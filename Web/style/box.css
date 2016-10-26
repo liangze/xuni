@@ -1,0 +1,11 @@
+/* CSS Document */
+#boxmsg{overflow:hidden;position:absolute;z-index:10003;left:40%;top:35%;}
+#mtmboxtable{}
+#box_title{float:left;background-image: url(../images/box/box_top_bg.jpg);background-repeat: repeat-x; height:36px;overflow:hidden;width:100%;}
+#box_title span{float:left; padding-left:10px; line-height:36px;font-weight:bold;color:#FFF;font-size:14px; width:100px;}
+#box_title input{float:right;}
+#box_left_line{background-image: url(../images/box/box_left_line.jpg);background-repeat: repeat-y;}
+#box_right_line{background-image: url(../images/box/box_right_line.png);background-repeat: repeat-y;}
+#box_bottom_bg{background-image: url(../images/box/box_bottom_bg.jpg);background-repeat: repeat-x;}
+#box_content{ height:100px;background-color: #FFF; padding:10px;}
+

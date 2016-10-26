@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <!-- 环迅环境 -->
+  <Environment>Official</Environment>
+  <!-- 商户环迅帐号和证书 -->
+  <IPS name="Testing">
+    <Account>000015</Account>
+    <Certificate>GDgLwwdK270Qj1w4xho8lyTpRQZV9Jm5x4NwWOTThUa4fMhEBK9jOXFrKRT6xhlJuU2FEa89ov0ryyjfJuuPkcGzO5CeVx5ZIrkkt1aBlZV36ySvHOMcNv8rncRiy3DQ</Certificate>
+  </IPS>
+  <IPS name="Official">
+    <Account>022891</Account>
+    <Certificate>40301353982421808762056564364329661849129129580266796478374708865375995863383797310863218357532035320426083319557639800106764832</Certificate>
+  </IPS>
+  <!-- 支持币种 -->
+  <CurrencyType>RMB</CurrencyType>
+  <!-- 支付方式 -->
+  <GatewayType>01</GatewayType>
+  <!-- 界面语言 -->
+  <Lang>GB</Lang>
+  <!-- 支付成功返回页面 -->
+  <MerchantUrl>http://127.0.0.1:8914/IPS/OrderReturn.aspx</MerchantUrl>
+  <!-- 支付失败返回页面 -->
+  <FailUrl>http://127.0.0.1:8914/IPS/OrderFail.aspx</FailUrl>
+  <!-- 支付错误返回页面 -->
+  <ErrorUrl>http://127.0.0.1:8914/IPS/OrderError.aspx</ErrorUrl>
+  <!-- 订单支付加密方式 -->
+  <OrderEncodeType>5</OrderEncodeType>
+  <!-- 交易返回加密方式 -->
+  <RetEncodeType>17</RetEncodeType>
+  <!-- Server返回方式 -->
+  <Rettype>0</Rettype>
+  <!-- Server返回页面 -->
+  <ServerUrl></ServerUrl>
+</Root>

@@ -1,0 +1,96 @@
+body,div,dl,dt,dd,ul,ol,li,pre,form,fieldset,input,textarea,blockquote{padding:0; margin:0;}
+li{list-style-type:none;}
+/* 左右分栏设置 */
+
+
+
+
+.modTop .sidetitle{height:28px;background:url('../images/sidetitle.gif') no-repeat; font-weight:bold;}
+
+.modTop em{float:left;padding:6px 0 0 11px;font-style:normal;color:#000;}
+
+
+/****左侧商品导航条****/
+.my_left_category{width:100px;}
+.my_left_category h1{height:20px;font-size:14px;font-weight:bold;padding-left:15px;padding-top:8px;margin:0px;color:#FFF;}
+.my_left_category .my_left_cat_list{width:100px;line-height:13.5pt;}
+.my_left_category .my_left_cat_list h2 {margin:0px;padding:3px 5px 0px 9px;}
+.my_left_category .my_left_cat_list h2 a {color:#d6290b;font-weight:bold;font-size:14px;line-height:22px;}
+.my_left_category .my_left_cat_list h2 a:hover {color:#d6290b;font-weight:bold;font-size:14px;line-height:22px;}
+.my_left_category .h2_cat{ padding-left:18px;width:100px; height:35px;_height:35px;background:url('../images/my_menubg00.gif') top left no-repeat;line-height:35px;*line-height:35px;_line-height:35px;font-weight:normal;color:#333333;position:relative;}
+.my_left_category .h2_cat_1{width:178px;height:30px;line-height:30px;font-weight:normal;color:#333333;position:relative;}
+.my_left_category a{font:12px;text-decoration:none;color:#333333;}
+.my_left_category a:hover{text-decoration:none;color:#ff3333;}
+.my_left_category h3{margin:0px;padding:0px;height:30px;font-size:12px;font-weight:normal;display:block;padding-left:8px;}
+.my_left_category h3 span{color:#999999; width:145px; float:right;}
+.my_left_category h3 a{	line-height:30px;}
+.my_left_category .h3_cat{display:none;width:204px;position:absolute;left:140px;margin-top:-26px;cursor:auto;}
+.my_left_category .shadow{position:inherit;width:204px;}
+.my_left_category .shadow_border{position:inherit;width:200px;border:1px solid #959595; margin-top:1px;border-left-width:0px;background:url('../images/shadow_border.gif') no-repeat 0px 21px;background-color:#ffffff;margin-bottom:3px}
+.my_left_category .shadow_border ul{margin:0; padding:0; margin-left:15px}
+.my_left_category .shadow_border ul li {list-style:none;padding-left:10px;background-image:url('../images/my_cat_sub_menu_dot.gif');background-repeat:no-repeat;background-position:0px 8px;float:left;width:75px;height:30px;overflow:hidden;letter-spacing:0px;}
+.my_left_category .active_cat{ z-index:99;background-position:0 -25px;cursor:pointer;}
+.my_left_category .active_cat h3 { font-weight:bold}
+.my_left_category .active_cat h3 span{ display:none;}
+.my_left_category .active_cat div{display:block;}
+
+.my_left_category .my_left_cat_list h4 {margin:0px;padding:3px 5px 0px 9px;}
+.my_left_category .my_left_cat_list h4 a {color:#d6290b;font-weight:bold;font-size:14px;line-height:22px;}
+.my_left_category .my_left_cat_list h4 a:hover {color:#d6290b;font-weight:bold;font-size:14px;line-height:22px;}
+.my_left_category .h4_cat{ padding-left:10px;width:213px;height:30px;background:url('../images/my_menubg0.gif') top left no-repeat;line-height:30px;font-weight:normal;color:#333333;position:relative;}
+.my_left_category .h4_cat_1{width:178px;height:30px;line-height:30px;font-weight:normal;color:#333333;position:relative;}
+.my_left_category h5{margin:0px;padding:0px;height:30px;font-size:12px;font-weight:normal;display:block;padding-left:8px;}
+.my_left_category h5 span{color:#999999; width:145px; float:right;}
+.my_left_category h5 a{	line-height:30px;}
+.my_left_category .h5_cat{display:none;width:204px;position:absolute;left:140px;margin-top:-26px;cursor:auto;}
+.my_left_category .active_cat{ z-index:99;background-position:0 -25px;cursor:pointer;}
+.my_left_category .active_cat h5 { font-weight:bold}
+.my_left_category .active_cat h5 span{ display:none;}
+.my_left_category .active_cat div{display:block;}
+
+#container{
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 50px 0 0 0;
+	position: relative;
+}
+
+.section { 
+	padding:10px; 
+	width:900px; 
+	margin:0 auto;
+	background-color:#f1f1f1; 
+	position:relative; 
+}
+
+.section .content { 
+	height:800px; 
+	background-color:#ddd; 
+	margin-left:250px; 
+	text-align:center; 
+	color:#333; 
+	font-size:16px; 
+}
+
+.menu {
+	position:absolute;
+	left:1216px;
+	width:101px;
+	height:582px;
+	text-align:left;
+	color:#000;
+	font-size:14px;
+	top: 20px;
+	background:url(../images/uy7.png) left 180px no-repeat;
+	 
+}
+.aisi{
+	margin-top:250px;
+	margin-left:10px	 
+}
+aisi span{ padding-top:10px;}
+#ohmygodsomuchwhitespace {
+	width: 10px;
+	height: 1000px;
+}

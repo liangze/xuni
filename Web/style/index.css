@@ -1,0 +1,36 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.index_l{float:left; width:290px;}/* 左侧向左浮动，宽度 */
+.index_r{float:right; width:740px;}/* 右侧向右浮动，宽度 */
+/* 快捷菜单 css */
+.kjcd{height:370px; width:300px; background:url(../images/kjcd_bg.gif) no-repeat; margin-top:7px;}/* 快捷菜单高度，宽度，背景图，外侧上边距 */
+.kjcd_t{ height:35px; line-height:35px; padding:12px 0 0 12px; width:75px; background:url(../images/row1.gif) no-repeat right 23px; color:#E6EFF3;}/* 快捷菜单标题高度，行高，上右下左边距，宽度，背景图，字体颜色 */
+.kjcd ul{ padding-top:28px;}/* 快捷菜图标的上边距 */
+.kjcd ul li{float:left; padding-left:23px; width:69px; height:120px;}/* 快捷菜单图标各项左浮动，做边距，宽度，高度 */
+.kjcd ul li .kjcd_tu{width:69px; height:59px;}/* 快捷菜单图的宽度，高度 */
+.kjcd ul li .wdyj{position:absolute; width:67px; padding-left:2px; padding-top:19px; font-weight:bold; color:#F00; font-size:15px; font-family:"微软雅黑"; text-decoration:underline; text-align:center;}/* 未读邮件的个数在绝对位置显示，宽度，左边距，上边距，加粗字体，字体颜色，字体大小，字体，带下划线，文字居中显示 */
+.kjcd ul li .kjcd_zi{padding-top:13px; text-align:center; font-size:14px; font-weight:bold;}/* 快捷菜单文字上边距 居中显示，字体大小，字体加粗 */
+.kjcd ul li .kjcd_zi a{color:#13425A; text-decoration:none;}/* 快捷菜单文字链接色，不带下划线 */
+.kjcd ul li .kjcd_zi a:hover{ color:#3690AF; text-decoration:none;}/* 快捷菜单文字链接鼠标指上去的颜色，不带下划线 */
+.kjcd ul li .kjcd_wd{position:absolute; width:69px; height:22px; padding-top:6px; line-height:22px; background:url(../images/wdyj_bg.gif) no-repeat; color:#5F6A6F; text-align:center;}/* 未读邮件，绝对显示，宽度，高度，上边距，行号，背景图，文字颜色，文字居中显示 */
+/* 在线客服 css */
+.kefu{width:178px; height:50px; padding:110px 0 0 122px; background:url(../images/kefu_bg.jpg) no-repeat;}/* 在线客服的宽度，高度，上右下左边距，背景图 */
+/* 会员信息 css */
+.xinxi{width:620px; height:139px; padding:15px 0 0 120px; background:url(../images/xinxi_bg.jpg) no-repeat;}/* 会员信息宽度，高度，上右下左边距，背景图 */
+.xinxi_nr{float:left; width:275px; padding-left:30px; height:120px; color:#555; font-size:13px; font-family:"微软雅黑"; line-height:24px;}/* 信息显示内容左浮动，宽度，左边距，高度，文字颜色，文字大小，字体，行高 */
+.xinxi_nr span{ color:#155877;}/* span标签里面的字体颜色 */
+/* 最新资讯 css */
+.zixun{float:left; width:377px; height:375px; padding:25px 23px 0 23px; background:url(../images/zixun_bg.jpg) no-repeat;}/* 资讯左浮动，宽度，高度，上右下左边距，背景图 */
+.zixun_t{ height:45px; background:url(../images/zixun_tbg.gif) no-repeat;}/* 资讯标题高度，背景图 */
+.zixun_t h2{width:99px; text-align:center; line-height:28px; color:#fff; font-family:"微软雅黑"; font-size:14px;}/* 资讯用h2标题，h2的宽度，文字居中，行高，字体颜色，字体，字体大小 */
+.zixun_t span{float:right; padding-top:8px; padding-right:3px;}/* 资讯标题 span标签右浮动，上边距，右边距 */
+.zixun_list{ height:297px;}/* 资讯列表的高度 */
+.zixun_list ul li{ padding-top:2px; line-height:30px; border-bottom:1px dashed #B7B7B7; padding-left:15px; background:url(../images/row2.gif) no-repeat 4px 12px;}/* 资讯每条的上边距，行高，下边一个像素的许仙，做边距，背景图 */
+.zixun_list ul li span{float:right; color:#888; padding-right:5px;}/* 每条资讯的span标签右浮动，字体颜色，右边距 */
+/* 课程表 css */
+.kecheng{float:left; width:276px; height:370px; padding:30px 20px 0 20px; background:url(../images/kecheng.gif) no-repeat;}/* 课程表左浮动，宽度，高度，上右下左边距，背景图 */
+.kecheng_t{height:50px;}/* 课程标题位置的高度 */
+.kecheng h2{padding-left:53px; color:#468EAA; font-family:"微软雅黑"; font-size:14px;}/* 课程标题用h2标签，左边距，字体颜色，字体 */
+.kecheng_t span{float:right; padding-top:6px; padding-right:2px;}/* 课程span标签右浮动，上边距，右边距 */
+.kecheng_nr{line-height:24px; height:240px; padding-left:10px;}/* 课程内容的行高，高度，左边距 */

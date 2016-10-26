@@ -1,0 +1,417 @@
+﻿/*
+    Common 
+*/
+#form {margin-top:20px;}
+
+.wizard,
+.tabcontrol
+{
+    display: block;
+    width: 100%;
+    /*overflow: hidden;*/
+}
+
+/*.field [class*="span"] {margin-left:0px;}*/
+
+.wizard a,
+.tabcontrol a
+{
+    outline: 0;
+	
+}
+
+.wizard ul,
+.tabcontrol ul
+{
+    list-style: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.wizard ul > li,
+.tabcontrol ul > li
+{
+    display: block;
+    padding: 0;
+}
+
+/* Accessibility */
+.wizard > .steps .current-info,
+.tabcontrol > .steps .current-info
+{
+    position: absolute;
+    left: -999em;
+}
+
+.wizard > .content > .title,
+.tabcontrol > .content > .title
+{
+    position: absolute;
+    left: -999em;
+}
+
+
+
+/*
+    Wizard
+*/
+
+.wizard > .steps
+{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.wizard.vertical > .steps
+{
+    display: inline;
+    float: left;
+    width: 30%;
+}
+
+.wizard > .steps .number
+{
+    font-size: 1.429em;
+}
+
+.wizard > .steps > ul > li
+{
+    width: 25%;
+}
+
+.wizard > .steps > ul > li,
+.wizard > .actions > ul > li
+{
+    float: left;
+}
+
+.wizard.vertical > .steps > ul > li
+{
+    float: none;
+    width: 100%;
+}
+
+.wizard > .steps a,
+.wizard > .steps a:hover,
+.wizard > .steps a:active
+{
+    display: block;
+    width: auto;
+    margin: 0 0.5em 0.5em;
+    padding: 1em 1em;
+    text-decoration: none;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.wizard > .steps .disabled a,
+.wizard > .steps .disabled a:hover,
+.wizard > .steps .disabled a:active
+{
+    background: #D3D3D3;
+    color: #999999;
+    cursor: default;
+}
+
+.wizard > .steps .current a,
+.wizard > .steps .current a:hover,
+.wizard > .steps .current a:active
+{
+    background: rgb(110,0,0); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(110,0,0,1) 0%, rgba(60,0,0,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(110,0,0,1)), color-stop(100%,rgba(60,0,0,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(110,0,0,1) 0%,rgba(60,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(110,0,0,1) 0%,rgba(60,0,0,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(110,0,0,1) 0%,rgba(60,0,0,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(110,0,0,1) 0%,rgba(60,0,0,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e0000', endColorstr='#3c0000',GradientType=0 ); /* IE6-9 */
+
+    color: #fff;
+    cursor: default;
+}
+
+.wizard > .steps .done a,
+.wizard > .steps .done a:hover,
+.wizard > .steps .done a:active
+{
+    background: #D3D3D3;
+    color: #960502;
+}
+
+.wizard > .steps .error a,
+.wizard > .steps .error a:hover,
+.wizard > .steps .error a:active
+{
+    background: #ff3111;
+    color: #fff;
+}
+
+.wizard > .content
+{
+    display: block;
+    margin: 0.5em;
+    /*min-height: 35em;*/
+    overflow: hidden;
+    position: relative;
+    width: auto;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.wizard.vertical > .content
+{
+    display: inline;
+    float: left;
+    margin: 0 2.5% 0.5em 2.5%;
+    width: 65%;
+}
+
+.wizard > .content > .body
+{
+   /* float: left;
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    padding: 2.5%;
+	*/
+}
+
+.wizard > .content > .body ul
+{
+    list-style: disc !important;
+}
+
+.wizard > .content > .body ul > li
+{
+    display: list-item;
+}
+
+.wizard > .content > .body > iframe
+{
+    border: 0 none;
+    width: 100%;
+    height: 100%;
+}
+
+.wizard > .content > .body input
+{
+    display: block;
+    border: 1px solid #ccc;
+}
+
+.wizard > .content > .body input[type="checkbox"]
+{
+    display: inline-block;
+}
+
+.wizard > .content > .body input.error
+{
+    border: 2px solid #FF0000;
+    color: #FF0000;
+	margin-bottom:20px;
+}
+
+.wizard > .content > .body label
+{
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+.wizard > .content > .body label.error
+{
+    color: #FF0000;
+	position:absolute;
+	left:0px;
+	top:36px;
+}
+
+.wizard > .actions
+{
+
+    text-align: right;
+	
+	background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+    margin: 15px -15px -15px;
+    overflow: hidden;
+    padding: 15px;
+}
+
+
+.stdform .end * {float:right; margin-left:15px;}
+
+.wizard.vertical > .actions
+{
+    display: inline;
+    float: right;
+    margin: 0 2.5%;
+    width: 95%;
+}
+
+.wizard > .actions > ul
+{
+    display: inline-block;
+    text-align: right;
+}
+
+.wizard > .actions > ul > li
+{
+    margin: 0 0.5em;
+}
+
+.wizard.vertical > .actions > ul > li
+{
+    margin: 0 0 0 1em;
+}
+
+
+
+.wizard > .actions .disabled a,
+.wizard > .actions .disabled a:hover,
+.wizard > .actions .disabled a:active
+{
+    background: #eee;
+    color: #aaa;
+}
+
+.wizard > .loading
+{
+}
+
+.wizard > .loading .spinner
+{
+}
+
+
+
+/*
+    Tabcontrol
+*/
+
+.tabcontrol > .steps
+{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.tabcontrol > .steps > ul
+{
+    position: relative;
+    margin: 6px 0 0 0;
+    top: 1px;
+    z-index: 1;
+}
+
+.tabcontrol > .steps > ul > li
+{
+    float: left;
+    margin: 5px 2px 0 0;
+    padding: 1px;
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.tabcontrol > .steps > ul > li:hover
+{
+    background: #edecec;
+    border: 1px solid #bbb;
+    padding: 0;
+}
+
+.tabcontrol > .steps > ul > li.current
+{
+    background: #fff;
+    border: 1px solid #bbb;
+    border-bottom: 0 none;
+    padding: 0 0 1px 0;
+    margin-top: 0;
+}
+
+.tabcontrol > .steps > ul > li > a
+{
+    color: #5f5f5f;
+    display: inline-block;
+    border: 0 none;
+    margin: 0;
+    padding: 10px 30px;
+    text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li > a:hover
+{
+    text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li.current > a
+{
+    padding: 15px 30px 10px 30px;
+}
+
+.tabcontrol > .content
+{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 35em;
+    overflow: hidden;
+    border-top: 1px solid #bbb;
+    padding-top: 20px;
+}
+
+.tabcontrol > .content > .body
+{
+    float: left;
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    padding: 2.5%;
+}
+
+.tabcontrol > .content > .body ul
+{
+    list-style: disc !important;
+}
+
+.tabcontrol > .content > .body ul > li
+{
+    display: list-item;
+}
+
+
+
+.actions li.disabled a{
+border:1px solid #CCCCCC; padding:6px 15px; margin-left:5px;
+color:#1A81D6;
+text-shadow:none;
+border-radius:5px;
+-webkit-border-radius:5px;
+-moz-border-radius:5px;
+background-repeat:repeat-x;
+padding:6px 12px;
+
+background-color: #ffffff; /* Old browsers */
+background-image: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+background-image: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+background-image: -o-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+background-image: -ms-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+background-image: linear-gradient(to bottom,  #ffffff 0%,#e5e5e5 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+
+.actions li.disabled a:hover {background-color:#e5e5e5; transition: background-position 0.2s linear; -moz-transition: background-position 0.2s linear; -webkit-transition: background-position 0.2s linear; background-position:0px -15px;}
+
+

@@ -1,0 +1,124 @@
+/* CSS Document */
+a:link{text-decoration:none;color:#666;font-size:9pt}
+a:visited{text-decoration:none;color:#666;font-size:9pt}
+a:active{text-decoration:none; color:#666;font-size:9pt}
+a:hover{text-decoration:none;color:#666;font-size:9pt}
+
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	FONT-SIZE: 9pt;
+	text-decoration: none;
+	line-height: 150%;
+	background-color: #FBFDFF;
+	FONT-SIZE: 9pt;background:#ffffff;
+	text-decoration: none;
+	SCROLLBAR-FACE-COLOR: #ffffff;/*IE专有属性 IE5.5+ 有 设置或检索滚动条3D表面（ThreedFace）的颜色*/
+	SCROLLBAR-HIGHLIGHT-COLOR: #ec5e5f;/*IE专有属性 IE5.5+ 有 设置或检索滚动条3D界面的亮边（ThreedHighlight）颜色 */
+	SCROLLBAR-SHADOW-COLOR: #F0841A; /*IE专有属性 IE5.5+ 有 设置或检索滚动条3D界面的暗边（ThreedShadow）颜色*/
+	SCROLLBAR-3DLIGHT-COLOR: #ffffff; /*IE专有属性 IE5.5+ 有 设置或检索滚动条亮边框颜色*/
+	SCROLLBAR-ARROW-COLOR: #F0841A; /*IE专有属性 IE5.5+ 有 设置或检索滚动条方向箭头的颜色 */
+	SCROLLBAR-TRACK-COLOR: #ffffff; /*IE专有属性 IE5.5+ 有 设置或检索滚动条的拖动区域（TrackBar）颜色*/
+	SCROLLBAR-DARKSHADOW-COLOR: #ffffff; /*IE专有属性 IE5.5+ 有 设置或检索滚动条暗边框（ThreedDarkShadow）颜色*/
+	margin-left: 0
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+body,td,th
+{
+	font-size:9pt;
+}
+.MouseOver{/*鼠标移动到某行的效果*/
+color:#000000;
+background-color:#FDD890;
+padding:5px;
+font-size:9pt;
+font-family:宋体;
+height:20px
+}
+.gridview_Header{
+
+background:url(../images/heade.png);
+background-repeat:repeat-x;
+font-size:12px;
+height:39px;
+color:#e00000;
+
+}
+.table1{/*公共表格样式*/
+	font-size:12px;
+	font-family:宋体,tahoma,arial;
+	color:#0A0000;
+	height:30px;
+	background-color: #cc0209;
+	border: 1px solid #e00000;
+	m1:expression(this.borderColorLight='#e000000');/*中层表格亮边框*/
+    m2:expression(this.borderColorDark='#e000000');/*中层表格暗边框*/
+}
+.table2{/*搜索表格样式*/
+	font-size:12px;
+	font-family:宋体,tahoma,arial;
+	color:#0A0000;
+	height:15px;
+	background-color: #cc0209;
+	border: 1px solid #000000;
+}
+.tableline1{/*表格头顶标题样式*/
+	background-color:#d90202;
+	padding:2px;
+	font-size:9pt;
+	font-family:宋体;
+	color:#FFFFFF;
+	height:20px;
+	
+}
+.tableline2{/*表格底部样式*/
+background-color:#d90202;
+font-size:9pt;
+font-family:宋体;
+color:#FFFFFF;
+height:25px;
+}
+.tableline1_1{/*整行样式一*/                    
+background-color:#ffffff;
+padding:5px;
+font-size:12px;
+font-family:宋体,tahoma,arial;
+color:#3d3e3f;
+height:15px;
+}
+.tableline1_2{/*整行样式2*/
+	background-color:#f2f2f2;
+	padding:3px;
+	font-size:12px;
+	font-family:宋体,tahoma,arial;
+	color:#3d3e3f;
+	height:15px;
+}
+
+
+
+.input1{
+border:1px solid #be9184;
+color:#000000;
+ }
+ 
+.input1:hover{
+border:1px solid #ecd451;
+background:#fdffe2;
+color:#000000;
+}
+.btncss_huang
+{
+	background:url(../images/btn_bk.gif);
+	width:58px;
+	height:20px;
+	border:0px;
+	color:#FFFFFF;
+	cursor:pointer;
+	font-size:12px;
+}
