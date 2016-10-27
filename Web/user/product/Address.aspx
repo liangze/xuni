@@ -19,7 +19,7 @@
                 <div class="span6">
                     <div class="control-group">
                         <label for="memid">
-                            <%=GetLanguage("DetailedAddress")%><%--详细地址--%>：
+                           <span style="color: #f00;">*</span> <%=GetLanguage("DetailedAddress")%><%--详细地址--%>：
                         </label>
                         <div class="field">
                             <asp:TextBox ID="txtAddress" runat="server" TextMode="SingleLine" class="input_select" Height="21px" Width="95%"></asp:TextBox>

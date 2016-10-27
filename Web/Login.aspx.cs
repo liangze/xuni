@@ -1,21 +1,10 @@
-﻿/*********************************************************************************
-* Copyright(c)  	2012 ZXHLRJ.COM
- * 创建日期：		2012-4-13 16:09:09 
- * 文 件 名：		Login.cs 
- * CLR 版本: 		2.0.50727.3053 
- * 创 建 人：		King
- * 文件版本：		1.0.0.0
- * 修 改 人： 
- * 修改日期： 
- * 备注描述：         
-***************************************************************************/
+﻿using Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Library;
 
 namespace Web
 {
@@ -24,7 +13,7 @@ namespace Web
         protected void Page_Load(object sender, EventArgs e)
         {
             long iUserID = Convert.ToInt64(Request["UserID"]);
-            
+
             if (!IsPostBack)
             {
                 string host = Request.Url.Host;
@@ -49,7 +38,7 @@ namespace Web
                     {
                         UserCookie["Id"] = Request.QueryString["id"];
                     }
-                    
+
                     UserCookie["name"] = UserName;
                     Response.AppendCookie(UserCookie);
                     HttpCookie CultureCookie = new HttpCookie("Culture");
@@ -60,18 +49,18 @@ namespace Web
                     //Response.Redirect("http://" + host.Replace("www.", "vip.") + "/user/index.aspx");//跳转到会员中心
                     Response.Redirect("/user/index.aspx");
                 }
-               // if (host.IndexOf("www.") == 0)
-               // {
-               ////     //Response.Redirect("/HTMLPage1.htm");
-               ////     //Response.Redirect("http://" + host + "/user/shop/index.aspx");//用www访问跳转到商城
-               //     Response.Redirect("/user/shop/index.aspx");
-               // }
+                // if (host.IndexOf("www.") == 0)
+                // {
+                ////     //Response.Redirect("/HTMLPage1.htm");
+                ////     //Response.Redirect("http://" + host + "/user/shop/index.aspx");//用www访问跳转到商城
+                //     Response.Redirect("/user/shop/index.aspx");
+                // }
                 if (string.IsNullOrEmpty(Request["adminid"]) == false)
                 {
                     Security sec = new Security();//解密传递过来的参数
                     string admin = sec.DecryptQueryString(Request["adminid"].ToString());//Request["adminid"].ToString();//
                     RegexR reg = new RegexR();
-                    if(reg.Nums(admin) == true)
+                    if (reg.Nums(admin) == true)
                     {
                         AdminEnter(admin, iUserID);
                     }
@@ -97,7 +86,7 @@ namespace Web
             {
                 lgk.Model.tb_user loginuser = userBLL.GetModel(Convert.ToInt64(Session["goto_uid"]));
                 //放入cookie
-                HttpCookie UserCookie = new HttpCookie("A128076_user");                
+                HttpCookie UserCookie = new HttpCookie("A128076_user");
                 UserCookie["Id"] = loginuser.UserID.ToString();
                 UserCookie["name"] = loginuser.UserCode;
                 Response.AppendCookie(UserCookie);

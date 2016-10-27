@@ -2795,4 +2795,8 @@
     <langtype name="zh-cn">推广链接</langtype>
     <langtype name="en-us">Promotion link</langtype>
   </key>
+  <key name="Listgoods">
+    <langtype name="zh-cn">商品列表</langtype>
+    <langtype name="en-us">List of goods</langtype>
+  </key>
 </lang>

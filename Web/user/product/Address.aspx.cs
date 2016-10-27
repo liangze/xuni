@@ -107,6 +107,65 @@ namespace Web.user.product
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            //if (ValidateData())
+            //{
+            //    lgk.Model.tb_Address addressInfo = new lgk.Model.tb_Address();
+
+            //    if (iID > 0)
+            //    {
+            //        addressInfo = addressBLL.GetModel(iID);
+            //    }
+
+            //    addressInfo.Address = txtAddress.Text.Trim();
+            //    addressInfo.MemberName = txtMemberName.Text.Trim();
+            //    addressInfo.PhoneNum = txtPhoneNum.Text.Trim();
+            //    addressInfo.Phone = txtPhone.Text.Trim();
+            //    addressInfo.UserID = getLoginID();
+            //    addressInfo.AreaInProvince = "";
+            //    addressInfo.AreaInCity = "";
+            //    addressInfo.PostCode = "";
+
+            //    if (iID > 0)
+            //    {
+            //        if (chkDefault.Checked == false)
+            //        {
+            //            addressInfo.Address01 = "0";
+            //        }
+            //        else
+            //        {
+            //            addressBLL.SetDefault(getLoginID(), addressInfo.ID);
+            //            addressInfo.Address01 = "1";
+            //        }
+
+            //        if (addressBLL.Update(addressInfo))
+            //        {
+            //            MessageBox.ShowAndRedirect(this, GetLanguage("Successful"), "Address.aspx");//操作成功
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show(this, GetLanguage("OperationFailed"));//操作失败
+            //            return;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        long id = addressBLL.Add(addressInfo);
+            //        if (id > 0)
+            //        {
+            //            if (chkDefault.Checked)
+            //                addressBLL.SetDefault(getLoginID(), id);
+            //            else
+            //                addressInfo.Address01 = "0";
+
+            //            MessageBox.ShowAndRedirect(this, GetLanguage("Successful"), "Address.aspx");//操作成功
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show(this, GetLanguage("OperationFailed"));//操作失败
+            //            return;
+            //        }
+            //    }
+            //}
             if (ValidateData())
             {
                 lgk.Model.tb_Address addressInfo = new lgk.Model.tb_Address();
@@ -149,13 +208,12 @@ namespace Web.user.product
                 }
                 else
                 {
+                    addressInfo.Address01 = "0";
                     long id = addressBLL.Add(addressInfo);
                     if (id > 0)
                     {
                         if (chkDefault.Checked)
                             addressBLL.SetDefault(getLoginID(), id);
-                        else
-                            addressInfo.Address01 = "0";
 
                         MessageBox.ShowAndRedirect(this, GetLanguage("Successful"), "Address.aspx");//操作成功
                     }

@@ -25,64 +25,33 @@ namespace Web.user
         {
             if (!IsPostBack)
             {
-                BindLanguage();
+               
                 BindData();
             }
         }
 
-        private void BindLanguage()
+        /// <summary>
+        /// 申请记录查询条件
+        /// </summary>
+        /// <returns></returns>
+        private string GetWhere()
         {
-            if (currentCulture == "zh-cn")
-            {
-                dropLanguage.Items.Add(new ListItem("-请选择-", "0"));
-                dropLanguage.Items.Add(new ListItem("中文", "1"));
-                dropLanguage.Items.Add(new ListItem("English", "2"));
-            }
-            else
-            {
-                dropLanguage.Items.Add(new ListItem("-Please choose-", "0"));
-                dropLanguage.Items.Add(new ListItem("中文", "1"));
-                dropLanguage.Items.Add(new ListItem("English", "2"));
-            }
-        }
-
-        protected void dropLanguage_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int iLanguage = int.Parse(dropLanguage.SelectedValue);
-
-            if (iLanguage == 1)
-            {
-                HttpCookie CultureCookie = new HttpCookie("Culture");
-                CultureCookie.Value = "zh-cn";//中文
-                Response.AppendCookie(CultureCookie);
-
-                //登录系统
-                Response.Write("<script type='text/javascript'>window.parent.location.href='index.aspx';</script>");
-
-            }
-            else if (iLanguage == 2)
-            {
-                HttpCookie CultureCookie = new HttpCookie("Culture");
-                CultureCookie.Value = "en-us";//英文
-                Response.AppendCookie(CultureCookie);
-
-                Response.Write("<script type='text/javascript'>window.parent.location.href='index.aspx';</script>");
-            }
+            string strWhere = "1=1";
+            return strWhere;
         }
 
         /// <summary>
-        /// 绑定公司快讯
+        /// 填充信息
         /// </summary>
-        private void BindData()
+        protected void BindData()
         {
-            if (Language == "zh-cn")
-            {
-                bind_repeater(newsBLL.GetList(8, "NewsType=0 and New01=0", "PublishTime desc"), Repeater1, "PublishTime desc", tr1, 8);
-            }
-            else if (Language == "en-us")
-            {
-                bind_repeater(newsBLL.GetList(8, "NewsType=0 and New01=1", "PublishTime desc"), Repeater1, "PublishTime desc", tr1, 8);
-            }
+            bind_repeater(newsBLL.GetList(GetWhere()), Repeater1, "PublishTime desc", tr1, AspNetPager1);
         }
+
+        protected void AspNetPager1_PageChanged(object sender, EventArgs e)
+        {
+            BindData();
+        }
+
     }
 }
