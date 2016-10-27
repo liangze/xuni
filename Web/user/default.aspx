@@ -43,7 +43,7 @@
                         <div class="subMIdTxt">
                             <p><i class="fa fa-user"></i></p>
                             <p><span>注册积分</span></p>
-                            <p><a href="#" style="color:white"><b><%=LoginUser.Emoney%></b></a></></p>
+                            <p><a href="goldcoin01.aspx" style="color:white"><b><%=LoginUser.Emoney%></b></a></></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
