@@ -759,7 +759,26 @@ namespace lgk.BLL
         {
             return dal.OnRecommendSameLine(iRecommendID, iUserID);
         }
-		#endregion  Method
-	}
+        /// <summary>
+        /// 查询语句
+        /// </summary>
+        /// <param name="pTable"></param>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public DataSet getData_Chaxun(string pTable, string strWhere)
+        {
+            return dal.getData_Chaxun(pTable, strWhere);
+        }
+        /// <summary>
+        ///  更新现金数据
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <returns></returns>
+        public int UpdataData_Chaxun(string sql, string UserID)
+        {
+            return dal.UpdataData_Chaxun(sql, UserID);
+        }
+        #endregion  Method
+    }
 }
 

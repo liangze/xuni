@@ -2510,6 +2510,47 @@ namespace lgk.DAL
                 return obj.ToString();
             }
         }
+        /// <summary>
+        /// 查询语句
+        /// </summary>
+        /// <param name="pTable"></param>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public DataSet getData_Chaxun(string pTable, string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(@"" + pTable + "");
+
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+        /// <summary>
+        ///  更新现金数据
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <returns></returns>
+        public int UpdataData_Chaxun(string sql, string UserID)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("" + sql + " ");
+            strSql.Append(" where UserID=@UserID ");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@UserID", SqlDbType.VarChar)};
+            parameters[0].Value = UserID;
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         #endregion  Method
     }
