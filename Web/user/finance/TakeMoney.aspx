@@ -24,7 +24,7 @@
                         </span>
                     </p>
                     <p class="span3">
-                        <label><%=GetLanguage("WithdrawalAmount")%><!--提现金额-->：</label>
+                        <label>提现金额（$）：</label>
                         <span class="field">
                             <asp:TextBox ID="txtTake" precision="2" runat="server" AutoPostBack="True"
                                 onkeydown="if(event.keyCode==13)event.keyCode=9" onKeyPress="if ((event.keyCode<48 || event.keyCode>57 ) && event.keyCode!=46) event.returnValue=false;"
@@ -32,7 +32,7 @@
                         </span>
                     </p>
                     <p class="span3">
-                        <label><%=GetLanguage("ActualAmount")%><!--到账金额-->：</label>
+                        <label><%=GetLanguage("ActualAmount")%><!--到账金额-->（$）：</label>
                         <span class="field">
                             <input name="txtExtMoney" type="text" id="txtExtMoney" runat="server" disabled="disabled" /><!--元-->
                         </span>
