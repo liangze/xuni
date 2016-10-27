@@ -40,15 +40,25 @@ namespace Web.user.finance
             decimal dMin = getParamAmount("ATM2");
 
             txtBonusAccount.Value = LoginUser.BonusAccount.ToString("0.00");
-
-            if (LoginUser.BonusAccount >= dMin)
+            var iOpen4 = getParamAmount("ATM1");
+            
+            if(iOpen4==1)
             {
-                btnSubmit.Visible = true;
+                if (LoginUser.BonusAccount >= dMin)
+                {
+                    btnSubmit.Visible = true;
+                }
+                else
+                {
+                    btnSubmit.Visible = false;
+                }
             }
             else
             {
                 btnSubmit.Visible = false;
+                txtTake.Visible = false;
             }
+           
         }
 
         /// <summary>
@@ -145,32 +155,7 @@ namespace Web.user.finance
                 return;
             }
 
-            //if (LoginUser.User010 != txtAnswer.Text.Trim())
-            //{
-            //    MessageBox.Show(this, GetLanguage("answerErrors"));//密保答案错误
-            //    return;
-            //}
-
-            //int getCount = 0;
-            //int takeCount = Convert.ToInt32(getParamAmount("extract4"));
-            //string dt = DateTime.Now.ToString("yyyy/M/d");
-            //string isTake = getColumn(1, "Take006", "tb_takeMoney", "UserID=" + getLoginID(), "Take006 Desc");
-            //DataSet ds = new DataSet();
-            //lgk.BLL.tb_takeMoney takemoney = new lgk.BLL.tb_takeMoney();
-            //ds = takemoney.GetList("UserID=" + getLoginID());
-            //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            //{
-            //    if (ds.Tables[0].Rows[i]["Take006"].ToString().Contains(dt)) 
-            //    {
-            //        getCount++;
-            //    }
-            //}
-            ////若今天已经存在提款记录，则提示不能再提现
-            //if (getCount >= takeCount)
-            //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('提现次数不能大于" + takeCount + "次!');", true);
-            //    return;
-            //}
+           
             #endregion
 
             #endregion
@@ -179,11 +164,11 @@ namespace Web.user.finance
             lgk.Model.tb_takeMoney takeMoneyInfo = new lgk.Model.tb_takeMoney();
             takeMoneyInfo.TakeTime = DateTime.Now;
             takeMoneyInfo.TakeMoney = resultNum;
-            takeMoneyInfo.TakePoundage = resultNum * getParamAmount("ATM3") / 100;
+            takeMoneyInfo.TakePoundage = resultNum * getParamAmount("ATM4") / 100;
             takeMoneyInfo.RealityMoney = resultNum - takeMoneyInfo.TakePoundage;
             takeMoneyInfo.Flag = 0;
             takeMoneyInfo.UserID = getLoginID();
-            takeMoneyInfo.BonusBalance = LoginUser.BonusAccount - takeMoneyInfo.TakeMoney;
+            takeMoneyInfo.BonusBalance = LoginUser.BonusAccount - takeMoneyInfo.TakeMoney*6;
 
             takeMoneyInfo.BankName = LoginUser.BankName;
             takeMoneyInfo.Take003 = LoginUser.BankBranch;
@@ -198,15 +183,15 @@ namespace Web.user.finance
             journalInfo.Remark = "会员提现";
             journalInfo.RemarkEn = "Cash withdrawal";
             journalInfo.InAmount = 0;
-            journalInfo.OutAmount = takeMoneyInfo.TakeMoney;
+            journalInfo.OutAmount = takeMoneyInfo.TakeMoney*6;
             journalInfo.BalanceAmount = takeMoneyInfo.BonusBalance;
             journalInfo.JournalDate = DateTime.Now;
-            journalInfo.JournalType = 1;
+            journalInfo.JournalType = 2;
             journalInfo.Journal01 = takeMoneyInfo.UserID;
 
             #endregion
 
-            if (takeBLL.Add(takeMoneyInfo) > 0 && journalBLL.Add(journalInfo) > 0 && UpdateAccount("BonusAccount", getLoginID(), takeMoneyInfo.TakeMoney, 0) > 0)
+            if (takeBLL.Add(takeMoneyInfo) > 0 && journalBLL.Add(journalInfo) > 0 && UpdateAccount("BonusAccount", getLoginID(), takeMoneyInfo.TakeMoney*6, 0) > 0)
             {
                 //string ss = (GetLanguage("MessageTakeMoney").Replace("{username}", LoginUser.UserCode)).Replace("{time}", Convert.ToDateTime(journalInfo.JournalDate).ToString("yyyy年MM月dd日HH时mm分")).Replace("{timeEn}", Convert.ToDateTime(journalInfo.JournalDate).ToString("yyyy/MM/dd HH:mm"));//添加短信内容
                 //SendMessage((int)LoginUser.UserID, LoginUser.PhoneNum, ss);
@@ -254,14 +239,14 @@ namespace Web.user.finance
                 lgk.Model.tb_journal model = new lgk.Model.tb_journal();
                 model.UserID = take.UserID;
                 model.Remark = "取消提现";
-                model.InAmount = take.TakeMoney;
+                model.InAmount = take.TakeMoney*6;
                 model.OutAmount = 0;
-                model.BalanceAmount = user.BonusAccount + take.TakeMoney;
+                model.BalanceAmount = user.BonusAccount + take.TakeMoney*6;
                 model.JournalDate = DateTime.Now;
-                model.JournalType = 1;
+                model.JournalType = 2;
                 model.Journal01 = take.UserID;
 
-                if (journalBLL.Add(model) > 0 && UpdateAccount("BonusAccount", take.UserID, take.TakeMoney, 1) > 0 && takeBLL.Delete(iID))
+                if (journalBLL.Add(model) > 0 && UpdateAccount("BonusAccount", take.UserID, take.TakeMoney*6, 1) > 0 && takeBLL.Delete(iID))
                 {
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("CancellationSuccess") + "');window.location.href='TakeMoney.aspx';", true);//取消成功
                 }

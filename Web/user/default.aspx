@@ -43,63 +43,63 @@
                         <div class="subMIdTxt">
                             <p><i class="fa fa-user"></i></p>
                             <p><span>注册积分</span></p>
-                            <p><b><%=LoginUser.Emoney%></b></p>
+                            <p><a href="#" style="color:white"><b><%=LoginUser.Emoney%></b></a></></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-credit-card"></i></p>
                             <p><span>电子积分</span></p>
-                            <p><b><%=LoginUser.AllBonusAccount%></b></p>
+                            <p><a href="#" style="color:white"><b><%=LoginUser.AllBonusAccount%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-cloud"></i></p>
                             <p><span>云商积分</span></p>
-                            <p><b><%=LoginUser.StockAccount%></b></p>
+                            <p><a href="#" style="color:white"><b><%=LoginUser.StockAccount%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-tags"></i></p>
                             <p><span>消费积分</span></p>
-                            <p><b><%=LoginUser.ShopAccount%></b></p>
+                            <p><a href="#" style="color:white"><b><%=LoginUser.ShopAccount%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-database"></i></p>
                             <p><span>奖金积分</span></p>
-                            <p><b><%=LoginUser.BonusAccount%></b></p>
+                            <p><a href="#" style="color:white"><b><%=LoginUser.BonusAccount%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-leanpub"></i></p>
                             <p><span>感恩积分</span></p>
-                            <p><b><%=LoginUser.StockMoney%></b></p>
+                            <p><a href="#" style="color:white"><b><%=LoginUser.StockMoney%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-shopping-cart"></i></p>
                             <p><span>购物积分</span></p>
-                            <p><b><%=LoginUser.GLmoney%></b></p>
+                            <p><a href="#" style="color:white"><b><%=LoginUser.GLmoney%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-money"></i></p>
                             <p><span>爱心基金</span></p>
-                            <p><b></b><%=LoginUser.User011%></p>
+                            <p><a href="#" style="color:white"><b></b><%=LoginUser.User011%></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-cloud"></i></p>
                             <p><span>云购积分</span></p>
-                            <p><b><%=LoginUser.User012%></b></p>
+                            <p><a href="#" style="color:white"><b><%=LoginUser.User012%></b></a></p>
                         </div>
                     </div>
                 </div>
