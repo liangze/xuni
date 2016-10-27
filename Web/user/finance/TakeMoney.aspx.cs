@@ -37,9 +37,9 @@ namespace Web.user.finance
         /// </summary>
         private void ShowData()
         {
-            decimal dMin = getParamAmount("ATM1");
+            decimal dMin = getParamAmount("ATM2");
 
-            txtBonusAccount.Value = LoginUser.BonusAccount.ToString("0.00") + GetLanguage("USD");
+            txtBonusAccount.Value = LoginUser.BonusAccount.ToString("0.00");
 
             if (LoginUser.BonusAccount >= dMin)
             {
@@ -118,8 +118,8 @@ namespace Web.user.finance
                 return;
             }
             decimal resultNum = 0;
-            decimal tx_min = getParamAmount("ATM1");//最低体现额
-            decimal tx_bs = getParamAmount("ATM2");//倍数基数
+            decimal tx_min = getParamAmount("ATM2");//最低体现额
+            decimal tx_bs = getParamAmount("ATM3");//倍数基数
             if (decimal.TryParse(txtTake.Text.Trim(), out resultNum))
             {
                 if (resultNum < tx_min)
@@ -222,9 +222,9 @@ namespace Web.user.finance
         {
             if (txtTake.Text.Trim() != "")
             {
-                decimal value = (Convert.ToDecimal(txtTake.Text) * (1 - getParamAmount("ATM3") / 100));//手续费getParamAmount("ATM4")
+                decimal value = (Convert.ToDecimal(txtTake.Text) * (1 - getParamAmount("ATM4") / 100));//手续费getParamAmount("ATM4")
 
-                txtExtMoney.Value = value.ToString() + GetLanguage("USD");
+                txtExtMoney.Value = value.ToString();
             }
         }
 

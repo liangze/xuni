@@ -18,7 +18,7 @@
             <div class="filter">
                 <div class="row-fluid">
                     <p class="span3">
-                        <label><%=GetLanguage("CurrencyBalance")%><!--流通币余额-->：</label>
+                        <label>奖金积分：</label>
                         <span class="field">
                             <input name="txtBonusAccount" id="txtBonusAccount" runat="server" type="text" disabled="disabled" />
                         </span>
@@ -81,20 +81,28 @@
                 <thead>
                     <tr>
                         <th align="center">
+                           会员账号
+                        </th>
+                        <th align="center">
+                           姓名
+                        </th>
+                        <th align="center">
+                           银行名称
+                        </th>
+                        <th align="center">
+                           支行名称
+                        </th>
+                        <th align="center">
                             <%=GetLanguage("WithdrawalAmount")%><!--提现金额-->
                         </th>
-                        <th align="center">
-                            <%=GetLanguage("WithdrawalFee")%><!--提现手续费-->
+                         <th align="center">
+                            处理状态
                         </th>
-                        <th align="center">
-                            <%=GetLanguage("ActualAmount")%><!--到账金额-->
-                        </th>
+                        
                         <th align="center">
                             <%=GetLanguage("DateWithdrawal")%><!--提现日期-->
                         </th>
-                        <th align="center">
-                            <%=GetLanguage("State")%><!--状态-->
-                        </th>
+                       
                         <th>
                             <%=GetLanguage("Operation")%><!--操作-->
                         </th>
@@ -105,16 +113,19 @@
                         <ItemTemplate>
                             <tr class="<%# (this.Repeater1.Items.Count + 1) % 2 == 0 ? "odd":"even"%>">
                                 <td align="center">
-                                    <%#Eval("TakeMoney")%>
+                                    <%#Eval("UserCode")%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("TakePoundage")%>
+                                    <%#Eval("BankAccountUser")%>
+                                </td>
+                                <td align="center">
+                                    <%#Eval("BankName")%>
+                                </td>
+                                <td align="center">
+                                    <%#Eval("Take003")%>
                                 </td>
                                 <td align="center">
                                     <%#Eval("RealityMoney")%>
-                                </td>
-                                <td align="center">
-                                    <%#Eval("TakeTime")%>
                                 </td>
                                 <td align="center">
                                     <% if (Language == "zh-cn")
@@ -126,7 +137,11 @@
                                     <%#Eval("Flag").ToString() == "0" ? "Not released" : "Has been released"%>
                                     <% }%>
                                 </td>
-                                <td>&nbsp<asp:LinkButton ID="lbtnCancel" runat="server" class="btn" CommandName="change" Visible='<%#Eval("Flag").ToString() == "0" ? true : false%>'
+                                <td align="center">
+                                    <%#Eval("TakeTime")%>
+                                </td>
+                                
+                                <td align="center">&nbsp<asp:LinkButton ID="lbtnCancel" runat="server" class="btn" CommandName="change" Visible='<%#Eval("Flag").ToString() == "0" ? true : false%>'
                                     CommandArgument='<%#Eval("ID")%>' OnClientClick="return confirm('确认取消提现吗？')"><%=GetLanguage("CancelWithdrawal")%><!--取消提现--></asp:LinkButton>
                                 </td>
                             </tr>

@@ -1115,6 +1115,7 @@
     <Content Include="css\tuango.min.css" />
     <Content Include="css\tuangou_detail.min.css" />
     <Content Include="css\uniform.css" />
+    <Content Include="doc\tb_journal.txt" />
     <Content Include="doc\tb_User.txt" />
     <Content Include="getemailcode.aspx" />
     <Content Include="images\06.jpg" />

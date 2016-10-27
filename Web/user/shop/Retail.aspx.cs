@@ -23,7 +23,7 @@ namespace Web.user.shop
                 BindData();
                 txtUserCode.Value = LoginUser.UserCode;
                 txtTrueName.Value = LoginUser.TrueName;
-                txtBonusAccount.Value = LoginUser.BonusAccount.ToString();
+                txtBonusAccount.Value = LoginUser.ShopAccount.ToString();
 
                 btnSubmit.Text = GetLanguage("Buy");//购买
             }

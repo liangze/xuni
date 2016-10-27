@@ -30,7 +30,7 @@
                         </span>
                     </p>
                     <p class="span3">
-                        <label><%=GetLanguage("CurrencyBalance")%><%--流通币余额--%>：</label>
+                        <label>消费积分：</label>
                         <span class="field">
                             <input name="txtBonusAccount" type="text" id="txtBonusAccount" runat="server" class="input_reg" disabled="disabled" />
                         </span>
@@ -43,18 +43,17 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th><%=GetLanguage("ItemNumber")%><%--商品编号--%>
+                                
                                 </th>
-                                <th><%=GetLanguage("CommodityName")%><%--商品名称--%>
+                                <th>产品名称
                                 </th>
-                                <th><%=GetLanguage("InventoryQuantity")%><%--库存数量--%>
+                                <th>产品单价
                                 </th>
-                                <th><%=GetLanguage("CommodityPrice")%><%--商品价格--%>
+                                <th>库存
                                 </th>
                                 <th><%=GetLanguage("PurchaseQuantity")%><%--购买数量--%>
                                 </th>
-                                <th><%=GetLanguage("TheTotalAmount")%><%--总金额--%>
-                                </th>
+                                
                             </tr>
                         </thead>
                         <script type="text/javascript">
@@ -113,22 +112,21 @@
                                         <td align="center">
                                             <input onclick="baodanID_onclick(this.checked,<%#Eval("ID")%>)" type="CheckBox" id="id_<%#Eval("ID")%>" name="baodanID" <%#(int.Parse(Eval("Pic5").ToString())>0?"":"disabled") %> value="<%#Eval("ID")%>" />
                                         </td>
-                                        <td align="center">
-                                            <a href="Retail2.aspx?oid=<%#Eval("GoodsCode")%>"><%#Eval("GoodsCode")%></a>
-                                        </td>
+                                       
                                         <td align="center">
                                             <span title=' <%#Eval("GoodsName")%>'><%#Eval("GoodsName").ToString().Length>6?Eval("GoodsName").ToString().Substring(0,6)+"..":Eval("GoodsName") %></span>
+                                        </td>
+                                        
+                                        <td align="center">
+                                            <span id="RealityPrice_<%#Eval("ID")%>"><%#Eval("Price")%></span>
                                         </td>
                                         <td align="center">
                                             <%#Eval("Pic5")%>
                                         </td>
                                         <td align="center">
-                                            <span id="RealityPrice_<%#Eval("ID")%>"><%#Eval("Price")%></span>
-                                        </td>
-                                        <td align="center">
                                             <input type="text" oninput="showMoeny()" onpropertychange="showMoeny()" id="num_<%#Eval("ID")%>" name="num_<%#Eval("ID")%>" style="width: 60px;" readonly disabled />
                                         </td>
-                                        <td align="center">
+                                        <td align="center" style="display:none">
                                             <span id="sum_<%#Eval("ID")%>">0</span>&nbsp;
                                         </td>
                                     </tr>
