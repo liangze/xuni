@@ -20,11 +20,14 @@ using DataAccess;
 using Library;
 using System.Text.RegularExpressions;
 using Web.MallInterface;
+using System.Data;
 
 namespace Web
 {
     public partial class Registers : PageCore//AllCore//System.Web.UI.Page
     {
+        static string sconn = System.Configuration.ConfigurationManager.AppSettings["SocutDataLink"];
+
         public int asd = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,9 +39,9 @@ namespace Web
                 BindBank();
                 //BindQuestion();
                 BindProvince();
-
+            
                 string sprID = Request.QueryString["UserID"];
-                
+
                 string state = getStringRequest("state");
                 string[] a;
                 if (state != "" && state != null)
@@ -77,7 +80,7 @@ namespace Web
         private void BindProvince()
         {
             bind_DropDownList(dropProvince, provinceBLL.GetList("").Tables[0], "provinceID", "province"); //銀行省份
-        } 
+        }
         #endregion
 
         /// <summary>
@@ -118,7 +121,7 @@ namespace Web
             }
             strSQL = "select count(*) From tb_user where UserCode like @UserCode + '%' ";
             SqlParameter[] parameters = {
-				new SqlParameter("@UserCode", UserID)
+                new SqlParameter("@UserCode", UserID)
             };
             if (int.Parse(DbHelperSQL.GetSingle(strSQL, parameters).ToString()) > 0)
             {
@@ -128,7 +131,7 @@ namespace Web
             {
                 return UserID;
             }
-        } 
+        }
         #endregion
 
         #region 绑定银行
@@ -202,12 +205,11 @@ namespace Web
                 strSql = @"select UserID from tb_user where isopend<>0 and ParentID =" + pID + " and Location=" + location;
             }
 
-            object obj = DbHelperSQL.GetSingle(strSql);
-            if (obj != null)
+            if (Convert.ToInt32(DbHelperSQL.GetSingle(strSql)) > 0)
             {
-                return Convert.ToInt32(obj.ToString());
+                return 2;
             }
-            return 0;
+            return 1;
         }
 
         /// <summary>
@@ -223,6 +225,8 @@ namespace Web
             if (Type == "p") { strSql = @"select count(0) from tb_user where ParentID =" + UserID; }
             return Convert.ToInt32(DbHelperSQL.GetSingle(strSql));
         }
+     
+      
 
         #region 确定推荐人，安置会员是否在同一条推荐线上
         /// <summary>
@@ -243,7 +247,7 @@ namespace Web
                 }
             }
             return false;
-        } 
+        }
         #endregion
 
         #region 提交
@@ -254,8 +258,107 @@ namespace Web
         /// <param name="e"></param>
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+
             if (RegValidate())
             {
+                lgk.BLL.tb_user u = new lgk.BLL.tb_user();
+                string sql15 = "select * from tb_user ";
+                string pWhere15 = " usercode='" + txtAgentCode.Value.ToString() + "'";
+                DataSet ds15 = u.getData_Chaxun(sql15, pWhere15);
+                DataTable dt15 = ds15.Tables[0];
+                if (dt15.Rows.Count > 0)
+                {
+                    long IsAgent = long.Parse(dt15.Rows[0]["IsAgent"].ToString());
+                    if (u.IsAgent(IsAgent) == false)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请填写正确的商务中心编号');", true);//请输入会员编号
+                        return;
+                    }
+                }
+
+
+                #region 循环找到买的产品，判断商品数量够不够
+
+                decimal dTotalMoney = 0;
+                decimal iTSettlement = 0;
+
+                lgk.Model.tb_goods tb_goodsModel = new lgk.Model.tb_goods();
+                string baodanGoodsID = Request["baodanID"];
+                DateTime time = DateTime.Now;
+                List<lgk.Model.tb_goodsCar> listCar = new List<lgk.Model.tb_goodsCar>();//购物车集合
+                lgk.BLL.tb_goods tb_goodsBLL = new lgk.BLL.tb_goods();
+                string[] baodanIDs = baodanGoodsID.Split(',');
+                foreach (string id in baodanIDs)
+                {
+                    tb_goodsModel = tb_goodsBLL.GetModel(int.Parse(id));//根据发布商品编号找到
+                    int num = int.Parse(Request["num_" + id]);
+                    lgk.Model.tb_goodsCar goodsCar = new lgk.Model.tb_goodsCar();
+                    goodsCar.GoodsID = int.Parse(id);
+                    goodsCar.Goods006 = num;//数量
+                    goodsCar.BuyUser = Convert.ToInt32(getLoginID());//购买人
+                    goodsCar.TotalMoney = tb_goodsModel.Price * num;//总价格
+                    goodsCar.ShopPrice = tb_goodsModel.Goods002 * num;//总BV
+                    goodsCar.AddTime = DateTime.Now;
+                    goodsCar.GoodsCode = tb_goodsModel.GoodsCode;
+                    goodsCar.GoodsName = tb_goodsModel.GoodsName;
+                    goodsCar.Price = tb_goodsModel.Price;
+                    goodsCar.RealityPrice = tb_goodsModel.Goods002;
+                    listCar.Add(goodsCar);
+                }
+
+                foreach (lgk.Model.tb_goodsCar car in listCar)
+                { //寻坏商品
+                    tb_goodsModel = tb_goodsBLL.GetModelAndName(car.GoodsID);//根据发布商品编号找到
+                                                                             //if (tb_goodsModel.StateType == 0) //判断是否 审核通过 0未审核
+                                                                             //{
+                                                                             //    MessageBox.Show(this, "商品" + tb_goodsModel.GoodsCode + "审核未通过,请删除该商品!");
+                                                                             //    return;
+                                                                             //}
+                                                                             //if (tb_goodsModel.Goods003 == "1") //判断是否 删除 1已经删除
+                                                                             //{
+                                                                             //    MessageBox.Show(this, "商品" + tb_goodsModel.GoodsCode + "已被删除,请移除该商品!");
+                                                                             //    return;
+                                                                             //}
+                                                                             //if (tb_goodsModel.Goods001 == 0) //判断是否 0下架
+                                                                             //{
+                                                                             //    MessageBox.Show(this, "商品" + tb_goodsModel.GoodsCode + "已经下架,请删除该商品!");
+                                                                             //    return;
+                                                                             //}
+
+                    if (Convert.ToInt32(tb_goodsModel.Pic5) < car.Goods006) //判断库存量
+                    {
+                        MessageBox.Show(this, "商品" + tb_goodsModel.GoodsCode + "库存不足,请重新修改数量!");
+                        return;
+                    }
+                    dTotalMoney = dTotalMoney + car.TotalMoney;
+                    iTSettlement = iTSettlement + car.ShopPrice;
+
+                }
+                if (dTotalMoney != decimal.Parse(txtRegMoney.Value.ToString()))
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('购买产品的金额与注册会员金额不一致！');", true);
+                    return;
+                }
+                if (DropDownList1.SelectedValue == "1")
+                {
+                    SqlConnection conn = new SqlConnection(sconn);
+                    conn.Open();
+                    string sql = string.Format("select * from tb_user where userID='" + getLoginID() + "'");
+                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    conn.Close();
+                    decimal AllBonusAccount = decimal.Parse(dt.Rows[0]["AllBonusAccount"].ToString());
+                    if (AllBonusAccount < dTotalMoney)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('现金积分不足！');", true);
+                        return;
+                    }
+
+                }
+
+                #endregion
+                #region 注册用户插入tb_user 
                 lgk.Model.tb_user m_user = new lgk.Model.tb_user();
                 lgk.Model.tb_user ModelRecommend = userBLL.GetModel(GetUserID(this.txtRecommendCode.Value.Trim()));//推荐用户
                 //lgk.Model.tb_user ModelParent = userBLL.GetModel(GetUserID(this.txtParentCode.Value.Trim()));//父节点用户
@@ -293,24 +396,25 @@ namespace Web
 
                 m_user.Location = 0;//radMarketOne.Checked == true ? 1 : 2;
                 m_user.User007 = "";//m_user.Location == 1 ? "左区" : "右区";
-                m_user.IsOpend = 0;//是否启用 0-未激活,1-新注册, 2-已激活
+                m_user.IsOpend = 2;//是否启用 0-未激活,1-新注册, 2-已激活
                 m_user.IsLock = 0;//是否被冻結(0-否,1-冻結)
 
                 m_user.IsAgent = 0;//是否报單中心(0-否，1-是)
                 m_user.User006 = ModelAgent.UserCode;//txtAgentCode.Value.Trim();
                 m_user.AgentsID = agentBLL.GetAgentsID(ModelAgent.UserCode);//
 
-                m_user.Emoney = 0;//现金币账户
-                m_user.BonusAccount = 0;//佣金币账户
-                m_user.AllBonusAccount = 0;//累计獎金賬戶
-                m_user.StockAccount = 0;//代金券
-                m_user.StockMoney = 0;//红包积分
-                m_user.GLmoney = 0;//购物币
-                m_user.ShopAccount = 0;//存折账户
+                m_user.Emoney = 0;//报单积分
+                m_user.BonusAccount = 0;//拆分积分
+                m_user.AllBonusAccount = 0;//现金积分
+                m_user.StockAccount = 0;//云积分
+                m_user.StockMoney = 0;//公积金
+                m_user.GLmoney = 0;//复投积分
+                m_user.ShopAccount = 0;//奖金币
 
                 decimal dRegMoney = getParamAmount("billMoney") * getParamAmount("Level1");
                 m_user.RegMoney = dRegMoney;
                 m_user.RegTime = DateTime.Now;//注册時間
+                m_user.OpenTime = DateTime.Now;
                 m_user.BillCount = 1;// getParamInt("reg" + ddlLevel.SelectedValue);//注册单数
                 m_user.Password = PageValidate.GetMd5(this.txtPassword.Value.Trim());//一级密码
                 m_user.SecondPassword = PageValidate.GetMd5(this.txtSecondPassword.Value.Trim());//二级密码
@@ -335,6 +439,8 @@ namespace Web
                 m_user.User002 = getLoginID();//
                 m_user.User003 = 0;//
                 m_user.User004 = 0;//
+                m_user.Location = radMarketOne.Checked == true ? 1 : 2;
+                m_user.User007 = m_user.Location == 1 ? "左区" : "右区";
                 //int.TryParse(dropQuestion.SelectedValue, out q);
                 //string question = q > 0 && q <= 3 ? dropQuestion.SelectedItem.Text : string.Empty;
                 m_user.User009 = "0";// question;//密保问题
@@ -359,15 +465,307 @@ namespace Web
                         a = state.Split(',');
                         asd = int.Parse(a[2].Trim());
                     }
+                    #endregion 
                     if (userBLL.Add(m_user) > 0)
                     {
+
                         lgk.Model.tb_user model = userBLL.GetModel(GetUserID(m_user.UserCode));
                         model.UserPath = model.UserPath + "-" + model.UserID.ToString();
                         model.RecommendPath = model.RecommendPath + "-" + model.UserID.ToString();
 
+                      
+
+                        lgk.Model.tb_user model2 = userBLL.GetModel(model.UserID);
+                        model2.RegMoney = 0;
+                        model2.LeftScore = 0;
+                        model2.RightScore = 0;
+                        model2.RightNewScore = 0;
+                        model2.LeftNewScore = 0;
+                        userBLL.Update(model2);
+                        int reuserid = 1;
+                        if (getLoginID() > 0)
+                        {
+                            reuserid = int.Parse(getLoginID().ToString());
+                        }
+                        AllCore acore = new AllCore();//1收入2支出
+
+                        decimal mysumcardd1 = 0;
+
+                        if (DropDownList1.SelectedValue == "1")
+                        {
+                            //mysumcardd1 = mysumcardd;
+                            mysumcardd1 = 0;
+                        }
+                        int i = acore.OpenCheck(model2, reuserid, mysumcardd1); //扣注册现金积分
+                        if (i != 0)
+                        {
+                            userBLL.Delete(model2.UserID);//删除该会员资料
+                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('您的报单积分不足!');", true);//开户名不能为空
+                            return;
+                        }
+                        else
+                        {
+                            //flag_open(Convert.ToInt32(model.UserID), 1);
+                            acore.add_userRecord(model.UserCode, DateTime.Now, mysumcardd1, 2);
+                            //插入用户
+                            //flag_InsertRegUser(m_user.UserCode, m_user.ParentCode, m_user.Location); 
+                            //Response.Redirect("RegSuccess.aspx?usercode=" + userModel.UserCode + "&asd=" + asd);
+                        }
+
                         if (userBLL.Update(model))
                         {
-                            Response.Redirect("RegSuccess.aspx?usercode=" + m_user.UserCode + "&asd=" + asd);
+                            //#region 纯奖
+                            //string sql1 = "select * from tb_user  where UserCode='" + m_user.UserCode + "'";
+                            //string pWhere1 = " ";
+                            //DataSet ds1 = u.getData_Chaxun(sql1, pWhere1);
+                            //DataTable dt1 = ds1.Tables[0];
+                            //string guanxi = dt1.Rows[0]["RecommendPath"].ToString();//关系图
+
+                            //string[] ID = guanxi.Split('-');
+                            //foreach (var id in ID)
+                            //{
+                            //    string sql2 = " select * from tb_user  where Userid='" + id + "';";
+                            //    sql2 += " select * from tb_user  where RecommendID='" + id + "' order by Userid;";
+                            //    string pWhere2 = " ";
+                            //    DataSet ds2 = u.getData_Chaxun(sql2, pWhere2);
+                            //    DataTable dt2 = ds2.Tables[0];
+                            //    DataTable dt3 = ds2.Tables[1];
+                            //    int ceng = int.Parse(dt2.Rows[0]["chunjiang"].ToString());
+                            //    int zuo = int.Parse(dt2.Rows[0]["zuo"].ToString());
+                            //    int you = int.Parse(dt2.Rows[0]["you"].ToString());
+
+                            //    if (id == dt1.Rows[0]["UserID"].ToString())
+                            //    {
+                            //        continue;//是自己就跳回去
+                            //    }
+
+                            //    //第二层特殊处理
+                            //    #region 第二层特殊处理
+                            //    if (int.Parse(dt1.Rows[0]["RecommendGenera"].ToString()) - int.Parse(dt2.Rows[0]["RecommendGenera"].ToString()) == 1)
+                            //    {
+                            //        if (dt3.Rows.Count == 2)//够两个人就碰了
+                            //        {
+                            //            lgk.BLL.tb_bonus bonus = new lgk.BLL.tb_bonus();
+                            //            lgk.Model.tb_bonus m_bonus = new lgk.Model.tb_bonus();
+                            //            lgk.Model.tb_journal m_journal = new lgk.Model.tb_journal();
+                            //            m_bonus.UserID = int.Parse(id);//纯奖
+                            //            m_bonus.TypeID = 1;
+                            //            m_bonus.Amount = 5000;
+                            //            m_bonus.Revenue = 0;
+                            //            m_bonus.sf = 5000;
+                            //            m_bonus.AddTime = DateTime.Now;
+                            //            m_bonus.IsSettled = 1;
+                            //            m_bonus.Source = "获得线下第 1 层纯奖";
+                            //            m_bonus.SourceEn = "Get the line of the first 1 layers of pure Award";
+                            //            m_bonus.SttleTime = DateTime.Now;
+                            //            m_bonus.FromUserID = model.UserID;
+                            //            m_bonus.Bonus001 = int.Parse(getLoginID().ToString());
+                            //            m_bonus.Bonus002 = 0;
+                            //            m_bonus.Bonus003 = "";
+                            //            m_bonus.Bonus004 = "";
+                            //            m_bonus.Bonus005 = 0;
+                            //            m_bonus.Bonus006 = 0;
+                            //            m_bonus.Bonus007 = DateTime.Now;
+                            //            m_bonus.Batch = 0;
+
+                            //            bonus.Add(m_bonus);   //纯奖
+
+                            //            lgk.Model.tb_user userInfo_cj = new lgk.Model.tb_user();
+                            //            //dRegMoney = mysumcardd1; //注册金额
+                            //            userInfo_cj = userBLL.GetModel(int.Parse(id));//报单中心实体
+                            //            userInfo_cj.AllBonusAccount = userInfo_cj.AllBonusAccount + m_bonus.Amount;
+                            //            if (userBLL.Update(userInfo_cj))
+                            //            {
+
+                            //                m_journal.UserID = int.Parse(id);//纯奖
+                            //                m_journal.Remark = "获得线下第 1 层纯奖";
+                            //                m_journal.RemarkEn = "Get the line of the first 1 layers of pure Award";
+                            //                m_journal.InAmount = m_bonus.Amount;
+                            //                m_journal.OutAmount = 0;
+                            //                m_journal.BalanceAmount = userInfo_cj.AllBonusAccount;
+                            //                m_journal.JournalDate = DateTime.Now;
+                            //                m_journal.JournalType = 3;
+                            //                m_journal.Journal01 = int.Parse(model.UserID.ToString());
+                            //                journalBLL.Add(m_journal);
+                            //                SqlConnection conn = new SqlConnection(sconn);
+                            //                conn.Open();
+                            //                string sql = "update tb_user set chunjiang ='" + 1 + "',you='" + (you + 1) + "' where Userid='" + id + "' ;";
+                            //                SqlCommand cmd = new SqlCommand(sql, conn);
+                            //                int reInt = cmd.ExecuteNonQuery();
+                            //                conn.Close();
+                            //            }
+                            //            continue;
+                            //        }
+                            //        if (dt3.Rows.Count == 1)//不够就人头+1
+                            //        {
+                            //            SqlConnection conn = new SqlConnection(sconn);
+                            //            conn.Open();
+                            //            string sql = "update tb_user set  zuo='" + (zuo + 1) + "' where Userid='" + id + "' ;";
+                            //            SqlCommand cmd = new SqlCommand(sql, conn);
+                            //            int reInt = cmd.ExecuteNonQuery();
+                            //            conn.Close();
+                            //            continue;
+                            //        }
+                            //    }
+                            //    #endregion
+                            //    #region 第二层之后先加人数
+                            //    string sql5 = " select * from tb_user  where RecommendPath like '%" + dt3.Rows[0]["UserID"].ToString() + "%' and RecommendGenera='" + dt1.Rows[0]["RecommendGenera"].ToString() + "' and UserID='" + dt1.Rows[0]["UserID"].ToString() + "' ;";
+                            //    sql5 += " select * from tb_user  where RecommendPath  like '%" + dt3.Rows[1]["UserID"].ToString() + "%' and RecommendGenera='" + dt1.Rows[0]["RecommendGenera"].ToString() + "' and UserID='" + dt1.Rows[0]["UserID"].ToString() + "' ;";
+                            //    string pWhere5 = " ";
+                            //    DataSet ds5 = u.getData_Chaxun(sql5, pWhere5);
+                            //    DataTable dt5 = ds5.Tables[0];
+                            //    DataTable dt55 = ds5.Tables[1];
+
+                            //    if (dt5.Rows.Count > 0)
+                            //    {
+                            //        SqlConnection conn = new SqlConnection(sconn);
+                            //        conn.Open();
+                            //        string sql = "update tb_user set  zuo='" + (zuo + 1) + "' where Userid='" + id + "' ;";
+                            //        SqlCommand cmd = new SqlCommand(sql, conn);
+                            //        int reInt = cmd.ExecuteNonQuery();
+                            //        conn.Close();
+                            //    }
+                            //    if (dt55.Rows.Count > 0)
+                            //    {
+                            //        SqlConnection conn = new SqlConnection(sconn);
+                            //        conn.Open();
+                            //        string sql = "update tb_user set  you='" + (you + 1) + "' where Userid='" + id + "' ;";
+                            //        SqlCommand cmd = new SqlCommand(sql, conn);
+                            //        int reInt = cmd.ExecuteNonQuery();
+                            //        conn.Close();
+                            //    }
+
+                            //    #endregion
+
+                            //    if (int.Parse(dt2.Rows[0]["RecommendGenera"].ToString()) - int.Parse(dt1.Rows[0]["RecommendGenera"].ToString()) != ceng)
+                            //    {
+
+                            //        string sql4 = " select * from tb_user  where RecommendPath like '%" + dt3.Rows[0]["UserID"].ToString() + "%' and RecommendGenera='" + dt1.Rows[0]["RecommendGenera"].ToString() + "' ;";
+                            //        sql4 += " select * from tb_user  where RecommendPath  like '%" + dt3.Rows[1]["UserID"].ToString() + "%' and RecommendGenera='" + dt1.Rows[0]["RecommendGenera"].ToString() + "' ;";
+                            //        string pWhere4 = " ";
+                            //        DataSet ds4 = u.getData_Chaxun(sql4, pWhere4);
+                            //        DataTable dt4 = ds4.Tables[0];
+                            //        DataTable dt44 = ds4.Tables[1];
+                            //        #region 左边有人，右边刚来
+                            //        if (dt4.Rows.Count > 0 && dt44.Rows.Count == 1 && dt44.Rows[0]["UserID"].ToString() == dt1.Rows[0]["UserID"].ToString())
+                            //        {
+                            //            lgk.BLL.tb_bonus bonus = new lgk.BLL.tb_bonus();
+                            //            lgk.Model.tb_bonus m_bonus = new lgk.Model.tb_bonus();
+                            //            lgk.Model.tb_journal m_journal = new lgk.Model.tb_journal();
+                            //            m_bonus.UserID = int.Parse(id);//纯奖
+                            //            m_bonus.TypeID = 1;
+                            //            m_bonus.Amount = 5000;
+                            //            m_bonus.Revenue = 0;
+                            //            m_bonus.sf = 5000;
+                            //            m_bonus.AddTime = DateTime.Now;
+                            //            m_bonus.IsSettled = 1;
+                            //            m_bonus.Source = "获得线下第 " + (int.Parse(ceng.ToString()) + 1) + " 层纯奖";
+                            //            m_bonus.SourceEn = "Get the line of the first " + int.Parse(ceng.ToString()) + 1 + " layers of pure Award";
+                            //            m_bonus.SttleTime = DateTime.Now;
+                            //            m_bonus.FromUserID = model.UserID;
+                            //            m_bonus.Bonus001 = int.Parse(getLoginID().ToString());
+                            //            m_bonus.Bonus002 = 0;
+                            //            m_bonus.Bonus003 = "";
+                            //            m_bonus.Bonus004 = "";
+                            //            m_bonus.Bonus005 = 0;
+                            //            m_bonus.Bonus006 = 0;
+                            //            m_bonus.Bonus007 = DateTime.Now;
+                            //            m_bonus.Batch = 0;
+
+                            //            bonus.Add(m_bonus);   //纯奖
+
+                            //            lgk.Model.tb_user userInfo_cj = new lgk.Model.tb_user();
+                            //            //dRegMoney = mysumcardd1; //注册金额
+                            //            userInfo_cj = userBLL.GetModel(int.Parse(id));//报单中心实体
+                            //            userInfo_cj.AllBonusAccount = userInfo_cj.AllBonusAccount + m_bonus.Amount;
+                            //            if (userBLL.Update(userInfo_cj))
+                            //            {
+
+                            //                m_journal.UserID = int.Parse(id);//纯奖
+                            //                m_journal.Remark = "获得线下第 " + (int.Parse(ceng.ToString()) + 1) + " 层纯奖";
+                            //                m_journal.RemarkEn = "Get the line of the first " + (int.Parse(ceng.ToString()) + 1) + " layers of pure Award";
+                            //                m_journal.InAmount = m_bonus.Amount;
+                            //                m_journal.OutAmount = 0;
+                            //                m_journal.BalanceAmount = userInfo_cj.AllBonusAccount;
+                            //                m_journal.JournalDate = DateTime.Now;
+                            //                m_journal.JournalType = 3;
+                            //                m_journal.Journal01 = int.Parse(model.UserID.ToString());
+                            //                journalBLL.Add(m_journal);
+
+                            //                SqlConnection conn = new SqlConnection(sconn);
+                            //                conn.Open();
+                            //                string sql = "update tb_user set  chunjiang='" + (int.Parse(ceng.ToString()) + 1) + "' where Userid='" + id + "' ;";
+                            //                SqlCommand cmd = new SqlCommand(sql, conn);
+                            //                int reInt = cmd.ExecuteNonQuery();
+                            //                conn.Close();
+                            //            }
+                            //            continue;
+                            //        }
+                            //        #endregion
+                            //        #region 左边刚来，右边有人
+                            //        if (dt44.Rows.Count > 0 && dt4.Rows.Count == 1 && dt4.Rows[0]["UserID"].ToString() == dt1.Rows[0]["UserID"].ToString())
+                            //        {
+                            //            lgk.BLL.tb_bonus bonus = new lgk.BLL.tb_bonus();
+                            //            lgk.Model.tb_bonus m_bonus = new lgk.Model.tb_bonus();
+                            //            lgk.Model.tb_journal m_journal = new lgk.Model.tb_journal();
+                            //            m_bonus.UserID = int.Parse(id);//纯奖
+                            //            m_bonus.TypeID = 1;
+                            //            m_bonus.Amount = 5000;
+                            //            m_bonus.Revenue = 0;
+                            //            m_bonus.sf = 5000;
+                            //            m_bonus.AddTime = DateTime.Now;
+                            //            m_bonus.IsSettled = 1;
+                            //            m_bonus.Source = "获得线下第 " + (int.Parse(ceng.ToString()) + 1) + " 层纯奖";
+                            //            m_bonus.SourceEn = "Get the line of the first " + (int.Parse(ceng.ToString()) + 1) + " layers of pure Award";
+                            //            m_bonus.SttleTime = DateTime.Now;
+                            //            m_bonus.FromUserID = model.UserID;
+                            //            m_bonus.Bonus001 = int.Parse(getLoginID().ToString());
+                            //            m_bonus.Bonus002 = 0;
+                            //            m_bonus.Bonus003 = "";
+                            //            m_bonus.Bonus004 = "";
+                            //            m_bonus.Bonus005 = 0;
+                            //            m_bonus.Bonus006 = 0;
+                            //            m_bonus.Bonus007 = DateTime.Now;
+                            //            m_bonus.Batch = 0;
+
+                            //            bonus.Add(m_bonus);   //纯奖
+
+                            //            lgk.Model.tb_user userInfo_cj = new lgk.Model.tb_user();
+                            //            //dRegMoney = mysumcardd1; //注册金额
+                            //            userInfo_cj = userBLL.GetModel(int.Parse(id));//报单中心实体
+                            //            userInfo_cj.AllBonusAccount = userInfo_cj.AllBonusAccount + m_bonus.Amount;
+                            //            if (userBLL.Update(userInfo_cj))
+                            //            {
+
+                            //                m_journal.UserID = int.Parse(id);//纯奖
+                            //                m_journal.Remark = "获得线下第 " + (int.Parse(ceng.ToString()) + 1) + " 层纯奖";
+                            //                m_journal.RemarkEn = "Get the line of the first " + (int.Parse(ceng.ToString()) + 1) + " layers of pure Award";
+                            //                m_journal.InAmount = m_bonus.Amount;
+                            //                m_journal.OutAmount = 0;
+                            //                m_journal.BalanceAmount = userInfo_cj.AllBonusAccount;
+                            //                m_journal.JournalDate = DateTime.Now;
+                            //                m_journal.JournalType = 3;
+                            //                m_journal.Journal01 = int.Parse(model.UserID.ToString());
+                            //                journalBLL.Add(m_journal);
+
+                            //                SqlConnection conn = new SqlConnection(sconn);
+                            //                conn.Open();
+                            //                string sql = "update tb_user set  chunjiang='" + (int.Parse(ceng.ToString()) + 1) + "' where Userid='" + id + "' ;";
+                            //                SqlCommand cmd = new SqlCommand(sql, conn);
+                            //                int reInt = cmd.ExecuteNonQuery();
+                            //                conn.Close();
+                            //            }
+                            //            continue;
+                            //        }
+                            //        #endregion  
+                            //    }
+                            //}
+                            #endregion
+
+                    
+                            //写流水
+                            Response.Redirect("RegSuccess2.aspx?usercode=" + m_user.UserCode + "&asd=" + asd);
+                            return;
                         }
                         else
                         {
@@ -381,8 +779,9 @@ namespace Web
                     }
                 }
             }
-        } 
-        #endregion
+        }
+
+ 
 
         #region 注册验证
         /// <summary>
@@ -394,8 +793,89 @@ namespace Web
             lgk.Model.tb_user ModelRecommend = new lgk.Model.tb_user();
             //lgk.Model.tb_user ModelParent = new lgk.Model.tb_user();
             lgk.Model.tb_agent ModelAgent = new lgk.Model.tb_agent();
+            lgk.Model.tb_user ModelParent = new lgk.Model.tb_user();
+
+
 
             #region 用户编号验证
+            if (txtRecommendCode.Value == "")
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("ReferenceNumberIsnull") + "');", true);//推荐人编号不能为空
+                return false;
+            }
+            else
+            {
+                string reName = this.txtRecommendCode.Value.Trim();
+                ModelRecommend = userBLL.GetModel(GetUserID(reName));//推薦用户
+                if (ModelRecommend == null)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("featuredNotExist") + "');", true);//该推荐玩家不存在
+                    return false;
+                }
+                if (ModelRecommend.IsOpend == 0)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("MemberISNull") + "');", true);//该玩家尚未开通，不能作为推荐玩家
+                    return false;
+                }
+            }
+            if (txtParentCode.Value == "")
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PlacementIsnull") + "');", true);//安置玩家编号不能为空
+                return false;
+            }
+            else
+            {
+                string parName = this.txtParentCode.Value.Trim();
+                ModelParent = userBLL.GetModel(GetUserID(parName));//父节点用户
+                if (ModelParent == null)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PlacementIsexist") + "');", true);//该安置玩家不存在
+                    return false;
+                }
+                else
+                {
+                    if (ModelParent.IsOpend == 0)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PlacementIsopen") + "');", true);//该安置玩家未开通
+                        return false;
+                    }
+                }
+            }
+            if (radMarketOne.Checked != true && radMarketTwo.Checked != true)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseArea") + "');", true);//请选择注册区域
+                return false;
+            }
+
+            //int reNum = Convert.ToInt32(DbHelperSQL.GetSingle("select count(*) from tb_user where RecommendID=" + GetUserID(this.txtRecommendCode.Value.Trim())));
+            //if (reNum == 0)
+            //{
+            //    if (radMarketTwo.Checked == true)
+            //    {
+            //        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("RecommendFirst") + "');", true);//推荐玩家推荐的第一人必须放在最左区
+            //        return false;
+            //    }
+            //}
+
+            int location = 0;
+            if (radMarketOne.Checked == true) { location = 1; }
+            if (radMarketTwo.Checked == true) { location = 2; }
+            if (FlagLocation(GetUserID(this.txtParentCode.Value.Trim()), location, 0) == 2)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("hasMember") + "');", true);//该区域已有玩家
+                return false;
+            }
+            if ((location == 2 && FlagLocation(GetUserID(this.txtParentCode.Value.Trim()), 1, 0) == 1))
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("leftIsnull") + "');", true);//该接点玩家左区未有人，不能注册右区!
+                return false;
+            }
+
+            if (ModelParent.IsOpend == 0 && location == 2)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('该接点玩家尚未开通，不能注册右区!');", true);
+                return false;
+            }
             if (txtUserCode.Value == "")
             {
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseNumber") + "');", true);//请输入会员编号
@@ -465,11 +945,12 @@ namespace Web
             #endregion
 
             #region 报单中心验证
-            //if (this.txtAgentCode.Value == "")
-            //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("AgentNumber") + "');", true);//代理中心编号不能为空
-            //    return false;
-            //}
+            if (this.txtAgentCode.Value == "")
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("AgentNumber") + "');", true);//代理中心编号不能为空
+                return false;
+            }
+
             //else
             //{
             //    string reName = this.txtAgentCode.Value.Trim();
@@ -577,136 +1058,136 @@ namespace Web
             #endregion
 
             #region 银行信息验证
-            if (this.dropBank.SelectedValue == "0")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseSelectBank") + "');", true);//请选择开户银行
-                return false;
-            }
-            if (this.dropProvince.SelectedValue == "0")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Banklocation") + "');", true);//请选择银行所在地
-                return false;
-            }
-            if (this.txtBankBranch.Value == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("BankIsNull") + "');", true);//银行支行不能为空
-                return false;
-            }
-            if (this.txtBankAccount.Value == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("BankCardIsNull") + "');", true);//银行卡号不能为空
-                return false;
-            }
-            //if (!PageValidate.RegexTrueBank(this.txtBankAccount.Value))
+            //if (this.dropBank.SelectedValue == "0")
             //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("BankCardErrors") + "');", true);//银行卡号输入错误
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseSelectBank") + "');", true);//请选择开户银行
             //    return false;
             //}
-            if (this.txtBankAccountUser.Value == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NameIsNull") + "');", true);//开户名不能为空
-                return false;
-            }
-
-            //if (!PageValidate.RegexTrueName(txtBankAccountUser.Value.Trim()))
+            //if (this.dropProvince.SelectedValue == "0")
             //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NameMust") + "');", true);//开户名必须为2-30个中英文
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Banklocation") + "');", true);//请选择银行所在地
             //    return false;
-            //} 
+            //}
+            //if (this.txtBankBranch.Value == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("BankIsNull") + "');", true);//银行支行不能为空
+            //    return false;
+            //}
+            //if (this.txtBankAccount.Value == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("BankCardIsNull") + "');", true);//银行卡号不能为空
+            //    return false;
+            //}
+            ////if (!PageValidate.RegexTrueBank(this.txtBankAccount.Value))
+            ////{
+            ////    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("BankCardErrors") + "');", true);//银行卡号输入错误
+            ////    return false;
+            ////}
+            //if (this.txtBankAccountUser.Value == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NameIsNull") + "');", true);//开户名不能为空
+            //    return false;
+            //}
+
+            ////if (!PageValidate.RegexTrueName(txtBankAccountUser.Value.Trim()))
+            ////{
+            ////    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NameMust") + "');", true);//开户名必须为2-30个中英文
+            ////    return false;
+            ////} 
             #endregion
 
             #region 基本信息验证
             string trueName = this.txtTrueName.Value.Trim();
-            if (trueName == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("AccountIsNull") + "');", true);//姓名不能为空
-                return false;
-            }
-            //if (!PageValidate.RegexTrueName(trueName))
+            //if (trueName == "")
             //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("AccountMust") + "');", true);//姓名必须为2-30个中英文
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("AccountIsNull") + "');", true);//姓名不能为空
+            //    return false;
+            //}
+            ////if (!PageValidate.RegexTrueName(trueName))
+            ////{
+            ////    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("AccountMust") + "');", true);//姓名必须为2-30个中英文
+            ////    return false;
+            ////}
+
+            //string IdenCode = this.txtIdenCode.Value.Trim();
+            //if (IdenCode == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("CardIDIsNull") + "');", true);//身份证号不能为空
+            //    return false;
+            //}
+            //if (!PageValidate.RegexIden(IdenCode))
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("CardIDMust") + "');", true);//身份证号格式错误
+            //    return false;
+            //}
+            //int iIdenCode = userBLL.GetCount("IdenCode='" + IdenCode + "'");
+            //if (iIdenCode >= getParamInt("Level2"))
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("IdenCodeReg") + "');", true);//身份证号已被注册
             //    return false;
             //}
 
-            string IdenCode = this.txtIdenCode.Value.Trim();
-            if (IdenCode == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("CardIDIsNull") + "');", true);//身份证号不能为空
-                return false;
-            }
-            if (!PageValidate.RegexIden(IdenCode))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("CardIDMust") + "');", true);//身份证号格式错误
-                return false;
-            }
-            int iIdenCode = userBLL.GetCount("IdenCode='" + IdenCode + "'");
-            if (iIdenCode >= getParamInt("Level2"))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("IdenCodeReg") + "');", true);//身份证号已被注册
-                return false;
-            }
-
-            var phoneNum = this.txtPhoneNum.Value.Trim();
-            if (string.IsNullOrEmpty(phoneNum))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PhoneMust") + "');", true);//联系电话不能为空
-                return false;
-            }
-            if (!PageValidate.RegexPhone(phoneNum))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PhoneMust") + "');", true);//联系电话格式错误
-                return false;
-            }
-            int iPhoneNum = userBLL.GetCount("PhoneNum='" + phoneNum + "'");
-            if (iPhoneNum >= getParamInt("Level3"))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PhoneReg") + "');", true);//联系电话已被注册
-                return false;
-            }
-            if (this.txtAddress.Value == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("AddressIsnull") + "');", true);//联系地址不能为空
-                return false;
-            }
-
-            //string email = this.txtEmail.Value.Trim();
-            //if (email == "")
+            //var phoneNum = this.txtPhoneNum.Value.Trim();
+            //if (string.IsNullOrEmpty(phoneNum))
             //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('Email不能为空!');", true);//联系地址不能为空
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PhoneMust") + "');", true);//联系电话不能为空
             //    return false;
             //}
-            //int emailnum = userBLL.GetCount(" Email='"+email+"'");
-            //if (emailnum > 0)
+            //if (!PageValidate.RegexPhone(phoneNum))
             //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('此Email已被注册!');", true);//联系地址不能为空
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PhoneMust") + "');", true);//联系电话格式错误
             //    return false;
             //}
-            var strQQnumer = this.txtQQnumer.Value.Trim();
-            if (string.IsNullOrEmpty(strQQnumer))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("QQNumberEmpty") + "');", true);//QQ号码不能为空
-                return false;
-            }
-            if (!PageValidate.IsNumber(strQQnumer))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("QQNumberCorrect") + "');", true);//QQ号码格式不正确
-                return false;
-            }
+            //int iPhoneNum = userBLL.GetCount("PhoneNum='" + phoneNum + "'");
+            //if (iPhoneNum >= getParamInt("Level3"))
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PhoneReg") + "');", true);//联系电话已被注册
+            //    return false;
+            //}
+            //if (this.txtAddress.Value == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("AddressIsnull") + "');", true);//联系地址不能为空
+            //    return false;
+            //}
 
-            //if (dropQuestion.SelectedValue.Trim() == "0")
+            ////string email = this.txtEmail.Value.Trim();
+            ////if (email == "")
+            ////{
+            ////    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('Email不能为空!');", true);//联系地址不能为空
+            ////    return false;
+            ////}
+            ////int emailnum = userBLL.GetCount(" Email='"+email+"'");
+            ////if (emailnum > 0)
+            ////{
+            ////    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('此Email已被注册!');", true);//联系地址不能为空
+            ////    return false;
+            ////}
+            //var strQQnumer = this.txtQQnumer.Value.Trim();
+            //if (string.IsNullOrEmpty(strQQnumer))
             //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseSelectQuestion") + "');", true);//请选择密保问题
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("QQNumberEmpty") + "');", true);//QQ号码不能为空
             //    return false;
             //}
-            //if (string.IsNullOrEmpty(txtAnswer.Text))
+            //if (!PageValidate.IsNumber(strQQnumer))
             //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseAnswer") + "');", true);//请输入密保答案
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("QQNumberCorrect") + "');", true);//QQ号码格式不正确
             //    return false;
-            //} 
+            //}
+
+            ////if (dropQuestion.SelectedValue.Trim() == "0")
+            ////{
+            ////    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseSelectQuestion") + "');", true);//请选择密保问题
+            ////    return false;
+            ////}
+            ////if (string.IsNullOrEmpty(txtAnswer.Text))
+            ////{
+            ////    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseAnswer") + "');", true);//请输入密保答案
+            ////    return false;
+            ////} 
             #endregion
 
             return true;
-        } 
+        }
         #endregion
 
         #region 自动生成用户编号
@@ -729,7 +1210,7 @@ namespace Web
                 }
             }
             txtUserCode.Value = strUserCode;
-        } 
+        }
         #endregion
 
         #region 检查用户编号是否可用
@@ -746,11 +1227,11 @@ namespace Web
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseNmae") + "');", true);//请输入用户名
                 return;
             }
-            //if (!PageValidate.checkUserCode(txtUserCode.Value.Trim()))
-            //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("UserNmae") + "');", true);//用户名必须由6-10位的英文字母或数字组成
-            //    return;
-            //}
+            if (!PageValidate.checkUserCode(txtUserCode.Value.Trim()))
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("UserNmae") + "');", true);//用户名必须由6-10位的英文字母或数字组成
+                return;
+            }
             if (userBLL.Exists(strUserCode))
             {
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("existsrNmae") + "');", true);//该用户名已存在
@@ -761,8 +1242,9 @@ namespace Web
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("availableNmae") + "');", true);//该用户名可用
                 return;
             }
-        } 
-        #endregion
+        }
 
+        #endregion
     }
 }
+ 

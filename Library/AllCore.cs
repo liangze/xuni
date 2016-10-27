@@ -896,6 +896,59 @@ namespace Library
         }
 
         /// <summary>
+        /// 判断是否有足够金额开通激活会员并扣除相应金额
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int OpenCheck(lgk.Model.tb_user model, int reuserid, decimal mysumcardd)
+        {
+            int iFlag = 0;
+            decimal dRegMoney = 0;
+            lgk.Model.tb_user userInfo = new lgk.Model.tb_user();
+            dRegMoney = mysumcardd; //注册金额
+
+            userInfo = userBLL.GetModel(reuserid);//报单中心实体
+
+            if (userInfo.AllBonusAccount >= dRegMoney)//AllBonusAccount为20的现金积分
+            {
+                userInfo.AllBonusAccount = userInfo.AllBonusAccount - dRegMoney;
+
+                if (userBLL.Update(userInfo))
+                {
+                    //加入流水账表扣除报单币
+                    lgk.Model.tb_journal data = new lgk.Model.tb_journal();
+                    data.UserID = int.Parse(userInfo.UserID.ToString());
+                    data.Remark = "开通会员" + model.UserCode;
+                    data.RemarkEn = "open user " + model.UserCode;
+                    data.InAmount = 0;
+                    data.OutAmount = dRegMoney;
+                    data.BalanceAmount = userInfo.AllBonusAccount;
+                    data.JournalDate = DateTime.Now;
+                    data.JournalType = 3;
+                    data.Journal01 = int.Parse(model.UserID.ToString());
+
+                    journalBLL.Add(data);
+
+                    // AddSubsidy(model);
+
+                    iFlag = 0;
+
+                    UpdateSystemAccount("MoneyAccount", dRegMoney, 1);
+                }
+                else
+                {
+                    iFlag = 1;
+                }
+            }
+            else
+            {
+                iFlag = 2;
+            }
+
+            return iFlag;
+        }
+
+        /// <summary>
         /// 判断是否有足够金额开通激活会员并扣除相应金额--错误信息
         /// </summary>
         /// <param name="type"></param>

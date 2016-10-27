@@ -67,7 +67,7 @@
                         <div class="field">
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
-                                    <input name="txtUserCode" type="text" id="txtUserCode" runat="server" class="boxx" />&nbsp;<asp:Button ID="btnCreateUser" runat="server" OnClick="btnCreateUser_Click" class="btn" Width="80px" />&nbsp;&nbsp;
+                                    <input name="txtUserCode" type="text" id="txtUserCode" runat="server" class="boxx" style="width:150px" />&nbsp;<asp:Button ID="btnCreateUser" runat="server" OnClick="btnCreateUser_Click" class="btn" Width="80px" />&nbsp;&nbsp;
                                     <asp:Button ID="btnValidate" runat="server" OnClick="btnValidate_Click" class="btn" Width="80px" />
                                 </ContentTemplate>
                                 <Triggers>
@@ -82,7 +82,7 @@
                         </label>
                         <div class="field">
                             <input name="txtPassword" type="password" id="txtPassword" runat="server" class="input_reg"
-                                value="1" />
+                                value="1" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
@@ -91,7 +91,7 @@
                         </label>
                         <div class="field">
                             <input name="txtRegPassword" type="password" id="txtRegPassword" runat="server" class="input_reg"
-                                value="1" />
+                                value="1" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
@@ -100,7 +100,7 @@
                         </label>
                         <div class="field">
                             <input name="txtSecondPassword" type="password" id="txtSecondPassword" runat="server" class="input_reg"
-                                value="1" />
+                                value="1" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
@@ -109,7 +109,7 @@
                         </label>
                         <div class="field">
                             <input name="txtRegSecondPassword" type="password" id="txtRegSecondPassword" runat="server" class="input_reg"
-                                value="1" />
+                                value="1" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
@@ -118,7 +118,7 @@
                         </label>
                         <div class="field">
                             <input name="txtThreePassword" type="password" id="txtThreePassword" runat="server" class="input_reg"
-                                value="1" />
+                                value="1" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
@@ -127,7 +127,7 @@
                         </label>
                         <div class="field">
                             <input name="txtRegThreePassword" type="password" id="txtRegThreePassword" runat="server" class="input_reg"
-                                value="1" />
+                                value="1" style="width:150px" />
                         </div>
                     </div>
                 </div>
@@ -151,12 +151,12 @@
                             <input name="txtRegMoney" type="text" id="txtRegMoney" runat="server" disabled="disabled" class="input_reg1" />
                         </div>
                     </div>
-                    <div class="control-group">
+                    <div class="control-group" style="display:none">
                         <label for="memid">
                             <span style="color: #f00;">*</span><%=GetLanguage("Agent") %>：
                         </label>
                         <div class="field">
-                            <input name="txtAgentCode" type="text" id="txtAgentCode" runat="server" class="input_reg" />
+                            <input name="txtAgentCode" type="text" id="txtAgentCode" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
@@ -164,17 +164,44 @@
                             <span style="color: #f00;">*</span><%=GetLanguage("ReferenceNumber")%>：
                         </label>
                         <div class="field">
-                            <input name="txtRecommendCode" type="text" id="txtRecommendCode" runat="server" class="input_reg" />
+                            <input name="txtRecommendCode" type="text" id="txtRecommendCode" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
-                    <div class="control-group" style="display: none;">
+                       <div class="control-group"  >
                         <label for="memid">
                             <span style="color: #f00;">*</span><%=GetLanguage("Placement")%>：
                         </label>
                         <div class="field">
-                            <input name="txtParentCode" type="text" id="txtParentCode" runat="server" class="input_reg" />
+                            <input name="txtParentCode" type="text" id="txtParentCode" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
+                    <div class="control-group" style="display:none">
+                        <label for="memid">
+                            <%--<span style="color: #f00;">*</span>--%><%--<%=GetLanguage("ReferenceNumber")%>：--%>
+                            请选择缴费方式：
+                        </label>
+                        <div class="field">
+                            <asp:DropDownList ID="DropDownList1" runat="server">
+                                <asp:ListItem Selected="True" Value="1">全额现金积分</asp:ListItem>
+                                <asp:ListItem Value="2">44%现金积分+56%报单积分</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                     <div class="control-group">
+                        <label for="memid">
+                            <%--<span style="color: #f00;">*</span>--%><%--<%=GetLanguage("ReferenceNumber")%>：--%>
+                          <span style="color: #f00">*</span><%=GetLanguage("Registration")%><!--区域-->：
+                        </label>
+                        <div class="field">
+                           <input id="radMarketOne" type="radio"  runat="server" />
+                            1
+                            <%=GetLanguage("Market")%><!--市场--> 
+                            <input id="radMarketTwo" type="radio"  runat="server" />
+                            2
+                            <%=GetLanguage("Market")%><!--市场-->
+                        </div>
+                    </div>
+                 
                 </div>
             </div>
             <h6><%=GetLanguage("Banking")%>：</h6>
@@ -182,7 +209,7 @@
                 <div class="span6">
                     <div class="control-group">
                         <label for="memid">
-                            <span style="color: #f00;">*</span><%=GetLanguage("Depositary") %>：
+                            <span style="color: #f00;"></span><%=GetLanguage("Depositary") %>：
                         </label>
                         <div class="field">
                             <asp:DropDownList ID="dropBank" runat="server">
@@ -193,26 +220,26 @@
                     </div>
                     <div class="control-group">
                         <label for="memid">
-                            <span style="color: #f00;">*</span><%=GetLanguage("BankBranch")%>：
+                            <span style="color: #f00;"></span><%=GetLanguage("BankBranch")%>：
                         </label>
                         <div class="field">
-                            <input name="txtBankBranch" type="text" id="txtBankBranch" runat="server" class="input_reg" />
+                            <input name="txtBankBranch" type="text" id="txtBankBranch" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label for="memid">
-                            <span style="color: #f00;">*</span><%=GetLanguage("BankAccount")%>：
+                            <span style="color: #f00;"></span><%=GetLanguage("BankAccount")%>：
                         </label>
                         <div class="field">
-                            <input name="txtBankAccount" type="text" id="txtBankAccount" runat="server" class="input_reg" value="" maxlength="19" />
+                            <input name="txtBankAccount" type="text" id="txtBankAccount" runat="server" class="input_reg" value="" maxlength="19" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label for="memid">
-                            <span style="color: #f00;">*</span><%=GetLanguage("AccountName")%>：
+                            <span style="color: #f00;"></span><%=GetLanguage("AccountName")%>：
                         </label>
                         <div class="field">
-                            <input name="txtBankAccountUser" type="text" id="txtBankAccountUser" runat="server" class="input_reg" />
+                            <input name="txtBankAccountUser" type="text" id="txtBankAccountUser" runat="server" class="input_reg"  style="width:150px" />
                         </div>
                     </div>
                 </div>
@@ -222,42 +249,42 @@
                 <div class="span6">
                     <div class="control-group">
                         <label for="memid">
-                            <span style="color: #f00;">*</span><%=GetLanguage("Name")%>：
+                            <span style="color: #f00;"></span><%=GetLanguage("Name")%>：
                         </label>
                         <div class="field">
-                            <input name="txtTrueName" type="text" id="txtTrueName" runat="server" class="input_reg" />
+                            <input name="txtTrueName" type="text" id="txtTrueName" runat="server" class="input_reg" style="width:150px"  />
                         </div>
                     </div>
                     <div class="control-group">
                         <label for="memid">
-                            <span style="color: #f00;">*</span><%=GetLanguage("IDNumber")%>：
+                            <span style="color: #f00;"></span><%=GetLanguage("IDNumber")%>：
                         </label>
                         <div class="field">
-                            <input name="txtIdenCode" type="text" id="txtIdenCode" runat="server" class="input_reg" />
+                            <input name="txtIdenCode" type="text" id="txtIdenCode" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label for="memid">
-                            <span style="color: #f00;">*</span><%=GetLanguage("ContactPhone")%>：
+                            <span style="color: #f00;"></span><%=GetLanguage("ContactPhone")%>：
                         </label>
                         <div class="field">
-                            <input name="txtPhoneNum" type="text" id="txtPhoneNum" runat="server" class="input_reg" />
+                            <input name="txtPhoneNum" type="text" id="txtPhoneNum" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label for="memid">
-                            <span style="color: #f00;">*</span><%=GetLanguage("ContactAddress")%>：
+                            <span style="color: #f00;"></span><%=GetLanguage("ContactAddress")%>：
                         </label>
                         <div class="field">
-                            <input name="txtAddress" type="text" id="txtAddress" runat="server" class="input_reg" />
+                            <input name="txtAddress" type="text" id="txtAddress" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label for="memid">
-                            <span style="color: #f00;">*</span><%=GetLanguage("QQNumber")%>：
+                            <span style="color: #f00;"></span><%=GetLanguage("QQNumber")%>：
                         </label>
                         <div class="field">
-                            <input name="txtQQnumer" type="text" id="txtQQnumer" runat="server" class="input_reg" />
+                            <input name="txtQQnumer" type="text" id="txtQQnumer" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
                     <div class="control-group">
@@ -265,11 +292,13 @@
                             <%=GetLanguage("Email")%>：
                         </label>
                         <div class="field">
-                            <input name="txtEmail" type="text" id="txtEmail" runat="server" class="input_reg" />
+                            <input name="txtEmail" type="text" id="txtEmail" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
                 </div>
             </div>
+            <div>  
+                    </div>
             <div class="action">
                 <asp:Button ID="btnSubmit" runat="server" class="btn" OnClick="btnSubmit_Click" />
             </div>
