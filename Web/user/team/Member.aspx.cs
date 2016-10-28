@@ -16,6 +16,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Library;
+using System.Data;
 
 namespace Web.user.team
 {
@@ -184,7 +185,118 @@ namespace Web.user.team
                 }
                 if (flag_open(UserID, 2) > 0)
                 {
+                    lgk.BLL.tb_user B_user = new lgk.BLL.tb_user();
+                    lgk.Model.tb_user model_ = userBLL.GetModel(UserID);//选择的人
+                     int dengji = model_.LevelID ;
+                    if (dengji==1)
+                    {
+                        string sql = "select * from tb_globeParam where ParamName like 'dengji'";
+                        DataSet ds = B_user.getData_Chaxun(sql,"");
+                        model_.LeftScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.RightScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());;
+                        model_.RightNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        userBLL.Update(model_);
+                    }
+                    if (dengji == 2)
+                    {
+                        string sql = "select * from tb_globeParam where ParamName like 'dengji1'";
+                        DataSet ds = B_user.getData_Chaxun(sql, "");
+                        model_.LeftScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.RightScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
+                        model_.RightNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        userBLL.Update(model_);
+                    }
+                    if (dengji == 3)
+                    {
+                        string sql = "select * from tb_globeParam where ParamName like 'dengji2'";
+                        DataSet ds = B_user.getData_Chaxun(sql, "");
+                        model_.LeftScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.RightScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
+                        model_.RightNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        userBLL.Update(model_);
+                    }
+                    if (dengji == 4)
+                    {
+                        string sql = "select * from tb_globeParam where ParamName like 'dengji3'";
+                        DataSet ds = B_user.getData_Chaxun(sql, "");
+                        model_.LeftScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.RightScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
+                        model_.RightNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        userBLL.Update(model_);
+                    } 
+                    string path = model_.RecommendPath;
+                    string[] ID = path.Split('-');
+                    foreach (var id in ID)
+                    {
+                        if (id == UserID.ToString())
+                        {
+                            continue;
+                        }
+                        lgk.Model.tb_user model_1 = userBLL.GetModel(id); //头上的人
+                        if (id == model_.ParentID.ToString())//倒数第二层特殊处理
+                        {
+                            int zy = model_.Location;
+                            if (zy==1)
+                            {
+                                model_1.LeftScore += model_.LeftScore;
+                                model_1.LeftNewScore += model_.LeftNewScore;
+                                userBLL.Update(model_1);
+                                continue;
+                            }
+                            if (zy == 2)
+                            {
+                                model_1.RightScore += model_.RightScore;
+                                model_1.RightNewScore += model_.RightNewScore;
+                                userBLL.Update(model_1);
+                                continue;
+                            }
+                            continue;
+                        }
+                       
+                        string sql = "select * from tb_user  where ParentID = '"+id+ "' order by Location";
+                        DataSet ds = B_user.getData_Chaxun(sql, "");
+                        DataTable dt = ds.Tables[0];
+                        if (dt.Rows.Count < 2)
+                        { 
+                            model_1.LeftScore += model_.LeftScore;
+                            model_1.LeftNewScore += model_.LeftNewScore;
+                            userBLL.Update(model_1);
+                            continue;
+                        }
+                        if (dt.Rows.Count>=2)
+                        {
+                            string zuo = dt.Rows[0]["UserID"].ToString();
+                            string you = dt.Rows[1]["UserID"].ToString();
+                            string sql1 = "select * from tb_user  where UserID = '" + zuo + "';select * from tb_user  where UserID = '" + you + "';";
+                            DataSet ds1 = B_user.getData_Chaxun(sql1, "");
+                            DataTable dt1 = ds1.Tables[0];
+                            DataTable dt2 = ds1.Tables[1];
+                            if (dt1.Rows.Count > 0)
+                            {
+                                model_1.LeftScore += model_.LeftScore;
+                                model_1.LeftNewScore += model_.LeftNewScore;
+                                userBLL.Update(model_1);
+                                continue;
+                            }
+                            if (dt2.Rows.Count > 0)
+                            {
+                                model_1.RightScore += model_.RightScore;
+                                model_1.RightNewScore += model_.RightNewScore;
+                                userBLL.Update(model_1);
+                                continue;
+                            }
+                        } 
+                    }
+                  
+
                     acore.add_userRecord(model.UserCode, DateTime.Now, model.RegMoney, 2);
+
+
+                   //对碰奖
                     MessageBox.MyShow(this, GetLanguage("OpenSuccess"));//开通成功
                 }
                 else 

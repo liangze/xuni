@@ -8,7 +8,7 @@
     <title>
         <%=GetLanguage("registration")%>
     </title>
-    <link href="../../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../../static/css/style.css?1" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" src="JS/jquery-1.7.1.min.js"></script>
 
     <script type="text/javascript">
@@ -135,12 +135,20 @@
             <h6><%=GetLanguage("NetworkInformation")%>：</h6>
             <div class="row-fluid">
                 <div class="span6">
+                       <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                <ContentTemplate>
                     <div class="control-group">
                         <label for="memid">
                             <span style="color: #f00;">*</span><%=GetLanguage("MembershipLevels")%>：
                         </label>
                         <div class="field">
-                            <input name="txtLevel" type="text" id="txtLevel" runat="server" class="input_reg" disabled="disabled" />
+                            <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
+                                <asp:ListItem Value="0">体验会员</asp:ListItem>
+                                <asp:ListItem Value="1">一星会员</asp:ListItem>
+                                <asp:ListItem Value="2">二星会员</asp:ListItem>
+                                <asp:ListItem Value="3">三星会员</asp:ListItem>
+                            </asp:DropDownList>
+                         <%--   <input name="txtLevel" type="text" id="txtLevel" runat="server" class="input_reg" disabled="disabled" />--%>
                         </div>
                     </div>
                     <div class="control-group">
@@ -148,9 +156,11 @@
                             <span style="color: #f00;">*</span><%=GetLanguage("RegistrationAmount")%>：
                         </label>
                         <div class="field">
-                            <input name="txtRegMoney" type="text" id="txtRegMoney" runat="server" disabled="disabled" class="input_reg1" />
+                            <input name="txtRegMoney" type="text" id="txtRegMoney" runat="server" disabled="disabled" class="input_reg1"  />
                         </div>
-                    </div>
+                    </div> 
+                                    </ContentTemplate>
+                            </asp:UpdatePanel> 
                     <div class="control-group" style="display:none">
                         <label for="memid">
                             <span style="color: #f00;">*</span><%=GetLanguage("Agent") %>：
@@ -193,15 +203,14 @@
                           <span style="color: #f00">*</span><%=GetLanguage("Registration")%><!--区域-->：
                         </label>
                         <div class="field">
-                           <input id="radMarketOne" type="radio"  runat="server" />
+                           <input id="radMarketOne" type="radio"   name="Market" runat="server" />
                             1
                             <%=GetLanguage("Market")%><!--市场--> 
-                            <input id="radMarketTwo" type="radio"  runat="server" />
+                            <input id="radMarketTwo" type="radio"   name="Market" runat="server" />
                             2
                             <%=GetLanguage("Market")%><!--市场-->
                         </div>
-                    </div>
-                 
+                    </div> 
                 </div>
             </div>
             <h6><%=GetLanguage("Banking")%>：</h6>
@@ -299,7 +308,7 @@
             </div>
             <div>  
                     </div>
-            <div class="action">
+            <div >
                 <asp:Button ID="btnSubmit" runat="server" class="btn" OnClick="btnSubmit_Click" />
             </div>
         </div>

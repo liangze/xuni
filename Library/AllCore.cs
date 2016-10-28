@@ -909,22 +909,22 @@ namespace Library
 
             userInfo = userBLL.GetModel(reuserid);//报单中心实体
 
-            if (userInfo.AllBonusAccount >= dRegMoney)//AllBonusAccount为20的现金积分
+            if (userInfo.Emoney >= dRegMoney)//AllBonusAccount为20的现金积分
             {
-                userInfo.AllBonusAccount = userInfo.AllBonusAccount - dRegMoney;
+                userInfo.Emoney = userInfo.Emoney - dRegMoney;
 
                 if (userBLL.Update(userInfo))
                 {
                     //加入流水账表扣除报单币
                     lgk.Model.tb_journal data = new lgk.Model.tb_journal();
                     data.UserID = int.Parse(userInfo.UserID.ToString());
-                    data.Remark = "开通会员" + model.UserCode;
-                    data.RemarkEn = "open user " + model.UserCode;
+                    data.Remark = "注册" + model.UserCode;
+                    data.RemarkEn = "Register " + model.UserCode;
                     data.InAmount = 0;
                     data.OutAmount = dRegMoney;
-                    data.BalanceAmount = userInfo.AllBonusAccount;
+                    data.BalanceAmount = userInfo.Emoney;
                     data.JournalDate = DateTime.Now;
-                    data.JournalType = 3;
+                    data.JournalType = 1;
                     data.Journal01 = int.Parse(model.UserID.ToString());
 
                     journalBLL.Add(data);

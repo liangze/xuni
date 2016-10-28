@@ -39,7 +39,7 @@ namespace Web
                 BindBank();
                 //BindQuestion();
                 BindProvince();
-            
+                getDate();
                 string sprID = Request.QueryString["UserID"];
 
                 string state = getStringRequest("state");
@@ -103,6 +103,16 @@ namespace Web
         //    }
         //}
 
+        public void getDate() 
+        {
+            lgk.BLL.tb_user u = new lgk.BLL.tb_user();
+            string sql = "select * from tb_globeParam where ParamName like 'dengji%'";
+            DataSet ds = u.getData_Chaxun(sql, "");
+            if (DropDownList2.SelectedValue == "0")
+            {
+                txtRegMoney.Value = ds.Tables[0].Rows[0]["ParamVarchar"].ToString();
+            }
+        }
         #region 检查用户
         /// <summary>
         /// 检查用户
@@ -142,15 +152,15 @@ namespace Web
         {
             if (currentCulture == "en-us")
             {
-                txtLevel.Value = levelBLL.GetLevelName(LoginUser.LevelID, "en-us");
+                //txtLevel.Value = levelBLL.GetLevelName(LoginUser.LevelID, "en-us");
             }
             else
             {
-                txtLevel.Value = levelBLL.GetLevelName(LoginUser.LevelID, "");
+                //txtLevel.Value = levelBLL.GetLevelName(LoginUser.LevelID, "");
             }
 
-            decimal dRegMoney = getParamInt("Level1") * getParamAmount("billMoney");
-            txtRegMoney.Value = dRegMoney.ToString("0.00");
+            //decimal dRegMoney = getParamInt("Level1") * getParamAmount("billMoney");
+            //txtRegMoney.Value = dRegMoney.ToString("0.00");
 
             string strBankName = new lgk.BLL.tb_bankName().GetModel(1).BankName;
             string[] s = strBankName.Split('|');
@@ -276,88 +286,7 @@ namespace Web
                     }
                 }
 
-
-                #region 循环找到买的产品，判断商品数量够不够
-
-                decimal dTotalMoney = 0;
-                decimal iTSettlement = 0;
-
-                lgk.Model.tb_goods tb_goodsModel = new lgk.Model.tb_goods();
-                string baodanGoodsID = Request["baodanID"];
-                DateTime time = DateTime.Now;
-                List<lgk.Model.tb_goodsCar> listCar = new List<lgk.Model.tb_goodsCar>();//购物车集合
-                lgk.BLL.tb_goods tb_goodsBLL = new lgk.BLL.tb_goods();
-                string[] baodanIDs = baodanGoodsID.Split(',');
-                foreach (string id in baodanIDs)
-                {
-                    tb_goodsModel = tb_goodsBLL.GetModel(int.Parse(id));//根据发布商品编号找到
-                    int num = int.Parse(Request["num_" + id]);
-                    lgk.Model.tb_goodsCar goodsCar = new lgk.Model.tb_goodsCar();
-                    goodsCar.GoodsID = int.Parse(id);
-                    goodsCar.Goods006 = num;//数量
-                    goodsCar.BuyUser = Convert.ToInt32(getLoginID());//购买人
-                    goodsCar.TotalMoney = tb_goodsModel.Price * num;//总价格
-                    goodsCar.ShopPrice = tb_goodsModel.Goods002 * num;//总BV
-                    goodsCar.AddTime = DateTime.Now;
-                    goodsCar.GoodsCode = tb_goodsModel.GoodsCode;
-                    goodsCar.GoodsName = tb_goodsModel.GoodsName;
-                    goodsCar.Price = tb_goodsModel.Price;
-                    goodsCar.RealityPrice = tb_goodsModel.Goods002;
-                    listCar.Add(goodsCar);
-                }
-
-                foreach (lgk.Model.tb_goodsCar car in listCar)
-                { //寻坏商品
-                    tb_goodsModel = tb_goodsBLL.GetModelAndName(car.GoodsID);//根据发布商品编号找到
-                                                                             //if (tb_goodsModel.StateType == 0) //判断是否 审核通过 0未审核
-                                                                             //{
-                                                                             //    MessageBox.Show(this, "商品" + tb_goodsModel.GoodsCode + "审核未通过,请删除该商品!");
-                                                                             //    return;
-                                                                             //}
-                                                                             //if (tb_goodsModel.Goods003 == "1") //判断是否 删除 1已经删除
-                                                                             //{
-                                                                             //    MessageBox.Show(this, "商品" + tb_goodsModel.GoodsCode + "已被删除,请移除该商品!");
-                                                                             //    return;
-                                                                             //}
-                                                                             //if (tb_goodsModel.Goods001 == 0) //判断是否 0下架
-                                                                             //{
-                                                                             //    MessageBox.Show(this, "商品" + tb_goodsModel.GoodsCode + "已经下架,请删除该商品!");
-                                                                             //    return;
-                                                                             //}
-
-                    if (Convert.ToInt32(tb_goodsModel.Pic5) < car.Goods006) //判断库存量
-                    {
-                        MessageBox.Show(this, "商品" + tb_goodsModel.GoodsCode + "库存不足,请重新修改数量!");
-                        return;
-                    }
-                    dTotalMoney = dTotalMoney + car.TotalMoney;
-                    iTSettlement = iTSettlement + car.ShopPrice;
-
-                }
-                if (dTotalMoney != decimal.Parse(txtRegMoney.Value.ToString()))
-                {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('购买产品的金额与注册会员金额不一致！');", true);
-                    return;
-                }
-                if (DropDownList1.SelectedValue == "1")
-                {
-                    SqlConnection conn = new SqlConnection(sconn);
-                    conn.Open();
-                    string sql = string.Format("select * from tb_user where userID='" + getLoginID() + "'");
-                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    conn.Close();
-                    decimal AllBonusAccount = decimal.Parse(dt.Rows[0]["AllBonusAccount"].ToString());
-                    if (AllBonusAccount < dTotalMoney)
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('现金积分不足！');", true);
-                        return;
-                    }
-
-                }
-
-                #endregion
+                 
                 #region 注册用户插入tb_user 
                 lgk.Model.tb_user m_user = new lgk.Model.tb_user();
                 lgk.Model.tb_user ModelRecommend = userBLL.GetModel(GetUserID(this.txtRecommendCode.Value.Trim()));//推荐用户
@@ -394,9 +323,9 @@ namespace Web
                 m_user.LeftScore = 0;
                 m_user.RightScore = 0;
 
-                m_user.Location = 0;//radMarketOne.Checked == true ? 1 : 2;
+                m_user.Location = radMarketOne.Checked == true ? 1 : 2; //radMarketOne.Checked == true ? 1 : 2;
                 m_user.User007 = "";//m_user.Location == 1 ? "左区" : "右区";
-                m_user.IsOpend = 2;//是否启用 0-未激活,1-新注册, 2-已激活
+                m_user.IsOpend = 0;//是否启用 0-未激活,1-新注册, 2-已激活
                 m_user.IsLock = 0;//是否被冻結(0-否,1-冻結)
 
                 m_user.IsAgent = 0;//是否报單中心(0-否，1-是)
@@ -411,7 +340,7 @@ namespace Web
                 m_user.GLmoney = 0;//复投积分
                 m_user.ShopAccount = 0;//奖金币
 
-                decimal dRegMoney = getParamAmount("billMoney") * getParamAmount("Level1");
+                decimal dRegMoney = decimal.Parse(txtRegMoney.Value);
                 m_user.RegMoney = dRegMoney;
                 m_user.RegTime = DateTime.Now;//注册時間
                 m_user.OpenTime = DateTime.Now;
@@ -494,13 +423,13 @@ namespace Web
                         if (DropDownList1.SelectedValue == "1")
                         {
                             //mysumcardd1 = mysumcardd;
-                            mysumcardd1 = 0;
+                            mysumcardd1 = dRegMoney;
                         }
                         int i = acore.OpenCheck(model2, reuserid, mysumcardd1); //扣注册现金积分
                         if (i != 0)
                         {
                             userBLL.Delete(model2.UserID);//删除该会员资料
-                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('您的报单积分不足!');", true);//开户名不能为空
+                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('您的注册积分不足!');", true);//开户名不能为空
                             return;
                         }
                         else
@@ -795,7 +724,8 @@ namespace Web
             lgk.Model.tb_agent ModelAgent = new lgk.Model.tb_agent();
             lgk.Model.tb_user ModelParent = new lgk.Model.tb_user();
 
-
+        
+           
 
             #region 用户编号验证
             if (txtRecommendCode.Value == "")
@@ -1245,6 +1175,29 @@ namespace Web
         }
 
         #endregion
+
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lgk.BLL.tb_user u = new lgk.BLL.tb_user();
+            string sql = "select * from tb_globeParam where ParamName like 'dengji%'"; 
+            DataSet ds = u.getData_Chaxun(sql, "");
+            if (DropDownList2.SelectedValue=="0")
+            {
+                txtRegMoney.Value = ds.Tables[0].Rows[0]["ParamVarchar"].ToString();
+            }
+            if (DropDownList2.SelectedValue == "1")
+            {
+                txtRegMoney.Value = ds.Tables[0].Rows[1]["ParamVarchar"].ToString();
+            }
+            if (DropDownList2.SelectedValue == "2")
+            {
+                txtRegMoney.Value = ds.Tables[0].Rows[2]["ParamVarchar"].ToString();
+            }
+            if (DropDownList2.SelectedValue == "3")
+            {
+                txtRegMoney.Value = ds.Tables[0].Rows[3]["ParamVarchar"].ToString();
+            }
+        }
     }
 }
  
