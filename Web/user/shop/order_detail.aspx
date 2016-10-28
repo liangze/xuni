@@ -39,6 +39,12 @@
                         </span>
                     </p>
                     <p class="span3">
+                        <label><%=GetLanguage("ContactPhone")%><!--联系电话-->：</label>
+                        <span class="field">
+                            <input name="txtPhone" type="text" id="txtPhone" runat="server" class="input_reg" disabled="disabled" />
+                        </span>
+                    </p>
+                    <p class="span3">
                         <label><%=GetLanguage("ShopAddress")%><!--收货地址-->：</label>
                         <span class="field">
                             <input name="txtAddress" type="text" id="txtAddress" runat="server" class="input_reg" disabled="disabled" />
@@ -76,9 +82,9 @@
         <table class="styled" >
             <thead>
                 <tr>
-                    <th align="center">
+                    <%--<th align="center">
                         <%=GetLanguage("ItemNumber")%><!--商品编号-->
-                    </th>
+                    </th>--%>
                     <th align="center">
                         <%=GetLanguage("CommodityName")%><!--商品名称-->
                     </th>
@@ -106,28 +112,28 @@
                             <%-- <td>
                                 <a href='<%#Eval("ProcudeID","detail.aspx?type=1&id={0}&payment=2") %>' target="_blank"><img src='../../Upload/<%# Eval("Pic1") %>' width="100" height="100" alt=""/></a>
                             </td>--%>
-                            <td>
+                            <%--<td align="center">
                                 <a href='<%#Eval("ProcudeID","detail.aspx?type=1&id={0}&payment=2") %>' target="_blank"><%#Eval("GoodsCode")%></a>
-                            </td>
-                            <td>
+                            </td>--%>
+                            <td align="center">
                                 <a href='<%#Eval("ProcudeID","detail.aspx?type=1&id={0}&payment=2") %>' target="_blank"><%#Eval("GoodsName")%></a>
-                                <br />
+                                <%--<br />
                                 <span>尺码：<%# Eval("gSize") %></span>
                                 <br />
-                                <span>颜色：<%# Eval("gColor") %></span>
+                                <span>颜色：<%# Eval("gColor") %></span>--%>
                             </td>
-                            <td>￥ <%#Eval("Price")%>
+                            <td align="center"><%#Eval("Price")%>
                             </td>
                             <%--<td>
                                 <%#Eval("PV")%>
                             </td>--%>
-                            <td>
+                            <td align="center">
                                 <%#Eval("OrderSum")%>
                             </td>
-                            <td>
+                            <td align="center">
                                 <%#Eval("OrderTotal")%>
                             </td>
-                            <td>
+                            <td align="center">
                                 <%#Eval("OrderDate")%>
                             </td>
                         </tr>

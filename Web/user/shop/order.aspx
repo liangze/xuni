@@ -24,34 +24,37 @@
             <table class="styled">
                 <thead>
                     <tr>
-                        <th align="center">
-                            <%=GetLanguage("Time")%><!--时间-->
+                        <th align="center">会员账号
                         </th>
-                        <th align="center">
+                        <th align="center">会员级别
+                        </th>
+                        <th align="center">姓名
+                        </th>
+                        <%--<th align="center">
                             <%=GetLanguage("OrderNumber")%><!--订单号-->
-                        </th>
-                        <th align="center">
-                            <%=GetLanguage("LoginInformation")%><!--会员编号-->
-                        </th>
-                        <th align="center">
-                            <%=GetLanguage("PurchaseQuantity")%><!--购买数量-->
-                        </th>
-                        <th align="center"><%=GetLanguage("TheTotalAmount")%><!--总金额-->
-                        </th>
+                        </th>--%>
+                        <%--                        <th align="center">
+                            购买数量
+                        </th>--%>
+                        <%--<th align="center"><%=GetLanguage("TheTotalAmount")%><!--总金额-->
+                        </th>--%>
                         <th align="center">
                             <%=GetLanguage("ContactPhone")%><!--联系电话-->
                         </th>
-                        <th align="center">
+                        <%--<th align="center">
                             <%=GetLanguage("Express")%><!--快递公司-->
                         </th>
                         <th align="center">
                             <%=GetLanguage("ExpressOrder")%><!--快递单号-->
-                        </th>
-                        <th align="center">
+                        </th>--%>
+                       <%-- <th align="center">
                             <%=GetLanguage("PaymentType")%><!--支付类型-->
-                        </th>
+                        </th>--%>
                         <th align="center">
                             <%=GetLanguage("State")%><!--状态-->
+                        </th>
+                        <th align="center">
+                            <%=GetLanguage("Time")%><!--时间-->
                         </th>
                         <th align="center">
                             <%=GetLanguage("Operation")%><!--操作-->
@@ -64,42 +67,39 @@
                         <ItemTemplate>
                             <tr class="<%# (this.Repeater1.Items.Count + 1) % 2 == 0 ? "odd":"even"%>">
                                 <td align="center">
-                                    <%#Convert.ToDateTime(Eval("OrderDate")).ToString("yyyy-MM-dd HH:mm:ss")%>
-                                </td>
-                                <td align="center">
-                                    <%#Eval("OrderCode")%>
-                                </td>
-                                <td align="center">
                                     <%#Eval("UserCode")%>
                                 </td>
                                 <td align="center">
+                                    <%=levelBLL.GetLevelName(LoginUser.LevelID)%>
+                                </td>
+                                <td align="center">
+                                    <%#Eval("Order6")%>
+                                </td>
+                                <%--<td align="center">
+                                    <%#Eval("OrderCode")%>
+                                </td>--%>
+                               <%-- <td align="center">
                                     <%#Eval("OrderSum")%>
-                                </td>
-                                <td align="center">
+                                </td>--%>
+                                <%--<td align="center">
                                     <%#Eval("OrderTotal")%>
-                                </td>
+                                </td>--%>
                                 <td align="center">
-                                    <%#Eval("PhoneNum")%>
+                                    <%#Eval("Order5")%>
                                 </td>
-                                <td align="center">
+                                <%--<td align="center">
                                     <%#Eval("Order3")%>
                                 </td>
                                 <td align="center">
                                     <%#Eval("Order4")%>
-                                </td>
-                                <td align="center">
-                                    <% if (Language == "zh-cn")
-                                       { %>
-                                购物币
-                            <% }
-                                       else
-                                       { %>
-                              Shopping currency
-                            <% }%>
-                                
-                                </td>
+                                </td>--%>
+                                <%--<td align="center">消费积分
+                                </td>--%>
                                 <td align="center">
                                     <%#GetState(Eval("IsSend").ToString())%>
+                                </td>
+                                <td align="center">
+                                    <%#Convert.ToDateTime(Eval("OrderDate")).ToString("yyyy-MM-dd HH:mm:ss")%>
                                 </td>
                                 <td align="center">&nbsp;
                                 <asp:HiddenField ID="hft" runat="server" Value='<%# Eval("IsSend") %>' />

@@ -1117,6 +1117,7 @@
     <Content Include="css\uniform.css" />
     <Content Include="doc\tb_journal.txt" />
     <Content Include="doc\tb_User.txt" />
+    <Content Include="doc\奖金类型.txt" />
     <Content Include="getemailcode.aspx" />
     <Content Include="images\06.jpg" />
     <Content Include="images\ad2.jpg" />
@@ -1209,6 +1210,7 @@
     <Content Include="images\mess.jpg" />
     <Content Include="images\mess2.jpg" />
     <Content Include="images\mima_bg.gif" />
+    <Content Include="images\more.jpg" />
     <Content Include="images\news_bg.jpg" />
     <Content Include="images\notice.png" />
     <Content Include="images\quick_bg.jpg" />
@@ -1555,6 +1557,15 @@
     <Content Include="user\finance\Remit2.aspx" />
     <Content Include="user\finance\return_url.aspx" />
     <Content Include="user\finance\xdw.aspx" />
+    <Content Include="user\goldcoin01.aspx" />
+    <Content Include="user\goldcoin02.aspx" />
+    <Content Include="user\goldcoin03.aspx" />
+    <Content Include="user\goldcoin04.aspx" />
+    <Content Include="user\goldcoin05.aspx" />
+    <Content Include="user\goldcoin06.aspx" />
+    <Content Include="user\goldcoin07.aspx" />
+    <Content Include="user\goldcoin08.aspx" />
+    <Content Include="user\goldcoin09.aspx" />
     <Content Include="user\JS\echarts\bar.js" />
     <Content Include="user\JS\echarts\chart.js" />
     <Content Include="user\JS\echarts\echarts.js" />
@@ -3122,6 +3133,69 @@
     </Compile>
     <Compile Include="user\finance\xdw.aspx.designer.cs">
       <DependentUpon>xdw.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\goldcoin01.aspx.cs">
+      <DependentUpon>goldcoin01.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\goldcoin01.aspx.designer.cs">
+      <DependentUpon>goldcoin01.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\goldcoin02.aspx.cs">
+      <DependentUpon>goldcoin02.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\goldcoin02.aspx.designer.cs">
+      <DependentUpon>goldcoin02.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\goldcoin03.aspx.cs">
+      <DependentUpon>goldcoin03.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\goldcoin03.aspx.designer.cs">
+      <DependentUpon>goldcoin03.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\goldcoin04.aspx.cs">
+      <DependentUpon>goldcoin04.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\goldcoin04.aspx.designer.cs">
+      <DependentUpon>goldcoin04.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\goldcoin05.aspx.cs">
+      <DependentUpon>goldcoin05.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\goldcoin05.aspx.designer.cs">
+      <DependentUpon>goldcoin05.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\goldcoin06.aspx.cs">
+      <DependentUpon>goldcoin06.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\goldcoin06.aspx.designer.cs">
+      <DependentUpon>goldcoin06.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\goldcoin07.aspx.cs">
+      <DependentUpon>goldcoin07.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\goldcoin07.aspx.designer.cs">
+      <DependentUpon>goldcoin07.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\goldcoin08.aspx.cs">
+      <DependentUpon>goldcoin08.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\goldcoin08.aspx.designer.cs">
+      <DependentUpon>goldcoin08.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\goldcoin09.aspx.cs">
+      <DependentUpon>goldcoin09.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\goldcoin09.aspx.designer.cs">
+      <DependentUpon>goldcoin09.aspx</DependentUpon>
     </Compile>
     <Compile Include="user\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

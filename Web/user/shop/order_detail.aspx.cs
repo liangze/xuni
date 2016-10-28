@@ -41,8 +41,9 @@ namespace Web.user.shop
 
             txtOrderCode.Value = order == null ? "" : order;//订单号
             txtUserCode.Value = user.UserCode == null ? "" : user.UserCode;//会员编号
-            txtTrueName.Value = user.TrueName == null ? "" : user.TrueName;//会员姓名
+            txtTrueName.Value = orderInfo.Order6 == null ? "" : orderInfo.Order6;//会员姓名
             txtAddress.Value = orderInfo.UserAddr == null ? "" : orderInfo.UserAddr;//收货地址
+            txtPhone.Value = orderInfo.Order5;
             txtTotalAmount.Value = orderInfo.OrderTotal.ToString() == null ? "" : orderInfo.OrderTotal.ToString();//总额
             txtExpress.Value = orderInfo.Order3 == null ? "" : orderInfo.Order3;//快递公司
             txtExpressOrder.Value = orderInfo.Order4 == null ? "" : orderInfo.Order4;//快递单号

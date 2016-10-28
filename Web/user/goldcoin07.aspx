@@ -1,70 +1,44 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="dl_JournalAccount.aspx.cs"
-    Inherits="Web.user.finance.dl_JournalAccount" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="goldcoin07.aspx.cs" Inherits="Web.user.goldcoin07" %>
 
+<!DOCTYPE html>
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>账户明细</title>
-    <link href="../../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <script type="text/javascript" src="../../Js/My97DatePicker/WdatePicker.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" language="javascript" src="../../Js/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="right_content">
-            <h2><%=GetLanguage("AccountsQueries")%></h2>
+            <h2>购物积分明细</h2>
             <div class="filter">
                 <div class="row-fluid">
-                    <%--<p class="span3">
-                        <label>注册积分：</label>
+                    <p class="span3">
+                        <label>购物积分：</label>
                         <span class="field">
                             <input name="txtBonusAccount" id="txtBonusAccount" runat="server" type="text" disabled="disabled" />
                         </span>
                     </p>
                     <p class="span3">
-                        <label>消费积分：</label>
+                        <label>日期：</label>
                         <span class="field">
-                            <input name="txtEmoney" id="txtEmoney" runat="server" type="text" disabled="disabled" />
+                            
+                            <asp:TextBox ID="txtStart" runat="server" class="input_select" onfocus="WdatePicker()"></asp:TextBox>
+                           
                         </span>
                     </p>
                     <p class="span3">
-                        <label>电子积分：</label>
+                        <label>至</label>
                         <span class="field">
-                            <input name="txtStockMoney" id="txtStockMoney" runat="server" type="text" disabled="disabled" />
+                           
+                            <asp:TextBox ID="txtEnd" runat="server" class="input_select" onfocus="WdatePicker()"></asp:TextBox>
+                           
                         </span>
                     </p>
-                    <div class="span3">
-                        <label>云商积分：</label>
-                        <span class="field">
-                            <input name="txtShopAccount" id="txtShopAccount" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>
-                    <div class="span3">
-                        <label>奖金积分：</label>
-                        <span class="field">
-                            <input name="txtStockAccount" id="txtStockAccount" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>
-                    <div class="span3">
-                        <label>感恩积分：</label>
-                        <span class="field">
-                            <input name="txtStockAccount" id="Text1" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>
-                    <div class="span3">
-                        <label>购物积分：</label>
-                        <span class="field">
-                            <input name="txtStockAccount" id="Text2" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>
-                    <div class="span3">
-                        <label>爱心基金：</label>
-                        <span class="field">
-                            <input name="txtStockAccount" id="Text3" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>--%>
                     <p class="span3">
-                        <asp:Button ID="btnDetail" runat="server" Text="搜 索" class="btn" OnClick="btnDetail_Click" />
+                        <asp:Button ID="btnSearch" runat="server" Text="搜索" class="btn" OnClick="btnSearch_Click" />
                     </p>
                 </div>
             </div>
@@ -100,8 +74,8 @@
                                     <%{ %>
                                     <%#Eval("Remark")%><%-- 详情--%>
                                     <%}
-                                      else
-                                      { %>
+                                        else
+                                        { %>
                                     <%#Eval("Remarken")%><%-- 详情--%>
                                     <%} %>
                                 </td>
@@ -135,12 +109,12 @@
                 </tr>
             </table>
             <div class="yellow">
-                <webdiyer:AspNetPager ID="AspNetPager1" runat="server" SkinID="AspNetPagerSkin" AlwaysShow="True"
-                    InputBoxClass="pageinput" NumericButtonCount="3" PageSize="12" ShowInputBox="Never"
-                    ShowNavigationToolTip="True" SubmitButtonClass="pagebutton" UrlPaging="false"
-                    pageindexboxtype="TextBox" showpageindexbox="Always" SubmitButtonText="" Direction="LeftToRight"
-                    OnPageChanged="AspNetPager1_PageChanged">
-                </webdiyer:AspNetPager>
+                <webdiyer:aspnetpager id="AspNetPager1" runat="server" skinid="AspNetPagerSkin" alwaysshow="True"
+                    inputboxclass="pageinput" numericbuttoncount="3" pagesize="12" showinputbox="Never"
+                    shownavigationtooltip="True" submitbuttonclass="pagebutton" urlpaging="false"
+                    pageindexboxtype="TextBox" showpageindexbox="Always" submitbuttontext="" direction="LeftToRight"
+                    onpagechanged="AspNetPager1_PageChanged">
+                </webdiyer:aspnetpager>
             </div>
         </div>
     </form>

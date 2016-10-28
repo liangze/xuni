@@ -104,6 +104,7 @@ namespace Web.user.shop
             {
                 lgk.Model.tb_user userInfo = userBLL.GetModel(LoginUser.UserID);//取得当前用户
 
+
                 lgk.Model.tb_Order orderInfo = new lgk.Model.tb_Order();//订单
 
                 lgk.Model.tb_OrderDetail orderDetailModel = new lgk.Model.tb_OrderDetail();//订单详情
@@ -126,31 +127,49 @@ namespace Web.user.shop
                     goodsCar.Price = goodsInfo.Price;
                     goodsCar.TotalMoney = goodsInfo.Price * num;
                     listCar.Add(goodsCar);
+
                 }
 
                 foreach (lgk.Model.tb_goodsCar car in listCar)
                 { //寻坏商品
                     if (Convert.ToInt32(goodsInfo.Pic5) < car.Goods006) //判断库存量
                     {
-                        MessageBox.Show(this, "" + GetLanguage("InventoryProblem") + "");
+                        MessageBox.Show(this, "" + GetLanguage("InventoryProblem") + "");//库存不足
                         return;
                     }
                 }
                 #region
+                decimal dPVTotal = listCar.Sum(p => p.TotalMoney); //总价格
+                if (userInfo.ShopAccount < dPVTotal)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("EcurrencyBalance") + "');", true);//账户余额不足
+                    return;
+                }
                 try
                 {
                     #region 写入订单
                     string code = DateTime.Now.ToString("yyyyMMddhhmmssffff");//订单编号
                     //写入订单
                     orderInfo.UserID = userInfo.UserID;//用户
+                    lgk.Model.tb_Address addressInfo = addressBLL.GetModel(userInfo.UserID);
+                    DataSet addressDS = addressBLL.GetList("UserID=" + LoginUser.UserID + " and Address01=1");//获取用户的地址
+                    if (addressDS.Tables[0].Rows.Count <= 0)
+                    {
+                        MessageBox.Show(this, "" + GetLanguage("Rec111nfirm") + "");//请先设置默认地址
+                        return;
+                    }
                     orderInfo.OrderCode = code;//订单编号
-                    orderInfo.UserAddr = userInfo.Address;//发货地址
+                    orderInfo.UserAddr = addressDS.Tables[0].Rows[0]["Address"].ToString();//userInfo.Address;//发货地址
                     //orderModel.OrderSum = car.Goods006;//订单数--
                     orderInfo.OrderSum = listCar.Sum(p => p.Goods006);
-                    decimal dPVTotal = listCar.Sum(p => p.TotalMoney); //总价格
+
                     //decimal bb = tb_goodsModel.Goods002 * car.Goods006;  //总BV
                     orderInfo.OrderDate = time;
                     orderInfo.IsSend = 1;
+                    orderInfo.Order3 = "";//快递公司
+                    orderInfo.Order4 = "";//快递单号
+                    orderInfo.Order5 = addressDS.Tables[0].Rows[0]["PhoneNum"].ToString();//联系电话
+                    orderInfo.Order6 = addressDS.Tables[0].Rows[0]["MemberName"].ToString();//收货人
                     orderInfo.PayMethod = 1;//--
                     orderInfo.OrderType = 0;//支付方式：0购物币支付
                     orderInfo.OrderTotal = dPVTotal;
@@ -158,12 +177,10 @@ namespace Web.user.shop
                     orderBLL.Add(orderInfo);//加入订单表
 
                     //减去会员表里面的购物币
-                    UpdateAccount("BonusAccount", userInfo.UserID, dPVTotal, 0);
-
-                    bonusBLL.ShoppingAward(orderInfo.UserID, dPVTotal);
+                    UpdateAccount("ShopAccount", userInfo.UserID, dPVTotal, 0);
 
                     #endregion
-                    
+
                     foreach (lgk.Model.tb_goodsCar car in listCar)
                     { //寻坏商品
                         //tb_goodsModel = tb_goodsBLL.GetModelAndName(car.GoodsID);//根据发布商品编号找到充值账号密码
@@ -192,28 +209,30 @@ namespace Web.user.shop
                             //写入到结算表
                             lgk.Model.tb_journal model = new lgk.Model.tb_journal();
                             model.UserID = LoginUser.UserID;
-                            model.Remark = "购买产品:" + car.GoodsName;//名称--;
+                            model.Remark = "购买产品:" + goodsInfo.GoodsName;//名称--;
                             model.InAmount = 0;//收入0;
-                            model.OutAmount = Convert.ToDecimal(orderDetailModel.OrderTotal);//购买价(支出购物币)
-                            model.BalanceAmount = userBLL.GetMoney(userInfo.UserID, "BonusAccount");//流通币余额
-                            model.JournalType = 1;//流通币
+                            model.OutAmount = Convert.ToDecimal(orderDetailModel.OrderTotal);//购买价(支出消费积分)
+                            model.BalanceAmount = userBLL.GetMoney(userInfo.UserID, "ShopAccount");//消费积分余额
+                            model.JournalType = 7;//消费积分
                             model.JournalDate = DateTime.Now;
                             model.Journal01 = LoginUser.UserID;//来自会员;
-                            journalBLL.Add(model); 
+                            model.Journal02 = 1;//0是删除的订单，1是正常的订单
+                            journalBLL.Add(model);
                             #endregion
 
                         }
                         else
                         {
-                            MessageBox.Show(this, "" + GetLanguage("InventoryProblem") + ""); 
+                            MessageBox.Show(this, "" + GetLanguage("InventoryProblem") + ""); //库存不足
                             return;
                         }
                     }
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Successful") + "');window.location.href='order.aspx';", true);
                 }
-                catch (Exception)
+                catch// (Exception ex)
                 {
                     MessageBox.Show(this, "" + GetLanguage("OperationFailed") + "");
+                    // MessageBox.Show(this, ex.Message);
                 }
                 #endregion
 
