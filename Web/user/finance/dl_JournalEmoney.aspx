@@ -55,6 +55,7 @@
             <table class="styled">
                 <thead>
                     <tr>
+                        <th>会员账号</th>
                         <th><%=GetLanguage("BusinessSummary")%></th>
                         <th><%=GetLanguage("AccountTypes")%></th>
                         <th><%=GetLanguage("CurrencyType")%><!--币种--></th>
@@ -67,7 +68,10 @@
                     <asp:Repeater ID="Repeater1" runat="server">
                         <ItemTemplate>
                             <tr class="<%# (this.Repeater1.Items.Count + 1) % 2 == 0 ? "odd":"even"%>">
-                                <td align="left">
+                                <td align="center">
+                                    <%#Eval("UserCode")%>
+                                </td>
+                                <td align="center">
                                     <%if (Language == "zh-cn") %>
                                     <%{ %>
                                     <%#Eval("Remark")%><%-- 详情--%>
@@ -77,15 +81,15 @@
                                     <%#Eval("Remarken")%><%-- 详情--%>
                                     <%} %>
                                 </td>
-                                <td align="left"><%#AccountType(Eval("InAmount").ToString())%></td>
-                                <td align="left"><%#GoldType(Eval("JournalType").ToString())%></td>
-                                <td align="left">
+                                <td align="center"><%#AccountType(Eval("InAmount").ToString())%></td>
+                                <td align="center"><%#GoldType(Eval("JournalType").ToString())%></td>
+                                <td align="center">
                                     <%#AccountType(Eval("InAmount").ToString()) == "支出" ? Eval("OutAmount") : Eval("InAmount")%>
                                 </td>
-                                <td align="left">
+                                <td align="center">
                                     <%#Eval("BalanceAmount")%>
                                 </td>
-                                <td align="left">
+                                <td align="center">
                                     <%#Eval("JournalDate")%>
                                 </td>
                             </tr>

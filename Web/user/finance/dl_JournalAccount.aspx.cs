@@ -33,11 +33,11 @@ namespace Web.user.finance
 
             if (!IsPostBack)
             {
-                txtBonusAccount.Value = LoginUser.BonusAccount.ToString();
-                txtEmoney.Value = LoginUser.Emoney.ToString();
-                txtStockMoney.Value = LoginUser.StockMoney.ToString();
-                txtShopAccount.Value = LoginUser.ShopAccount.ToString();
-                txtStockAccount.Value = LoginUser.StockAccount.ToString();
+                //txtBonusAccount.Value = LoginUser.BonusAccount.ToString();
+                //txtEmoney.Value = LoginUser.Emoney.ToString();
+                //txtStockMoney.Value = LoginUser.StockMoney.ToString();
+                //txtShopAccount.Value = LoginUser.ShopAccount.ToString();
+                //txtStockAccount.Value = LoginUser.StockAccount.ToString();
 
                 BindData();
                 btnDetail.Text = GetLanguage("DetailAccount"); //"Ó¶½ð±ÒÃ÷Ï¸"

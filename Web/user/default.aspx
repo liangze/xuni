@@ -107,7 +107,9 @@
             <h4>新闻中心</h4>
             <div class="row-fluid">
                 <div class="span12">
+                     
                     <div class="widget-box">
+                        <div style="height:30px;margin-top:12px;margin-left:20px;"><a href="member/NoticeList.aspx"> <img src="../images/more.jpg" /></a></div>
                         <div class="widget-content nopadding">
                             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
                                 <div class=""></div>
@@ -156,7 +158,7 @@
                         </div>
 
                     </div>
-                    <div class="yellow">
+                    <div class="yellow" style="display:none">
                         <webdiyer:AspNetPager ID="AspNetPager1" runat="server" SkinID="AspNetPagerSkin" AlwaysShow="True" InputBoxClass="pageinput"
                             NumericButtonCount="3" PageSize="5" ShowInputBox="Never" ShowNavigationToolTip="True"
                             SubmitButtonClass="pagebutton" UrlPaging="false" pageindexboxtype="TextBox" showpageindexbox="Always"
