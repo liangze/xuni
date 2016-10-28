@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace Web.user
 {
-    public partial class goldcoin02 : PageCore
+    public partial class goldcoin06 : PageCore// System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,13 +16,13 @@ namespace Web.user
 
             if (!IsPostBack)
             {
-                txtBonusAccount.Value = LoginUser.AllBonusAccount.ToString();
+                txtBonusAccount.Value = LoginUser.StockMoney.ToString();
                 BindData();
             }
         }
         private string GetWhere()
         {
-            string strWhere = string.Format("u.UserID=" + getLoginID() + "AND JournalType=3");
+            string strWhere = string.Format("u.UserID=" + getLoginID() + "AND JournalType=5");
             string strStartTime = this.txtStart.Text.Trim();
             string strEndTime = this.txtEnd.Text.Trim();
 

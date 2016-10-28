@@ -1,6 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="goldcoin02.aspx.cs" Inherits="Web.user.goldcoin02" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="goldcoin03.aspx.cs" Inherits="Web.user.goldcoin03" %>
 
 <!DOCTYPE html>
+
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -12,11 +13,11 @@
 <body>
     <form id="form1" runat="server">
         <div class="right_content">
-            <h2>电子积分明细</h2>
+            <h2>云商积分明细</h2>
             <div class="filter">
                 <div class="row-fluid">
                     <p class="span3">
-                        <label>电子积分：</label>
+                        <label>云商积分：</label>
                         <span class="field">
                             <input name="txtBonusAccount" id="txtBonusAccount" runat="server" type="text" disabled="disabled" />
                         </span>
@@ -24,17 +25,17 @@
                     <p class="span3">
                         <label>日期：</label>
                         <span class="field">
-
+                            
                             <asp:TextBox ID="txtStart" runat="server" class="input_select" onfocus="WdatePicker()"></asp:TextBox>
-
+                           
                         </span>
                     </p>
                     <p class="span3">
                         <label>至</label>
                         <span class="field">
-
+                           
                             <asp:TextBox ID="txtEnd" runat="server" class="input_select" onfocus="WdatePicker()"></asp:TextBox>
-
+                           
                         </span>
                     </p>
                     <p class="span3">
@@ -109,12 +110,12 @@
                 </tr>
             </table>
             <div class="yellow">
-                <webdiyer:AspNetPager ID="AspNetPager1" runat="server" SkinID="AspNetPagerSkin" AlwaysShow="True"
-                    InputBoxClass="pageinput" NumericButtonCount="3" PageSize="12" ShowInputBox="Never"
-                    ShowNavigationToolTip="True" SubmitButtonClass="pagebutton" UrlPaging="false"
-                    pageindexboxtype="TextBox" showpageindexbox="Always" SubmitButtonText="" Direction="LeftToRight"
-                    OnPageChanged="AspNetPager1_PageChanged">
-                </webdiyer:AspNetPager>
+                <webdiyer:aspnetpager id="AspNetPager1" runat="server" skinid="AspNetPagerSkin" alwaysshow="True"
+                    inputboxclass="pageinput" numericbuttoncount="3" pagesize="12" showinputbox="Never"
+                    shownavigationtooltip="True" submitbuttonclass="pagebutton" urlpaging="false"
+                    pageindexboxtype="TextBox" showpageindexbox="Always" submitbuttontext="" direction="LeftToRight"
+                    onpagechanged="AspNetPager1_PageChanged">
+                </webdiyer:aspnetpager>
             </div>
         </div>
     </form>

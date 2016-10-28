@@ -50,56 +50,56 @@
                         <div class="subMIdTxt">
                             <p><i class="fa fa-credit-card"></i></p>
                             <p><span>电子积分</span></p>
-                            <p><a href="#" style="color:white"><b><%=LoginUser.AllBonusAccount%></b></a></p>
+                            <p><a href="goldcoin02.aspx" style="color:white"><b><%=LoginUser.AllBonusAccount%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-cloud"></i></p>
                             <p><span>云商积分</span></p>
-                            <p><a href="#" style="color:white"><b><%=LoginUser.StockAccount%></b></a></p>
+                            <p><a href="goldcoin03.aspx" style="color:white"><b><%=LoginUser.StockAccount%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-tags"></i></p>
                             <p><span>消费积分</span></p>
-                            <p><a href="#" style="color:white"><b><%=LoginUser.ShopAccount%></b></a></p>
+                            <p><a href="goldcoin04.aspx" style="color:white"><b><%=LoginUser.ShopAccount%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-database"></i></p>
                             <p><span>奖金积分</span></p>
-                            <p><a href="#" style="color:white"><b><%=LoginUser.BonusAccount%></b></a></p>
+                            <p><a href="goldcoin05.aspx" style="color:white"><b><%=LoginUser.BonusAccount%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-leanpub"></i></p>
                             <p><span>感恩积分</span></p>
-                            <p><a href="#" style="color:white"><b><%=LoginUser.StockMoney%></b></a></p>
+                            <p><a href="goldcoin06.aspx" style="color:white"><b><%=LoginUser.StockMoney%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-shopping-cart"></i></p>
                             <p><span>购物积分</span></p>
-                            <p><a href="#" style="color:white"><b><%=LoginUser.GLmoney%></b></a></p>
+                            <p><a href="goldcoin07.aspx" style="color:white"><b><%=LoginUser.GLmoney%></b></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-money"></i></p>
                             <p><span>爱心基金</span></p>
-                            <p><a href="#" style="color:white"><b></b><%=LoginUser.User011%></a></p>
+                            <p><a href="goldcoin08.aspx" style="color:white"><b></b><%=LoginUser.User011%></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
                         <div class="subMIdTxt">
                             <p><i class="fa fa-cloud"></i></p>
                             <p><span>云购积分</span></p>
-                            <p><a href="#" style="color:white"><b><%=LoginUser.User012%></b></a></p>
+                            <p><a href="goldcoin09.aspx" style="color:white"><b><%=LoginUser.User012%></b></a></p>
                         </div>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                     </div>
                     <div class="yellow">
                         <webdiyer:AspNetPager ID="AspNetPager1" runat="server" SkinID="AspNetPagerSkin" AlwaysShow="True" InputBoxClass="pageinput"
-                            NumericButtonCount="3" PageSize="1" ShowInputBox="Never" ShowNavigationToolTip="True"
+                            NumericButtonCount="3" PageSize="5" ShowInputBox="Never" ShowNavigationToolTip="True"
                             SubmitButtonClass="pagebutton" UrlPaging="false" pageindexboxtype="TextBox" showpageindexbox="Always"
                             SubmitButtonText="" Direction="LeftToRight"
                             OnPageChanged="AspNetPager1_PageChanged">

@@ -10,7 +10,7 @@
 namespace Web.user {
     
     
-    public partial class goldcoin02 {
+    public partial class goldcoin04 {
         
         /// <summary>
         /// form1 控件。
