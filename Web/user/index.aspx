@@ -42,6 +42,7 @@
                         <li><a href="team/Member.aspx" target="mainfrom">待开通会员</a></li>
                         <li><a href="team/TableTree.aspx" target="mainfrom">会员列表</a></li>
                         <li><a href="team/RecommendTree.aspx" target="mainfrom">直接推荐图</a></li>
+                        <li><a href="team/RecommendTree_1.aspx" target="mainfrom">系谱图</a></li>
                         <li><a href="team/Agent.aspx" target="mainfrom">申请报单中心</a></li>
                     </ul>
                 </li>

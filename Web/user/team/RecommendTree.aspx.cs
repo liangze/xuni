@@ -33,7 +33,7 @@ namespace Web.user.team
                 //    this.TreeView1.Nodes.Add(getTree(Convert.ToInt64(Request.QueryString["UserID"])));
                 //}
 
-                this.TreeView1.Nodes.Add(getTree(getLoginID()));
+                this.TreeView1.Nodes.Add(getTree(int.Parse(getLoginID().ToString())));
 
                 //Button4.Text = GetLanguage("MemberList");//会员列表
                 //Button1.Text = GetLanguage("AvailableMembers");//已开通会员
@@ -41,61 +41,61 @@ namespace Web.user.team
             }
         }
 
-        public TreeNode getTree(long uid)
+        public TreeNode getTree(int uid)
         {
-            lgk.Model.tb_user userInfo = new lgk.Model.tb_user();
+            lgk.Model.tb_user Model = new lgk.Model.tb_user();
+
             if (userBLL.GetModel(uid) == null)
             {
                 return null;
             }
-            userInfo = userBLL.GetModel(uid);
+            Model = userBLL.GetModel(uid);
+            //if (Session["xx"] == null)
+            //{
+            //    int a = int.Parse(Model.Layer.ToString()) + 5;
+            //    Session["a"] = a;
+            //    Session["xx"] = 99;
+            //}
             TreeNode node = new TreeNode();
-            string strLevelName = levelBLL.GetLevelName(userInfo.LevelID, GetLanguage("LoginLable"));
-            //是否开通
+            string LevelName = levelBLL.GetModel(Model.LevelID).LevelName;
             string dd = "";
-            if (userInfo.IsOpend == 0)
-            {
-                if (GetLanguage("LoginLable") == "zh-cn")
-                {
-                    dd = "[<span style='color:red;'>未开通</span>]";
-                }
-                else
-                {
-                    dd = "[<span style='color:red;'>Not Yet Opened</span>]";
-                }
-            }
-            else if (userInfo.IsOpend == 2)
-            {
-                if (GetLanguage("LoginLable") == "zh-cn")
-                {
-                    dd = "[已开通]";
-                }
-                else
-                {
-                    dd = "[Opened]";
-                }
-            }
+            //if (Model.IsOpend == 0)
+            //{ 
+            //    dd = "[<span style='color:red;'>未开通</span>]";
+            //}
+            //else if (Model.IsOpend == 2)
+            //{
+            //    dd = "[已开通]";
+            //}
 
-            if (uid == 2)
+            if (Model.IsLock == 1)
             {
-                node.Text = userInfo.UserCode;
+                dd += "[<span style='color:red;'>已冻结</span>]";
+            } 
+            if (uid == 1)
+            {
+                node.Text = Model.UserCode;
                 node.ImageUrl = "../../images/ico_admin.gif";
-                node.NavigateUrl = "RecommendTree.aspx?UserID=" + userInfo.UserID;
-            }
+                node.NavigateUrl = "RecommendTree.aspx?userid=" + Model.UserID;
+            } 
             else
             {
-                if (GetLanguage("LoginLable") == "zh-cn")
+                if (Model.IsOpend == 0)
                 {
-                    node.Text = userInfo.UserCode + "[" + userInfo.TrueName + "][" + strLevelName + "]" + dd;
+                    dd += "[<span style='color:red;'>未开通</span>]";
+                    node.Text = Model.UserCode + Model.TrueName+dd;
+                    node.NavigateUrl = "RecommendTree.aspx?userid=" + Model.UserID;
                 }
                 else
                 {
-                    node.Text = userInfo.UserCode + "[" + userInfo.TrueName + "][" + strLevelName + "]" + dd;
+                    //node.Text = Model.UserCode + Model.TrueName + dd + "[个人]:" + Model.RegMoney + "[左总]:" + Model.LeftScore + "[右总]:" + Model.RightScore + "[左余]" + Model.LeftBalance + "[右余]" + Model.RightBalance + "[左新]" + Model.LeftNewScore + "[右新]" + Model.RightNewScore;
+                    node.Text = Model.UserCode + Model.TrueName + dd + "[已开通]";
+                    node.NavigateUrl = "RecommendTree.aspx?userid=" + Model.UserID;
                 }
-                node.NavigateUrl = "RecommendTree.aspx?UserID=" + userInfo.UserID;
+              
             }
-            int dai = LoginUser.RecommendGenera+3;
-            IList<lgk.Model.tb_user> list = userBLL.GetModelList(" RecommendGenera<"+ dai.ToString() +" AND RecommendID = " + userBLL.GetModel(uid).UserID);
+
+            IList<lgk.Model.tb_user> list = userBLL.GetModelList(" ParentID = " + userBLL.GetModel(uid).UserID + " and Layer>=" + Model.Layer + "");
             if (list == null)
             {
                 return null;
