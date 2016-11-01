@@ -330,7 +330,7 @@ namespace Web
                 m_user.IsLock = 0;//是否被冻結(0-否,1-冻結)
 
                 m_user.IsAgent = 0;//是否报單中心(0-否，1-是)
-                m_user.User006 = txtAgentCode.Value.Trim();// ModelAgent.UserCode;//txtAgentCode.Value.Trim();
+                m_user.User006 = txtRecommendCode.Value.Trim();// ModelAgent.UserCode;//txtAgentCode.Value.Trim();
                 m_user.AgentsID = agentBLL.GetAgentsID(ModelAgent.UserCode);//
 
                 m_user.Emoney = 0;//报单积分

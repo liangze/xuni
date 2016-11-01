@@ -7,3 +7,5 @@ m_user.GLmoney = 0;// 购物积分	 6
 m_user.ShopAccount = 0;// 消费积分	 7
 m_user.User011// 爱心基金	 8
 m_user.User012// 云购积分	 9
+
+注册时发的PV写流水类型：10
