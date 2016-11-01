@@ -15,7 +15,7 @@ namespace Web.user.Stock
         {
             if (!IsPostBack)
             {
-                BindData();
+                //BindData();
             }
         }
 
@@ -27,38 +27,38 @@ namespace Web.user.Stock
         {
             string strWhere = "[tb_StockBuy].[UserID] = " + getLoginID() + "";
 
-            string strStartTime = txtStart.Text.Trim();
-            string strEndTime = txtEnd.Text.Trim();
+          //  string strStartTime = txtStart.Text.Trim();
+           // string strEndTime = txtEnd.Text.Trim();
 
-            if (currentCulture == "en-us")
-            {
-                strStartTime = txtStartEn.Text.Trim();
-                strEndTime = txtEndEn.Text.Trim();
-            }
+            //if (currentCulture == "en-us")
+            //{
+            //    strStartTime = txtStartEn.Text.Trim();
+            //    strEndTime = txtEndEn.Text.Trim();
+            //}
 
-            if (strStartTime != "" && strEndTime == "")
-            {
-                strWhere += string.Format(" AND Convert(nvarchar(10),BuyDate,120) >= '" + strStartTime + "'");
-            }
-            else if (strStartTime == "" && strEndTime != "")
-            {
-                strWhere += string.Format(" AND Convert(nvarchar(10),BuyDate,120) <= '" + strEndTime + "'");
-            }
-            else if (strStartTime != "" && strEndTime != "")
-            {
-                strWhere += string.Format(" AND Convert(nvarchar(10),BuyDate,120) BETWEEN '" + strStartTime + "' AND '" + strEndTime + "'");
-            }
+            //if (strStartTime != "" && strEndTime == "")
+            //{
+            //    strWhere += string.Format(" AND Convert(nvarchar(10),BuyDate,120) >= '" + strStartTime + "'");
+            //}
+            //else if (strStartTime == "" && strEndTime != "")
+            //{
+            //    strWhere += string.Format(" AND Convert(nvarchar(10),BuyDate,120) <= '" + strEndTime + "'");
+            //}
+            //else if (strStartTime != "" && strEndTime != "")
+            //{
+            //    strWhere += string.Format(" AND Convert(nvarchar(10),BuyDate,120) BETWEEN '" + strStartTime + "' AND '" + strEndTime + "'");
+            //}
 
             return strWhere;
         }
 
-        /// <summary>
-        /// 填充信息
-        /// </summary>
-        protected void BindData()
-        {
-            bind_repeater(stockBuyBLL.GetInnerList(GetWhere()), Repeater1, "BuyDate desc", tr1, AspNetPager1);
-        }
+        ///// <summary>
+        ///// 填充信息
+        ///// </summary>
+        //protected void BindData()
+        //{
+        //    bind_repeater(stockBuyBLL.GetInnerList(GetWhere()), Repeater1, "BuyDate desc", tr1, AspNetPager1);
+        //}
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -79,14 +79,14 @@ namespace Web.user.Stock
             }
         }
 
-        protected void AspNetPager1_PageChanged(object sender, EventArgs e)
-        {
-            BindData();
-        }
+        //protected void AspNetPager1_PageChanged(object sender, EventArgs e)
+        //{
+        //    BindData();
+        //}
 
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            BindData();
-        }
+        //protected void btnSearch_Click(object sender, EventArgs e)
+        //{
+        //    BindData();
+        //}
     }
 }
