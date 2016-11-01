@@ -306,7 +306,7 @@ namespace Web
                 lgk.Model.tb_user ModelAgent = userBLL.GetModel(agentUserID);
 
                 m_user.UserCode = txtUserCode.Value.Trim();//会员编号
-                m_user.LevelID = 1;
+                m_user.LevelID = int.Parse(DropDownList2.SelectedValue);
                 m_user.RecommendID = ModelRecommend.UserID;//推荐人ID
                 m_user.RecommendCode = ModelRecommend.UserCode;//推荐人编号
                 m_user.RecommendPath = ModelParent.RecommendPath; //路径
