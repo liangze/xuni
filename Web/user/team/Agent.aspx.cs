@@ -71,14 +71,13 @@ namespace Web.user.team
             {
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("pleaseWait") + "');", true);//您的申请已提交，请耐心等待
                 return;
-            }
-
-            if (userBLL.GetCount("RecommendID=" + LoginUser.UserID + " AND IsOpend = 2") < getParamInt("Agent1"))
+            } 
+             
+            if (userBLL.GetMoney(getLoginID(), "LeftNewScore") < getParamInt("Static0") *10000 && userBLL.GetMoney(getLoginID(), "RightNewScore") < getParamInt("Static0") * 10000)
             {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("InsufficientNumber") + "');", true);//推荐人数不足
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('业绩不足，无法开通代理中心');", true);//推荐人数不足
                 return;
             }
-
             lgk.Model.tb_agent model = new lgk.Model.tb_agent();
             model.UserID = getLoginID();
             model.AgentCode = LoginUser.UserCode;
