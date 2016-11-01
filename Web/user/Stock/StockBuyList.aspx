@@ -56,25 +56,14 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>2225</td>
-                                            <td>135</td>
-                                            <td>256</td>
-                                            <td>225</td>
-                                            <td>250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2225</td>
-                                            <td>135</td>
-                                            <td>256</td>
-                                            <td>225</td>
-                                            <td>250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2225</td>
-                                            <td>135</td>
-                                            <td>256</td>
-                                            <td>225</td>
-                                            <td>250</td>
+                                            <td align="center"><%=LoginUser.StockAccount%></td>
+                                            <td align="center"><%=LoginUser.User013%></td>
+                                            <td align="center">
+                                                <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+
+                                            </td>
+                                            <td align="center">2$/个云商积分</td>
+                                            <td align="center">250</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -87,16 +76,16 @@
                                         <span class="icon">
                                             <i class="icon-align-right"></i>
                                         </span>
-                                      
-                                            <h5 align="center">买入云商积分</h5>
-                                       
-                                        
+
+                                        <h5 align="center">买入云商积分</h5>
+
+
                                     </div>
                                     <div class="widget-content nopadding">
                                         <form action="#" method="get" class="form-horizontal">
                                             <div class="control-group">
                                                 <label class="control-label">当前价格：</label>
-                                                <div class="controls">999.00</div>
+                                                <div class="controls">2$/个云商积分  </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label">购买数量：</label>
@@ -113,8 +102,8 @@
                                                 <div class="controls">
                                                     <select name="" class="span5">
                                                         <option value="">请选择</option>
-                                                        <option value="">农业银行</option>
-                                                        <option value="">建设银行</option>
+                                                        <option value="">电子积分</option>
+                                                        <option value="">注册积分</option>
                                                     </select>
                                                 </div>
                                             </div>
