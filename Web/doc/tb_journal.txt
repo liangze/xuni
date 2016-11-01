@@ -1,3 +1,26 @@
 ﻿journalType : 1、注册积分，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
 
 journal01//来自哪个会员
+
+
+
+m_user.Emoney = 0;// 注册积分         写流水类型：1
+m_user.BonusAccount = 0;// 奖金积分 		2
+m_user.AllBonusAccount = 0;// 电子积分		3
+m_user.StockAccount = 0;// 云商积分		4
+m_user.StockMoney = 0;// 感恩积分		5
+m_user.GLmoney = 0;// 购物积分			6
+m_user.ShopAccount = 0;// 消费积分		7
+m_user.LoveFund// 爱心基金			8
+m_user.CloudShop// 云购积分			9
+
+
+开通对碰：传入UserID到存储过程
+[LeftScore]记录左区对碰结余
+[RightScore]记录右区对碰结余
+[LeftNewScore]记录左区的伞下业绩
+[RightNewScore]记录右区的伞下业绩
+
+
+--奖金类型(1.代理中心奖, 2.推荐奖，3.静态月分红奖，4.对碰奖)
+

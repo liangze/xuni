@@ -1847,6 +1847,7 @@
     <Content Include="user\Stock\SellList.aspx" />
     <Content Include="user\Stock\StockBuyList.aspx" />
     <Content Include="user\Stock\StockorderList.aspx" />
+    <Content Include="user\team\RecommendTree_1.aspx" />
     <Content Include="user\team\TreeList.aspx" />
     <Content Include="user\team\UpdateUser.aspx" />
     <Content Include="ValidatedCode.aspx" />
@@ -3763,6 +3764,13 @@
     </Compile>
     <Compile Include="user\team\RecommendTree.aspx.designer.cs">
       <DependentUpon>RecommendTree.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\team\RecommendTree_1.aspx.cs">
+      <DependentUpon>RecommendTree_1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\team\RecommendTree_1.aspx.designer.cs">
+      <DependentUpon>RecommendTree_1.aspx</DependentUpon>
     </Compile>
     <Compile Include="user\team\TableTree.aspx.cs">
       <DependentUpon>TableTree.aspx</DependentUpon>

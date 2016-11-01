@@ -100,11 +100,12 @@ namespace Web.user.team
         /// <returns></returns>
         private string GetWhere()
         {
+            lgk.Model.tb_user model = userBLL.GetModel(getLoginID());
             string strWhere = "";
             string strStartTime = txtStart.Text.Trim();
             string strEndTime = txtEnd.Text.Trim();
 
-            strWhere = " IsOpend=0 and AgentsID=" + Loginagent.ID;
+            strWhere = " IsOpend=0  and User006 = '"+ model.UserCode + "';";//and AgentsID=" + Loginagent.ID
             if (this.dropType.SelectedValue != "0")
             {
                 if (this.dropType.SelectedValue == "1")
@@ -192,40 +193,40 @@ namespace Web.user.team
                     {
                         string sql = "select * from tb_globeParam where ParamName like 'dengji'";
                         DataSet ds = B_user.getData_Chaxun(sql,"");
-                        model_.LeftScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.RightScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());;
-                        model_.RightNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.LeftNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());;
+                        model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         userBLL.Update(model_);
                     }
                     if (dengji == 2)
                     {
                         string sql = "select * from tb_globeParam where ParamName like 'dengji1'";
                         DataSet ds = B_user.getData_Chaxun(sql, "");
-                        model_.LeftScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.RightScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
-                        model_.RightNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.LeftNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
+                        model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         userBLL.Update(model_);
                     }
                     if (dengji == 3)
                     {
                         string sql = "select * from tb_globeParam where ParamName like 'dengji2'";
                         DataSet ds = B_user.getData_Chaxun(sql, "");
-                        model_.LeftScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.RightScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
-                        model_.RightNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.LeftNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
+                        model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         userBLL.Update(model_);
                     }
                     if (dengji == 4)
                     {
                         string sql = "select * from tb_globeParam where ParamName like 'dengji3'";
                         DataSet ds = B_user.getData_Chaxun(sql, "");
-                        model_.LeftScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.RightScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
-                        model_.RightNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.LeftNewScore += decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
+                        model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         userBLL.Update(model_);
                     } 
                     string path = model_.RecommendPath;
@@ -236,7 +237,7 @@ namespace Web.user.team
                         {
                             continue;
                         }
-                        lgk.Model.tb_user model_1 = userBLL.GetModel(id); //头上的人
+                        lgk.Model.tb_user model_1 = userBLL.GetModel(long.Parse(id)); //头上的人
                         if (id == model_.ParentID.ToString())//倒数第二层特殊处理
                         {
                             int zy = model_.Location;
@@ -320,13 +321,26 @@ namespace Web.user.team
             if (e.CommandName.Equals("Remove"))//删除
             {
                 //返回注册金额
-                //var user = userBLL.GetModel(UserID);
+                lgk.BLL.tb_user u = new lgk.BLL.tb_user();
+                var user = userBLL.GetModel(UserID);
                 //var agent = agentBLL.GetModel(user.AgentsID);
-                //var data = userBLL.GetModel(agent.UserID);
-                //data.Emoney = data.Emoney + user.RegMoney;
-                if ( flag_delete(UserID) > 0)
+                var data = userBLL.GetModel(getLoginID());
+                data.Emoney = data.Emoney + user.RegMoney;
+                if ( flag_delete(UserID) > 0&& u.Update(data)==true)
                 {
+                    lgk.Model.tb_journal m_journal_sc = new lgk.Model.tb_journal();
+                    m_journal_sc.UserID = getLoginID();
+                    m_journal_sc.Remark = "" + data.UserCode + "删除会员" + user.UserCode + "退还：" + user.RegMoney + "";
+                    m_journal_sc.RemarkEn = "" + data.UserCode + "del member " + user.UserCode + " back " + user.RegMoney + "";
+                    m_journal_sc.InAmount = user.RegMoney;
+                    m_journal_sc.OutAmount = 0;
+                    m_journal_sc.BalanceAmount = data.Emoney;
+                    m_journal_sc.JournalDate = DateTime.Now;
+                    m_journal_sc.JournalType = 1;
+                    m_journal_sc.Journal01 = int.Parse(getLoginID().ToString());
+                    journalBLL.Add(m_journal_sc);
                     MessageBox.MyShow(this, GetLanguage("DeletedSuccessfully"));//删除成功
+
                 }
                 else
                 {

@@ -161,7 +161,7 @@
                     </div> 
                                     </ContentTemplate>
                             </asp:UpdatePanel> 
-                    <div class="control-group" style="display:none">
+                    <div class="control-group"  >
                         <label for="memid">
                             <span style="color: #f00;">*</span><%=GetLanguage("Agent") %>：
                         </label>

@@ -58,6 +58,7 @@ namespace Web
                     var user = userBLL.GetModel(getLoginID());
                     string code = user != null ? user.UserCode : "";
                     txtRecommendCode.Value = code;
+                    txtParentCode.Value = code;
                     if (user != null)
                     {
                         if (user.IsAgent == 1)
@@ -290,7 +291,7 @@ namespace Web
                 #region 注册用户插入tb_user 
                 lgk.Model.tb_user m_user = new lgk.Model.tb_user();
                 lgk.Model.tb_user ModelRecommend = userBLL.GetModel(GetUserID(this.txtRecommendCode.Value.Trim()));//推荐用户
-                //lgk.Model.tb_user ModelParent = userBLL.GetModel(GetUserID(this.txtParentCode.Value.Trim()));//父节点用户
+                lgk.Model.tb_user ModelParent = userBLL.GetModel(GetUserID(this.txtParentCode.Value.Trim()));//父节点用户
                 //lgk.Model.tb_user ModelAgent = userBLL.GetModel(GetUserID(txtAgentCode.Value.Trim()));//报单会员
 
                 long agentUserID = 1;
@@ -308,13 +309,13 @@ namespace Web
                 m_user.LevelID = 1;
                 m_user.RecommendID = ModelRecommend.UserID;//推荐人ID
                 m_user.RecommendCode = ModelRecommend.UserCode;//推荐人编号
-                m_user.RecommendPath = ModelRecommend.RecommendPath; //路径
-                m_user.RecommendGenera = Convert.ToInt32(ModelRecommend.RecommendGenera + 1);//（推荐代数）第几代
+                m_user.RecommendPath = ModelParent.RecommendPath; //路径
+                m_user.RecommendGenera = Convert.ToInt32(ModelParent.RecommendGenera + 1);//（推荐代数）第几代
 
-                m_user.ParentID = ModelRecommend.UserID;//父节点ID
-                m_user.ParentCode = ModelRecommend.UserCode;//父节点編號
-                m_user.UserPath = ModelRecommend.UserPath; //路径
-                m_user.Layer = ModelRecommend.Layer + 1;//属于多少层
+                m_user.ParentID = ModelParent.UserID;//父节点ID
+                m_user.ParentCode = ModelParent.UserCode;//父节点編號
+                m_user.UserPath = ModelParent.UserPath; //路径
+                m_user.Layer = ModelParent.Layer + 1;//属于多少层
 
                 m_user.LeftBalance = 0;
                 m_user.LeftNewScore = 0;
@@ -329,7 +330,7 @@ namespace Web
                 m_user.IsLock = 0;//是否被冻結(0-否,1-冻結)
 
                 m_user.IsAgent = 0;//是否报單中心(0-否，1-是)
-                m_user.User006 = ModelAgent.UserCode;//txtAgentCode.Value.Trim();
+                m_user.User006 = txtAgentCode.Value.Trim();// ModelAgent.UserCode;//txtAgentCode.Value.Trim();
                 m_user.AgentsID = agentBLL.GetAgentsID(ModelAgent.UserCode);//
 
                 m_user.Emoney = 0;//报单积分

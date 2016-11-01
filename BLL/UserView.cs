@@ -319,7 +319,7 @@ namespace lgk.BLL
                 if (cnen == "zh-cn")
                 {
                     sbContent.Append(" <table height=\"100px\"  border=\"0\" cellspacing=\"0\" cellpadding=\"0\"  class=\"" + map + "\">" +
-                        "<tr height=\"5px\"><td align=\"center\"  colspan=\"3\" class=\"th\"><b><a style=\" color:White;\" href=\"MemberTree.aspx?tt=" + sd.UserID + "\">" + sd.UserCode + "</a></b></td></tr>" +
+                        "<tr height=\"5px\"><td align=\"center\"  colspan=\"3\" class=\"th\"><b><a style=\" color:White;\" href=\"#?tt=" + sd.UserID + "\">" + sd.UserCode + "</a></b></td></tr>" +
                         "<tr  align=\"center\" height=\"5px\"><td align=\"center\"  colspan=\"3\" class=\"th\">" + sd.TrueName + "</td></tr>" +
                         "<tr height=\"5px\"><td width=\"50\" align=\"center\" >" + Convert.ToDouble(sd.LeftScore).ToString() + "</td><td>总</td><td width=\"50\" align=\"center\" >" + Convert.ToDouble(sd.RightScore).ToString() + "</td></tr>" +
                         "<tr height=\"5px\"><td width=\"50\" align=\"center\" >" + Convert.ToDouble(sd.LeftBalance).ToString() + "</td><td>余</td><td width=\"50\" align=\"center\" >" + Convert.ToDouble(sd.RightBalance).ToString() + "</td></tr>" +
@@ -329,7 +329,7 @@ namespace lgk.BLL
                 else
                 {
                     sbContent.Append(" <table height=\"100px\"  border=\"0\" cellspacing=\"0\" cellpadding=\"0\"  class=\"" + map + "\">" +
-                        "<tr height=\"5px\"><td align=\"center\"  colspan=\"3\" class=\"th\"><b><a style=\" color:White;\" href=\"MemberTree.aspx?tt=" + sd.UserID + "\">" + sd.UserCode + "</a></b></td></tr>" +
+                        "<tr height=\"5px\"><td align=\"center\"  colspan=\"3\" class=\"th\"><b><a style=\" color:White;\" href=\"#?tt=" + sd.UserID + "\">" + sd.UserCode + "</a></b></td></tr>" +
                         "<tr  align=\"center\" height=\"5px\"><td align=\"center\"  colspan=\"3\" class=\"th\">" + sd.TrueName + "</td></tr>" +
                         "<tr height=\"5px\"><td width=\"50\" align=\"center\" >" + Convert.ToDouble(sd.LeftScore).ToString() + "</td><td>total</td><td width=\"50\" align=\"center\" >" + Convert.ToDouble(sd.RightScore).ToString() + "</td></tr>" +
                         "<tr height=\"5px\"><td width=\"50\" align=\"center\" >" + Convert.ToDouble(sd.LeftBalance).ToString() + "</td><td>balance</td><td width=\"50\" align=\"center\" >" + Convert.ToDouble(sd.RightBalance).ToString() + "</td></tr>" +
