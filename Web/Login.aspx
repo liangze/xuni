@@ -114,36 +114,38 @@
                         </div>
                         <div class="widget-content nopadding">
                             <form id="form1" runat="server" class="form-horizontal">
-                                <div class="control-group">
-                                    <label class="control-label">账号：</label>
-                                    <div class="controls">
-                                        <input id="TBUserName" name="TBUserName" type="text" class="span9" placeholder="请输入账号" aria-required="true" runat="server" />
+                                <asp:Panel runat="server" ID="Panel1" DefaultButton="btnLogin">
+                                    <div class="control-group">
+                                        <label class="control-label">账号：</label>
+                                        <div class="controls">
+                                            <input id="TBUserName" name="TBUserName" type="text" class="span9" placeholder="请输入账号" aria-required="true" runat="server" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">密码：</label>
-                                    <div class="controls">
-                                      
-                                        <input id="TBPassWord" name="TBPassWord" class="span9" type="password" placeholder="请输入密码" aria-required="true" runat="server" />
+                                    <div class="control-group">
+                                        <label class="control-label">密码：</label>
+                                        <div class="controls">
+
+                                            <input id="TBPassWord" name="TBPassWord" class="span9" type="password" placeholder="请输入密码" aria-required="true" runat="server" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">验证码：</label>
-                                    <div class="controls">
-                                      
-                                        <input id="TBCode" name="TBCode" class="span6" type="text" autocomplete="off" size="7" aria-required="true" runat="server" />
-                                       
-                                        <input type="image" id="checkCode" style="width: 101px; height: 32px; border: 0px; /*background: 0;*/ cursor: pointer;" onclick="createCode();" />
+                                    <div class="control-group">
+                                        <label class="control-label">验证码：</label>
+                                        <div class="controls">
+
+                                            <input id="TBCode" name="TBCode" class="span6" type="text" autocomplete="off" size="7" aria-required="true" runat="server" />
+
+                                            <input type="image" id="checkCode" style="width: 101px; height: 32px; border: 0px; /*background: 0; */ cursor: pointer;" onclick="createCode();" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="control-group">
-                                    <div class="controls"><a href="javascript:void(0)" class="btn">找回密码</a></div>
-                                </div>
-                                <div class="control-group">
-                                   
-                                    <asp:Button ID="btnLogin" runat="server" Style="background: #950101; color: #fff; margin: 10px auto; display: block; width: 45%; height: 40px; font-size: 16px; text-shadow: none;"
-                                        OnClick="btnLogin_Click" Text="提交" />
-                                </div>
+                                    <div class="control-group">
+                                        <div class="controls"><a href="javascript:void(0)" class="btn">找回密码</a></div>
+                                    </div>
+                                    <div class="control-group">
+
+                                        <asp:Button ID="btnLogin" runat="server" Style="background: #950101; color: #fff; margin: 10px auto; display: block; width: 45%; height: 40px; font-size: 16px; text-shadow: none;"
+                                            OnClick="btnLogin_Click" Text="提交" />
+                                    </div>
+                                </asp:Panel>
                             </form>
                         </div>
                     </div>

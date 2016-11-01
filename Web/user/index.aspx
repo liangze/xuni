@@ -56,9 +56,10 @@
                 </li>
                 <li class="submenu"><a href="JavaScript:;"><span><i class="icon icon-briefcase"></i>交易管理</span></a>
                     <ul>
-                        <li><a href="Cash/TradingFloor.aspx" target="mainfrom">交易大厅</a></li>
+                        <%--<li><a href="Cash/TradingFloor.aspx" target="mainfrom">交易大厅</a></li>--%>
+                        <li><a href="Stock/StockBuyList.aspx" target="mainfrom">交易大厅</a></li>
                         <li><a href="Cash/CashOrderList.aspx" target="mainfrom">我的订单</a></li>
-                        <li><a href="Stock/StockBuyList.aspx" target="mainfrom">MDD金币预购</a></li>
+                        <%--<li><a href="Stock/StockBuyList.aspx" target="mainfrom">走势图</a></li>--%>
                         <li><a href="Stock/BuyList.aspx" target="mainfrom">已购列表</a></li>
                         <li><a href="Stock/SellList.aspx" target="mainfrom">已卖列表</a></li>
                         <li><a href="Stock/StockorderList.aspx" target="mainfrom">我的订单</a></li>
