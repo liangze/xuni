@@ -107,7 +107,7 @@ namespace Web
         public void getDate() 
         {
             lgk.BLL.tb_user u = new lgk.BLL.tb_user();
-            string sql = "select * from tb_globeParam where ParamName like 'dengji%'";
+            string sql = "select * from tb_globeParam where ParamName like 'VIP%'";
             DataSet ds = u.getData_Chaxun(sql, "");
             if (DropDownList2.SelectedValue == "0")
             {
@@ -1180,7 +1180,7 @@ namespace Web
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
             lgk.BLL.tb_user u = new lgk.BLL.tb_user();
-            string sql = "select * from tb_globeParam where ParamName like 'dengji%'"; 
+            string sql = "select * from tb_globeParam where ParamName like 'VIP%'"; 
             DataSet ds = u.getData_Chaxun(sql, "");
             if (DropDownList2.SelectedValue=="0")
             {

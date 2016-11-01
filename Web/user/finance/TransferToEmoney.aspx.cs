@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Library;
 using lgk.Model;
+using System.Data;
 
 namespace Web.user.finance
 {
@@ -18,8 +19,8 @@ namespace Web.user.finance
             if (!IsPostBack)
             {
                 txtBonusAccount.Value = LoginUser.BonusAccount.ToString();//佣金币余额
-                txtEmoney.Value = LoginUser.Emoney.ToString();//现金币余额
-                txtStockMoney.Value = LoginUser.GLmoney.ToString();//购物币余额
+                Emoney.Value = LoginUser.Emoney.ToString();//奖金币余额
+                //txtStockMoney.Value = LoginUser.GLmoney.ToString();//购物币余额
 
                 BindCurrency();
                 BindData();
@@ -34,34 +35,21 @@ namespace Web.user.finance
             if (GetLanguage("LoginLable") == "zh-cn")
             {
                 dropCurrency.Items.Add(new ListItem("-请选择-", "0"));
-                dropCurrency.Items.Add(new ListItem("流通币转MDD钻币", "1"));
-                dropCurrency.Items.Add(new ListItem("流通币转注册币", "2"));
-                dropCurrency.Items.Add(new ListItem("流通币转购物币", "3"));
-                dropCurrency.Items.Add(new ListItem("注册币转购物币", "4"));
-                dropCurrency.Items.Add(new ListItem("注册币转其他会员", "5"));
-
+                dropCurrency.Items.Add(new ListItem("奖金积分转注册积分", "1"));
+                dropCurrency.Items.Add(new ListItem("注册积分转其他会员", "2"));
                 dropType.Items.Add(new ListItem("-请选择-", "0"));
-                dropType.Items.Add(new ListItem("流通币", "1"));
-                dropType.Items.Add(new ListItem("MDD钻币", "2"));
-                dropType.Items.Add(new ListItem("平台费用", "3"));
-                dropType.Items.Add(new ListItem("购物币", "4"));
-                dropType.Items.Add(new ListItem("注册币", "5"));
+                dropType.Items.Add(new ListItem("奖金币", "1"));
+                dropType.Items.Add(new ListItem("注册币", "2"));
             }
             else
             {
                 dropCurrency.Items.Add(new ListItem("-Please choose-", "0"));
-                dropCurrency.Items.Add(new ListItem("Currency to MDD drill", "1"));
-                dropCurrency.Items.Add(new ListItem("Currency to Registered currency", "2"));
-                dropCurrency.Items.Add(new ListItem("Currency to shopping currency", "3"));
-                dropCurrency.Items.Add(new ListItem("Registered currency to shopping currency", "4"));
-                dropCurrency.Items.Add(new ListItem("Registered currency to other members", "5"));
+                dropCurrency.Items.Add(new ListItem("Gold coin to award entry ", "1"));
+                dropCurrency.Items.Add(new ListItem("Other members of the registered currency", "2"));
 
                 dropType.Items.Add(new ListItem("-Please choose-", "0"));
-                dropType.Items.Add(new ListItem("Currency", "1"));
-                dropType.Items.Add(new ListItem("MDD Drill", "2"));
-                dropType.Items.Add(new ListItem("Platform cost", "3"));
-                dropType.Items.Add(new ListItem("Shopping currency", "4"));
-                dropType.Items.Add(new ListItem("Registered currency", "5"));
+                dropType.Items.Add(new ListItem("EMoney", "1"));
+                dropType.Items.Add(new ListItem("BonusMoney", "2"));
             }
         }
 
@@ -71,7 +59,7 @@ namespace Web.user.finance
             {
                 case "1":
                     var iOpen1 = getParamInt("Transfer4");
-                    if (iOpen1 != 1)//流通币转MDD钻币功能未开放
+                    if (iOpen1 != 1)//金币转其他会员是否开启
                     {
                         ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Feature") + "');", true);//该功能未开放
                         return false;
@@ -79,31 +67,7 @@ namespace Web.user.finance
                     break;
                 case "2":
                     var iOpen2 = getParamAmount("Transfer5");
-                    if (iOpen2 != 1)//流通币转注册币功能未开放
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Feature") + "');", true);//该功能未开放
-                        return false;
-                    }
-                    break;
-                case "3":
-                    var iOpen3 = getParamAmount("Transfer6");
-                    if (iOpen3 != 1)//流通币转购物币功能未开放
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Feature") + "');", true);//该功能未开放
-                        return false;
-                    }
-                    break;
-                case "4":
-                    var iOpen4 = getParamAmount("Transfer7");
-                    if (iOpen4 != 1)//注册币转购物币功能未开放
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Feature") + "');", true);//该功能未开放
-                        return false;
-                    }
-                    break;
-                case "5":
-                    var iOpen5 = getParamAmount("Transfer8");
-                    if (iOpen5 != 1)//注册币转其他会员功能未开放
+                    if (iOpen2 != 1)//奖金币转其他会员是否开启
                     {
                         ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Feature") + "');", true);//该功能未开放
                         return false;
@@ -153,12 +117,19 @@ namespace Web.user.finance
                 MessageBox.Show(this, "" + GetLanguage("transferMoneyIsnull") + "");//转账金额不能为空
                 return;
             }
+            string strMoney = txtMoney.Text.Trim();
+            int aa = int.Parse(strMoney) % 100;
+            if (aa != 0)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请输入100的倍数金额');", true);//奖金币转拍币功能未开放
+                return;
+            }
 
             decimal dResult = 0;
             if (decimal.TryParse(txtMoney.Text.Trim(), out dResult))
             {
-                decimal dTrans = getParamAmount("Transfer1");//转账最低金额
-                decimal d = getParamAmount("Transfer2");//转账倍数基数
+                decimal dTrans = getParamAmount("zhuanzhang_4");//转账最低金额
+                decimal d = getParamAmount("zhuanzhang_5");//转账倍数基数
                 if (dResult < dTrans)
                 {
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("equalTo") + dTrans + "');", true);//转账金额必须是大于等于XX的整数
@@ -173,18 +144,18 @@ namespace Web.user.finance
 
             if (iTypeID != 0)
             {
-                if (iTypeID <= 3 && dResult > userInfo.BonusAccount)
+                if (iTypeID == 1 && dResult > userInfo.BonusAccount)
                 {
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NotCurrent") + "');", true);
                     return;
                 }
-                else if (iTypeID >= 4 && dResult > userInfo.StockAccount)
+                else if (iTypeID == 2 && dResult > userInfo.Emoney)
                 {
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NotRegistered") + "');", true);
                     return;
                 }
             }
-            
+
             string strUserCode = txtUserCode.Text.Trim();
             var toUser = userBLL.GetModel(" UserCode='" + strUserCode + "'");
             if (toUser == null)
@@ -202,21 +173,18 @@ namespace Web.user.finance
                 MessageBox.Show(this, GetLanguage("objectExist"));//转帐对象不存在
                 return;
             }
+            lgk.BLL.tb_user u = new lgk.BLL.tb_user();
+            string sql = "select *  from  tb_user where RecommendPath like '%"+ userInfo .UserID+ "%' and userid='"+ toUser.UserID + "';select *  from  tb_user where RecommendPath like '%" + toUser.UserID + "%' and userid='" + userInfo.UserID + "' ";
 
-            if (dropCurrency.SelectedValue == "5")
+            DataSet ds = u.getData_Chaxun(sql, "");
+            DataTable dt = ds.Tables[0];
+            DataTable dt1 = ds.Tables[1];
+            if (dt.Rows.Count==0 && dt1.Rows.Count==0)
             {
-                if (toUserID == userInfo.UserID)
-                {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("TransferToOuner") + "');", true);
-                    return;
-                }
-
-                if (!userBLL.OnRecommendSameLine(userInfo.UserID, toUserID))
-                {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("objectExist") + "');", true);
-                    return;
-                }
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('没有代数关系无法转账');", true);
+                return;
             }
+
 
             changeInfo.UserID = getLoginID();
             changeInfo.ToUserID = toUserID;
@@ -225,227 +193,126 @@ namespace Web.user.finance
             changeInfo.Amount = dResult;
             changeInfo.ChangeType = Convert.ToInt32(dropCurrency.SelectedValue);
             changeInfo.ChangeDate = DateTime.Now;
-            changeInfo.Change005 = dResult - dResult * getParamAmount("Transfer3") / 100;
-
-            if (changeBLL.Add(changeInfo) > 0)
+            if (dropCurrency.SelectedValue=="1")
             {
-                try
+                changeInfo.Change005 = dResult * getParamAmount("zhuanzhang") - dResult * getParamInt("zhuanzhang_3") / 100*getParamAmount("zhuanzhang");
+            }
+            if (dropCurrency.SelectedValue == "2")
+            {
+                changeInfo.Change005 = dResult* getParamAmount("zhuanzhang_1");
+            }
+
+            try
+            {
+                if (changeInfo.ChangeType == 1)//奖金积分转注册积分
                 {
-                    if (changeInfo.ChangeType == 1)//流通币转MDD钻币
+                    decimal dBonusAccount = userBLL.GetMoney(getLoginID(), "BonusAccount");
+                    if (dBonusAccount >= changeInfo.Amount)
                     {
-                        #region 流通币转MDD钻币
-                        decimal dBonusAccount = userBLL.GetMoney(getLoginID(), "BonusAccount");
-                        if (dBonusAccount >= changeInfo.Amount)
+                        #region 奖金积分转注册积分
+                        if (changeBLL.Add(changeInfo) > 0)
                         {
                             UpdateAccount("BonusAccount", userInfo.UserID, changeInfo.Amount, 0);//
                             UpdateAccount("Emoney", toUserID, changeInfo.Change005, 1);//
-                            //加入流水账表（流通币减少）
+                            //加入流水账表（金币减少）
                             lgk.Model.tb_journal model = new lgk.Model.tb_journal();
                             model.UserID = userInfo.UserID;
-                            model.Remark = "流通币转MDD钻币";
-                            model.RemarkEn = "Currency to MDD drill";
+                            model.Remark = "奖金积分转注册积分";
+                            model.RemarkEn = "Currency to Registration integral";
                             model.InAmount = 0;
                             model.OutAmount = changeInfo.Amount;
 
                             model.BalanceAmount = userBLL.GetMoney(getLoginID(), "BonusAccount");
                             model.JournalDate = DateTime.Now;
-                            model.JournalType = 1;
+                            model.JournalType = 2;
                             model.Journal01 = toUserID;
                             journalBLL.Add(model);
 
-                            //加入流水账表(购物币增加)
+                            //加入流水账表(金币增加)
                             lgk.Model.tb_journal journalInfo = new lgk.Model.tb_journal();
                             journalInfo.UserID = toUserID;
-                            journalInfo.Remark = "流通币转MDD钻币";
-                            journalInfo.RemarkEn = "Currency to MDD drill";
-                            journalInfo.InAmount = changeInfo.Change005;
+                            journalInfo.Remark = "奖金积分转注册积分";
+                            journalInfo.RemarkEn = "Currency to Registration integral";
+                            journalInfo.InAmount = changeInfo.Change005 ;
                             journalInfo.OutAmount = 0;
                             journalInfo.BalanceAmount = userBLL.GetMoney(getLoginID(), "Emoney");
                             journalInfo.JournalDate = DateTime.Now;
-                            journalInfo.JournalType = 2;
+                            journalInfo.JournalType = 1;
+                            journalInfo.Journal02 = 1;
                             journalInfo.Journal01 = userInfo.UserID;
-
                             journalBLL.Add(journalInfo);
+                            MessageBox.ShowAndRedirect(this, GetLanguage("TransferSuccess"), "TransferToEmoney.aspx");//转账成功
                         }
                         else
                         {
-                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("objectExist") + "');", true);//奖金币转拍币功能未开放
+                            MessageBox.Show(this, GetLanguage("OperationFailed"));//操作失败
                         }
-                        #endregion
                     }
-                    else if (changeInfo.ChangeType == 2)//流通币转注册币
+                    else
                     {
-                        #region 流通币转注册币
-                        decimal dBonusAccount = userBLL.GetMoney(getLoginID(), "BonusAccount");
-                        if (dBonusAccount >= changeInfo.Amount)
-                        {
-                            UpdateAccount("BonusAccount", userInfo.UserID, changeInfo.Amount, 0);//
-                            UpdateAccount("StockAccount", toUserID, changeInfo.Change005, 1);//
-                            //加入流水账表（佣金币减少）
-                            lgk.Model.tb_journal jmodel = new lgk.Model.tb_journal();
-                            jmodel.UserID = userInfo.UserID;
-                            jmodel.Remark = "流通币转注册币";
-                            jmodel.RemarkEn = "Currency to Registered currency";
-                            jmodel.InAmount = 0;
-                            jmodel.OutAmount = changeInfo.Amount;
-
-                            jmodel.BalanceAmount = userBLL.GetMoney(getLoginID(), "BonusAccount");
-                            jmodel.JournalDate = DateTime.Now;
-                            jmodel.JournalType = 1;
-                            jmodel.Journal01 = toUserID;
-                            journalBLL.Add(jmodel);
-
-                            //加入流水账表(现金币增加)
-                            lgk.Model.tb_journal journalInfo = new lgk.Model.tb_journal();
-                            journalInfo.UserID = toUserID;
-                            journalInfo.Remark = "流通币转注册币";
-                            journalInfo.RemarkEn = "Currency to Registered currency";
-                            journalInfo.InAmount = changeInfo.Change005;
-                            journalInfo.OutAmount = 0;
-                            journalInfo.BalanceAmount = userBLL.GetMoney(toUserID, "StockAccount");
-                            journalInfo.JournalDate = DateTime.Now;
-                            journalInfo.JournalType = 5;
-                            journalInfo.Journal01 = userInfo.UserID;
-                            journalBLL.Add(journalInfo);
-                        }
-                        else
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("objectExist") + "');", true);//奖金币转拍币功能未开放
-                        }
-                        #endregion
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("E-moneyDollars") + "');", true);//金币余额不足
                     }
-                    else if (changeInfo.ChangeType == 3)//流通币转购物币
-                    {
-                        #region 流通币转购物币
-                        decimal dBonusAccount = userBLL.GetMoney(getLoginID(), "BonusAccount");
-                        if (dBonusAccount >= changeInfo.Amount)
-                        {
-                            UpdateAccount("BonusAccount", userInfo.UserID, changeInfo.Amount, 0);//
-                            UpdateAccount("ShopAccount", toUserID, changeInfo.Change005, 1);//
-                            //加入流水账表（佣金币减少）
-                            lgk.Model.tb_journal jmodel = new lgk.Model.tb_journal();
-                            jmodel.UserID = userInfo.UserID;
-                            jmodel.Remark = "流通币转购物币";
-                            jmodel.RemarkEn = "Currency to shopping currency";
-                            jmodel.InAmount = 0;
-                            jmodel.OutAmount = changeInfo.Amount;
-                            jmodel.BalanceAmount = userBLL.GetMoney(getLoginID(), "BonusAccount");
-                            jmodel.JournalDate = DateTime.Now;
-                            jmodel.JournalType = 1;
-                            jmodel.Journal01 = toUserID;
-                            journalBLL.Add(jmodel);
-
-                            //加入流水账表(现金币增加)
-                            lgk.Model.tb_journal journalInfo = new lgk.Model.tb_journal();
-                            journalInfo.UserID = toUserID;
-                            journalInfo.Remark = "流通币转购物币";
-                            journalInfo.RemarkEn = "Currency to shopping currency";
-                            journalInfo.InAmount = changeInfo.Change005;
-                            journalInfo.OutAmount = 0;
-                            journalInfo.BalanceAmount = userBLL.GetMoney(toUserID, "ShopAccount");
-                            journalInfo.JournalDate = DateTime.Now;
-                            journalInfo.JournalType = 3;
-                            journalInfo.Journal01 = userInfo.UserID;
-                            journalBLL.Add(journalInfo);
-                        }
-                        else
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("objectExist") + "');", true);//奖金币转拍币功能未开放
-                        }
-                        #endregion
-                    }
-                    else if (changeInfo.ChangeType == 4)//注册币转购物币
-                    {
-                        #region 注册币转购物币
-                        decimal dStockAccount = userBLL.GetMoney(getLoginID(), "StockAccount");
-                        if (dStockAccount >= changeInfo.Amount)
-                        {
-                            UpdateAccount("StockAccount", userInfo.UserID, changeInfo.Amount, 0);//
-                            UpdateAccount("ShopAccount", toUserID, changeInfo.Change005, 1);//
-                            //加入流水账表（佣金币减少）
-                            lgk.Model.tb_journal jmodel = new lgk.Model.tb_journal();
-                            jmodel.UserID = userInfo.UserID;
-                            jmodel.Remark = "注册币转购物币";
-                            jmodel.RemarkEn = "Registered currency to shopping currency";
-                            jmodel.InAmount = 0;
-                            jmodel.OutAmount = changeInfo.Amount;
-                            jmodel.BalanceAmount = userBLL.GetMoney(getLoginID(), "StockAccount");
-                            jmodel.JournalDate = DateTime.Now;
-                            jmodel.JournalType = 5;
-                            jmodel.Journal01 = toUserID;
-                            journalBLL.Add(jmodel);
-
-                            //加入流水账表(现金币增加)
-                            lgk.Model.tb_journal journalInfo = new lgk.Model.tb_journal();
-                            journalInfo.UserID = toUserID;
-                            journalInfo.Remark = "注册币转购物币";
-                            journalInfo.RemarkEn = "Registered currency to shopping currency";
-                            journalInfo.InAmount = changeInfo.Change005;
-                            journalInfo.OutAmount = 0;
-                            journalInfo.BalanceAmount = userBLL.GetMoney(toUserID, "ShopAccount");
-                            journalInfo.JournalDate = DateTime.Now;
-                            journalInfo.JournalType = 3;
-                            journalInfo.Journal01 = userInfo.UserID;
-                            journalBLL.Add(journalInfo);
-                        }
-                        else
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("objectExist") + "');", true);//奖金币转拍币功能未开放
-                        }
-                        #endregion
-                    }
-                    else if (changeInfo.ChangeType == 5)//注册币转其他会员
-                    {
-                        #region 注册币转其他会员
-                        decimal dStockAccount = userBLL.GetMoney(getLoginID(), "StockAccount");
-                        if (dStockAccount >= changeInfo.Amount)
-                        {
-                            UpdateAccount("StockAccount", userInfo.UserID, changeInfo.Amount, 0);//
-                            UpdateAccount("StockAccount", toUserID, changeInfo.Change005, 1);//
-                            //加入流水账表（佣金币减少）
-                            lgk.Model.tb_journal jmodel = new lgk.Model.tb_journal();
-                            jmodel.UserID = userInfo.UserID;
-                            jmodel.Remark = "注册币转给" + txtUserCode.Text;
-                            jmodel.RemarkEn = "Registered currency to " + txtUserCode.Text;
-                            jmodel.InAmount = 0;
-                            jmodel.OutAmount = changeInfo.Amount;
-                            jmodel.BalanceAmount = userBLL.GetMoney(getLoginID(), "StockAccount");
-                            jmodel.JournalDate = DateTime.Now;
-                            jmodel.JournalType = 5;
-                            jmodel.Journal01 = toUserID;
-                            journalBLL.Add(jmodel);
-
-                            //加入流水账表(现金币增加)
-                            lgk.Model.tb_journal journalInfo = new lgk.Model.tb_journal();
-                            journalInfo.UserID = toUserID;
-                            journalInfo.Remark = "获得" + LoginUser.UserCode + "转来注册币";
-                            journalInfo.RemarkEn = "Get " + LoginUser.UserCode + " Transfer Registered currency";
-                            journalInfo.InAmount = changeInfo.Change005;
-                            journalInfo.OutAmount = 0;
-                            journalInfo.BalanceAmount = userBLL.GetMoney(toUserID, "StockAccount");
-                            journalInfo.JournalDate = DateTime.Now;
-                            journalInfo.JournalType = 5;
-                            journalInfo.Journal01 = userInfo.UserID;
-                            journalBLL.Add(journalInfo);
-                        }
-                        else
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("objectExist") + "');", true);//奖金币转拍币功能未开放
-                        }
-                        #endregion
-                    }
+                    #endregion
                 }
-                catch
+                else if (changeInfo.ChangeType == 2)//注册积分
                 {
-                    MessageBox.Show(this, GetLanguage("addError"));//添加流水账错误
+                    #region 注册积分
+                    decimal Emoney = userBLL.GetMoney(getLoginID(), "Emoney");
+                    if (Emoney >= changeInfo.Amount)
+                    {
+                        if (changeBLL.Add(changeInfo) > 0)
+                        {
+                            UpdateAccount("Emoney", userInfo.UserID, changeInfo.Amount, 0);//
+                            UpdateAccount("Emoney", toUserID, changeInfo.Change005, 1);//
+                            //加入流水账表（奖金币减少）
+                            lgk.Model.tb_journal jmodel = new lgk.Model.tb_journal();
+                            jmodel.UserID = userInfo.UserID;
+                            jmodel.Remark = "注册币转其他会员";
+                            jmodel.RemarkEn = "Other members of the registered currency";
+                            jmodel.InAmount = 0;
+                            jmodel.OutAmount = changeInfo.Amount;
+
+                            jmodel.BalanceAmount = userBLL.GetMoney(getLoginID(), "Emoney");
+                            jmodel.JournalDate = DateTime.Now;
+                            jmodel.JournalType = 1;
+                            jmodel.Journal02 = 2;
+                            jmodel.Journal01 = toUserID;
+                            journalBLL.Add(jmodel);
+
+                            //加入流水账表(现金币增加)
+                            lgk.Model.tb_journal journalInfo = new lgk.Model.tb_journal();
+                            journalInfo.UserID = toUserID;
+                            journalInfo.Remark = "收到" + userInfo.UserCode + "转来的注册币";
+                            journalInfo.RemarkEn = "roger " + userInfo.UserCode + " Registered currency transferred";
+                            journalInfo.InAmount = changeInfo.Change005;
+                            journalInfo.OutAmount = 0;
+                            journalInfo.BalanceAmount = userBLL.GetMoney(toUserID, "Emoney");
+                            journalInfo.JournalDate = DateTime.Now;
+                            journalInfo.JournalType = 1;
+                            journalInfo.Journal02 = 2;
+                            journalInfo.Journal01 = userInfo.UserID;
+                            journalBLL.Add(journalInfo);
+                            MessageBox.ShowAndRedirect(this, GetLanguage("TransferSuccess"), "TransferToEmoney.aspx");//转账成功
+                        }
+                        else
+                        {
+                            MessageBox.Show(this, GetLanguage("OperationFailed"));//操作失败
+
+                        }
+                        #endregion
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("balanceDollars") + "');", true);//奖金币转拍币功能未开放
+                    }
                 }
-                MessageBox.ShowAndRedirect(this, GetLanguage("TransferSuccess"), "TransferToEmoney.aspx");//转账成功
             }
-            else
+            catch
             {
-                MessageBox.Show(this, GetLanguage("OperationFailed"));//操作失败
+                MessageBox.Show(this, GetLanguage("addError"));//添加流水账错误
             }
         }
+
 
         private string GetWhere()
         {
@@ -504,30 +371,49 @@ namespace Web.user.finance
         /// <param name="e"></param>
         protected void dropCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (dropCurrency.SelectedValue == "5")
-            {
-                txtUserCode.Enabled = true;
-                txtUserCode.Text = string.Empty;
-                txtTrueName.Text = string.Empty;
-            }
-            else
+
+            if (dropCurrency.SelectedValue == "1")
             {
                 txtUserCode.Enabled = false;
                 txtUserCode.Text = LoginUser.UserCode;
                 txtTrueName.Text = LoginUser.TrueName;
             }
+            if (dropCurrency.SelectedValue == "2")
+            {
+                txtUserCode.Enabled = true;
+                txtUserCode.Text = string.Empty;
+                txtTrueName.Text = string.Empty;
+            }
+
+
         }
 
         protected void txtMoney_TextChanged(object sender, EventArgs e)
         {
             string strMoney = txtMoney.Text.Trim();
+
             if (strMoney != "")
             {
-                decimal dMoney = decimal.Parse(strMoney);
-                decimal dValue = dMoney - dMoney * getParamAmount("Transfer3") / 100;
+                btnSubmit.Enabled = false;
+                int aa = int.Parse(strMoney) % 100;
+                if (aa != 0)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请输入100的倍数金额');", true);//奖金币转拍币功能未开放
+                    return;
+                }
 
+                decimal dMoney = decimal.Parse(strMoney);
+                decimal dValue = dMoney* getParamAmount("zhuanzhang_1");
                 txtActualAmount.Value = dValue.ToString();
+                if (dropCurrency.SelectedValue=="1")
+                {
+                    dValue = dMoney*getParamAmount("zhuanzhang") - dMoney* getParamInt("zhuanzhang_3") /100* getParamAmount("zhuanzhang");
+                    txtActualAmount.Value = dValue.ToString();
+                }
+                return;
+
             }
+
         }
 
     }

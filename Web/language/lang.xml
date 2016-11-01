@@ -2528,8 +2528,8 @@
     <langtype name="en-us">Total bonus</langtype>
   </key>
   <key name="CirculatingGold">
-    <langtype name="zh-cn">流通币</langtype>
-    <langtype name="en-us">Circulating gold</langtype>
+    <langtype name="zh-cn">奖金积分</langtype>
+    <langtype name="en-us">Bonus points</langtype>
   </key>
   <key name="MDDDrill">
     <langtype name="zh-cn">MDD钻币</langtype>

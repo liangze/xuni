@@ -26,35 +26,17 @@
             <div class="filter">
                 <div class="row-fluid">
                     <p class="span3">
-                        <label><%=GetLanguage("CirculatingGold")%><%--流通币--%>(￥)：</label>
+                        <label><%=GetLanguage("CirculatingGold")%><%--奖金币--%>(￥)：</label>
                         <span class="field">
                             <input name="txtBonusAccount" id="txtBonusAccount" runat="server" type="text" disabled="disabled" />
                         </span>
                     </p>
                     <p class="span3">
-                        <label><%=GetLanguage("MDDDrill")%><%--MDD钻币--%>(￥)：</label>
-                        <span class="field">
-                            <input name="txtEmoney" id="txtEmoney" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </p>
-                    <p class="span3">
-                        <label><%=GetLanguage("Platform")%><%--平台费用--%>(￥)：</label>
-                        <span class="field">
-                            <input name="txtStockMoney" id="txtStockMoney" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </p>
-                    <div class="span3">
-                        <label><%=GetLanguage("Shoppingcurrency")%><%--购物币--%>(￥)：</label>
-                        <span class="field">
-                            <%=LoginUser.ShopAccount%>
-                        </span>
-                    </div>
-                    <div class="span3">
                         <label><%=GetLanguage("Registeredcurrency")%><%--注册币--%>(￥)：</label>
                         <span class="field">
-                            <%=LoginUser.StockAccount%>
+                            <input name="txtEmoney" id="Emoney" runat="server" type="text" disabled="disabled" />
                         </span>
-                    </div>
+                    </p>
                 </div>
             </div>
             <div>&nbsp;</div>

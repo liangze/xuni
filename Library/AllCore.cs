@@ -1224,24 +1224,13 @@ namespace Library
             {
                 if (type == 1)
                 {
-                    bi = "流通币转MDD钻币";
+                    bi = "奖金积分转注册积分";
                 }
                 else if (type == 2)
                 {
-                    bi = "流通币转注册币";
-                }
-                else if (type == 3)
-                {
-                    bi = "流通币转购物币";
-                }
-                else if (type == 4)
-                {
-                    bi = "注册币转购物币";
-                }
-                else if (type == 5)
-                {
                     bi = "注册币转其他会员";
                 }
+               
             }
             else
             {
@@ -1253,18 +1242,7 @@ namespace Library
                 {
                     bi = "Currency to Registered currency";
                 }
-                else if (type == 3)
-                {
-                    bi = "Currency to shopping currency";
-                }
-                else if (type == 4)
-                {
-                    bi = "Registered currency to shopping currency";
-                }
-                else if (type == 5)
-                {
-                    bi = "Registered currency to other members";
-                }
+              
             }
             return bi;
         }

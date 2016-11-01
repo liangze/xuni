@@ -191,42 +191,152 @@ namespace Web.user.team
                      int dengji = model_.LevelID ;
                     if (dengji==1)
                     {
-                        string sql = "select * from tb_globeParam where ParamName like 'dengji'";
+                        string sql = "select * from tb_globeParam where ParamName like 'VIP0';";
+                        sql += "select * from tb_globeParam where ParamName like 'PV0'";
                         DataSet ds = B_user.getData_Chaxun(sql,"");
                         model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());;
                         model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.User018= decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString())/100 * model_.LeftScore;
+                        model_.AllBonusAccount = model_.User018;
+                        lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
+                        m_journal_pv.UserID = UserID;
+                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 "+ model_.UserCode  + "获得 " + model_.User018 + " PV值";
+                        m_journal_pv.RemarkEn = "";
+                        m_journal_pv.InAmount = model_.User018;
+                        m_journal_pv.OutAmount = 0;
+                        m_journal_pv.BalanceAmount = model_.User018;
+                        m_journal_pv.JournalDate = DateTime.Now;
+                        m_journal_pv.JournalType = 10;
+                        m_journal_pv.Journal01 = UserID;
+                        journalBLL.Add(m_journal_pv);
+
+                       
+                        m_journal_pv.UserID = UserID;
+                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + "电子积分";
+                        m_journal_pv.RemarkEn = "";
+                        m_journal_pv.InAmount = model_.User018;
+                        m_journal_pv.OutAmount = 0;
+                        m_journal_pv.BalanceAmount = model_.User018;
+                        m_journal_pv.JournalDate = DateTime.Now;
+                        m_journal_pv.JournalType = 3;
+                        m_journal_pv.Journal01 = UserID;
+                        journalBLL.Add(m_journal_pv);
+
+
                         userBLL.Update(model_);
+
+
                     }
                     if (dengji == 2)
                     {
-                        string sql = "select * from tb_globeParam where ParamName like 'dengji1'";
+                        string sql = "select * from tb_globeParam where ParamName like 'VIP1';";
+                        sql += "select * from tb_globeParam where ParamName like 'PV1'";
                         DataSet ds = B_user.getData_Chaxun(sql, "");
                         model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
                         model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.User018 = decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString()) / 100 * model_.LeftScore;
+                        model_.AllBonusAccount = model_.User018;
+                        lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
+                        m_journal_pv.UserID = UserID;
+                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                        m_journal_pv.RemarkEn = "";
+                        m_journal_pv.InAmount = model_.User018;
+                        m_journal_pv.OutAmount = 0;
+                        m_journal_pv.BalanceAmount = model_.User018;
+                        m_journal_pv.JournalDate = DateTime.Now;
+                        m_journal_pv.JournalType = 10;
+                        m_journal_pv.Journal01 = UserID;
+                        journalBLL.Add(m_journal_pv);
+
+                        m_journal_pv.UserID = UserID;
+                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + "电子积分";
+                        m_journal_pv.RemarkEn = "";
+                        m_journal_pv.InAmount = model_.User018;
+                        m_journal_pv.OutAmount = 0;
+                        m_journal_pv.BalanceAmount = model_.User018;
+                        m_journal_pv.JournalDate = DateTime.Now;
+                        m_journal_pv.JournalType = 3;
+                        m_journal_pv.Journal01 = UserID;
+                        journalBLL.Add(m_journal_pv);
+
                         userBLL.Update(model_);
                     }
                     if (dengji == 3)
                     {
-                        string sql = "select * from tb_globeParam where ParamName like 'dengji2'";
+                        string sql = "select * from tb_globeParam where ParamName like 'VIP2';";
+                        sql += "select * from tb_globeParam where ParamName like 'PV2'";
                         DataSet ds = B_user.getData_Chaxun(sql, "");
                         model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
                         model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.User018 = decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString()) / 100 * model_.LeftScore;
+                        model_.AllBonusAccount = model_.User018;
+                        lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
+                        m_journal_pv.UserID = UserID;
+                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                        m_journal_pv.RemarkEn = "";
+                        m_journal_pv.InAmount = model_.User018;
+                        m_journal_pv.OutAmount = 0;
+                        m_journal_pv.BalanceAmount = model_.User018;
+                        m_journal_pv.JournalDate = DateTime.Now;
+                        m_journal_pv.JournalType = 10;
+                        m_journal_pv.Journal01 = UserID;
+                        journalBLL.Add(m_journal_pv);
+
+                        m_journal_pv.UserID = UserID;
+                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + "电子积分";
+                        m_journal_pv.RemarkEn = "";
+                        m_journal_pv.InAmount = model_.User018;
+                        m_journal_pv.OutAmount = 0;
+                        m_journal_pv.BalanceAmount = model_.User018;
+                        m_journal_pv.JournalDate = DateTime.Now;
+                        m_journal_pv.JournalType = 3;
+                        m_journal_pv.Journal01 = UserID;
+                        journalBLL.Add(m_journal_pv);
+
                         userBLL.Update(model_);
                     }
                     if (dengji == 4)
                     {
-                        string sql = "select * from tb_globeParam where ParamName like 'dengji3'";
+                        string sql = "select * from tb_globeParam where ParamName like 'VIP3';";
+                        sql += "select * from tb_globeParam where ParamName like 'PV3'";
                         DataSet ds = B_user.getData_Chaxun(sql, "");
                         model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
                         model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
                         model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+
+                        model_.User018 = decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString()) / 100 * model_.LeftScore;
+                        model_.AllBonusAccount = model_.User018;
+
+                        lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
+                        m_journal_pv.UserID = UserID;
+                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                        m_journal_pv.RemarkEn = "";
+                        m_journal_pv.InAmount = model_.User018;
+                        m_journal_pv.OutAmount = 0;
+                        m_journal_pv.BalanceAmount = model_.User018;
+                        m_journal_pv.JournalDate = DateTime.Now;
+                        m_journal_pv.JournalType = 10;
+                        m_journal_pv.Journal01 = UserID;
+                        journalBLL.Add(m_journal_pv);
+
+                        m_journal_pv.UserID = UserID;
+                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + "电子积分";
+                        m_journal_pv.RemarkEn = "";
+                        m_journal_pv.InAmount = model_.User018;
+                        m_journal_pv.OutAmount = 0;
+                        m_journal_pv.BalanceAmount = model_.User018;
+                        m_journal_pv.JournalDate = DateTime.Now;
+                        m_journal_pv.JournalType = 3;
+                        m_journal_pv.Journal01 = UserID;
+                        journalBLL.Add(m_journal_pv);
+
                         userBLL.Update(model_);
                     } 
                     string path = model_.RecommendPath;
@@ -246,6 +356,18 @@ namespace Web.user.team
                                 model_1.LeftScore += model_.LeftScore;
                                 model_1.LeftNewScore += model_.LeftNewScore;
                                 userBLL.Update(model_1);
+
+                                lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
+                                m_journal_pv.UserID = UserID;
+                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                                m_journal_pv.RemarkEn = "";
+                                m_journal_pv.InAmount = model_.User018;
+                                m_journal_pv.OutAmount = 0;
+                                m_journal_pv.BalanceAmount = model_.User018;
+                                m_journal_pv.JournalDate = DateTime.Now;
+                                m_journal_pv.JournalType = 10;
+                                m_journal_pv.Journal01 = UserID;
+                                journalBLL.Add(m_journal_pv);
                                 continue;
                             }
                             if (zy == 2)
