@@ -11,7 +11,7 @@
     <script type="text/javascript" language="javascript" src="../../JS/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server"> 
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <div class="right_content">
