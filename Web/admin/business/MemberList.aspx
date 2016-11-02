@@ -151,7 +151,9 @@
                                 class="easyui-linkbutton" iconcls="icon-ok" Visible='<%#Eval("IsLock").ToString()=="1"?true:false %>'>解冻</asp:LinkButton>
                          <asp:LinkButton ID="lbtnInto" runat="server" CommandName="Into" CommandArgument='<%#Eval("UserID") %>'
                                 class="easyui-linkbutton" iconcls="icon-ok" Visible='<%#Eval("IsOpend").ToString() == "2" ? true : false%>'>进入前台</asp:LinkButton>
-                        </td>
+                         <asp:LinkButton ID="LinkButton1" runat="server" CommandName="daili" CommandArgument='<%#Eval("UserID") %>'
+                                class="easyui-linkbutton" iconcls="icon-ok" Visible='<%#Eval("IsAgent").ToString() == "0" ? true : false%>'>开通代理</asp:LinkButton>
+                             </td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
