@@ -15,7 +15,8 @@ namespace Web.user.Stock
         {
             if (!IsPostBack)
             {
-                //BindData();
+                
+                BindData();
             }
         }
 
@@ -52,13 +53,16 @@ namespace Web.user.Stock
             return strWhere;
         }
 
-        ///// <summary>
-        ///// 填充信息
-        ///// </summary>
-        //protected void BindData()
-        //{
-        //    bind_repeater(stockBuyBLL.GetInnerList(GetWhere()), Repeater1, "BuyDate desc", tr1, AspNetPager1);
-        //}
+        /// <summary>
+        /// 可卖数量
+        /// </summary>
+        protected void BindData()
+        {
+            decimal strbeis = getParamAmount("Integraltra");//可卖超额倍数
+            string LeveName = levelBLL.GetLevelName(LoginUser.LevelID);
+            decimal zhuPrice = getParamAmount(LeveName);
+            Label1.Text = zhuPrice.ToString();
+        }
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {

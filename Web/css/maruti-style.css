@@ -1246,7 +1246,8 @@ form {
 .row-fluid .span20{ width:97.8%}
 .form-horizontal .form-actions {
 	margin-top: 0;
-	margin-bottom: 0;
+	margin-bottom:0;
+    
 }
 .help-block, .help-inline {
     color: #999999;
