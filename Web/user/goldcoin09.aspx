@@ -86,7 +86,7 @@
                                     <%#GoldType(Eval("JournalType").ToString())%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("InAmount").ToString() == "0.00" ? Eval("OutAmount") : Eval("InAmount")%>
+                                    <%#AccountType(Eval("InAmount").ToString()) == "支出" ? Eval("OutAmount") : Eval("InAmount")%>
                                 </td>
                                 <td align="center">
                                     <%#Eval("BalanceAmount")%>

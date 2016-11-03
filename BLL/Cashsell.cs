@@ -83,6 +83,13 @@ namespace lgk.BLL
         {
             return dal.GetAlready(iUserID);
         }
+        /// <summary>
+        /// 今日已挂卖次数
+        /// </summary>
+        public int Getalready(string strWhere)
+        {
+            return dal.Getalready(strWhere);
+        }
 
         /// <summary>
         /// 获得数据列表

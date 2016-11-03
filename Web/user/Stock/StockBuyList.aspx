@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="../../css/maruti-media.css" class="skin-color" />
     <link rel="stylesheet" href="../../css/font-awesome.min.css" />
     <script src="../../JS/jquery-1.7.1.min.js" type="text/javascript"></script>
-    <script src="../JS/echarts/esl.js" type="text/javascript"></script>
-    <script type="text/javascript" src="../../Js/My97DatePicker/WdatePicker.js"></script>
+    <script src="../../JS/echarts/esl.js" type="text/javascript"></script>
 
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
         <div id="content">
             <div class="container-fluid">
                 <div class="row-fluid">
@@ -59,11 +59,15 @@
                                             <td align="center"><%=LoginUser.StockAccount%></td>
                                             <td align="center"><%=LoginUser.User013%></td>
                                             <td align="center">
-                                                <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="Label1" runat="server" Text=""></asp:Label><%--可卖数量--%>
 
                                             </td>
-                                            <td align="center">2$/个云商积分</td>
-                                            <td align="center">250</td>
+                                            <td align="center">
+                                                <asp:Label ID="Label2" runat="server" Text=""></asp:Label></td>
+                                            <td align="center">
+                                                <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -79,44 +83,55 @@
 
                                         <h5 align="center">买入云商积分</h5>
 
-
                                     </div>
                                     <div class="widget-content nopadding">
-                                        <form action="#" method="get" class="form-horizontal">
-                                            <div class="control-group">
-                                                <label class="control-label">当前价格：</label>
-                                                <div class="controls">2$/个云商积分  </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">购买数量：</label>
-                                                <div class="controls">
-                                                    <input type="text" class="span6" name="" id="" value="" />
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">购买总价：</label>
-                                                <div class="controls">0.00</div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">选择支付：</label>
-                                                <div class="controls">
-                                                    <select name="" class="span5">
-                                                        <option value="">请选择</option>
-                                                        <option value="">电子积分</option>
-                                                        <option value="">注册积分</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">交易密码：</label>
-                                                <div class="controls">
-                                                    <input type="text" class="span6" name="" id="" value="" />
-                                                </div>
-                                            </div>
-                                            <div class="form-actions">
-                                                <button type="submit" class="btn btn-success">确认提交</button>
-                                            </div>
-                                        </form>
+                                        <table class="table table-bordered data-table">
+                                            <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+                                                <ContentTemplate>
+                                                    <tbody>
+                                                        <tr style="height: 50px;">
+                                                            <td style="width: 30.9%; text-align: right;">当前价格：
+                                                            <td align="left">
+                                                                <asp:Label ID="Label4" class="span5" runat="server" Text="Label"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="height: 50px;">
+                                                            <td style="width: 30.9%; text-align: right;">购买数量：
+                                                            </td>
+                                                            <td align="left">
+                                                                <asp:TextBox ID="txtBuyNum" class="span5" runat="server" AutoPostBack="true" OnTextChanged="txtBuyNum_TextChanged1"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="height: 50px;">
+                                                            <td style="width: 30.9%; text-align: right;">购买总价:
+                                                            </td>
+                                                            <td align="left">
+                                                                <asp:Label ID="Label6" runat="server" Text="" class="span5"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="height: 50px;">
+                                                            <td style="width: 30.9%; text-align: right;">选择支付：
+                                                            </td>
+                                                            <td align="left">
+                                                                <asp:DropDownList ID="dropCurrency" runat="server" class="span5">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="height: 50px;">
+                                                            <td style="width: 30.9%; text-align: right;">交易密码：
+                                                            </td>
+                                                            <td align="left">
+                                                                <input runat="server" type="password" class="span5" name="PayPassword" id="PayPassword" value="" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </table>
+                                        <div class="form-actions">
+
+                                            <asp:Button ID="btnSubmit" runat="server" Text="确认提交" class="btn btn-success" OnClick="btnSubmit_Click" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -129,31 +144,46 @@
                                         <h5>卖出云商积分</h5>
                                     </div>
                                     <div class="widget-content nopadding">
-                                        <form action="#" method="get" class="form-horizontal">
-                                            <div class="control-group">
-                                                <label class="control-label">当前价格：</label>
-                                                <div class="controls">99998850.00</div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">卖出数量：</label>
-                                                <div class="controls">
-                                                    <input type="text" class="span6" name="" id="" value="" />
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">卖出总价：</label>
-                                                <div class="controls">0.00</div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">交易密码：</label>
-                                                <div class="controls">
-                                                    <input type="text" class="span6" name="" id="" value="" />
-                                                </div>
-                                            </div>
-                                            <div class="form-actions">
-                                                <button type="submit" class="btn btn-success">确认提交</button>
-                                            </div>
-                                        </form>
+                                        <table class="table table-bordered data-table">
+                                            <asp:UpdatePanel runat="server" ID="UpdatePanel2">
+                                                <ContentTemplate>
+                                                    <tbody>
+                                                        <tr style="height: 50px;">
+                                                            <td style="width: 30.9%; text-align: right;">当前价格：
+                                                            <td align="left">
+                                                                <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="height: 50px;">
+                                                            <td style="width: 30.9%; text-align: right;">卖出数量：
+                                                            </td>
+                                                            <td align="left">
+                                                                <%--<input runat="server" type="text" class="span6" name="SellNum" id="SellNum" value="" />--%>
+                                                                <asp:TextBox ID="txtSellNum" runat="server" AutoPostBack="true" OnTextChanged="txtSellNum_TextChanged"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="height: 50px;">
+                                                            <td style="width: 30.9%; text-align: right;">卖出总价:
+                                                            </td>
+                                                            <td align="left">
+                                                                <asp:Label ID="Label7" runat="server" Text="" class="span5"></asp:Label>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr style="height: 50px;">
+                                                            <td style="width: 30.9%; text-align: right;">交易密码：
+                                                            </td>
+                                                            <td align="left">
+                                                                <input runat="server" type="password" class="span6" name="PayPass" id="PayPass" value="" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </table>
+                                        <div class="form-actions">
+                                            <asp:Button ID="Button1" runat="server" Text="确认提交" class="btn btn-success" OnClick="Button1_Click" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

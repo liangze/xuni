@@ -72,14 +72,7 @@
                                     <%#Eval("UserCode")%>
                                 </td>
                                 <td align="center">
-                                    <%if (Language == "zh-cn") %>
-                                    <%{ %>
                                     <%#Eval("Remark")%><%-- 详情--%>
-                                    <%}
-                                      else
-                                      { %>
-                                    <%#Eval("Remarken")%><%-- 详情--%>
-                                    <%} %>
                                 </td>
                                 <td align="center"><%#AccountType(Eval("InAmount").ToString())%></td>
                                 <td align="center"><%#GoldType(Eval("JournalType").ToString())%></td>

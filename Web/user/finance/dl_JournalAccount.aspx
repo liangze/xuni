@@ -15,54 +15,6 @@
             <h2><%=GetLanguage("AccountsQueries")%></h2>
             <div class="filter">
                 <div class="row-fluid">
-                    <%--<p class="span3">
-                        <label>注册积分：</label>
-                        <span class="field">
-                            <input name="txtBonusAccount" id="txtBonusAccount" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </p>
-                    <p class="span3">
-                        <label>消费积分：</label>
-                        <span class="field">
-                            <input name="txtEmoney" id="txtEmoney" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </p>
-                    <p class="span3">
-                        <label>电子积分：</label>
-                        <span class="field">
-                            <input name="txtStockMoney" id="txtStockMoney" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </p>
-                    <div class="span3">
-                        <label>云商积分：</label>
-                        <span class="field">
-                            <input name="txtShopAccount" id="txtShopAccount" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>
-                    <div class="span3">
-                        <label>奖金积分：</label>
-                        <span class="field">
-                            <input name="txtStockAccount" id="txtStockAccount" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>
-                    <div class="span3">
-                        <label>感恩积分：</label>
-                        <span class="field">
-                            <input name="txtStockAccount" id="Text1" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>
-                    <div class="span3">
-                        <label>购物积分：</label>
-                        <span class="field">
-                            <input name="txtStockAccount" id="Text2" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>
-                    <div class="span3">
-                        <label>爱心基金：</label>
-                        <span class="field">
-                            <input name="txtStockAccount" id="Text3" runat="server" type="text" disabled="disabled" />
-                        </span>
-                    </div>--%>
                     <p class="span3">
                         <asp:Button ID="btnDetail" runat="server" Text="搜 索" class="btn" OnClick="btnDetail_Click" />
                     </p>
@@ -96,14 +48,9 @@
                         <ItemTemplate>
                             <tr class="<%# (this.Repeater1.Items.Count + 1) % 2 == 0 ? "odd":"even"%>">
                                 <td align="center">
-                                    <%if (Language == "zh-cn") %>
-                                    <%{ %>
+                                   
                                     <%#Eval("Remark")%><%-- 详情--%>
-                                    <%}
-                                      else
-                                      { %>
-                                    <%#Eval("Remarken")%><%-- 详情--%>
-                                    <%} %>
+                                   
                                 </td>
                                 <td align="center">
                                     <%#AccountType(Eval("InAmount").ToString())%>
@@ -112,7 +59,7 @@
                                     <%#GoldType(Eval("JournalType").ToString())%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("InAmount").ToString() == "0.00" ? Eval("OutAmount") : Eval("InAmount")%>
+                                    <%#AccountType(Eval("InAmount").ToString()) == "支出" ? Eval("OutAmount") : Eval("InAmount")%>
                                 </td>
                                 <td align="center">
                                     <%#Eval("BalanceAmount")%>
