@@ -2287,7 +2287,7 @@ namespace lgk.DAL
         public DataSet GetOpenList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(@"select tb_user.UserID,tb_user.RecommendCode,tb_user.UserCode,tb_user.TrueName,tb_user.LevelID,tb_user.Location,tb_user.GLmoney,");
+            strSql.Append(@"select tb_user.UserID,tb_user.RecommendCode,tb_user.UserCode,tb_user.TrueName,tb_user.IsAgent,tb_user.LevelID,tb_user.Location,tb_user.GLmoney,");
             strSql.Append(@"tb_user.RegMoney,tb_Level.LevelName,tb_user.User006,tb_user.ParentCode,tb_user.User007,tb_user.IsOpend,");
             strSql.Append(@"tb_user.IsLock,tb_user.User002,tb_Level.Level03,tb_user.User008,User004,tb_user.RegTime,tb_user.OpenTime,");
             strSql.Append(@"tb_user.Email,tb_user.IsOut,tb_user.Batch from tb_user join tb_Level on tb_user.LevelID=tb_Level.LevelID");

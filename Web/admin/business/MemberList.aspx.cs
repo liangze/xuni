@@ -304,6 +304,30 @@ namespace Web.admin.business
                 string admins = sec.EncryptQueryString("1");//加密传递的adminid
                 Response.Write("<script>window.open('../../Login.aspx?adminid=" + admins + "&userid=" + iUserID + "')</script>");
             }
+            if (e.CommandName == "daili")
+            {
+                spd.jumpAdminUrl1(this.Page, 1);//跳转三级密码
+
+                lgk.Model.tb_agent model = new lgk.Model.tb_agent();
+                model.UserID = iUserID;
+                model.AgentCode = userInfo.UserCode;
+                model.Flag = 0;
+                model.AgentType = userInfo.LevelID;
+                model.Agent003 = userInfo.TrueName;
+                model.AppliTime = DateTime.Now;
+                model.JoinMoney = getParamAmount("Level" + userInfo.LevelID);
+                model.Agent004 = "";
+                model.Agent001 = 0;
+                model.Agent002 = 0;
+                model.PicLink = "";
+
+                if (agentBLL.Add(model) > 0)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Successful") + "');window.location.href='MemberList.aspx';", true);//申请XX成功
+                }
+
+
+            }
             if (e.CommandName == "Lock")//冻结
             {
                 spd.jumpAdminUrl1(this.Page, 1);//跳转三级密码
