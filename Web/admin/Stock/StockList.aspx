@@ -19,7 +19,7 @@
     <form id="form1" runat="server">
         <div class="operation">
             <fieldset class="fieldset">
-                <legend class="legSearch">MDD金币购买查询</legend>会员编号：<asp:TextBox
+                <legend class="legSearch">云商积分购买查询</legend>会员编号：<asp:TextBox
                     ID="txtUserCode" tip="输入购买日期" runat="server" class="input_select"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;购买日期：<asp:TextBox
                     ID="txtStart" tip="输入购买日期" runat="server" onfocus="WdatePicker()" class="input_select"></asp:TextBox>
                 至<asp:TextBox ID="txtEnd" tip="输入购买日期" runat="server" onfocus="WdatePicker()" class="input_select"></asp:TextBox>
@@ -55,13 +55,13 @@
                     <ItemTemplate>
                         <tr>
                             <td align="center">
-                                <%#Eval("UserCode")%>
+                                <%#userBLL.GetUserCode(long.Parse(Eval("UserID").ToString()))%>
                             </td>
                             <td align="center">
                                 <%#Eval("Amount")%>
                             </td>
                             <td align="center">
-                                <%#Eval("BuyPrice")%>
+                                <%#Eval("Price")%>
                             </td>
                             <td align="center">
                                 <%#Eval("Number")%>
@@ -70,7 +70,8 @@
                                 <%#Eval("BuyDate")%>
                             </td>
                             <td align="center">
-                                <asp:Literal ID="ltIsBuy" runat="server"></asp:Literal>
+                                <%--<asp:Literal ID="ltIsBuy" runat="server"></asp:Literal>--%>
+                               <%#Eval("IsBuy").ToString()=="1"?"已完成":"挂单中"%> 
                             </td>
                             <%--<td align="center">
                                 <asp:LinkButton ID="lbtnAudit" runat="server" CommandArgument='<%# Eval("StockBuyID") %>' class="easyui-linkbutton"
@@ -83,7 +84,7 @@
                     </ItemTemplate>
                 </asp:Repeater>
                 <tr id="tr1" runat="server">
-                    <td colspan="5" align="center">
+                    <td colspan="6" align="center">
                         <div class="NoData">
                             <span class="cBlack">
                                 <img alt="" src="../../images/ico_NoDate.gif" width="16" height="16" />

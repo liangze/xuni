@@ -22,7 +22,7 @@ namespace Web.admin.Stock
 
         private void BindData()
         {
-            bind_repeater(stockBuyBLL.GetInnerList(GetWhere()), Repeater1, "BuyDate ASC", tr1, AspNetPager1);
+            bind_repeater(cashsellBLL.GetList(GetWhere()), Repeater1, "SellDate ASC", tr1, AspNetPager1);
         }
 
         private string GetWhere()
@@ -30,24 +30,27 @@ namespace Web.admin.Stock
             string strWhere = "1=1";
 
             string strUserCode = this.txtUserCode.Text.Trim();
+            long UserId = userBLL.GetUserID(strUserCode);
             if (!string.IsNullOrEmpty(strUserCode))
-                strWhere += " AND UserCode LIKE '%" + strUserCode + "%'";
-
+            {
+                strWhere += " AND UserID=" + UserId;
+            }
+            
             #region 下定时间
             string strStartTime = txtStart.Text.Trim();
             string strEndTime = txtEnd.Text.Trim();
 
             if (strStartTime != "" && strEndTime == "")
             {
-                strWhere += string.Format(" AND Convert(nvarchar(10),BuyDate,120) >= '" + strStartTime + "'");
+                strWhere += string.Format(" AND Convert(nvarchar(10),SellDate,120) >= '" + strStartTime + "'");
             }
             else if (strStartTime == "" && strEndTime != "")
             {
-                strWhere += string.Format(" AND Convert(nvarchar(10),BuyDate,120) <= '" + strEndTime + "'");
+                strWhere += string.Format(" AND Convert(nvarchar(10),SellDate,120) <= '" + strEndTime + "'");
             }
             else if (strStartTime != "" && strEndTime != "")
             {
-                strWhere += string.Format(" AND Convert(nvarchar(10),BuyDate,120) between '" + strStartTime + "' AND '" + strEndTime + "'");
+                strWhere += string.Format(" AND Convert(nvarchar(10),SellDate,120) between '" + strStartTime + "' AND '" + strEndTime + "'");
             }
             #endregion
 
@@ -61,19 +64,19 @@ namespace Web.admin.Stock
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
-            {
-                int iIsBuy = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "IsBuy"));
+            //if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
+            //{
+            //    int iIsBuy = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "IsBuy"));
 
-                Literal ltIsBuy = (Literal)e.Item.FindControl("ltIsBuy");
+            //    Literal ltIsBuy = (Literal)e.Item.FindControl("ltIsBuy");
 
-                if (iIsBuy == 0)//购买状态(0等待买入，1购买中，2购买完毕)
-                    ltIsBuy.Text = "等待买入";
-                else if (iIsBuy == 1)
-                    ltIsBuy.Text = "购买中";
-                else if (iIsBuy == 2)
-                    ltIsBuy.Text = "已完成";
-            }
+            //    if (iIsBuy == 0)//购买状态(0等待买入，1购买中，2购买完毕)
+            //        ltIsBuy.Text = "等待买入";
+            //    else if (iIsBuy == 1)
+            //        ltIsBuy.Text = "购买中";
+            //    else if (iIsBuy == 2)
+            //        ltIsBuy.Text = "已完成";
+            //}
         }
 
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)

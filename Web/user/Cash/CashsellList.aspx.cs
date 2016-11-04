@@ -27,7 +27,7 @@ namespace Web.user.Cash
         /// </summary>
         private void BindData()
         {
-            bind_repeater(cashsellBLL.GetInnerList(GetWhere()), Repeater1, "Price desc", tr1, AspNetPager1);
+            bind_repeater(cashsellBLL.GetList(GetWhere()), Repeater1, "Price desc", tr1, AspNetPager1);
         }
 
         /// <summary>
@@ -94,29 +94,29 @@ namespace Web.user.Cash
                     }
                 }
 
-                lgk.Model.Cashsell cashsellInfo = cashsellBLL.GetModel(iCashsellID);
-                if (cashsellInfo != null)
-                {
-                    if (cashsellInfo.IsUndo == 1)
-                    {
-                        ltStatus.Text = GetLanguage("Undone");//已撤销
-                    }
-                    else
-                    {
-                        ltStatus.Text = GetLanguage("NotRevoked");//未撤销
-                    }
+                //lgk.Model.Cashsell cashsellInfo = cashsellBLL.GetModel(iCashsellID);
+                //if (cashsellInfo != null)
+                //{
+                //    if (cashsellInfo.IsUndo == 1)
+                //    {
+                //        ltStatus.Text = GetLanguage("Undone");//已撤销
+                //    }
+                //    else
+                //    {
+                //        ltStatus.Text = GetLanguage("NotRevoked");//未撤销
+                //    }
 
-                    if (cashsellInfo.SaleNum == 0 && cashsellInfo.IsUndo == 0)
-                    {
-                        lbtnCancel.Visible = true;
-                        lbtnCancelEn.Visible = true;
-                    }
-                    else
-                    {
-                        lbtnCancel.Visible = false;
-                        lbtnCancelEn.Visible = false;
-                    }
-                }
+                //    if (cashsellInfo.SaleNum == 0 && cashsellInfo.IsUndo == 0)
+                //    {
+                //        lbtnCancel.Visible = true;
+                //        lbtnCancelEn.Visible = true;
+                //    }
+                //    else
+                //    {
+                //        lbtnCancel.Visible = false;
+                //        lbtnCancelEn.Visible = false;
+                //    }
+                //}
             }
         }
 

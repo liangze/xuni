@@ -34,51 +34,45 @@
                         会员编号
                     </th>
                     <th>
-                        总购买金额
+                        总出售金额
                     </th>
                     <th>
-                        未购买金额
+                        卖出单价
                     </th>
                     <th>
-                        申请时间
+                        卖出时间
                     </th>
                     <th>
                         状态
                     </th>
-                    <th>
+                    <%--<th>
                         操作
-                    </th>
+                    </th>--%>
                 </tr>
                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand" OnItemDataBound="Repeater1_ItemDataBound">
                     <ItemTemplate>
                         <tr>
                             <td align="center">
-                                <%#Eval("UserCode")%>
+                                 <%#userBLL.GetUserCode(long.Parse(Eval("UserID").ToString()))%>
                             </td>
                             <td align="center">
                                 <%#Eval("Amount")%>
                             </td>
                             <td align="center">
-                                <%#Eval("SurplusSum")%>
+                                <%#Eval("Price")%>
                             </td>
                             <td align="center">
-                                <%#Eval("BuyDate")%>
+                                <%#Eval("SellDate")%>
                             </td>
                             <td align="center">
-                                <asp:Literal ID="ltIsBuy" runat="server"></asp:Literal>
+                                <%#Eval("IsSell").ToString()=="0"?"已完成":"挂单中"%>
                             </td>
-                            <td align="center">
-                                <%--<asp:LinkButton ID="lbtnAudit" runat="server" CommandArgument='<%# Eval("StockBuyID") %>' class="easyui-linkbutton"
-                                    iconcls="icon-ok" Visible='<%#Eval("IsBuy").ToString()=="0"?true:false %>' CommandName="Audit" OnClientClick="javascript:return confirm('确定要通过此申请吗？')">审核通过</asp:LinkButton>--%>&nbsp;&nbsp;<asp:LinkButton
-                                        ID="lbtnRemove" runat="server" CommandArgument='<%# Eval("StockBuyID") %>' class="easyui-linkbutton"
-                                        iconcls="icon-no" Visible='<%#Eval("IsBuy").ToString()=="0"?true:false %>'
-                                        CommandName="Remove" OnClientClick="javascript:return confirm('确定要删除此申请记录吗？')">删除</asp:LinkButton>
-                            </td>
+                           
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
                 <tr id="tr1" runat="server">
-                    <td colspan="5" align="center">
+                    <td colspan="6" align="center">
                         <div class="NoData">
                             <span class="cBlack">
                                 <img alt="" src="../../images/ico_NoDate.gif" width="16" height="16" />

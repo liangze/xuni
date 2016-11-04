@@ -20,7 +20,7 @@ namespace Web.admin.Stock
 
         private void BindData()
         {
-            bind_repeater(stockBLL.GetInnerList(GetWhere()), Repeater1, "BuyDate ASC", tr1, AspNetPager1);
+            bind_repeater(cashbuyBLL.GetList(GetWhere()), Repeater1, "BuyDate ASC", tr1, AspNetPager1);
         }
 
         private string GetWhere()
@@ -28,9 +28,11 @@ namespace Web.admin.Stock
             string strWhere = "1=1";
 
             string strUserCode = this.txtUserCode.Text.Trim();
+            long UserId = userBLL.GetUserID(strUserCode);
             if (!string.IsNullOrEmpty(strUserCode))
-                strWhere += " AND UserCode LIKE '%" + strUserCode + "%'";
-
+            {
+                strWhere += " AND UserID=" + UserId;
+            }
             #region 下定时间
             string strStartTime = txtStart.Text.Trim();
             string strEndTime = txtEnd.Text.Trim();
@@ -54,23 +56,23 @@ namespace Web.admin.Stock
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
-            {
-                long iStockID = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "StockID"));
+            //if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
+            //{
+            //    long iStockID = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "StockID"));
 
-                Literal ltIsBuy = (Literal)e.Item.FindControl("ltIsBuy");
+            //    //Literal ltIsBuy = (Literal)e.Item.FindControl("ltIsBuy");
 
-                lgk.Model.tb_Stock stockInfo = stockBLL.GetModel(iStockID);
+            //    lgk.Model.tb_Stock stockInfo = stockBLL.GetModel(iStockID);
 
-                if (stockInfo.IsSell == 0)//0持有，1挂单，2已生成订单卖出中,3已卖出
-                    ltIsBuy.Text = "持有";
-                else if (stockInfo.IsSell == 1)
-                    ltIsBuy.Text = "挂单";
-                else if (stockInfo.IsSell == 2)
-                    ltIsBuy.Text = "卖出中";
-                else if (stockInfo.IsSell == 3)
-                    ltIsBuy.Text = "已卖出";
-            }
+            //    if (stockInfo.IsSell == 0)//0持有，1挂单，2已生成订单卖出中,3已卖出
+            //        ltIsBuy.Text = "持有";
+            //    else if (stockInfo.IsSell == 1)
+            //        ltIsBuy.Text = "挂单";
+            //    else if (stockInfo.IsSell == 2)
+            //        ltIsBuy.Text = "卖出中";
+            //    else if (stockInfo.IsSell == 3)
+            //        ltIsBuy.Text = "已卖出";
+            //}
         }
 
         protected void AspNetPager1_PageChanged(object sender, EventArgs e)

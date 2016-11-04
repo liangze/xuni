@@ -18,8 +18,8 @@
         <div class="operation">
             <%--<asp:LinkButton ID="lbtnIssue" runat="server" class="easyui-linkbutton" iconcls="icon-search"
                 OnClick="lbtnIssue_Click"> 股份发行 </asp:LinkButton>--%>
-            <asp:LinkButton ID="lbtnSplit" runat="server" class="easyui-linkbutton" iconcls="icon-search"
-                OnClick="lbtnSplit_Click"> 拆分管理 </asp:LinkButton>
+            <%--asp:LinkButton ID="lbtnSplit" runat="server" class="easyui-linkbutton" iconcls="icon-search"
+                OnClick="lbtnSplit_Click" > 拆分管理 </asp:LinkButton>--%>
         </div>
         <div class="operation">
             <fieldset class="fieldset">
