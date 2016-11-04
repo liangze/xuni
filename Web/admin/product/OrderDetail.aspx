@@ -41,16 +41,16 @@
             <div class="dataTable">
                 <table width="99%" border="0" cellspacing="0" cellpadding="0" class="t1">
                     <tr>
-                        <th align="center">商品图片
-                        </th>
+                        <%--<th align="center">商品图片
+                        </th>--%>
                         <th align="center">商品编号
                         </th>
                         <th align="center">商品名称
                         </th>
                         <th align="center">市场价格
                         </th>
-                        <th align="center">本站价格
-                        </th>
+                        <%--<th align="center">本站价格
+                        </th>--%>
                         <th align="center">购买数量
                         </th>
                         <th align="center">总金额
@@ -61,9 +61,9 @@
                     <asp:Repeater ID="Repeater1" runat="server">
                         <ItemTemplate>
                             <tr align="center">
-                                <td><a href='#' target="_blank">
+                                <%--<td><a href='#' target="_blank">
                                     <img alt="" src='../../Upload/<%# Eval("Pic1") %>' width="100" height="100" /></a>
-                                </td>
+                                </td>--%>
                                 <td>
                                     <%#Eval("GoodsCode")%>
                                 </td>
@@ -73,14 +73,13 @@
                                 <td>
                                     <%#Eval("Price")%>
                                 </td>
-                                <td>
-                                    <%#Eval("ShopPrice")%>
-                                </td>
+                                
                                 <td>
                                     <%#Eval("OrderSum")%>
                                 </td>
                                 <td>
                                     <%#Eval("OrderTotal")%>
+                                     
                                 </td>
                                 <td>
                                     <%#Eval("OrderDate")%>

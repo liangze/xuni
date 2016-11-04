@@ -40,7 +40,7 @@ namespace web.admin.product
             string order4 = model.Order4 == null ? "" : model.Order4;
             Label1.Text = orderID;//订单号
             Label2.Text = UserCode;//会员编号
-            Label3.Text = model.Order7;//会员姓名
+            Label3.Text = model.Order6;//会员姓名
             Label4.Text = UserAddr;//收货地址
            // Label5.Text = OrderTotal;//总额
             Label6.Text = order3;//快递公司

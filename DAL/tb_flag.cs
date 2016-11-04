@@ -1173,14 +1173,17 @@ namespace lgk.DAL
         /// <returns></returns>
         public DataSet GetGoodsList(string strWhere)
         {
+           // (SELECT TypeName FROM tb_produceType WHERE ID = p.TypeID) AS OneName,
+  
+           //       (SELECT TypeName FROM tb_produceType WHERE ID = p.GoodsType) AS TypeName,
+    
+           //(SELECT TypeName FROM tb_produceType WHERE ID = p.Goods006) AS SypeName
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"select p.ID,p.GoodsCode,p.GoodsName,p.Price,p.RealityPrice,
                 p.Standard,p.IsHave,p.TypeID,p.GoodsType,p.Pic1,p.Pic2,p.Pic3,p.Pic4,p.Pic5,
                 p.Summary,p.Remarks,p.AddTime,p.Goods001,p.Goods002,p.Goods003,p.Goods004,p.Goods005,p.ShopPrice,
-                p.Goods006,p.Goods007,p.Goods008,p.StateType,p.City,
-                (SELECT TypeName FROM tb_produceType WHERE ID=p.TypeID) AS OneName,
-                (SELECT TypeName FROM tb_produceType WHERE ID=p.GoodsType) AS TypeName,
-       (SELECT TypeName FROM tb_produceType WHERE ID=p.Goods006) AS SypeName from tb_goods p JOIN tb_produceType t ON  t.ParentID=p.TypeID AND t.ID = p.GoodsType AND p.Goods003 <> '1'");
+                p.Goods006,p.Goods007,p.Goods008,p.StateType,p.City
+                 from tb_goods p");//p JOIN tb_produceType t ON  t.ParentID=p.TypeID AND t.ID = p.GoodsType AND p.Goods003 <> '1'
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

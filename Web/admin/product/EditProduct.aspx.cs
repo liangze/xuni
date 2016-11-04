@@ -20,7 +20,7 @@ namespace web.admin.product
             if (!IsPostBack)
             {
                 BindType();
-                bind_DropDownList_ht(ddlType, produceTypeBLL.GetList("ParentID=0 ").Tables[0], "ID", "TypeName"); //一级类目
+                //bind_DropDownList_ht(ddlType, produceTypeBLL.GetList("ParentID=0 ").Tables[0], "ID", "TypeName"); //一级类目
 
                 if (GetPID() > 0)
                 {
@@ -34,17 +34,17 @@ namespace web.admin.product
         private void BindType()
         {
             IList<lgk.Model.tb_produceType> list = produceTypeBLL.GetModelList(" ParentID>1");
-            ddlType.Items.Clear();
+           // ddlType.Items.Clear();
             ListItem li = new ListItem();
             li.Value = "0";
             li.Text = "-请选择-";
-            ddlType.Items.Add(li);
+           // ddlType.Items.Add(li);
             foreach (lgk.Model.tb_produceType item in list)
             {
                 ListItem items = new ListItem();
                 items.Value = item.ID.ToString();
                 items.Text = item.TypeName;
-                ddlType.Items.Add(items);
+                //ddlType.Items.Add(items);
             }
         }
 
@@ -78,26 +78,26 @@ namespace web.admin.product
             txtGoodsName.Text = model.GoodsName;
 
             txtPrice.Text = model.Price.ToString();
-            txtShopPrice.Text = model.ShopPrice.ToString();
+           // txtShopPrice.Text = model.ShopPrice.ToString();
             txtRealityPrice.Text = model.Pic5.ToString();//库存
 
             //Goods004
-            foreach( ListItem li in  checkList.Items)
-            {
-                if (("," + model.Goods004 + ",").IndexOf("," + li.Value + ",") > -1)
-                {
-                    li.Selected = true;
-                }
-            }
+            //foreach( ListItem li in  checkList.Items)
+            //{
+            //    if (("," + model.Goods004 + ",").IndexOf("," + li.Value + ",") > -1)
+            //    {
+            //        li.Selected = true;
+            //    }
+            //}
            
-            txtCity.Text = model.City;
-            ddlType.SelectedValue = model.TypeID.ToString();
+            //txtCity.Text = model.City;
+            //ddlType.SelectedValue = model.TypeID.ToString();
             ListItem item_list = new ListItem();
             item_list.Value = "0";
             item_list.Text = "请选择";
-            this.ddl_secondType.Items.Add(item_list);
-            bind_DropDownList(this.ddl_secondType, produceTypeBLL.GetList("ParentID=" + model.TypeID).Tables[0], "ID", "TypeName");
-            ddl_secondType.SelectedValue = model.GoodsType.ToString();
+            //this.ddl_secondType.Items.Add(item_list);
+            //bind_DropDownList(this.ddl_secondType, produceTypeBLL.GetList("ParentID=" + model.TypeID).Tables[0], "ID", "TypeName");
+            //ddl_secondType.SelectedValue = model.GoodsType.ToString();
             textPubContext.Text = model.Remarks;
             
             Image1.ImageUrl = "../../Upload/" + model.Pic1;
@@ -106,11 +106,11 @@ namespace web.admin.product
         protected void lbtnSubmit_Click(object sender, EventArgs e)
         {
 
-            if (this.ddl_secondType.SelectedValue == "0")
-            {
-                MessageBox.Show(this, "请选择商品类别");
-                return;
-            }
+            //if (this.ddl_secondType.SelectedValue == "0")
+            //{
+            //    MessageBox.Show(this, "请选择商品类别");
+            //    return;
+            //}
             if (this.txtGoodsCode.Text.Trim() == "")
             {
                 MessageBox.Show(this, "请输入商品编号");
@@ -132,16 +132,16 @@ namespace web.admin.product
                 MessageBox.Show(this, "请输入市场价");
                 return;
             }
-            if (this.txtShopPrice.Text.Trim() == "")
-            {
-                MessageBox.Show(this, "请输入本站价");
-                return;
-            }
+            //if (this.txtShopPrice.Text.Trim() == "")
+            //{
+            //    MessageBox.Show(this, "请输入本站价");
+            //    return;
+            //}
 
             try
             {
                 decimal lsj = Convert.ToDecimal(txtPrice.Text);
-                decimal lsj2 = Convert.ToDecimal(txtShopPrice.Text);
+               // decimal lsj2 = Convert.ToDecimal(txtShopPrice.Text);
                 decimal kucun = Convert.ToDecimal(txtRealityPrice.Text);
             }
             catch (Exception)
@@ -162,11 +162,11 @@ namespace web.admin.product
                 {
                     strUpload = ViewState["urlname1"].ToString();
                 }
-                if (strUpload == "")
-                {
-                    MessageBox.Show(this, "请上传商品图片");
-                    return;
-                }
+                //if (strUpload == "")
+                //{
+                //    MessageBox.Show(this, "请上传商品图片");
+                //    return;
+                //}
                 //  upload1 = upload1.Substring(upload1.LastIndexOf("/") + 1, upload1.Length - upload1.LastIndexOf("/") - 1);
 
                 if (this.textPubContext.Text.Trim() == "")
@@ -182,10 +182,10 @@ namespace web.admin.product
                 model.GoodsCode = txtGoodsCode.Text.Trim();
                 model.GoodsName = txtGoodsName.Text.Trim();
                 model.UploadUser = 0;//上传者ID
-                model.City = txtCity.Text.Trim();
-                model.Pic1 = strUpload;
+                //model.City = txtCity.Text.Trim();
+                model.Pic1 = "无";
                 model.Price = Convert.ToDecimal(txtPrice.Text.Trim());
-                model.ShopPrice = Convert.ToDecimal(txtShopPrice.Text.Trim());
+                //model.ShopPrice = Convert.ToDecimal(txtShopPrice.Text.Trim());
                 model.Pic5 = txtRealityPrice.Text.Trim();//库存
                 model.RealityPrice = 0;//--折扣价
                 model.Remarks = textPubContext.Text;
@@ -193,13 +193,13 @@ namespace web.admin.product
 
                 model.Goods003 = "0";//1:隐藏
                 string chkSelect = "";
-                for (int i = 0; i < checkList.Items.Count; i++)
-                {
-                    if (checkList.Items[i].Selected == true)
-                    {
-                        chkSelect += checkList.Items[i].Value + ",";
-                    }
-                }
+                //for (int i = 0; i < checkList.Items.Count; i++)
+                //{
+                //    if (checkList.Items[i].Selected == true)
+                //    {
+                //        chkSelect += checkList.Items[i].Value + ",";
+                //    }
+                //}
                 if (chkSelect != "")
                 {
                     chkSelect = chkSelect.Substring(0, chkSelect.Length - 1);
@@ -210,9 +210,9 @@ namespace web.admin.product
                 }
                 model.Goods004 = chkSelect;
                 model.Goods005 = 0;//折扣
-                model.TypeID = Convert.ToInt32(ddlType.SelectedValue);//一级分类
-                model.GoodsType = Convert.ToInt32(ddl_secondType.SelectedValue);//二级分类
-                model.Goods006 = Convert.ToDecimal(dd_sanType.SelectedValue);//三级分类
+                //model.TypeID = Convert.ToInt32(ddlType.SelectedValue);//一级分类
+                //model.GoodsType = Convert.ToInt32(ddl_secondType.SelectedValue);//二级分类
+               // model.Goods006 = Convert.ToDecimal(dd_sanType.SelectedValue);//三级分类
                 model.Remarks_en = "";
                 model.GoodsName_en = "";
 
@@ -237,9 +237,9 @@ namespace web.admin.product
                 }
                 model.GoodsCode = txtGoodsCode.Text.Trim();
                 model.GoodsName = txtGoodsName.Text.Trim();
-                model.City = txtCity.Text.Trim();
+               // model.City = txtCity.Text.Trim();
                 model.Price = Convert.ToDecimal(txtPrice.Text.Trim());
-                model.ShopPrice = Convert.ToDecimal(txtShopPrice.Text.Trim());
+               // model.ShopPrice = Convert.ToDecimal(txtShopPrice.Text.Trim());
                 model.Pic5 = txtRealityPrice.Text.Trim();
                 model.RealityPrice = 0;
                 model.Remarks = textPubContext.Text;
@@ -248,13 +248,13 @@ namespace web.admin.product
                 model.UserCode = "";
 
                 string chkSelect = "";
-                for (int i = 0; i < checkList.Items.Count; i++)
-                {
-                    if (checkList.Items[i].Selected == true)
-                    {
-                        chkSelect += checkList.Items[i].Value + ",";
-                    }
-                }
+                //for (int i = 0; i < checkList.Items.Count; i++)
+                //{
+                //    if (checkList.Items[i].Selected == true)
+                //    {
+                //        chkSelect += checkList.Items[i].Value + ",";
+                //    }
+                //}
                 if (chkSelect != "")
                 {
                     chkSelect = chkSelect.Substring(0, chkSelect.Length - 1);
@@ -266,9 +266,9 @@ namespace web.admin.product
                 model.Goods004 = chkSelect;
 
 
-                model.TypeID = Convert.ToInt32(ddlType.SelectedValue);
-                model.GoodsType = Convert.ToInt32(ddl_secondType.SelectedValue);
-                model.Goods006 = Convert.ToDecimal(dd_sanType.SelectedValue);//三级分类
+                //model.TypeID = Convert.ToInt32(ddlType.SelectedValue);
+                //model.GoodsType = Convert.ToInt32(ddl_secondType.SelectedValue);
+                //model.Goods006 = Convert.ToDecimal(dd_sanType.SelectedValue);//三级分类
 
                 model.StateType = 0;//审核
                 if (goodsBLL.Update(model))
@@ -296,16 +296,16 @@ namespace web.admin.product
         {
             string _fileName = "";
             string _name = "";
-            if (FileUpload1.HasFile)
-            {
-                _fileName = (Server.MapPath("../../Upload/"));
-                if (pName == "")
-                    _name = DateTime.Now.ToString("yyyyMMddHHmmss") + FileUpload1.FileName.Substring(FileUpload1.FileName.LastIndexOf('.'));
-                else
-                    _name = pName;
-                _fileName += _name;
-                FileUpload1.SaveAs(_fileName);
-            }
+            //if (FileUpload1.HasFile)
+            //{
+            //    _fileName = (Server.MapPath("../../Upload/"));
+            //    if (pName == "")
+            //        _name = DateTime.Now.ToString("yyyyMMddHHmmss") + FileUpload1.FileName.Substring(FileUpload1.FileName.LastIndexOf('.'));
+            //    else
+            //        _name = pName;
+            //    _fileName += _name;
+            //    FileUpload1.SaveAs(_fileName);
+            //}
             return _name;
         }
 
@@ -314,41 +314,41 @@ namespace web.admin.product
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void btnUpload_Click(object sender, EventArgs e)
-        {
-            if (!FileUpload1.HasFile)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请选择商品图片!');", true);
-                return;
-            }
-            string upload = UpLoadFile("");
-            ViewState["urlname1"] = upload;
-            this.Image1.ImageUrl = "../../Upload/" + upload;
-            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('商品图片上传成功!');", true);
-        }
+        //protected void btnUpload_Click(object sender, EventArgs e)
+        //{
+        //    //if (!FileUpload1.HasFile)
+        //    //{
+        //    //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请选择商品图片!');", true);
+        //    //    return;
+        //    //}
+        //    string upload = UpLoadFile("");
+        //    ViewState["urlname1"] = upload;
+        //    this.Image1.ImageUrl = "../../Upload/" + upload;
+        //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('商品图片上传成功!');", true);
+        //}
 
         protected void ddlType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.ddlType.SelectedValue != "0")
-            {
-                ListItem item_list = new ListItem();
-                item_list.Value = "0";
-                item_list.Text = "请选择";
-                this.ddl_secondType.Items.Add(item_list);
-                bind_DropDownList_ht(this.ddl_secondType, produceTypeBLL.GetList("ParentID=" + ddlType.SelectedValue).Tables[0], "ID", "TypeName");
-            }
+            //if (this.ddlType.SelectedValue != "0")
+            //{
+            //    ListItem item_list = new ListItem();
+            //    item_list.Value = "0";
+            //    item_list.Text = "请选择";
+            //    this.ddl_secondType.Items.Add(item_list);
+            //    bind_DropDownList_ht(this.ddl_secondType, produceTypeBLL.GetList("ParentID=" + ddlType.SelectedValue).Tables[0], "ID", "TypeName");
+            //}
         }
 
         protected void ddl_secondType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.ddl_secondType.SelectedValue != "0")
-            {
-                ListItem item_list = new ListItem();
-                item_list.Value = "0";
-                item_list.Text = "请选择";
-                this.dd_sanType.Items.Add(item_list);
-                bind_DropDownList_ht(this.dd_sanType, produceTypeBLL.GetList("ParentID=" + ddl_secondType.SelectedValue).Tables[0], "ID", "TypeName");
-            }
+            //if (this.ddl_secondType.SelectedValue != "0")
+            //{
+            //    ListItem item_list = new ListItem();
+            //    item_list.Value = "0";
+            //    item_list.Text = "请选择";
+            //    this.dd_sanType.Items.Add(item_list);
+            //    bind_DropDownList_ht(this.dd_sanType, produceTypeBLL.GetList("ParentID=" + ddl_secondType.SelectedValue).Tables[0], "ID", "TypeName");
+            //}
         }
 
         lgk.BLL.tb_goods_property_size psizeBLL = new lgk.BLL.tb_goods_property_size();
