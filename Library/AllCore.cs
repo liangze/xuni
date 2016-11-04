@@ -599,9 +599,9 @@ namespace Library
         /// <param name="remark">业务摘要</param>
         /// <param name="fromID">来自哪个会员</param>
         /// <returns></returns>
-        public int add_journal(long iUserID, decimal inamount, decimal outamount, decimal banlance, int jourtype, int type, string remark, string remarken, long iFromUserID)
+        public int add_journal(long iUserID, decimal inamount, decimal outamount, decimal banlance, int jourtype, string remark, string remarken, long iFromUserID)
         {
-            return dal.add_journal(iUserID, inamount, outamount, banlance, jourtype, type, remark, remarken, iFromUserID);
+            return dal.add_journal(iUserID, inamount, outamount, banlance, jourtype, remark, remarken, iFromUserID);
         }
 
         public void SendMessage(int Userid, string MobileNum, string Mcontent)

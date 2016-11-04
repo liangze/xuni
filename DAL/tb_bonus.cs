@@ -479,6 +479,33 @@ namespace lgk.DAL
                 return -1;
             }
         }
+        /// <summary>
+        /// 执行给定的存储过程。
+        /// </summary>
+        /// <param name="strProcName">给定的存储过程</param>
+        /// <param name="sqlParams">参数</param>
+        /// <returns></returns>
+        public int ExecProcedure(string strProcName,decimal para)
+        {
+            int iResult = 0;
+
+            try
+            {
+                SqlParameter[] sqlParams = { new SqlParameter("@Type", SqlDbType.Decimal) };
+                sqlParams[0].Value = para;
+                iResult = SqlHelper.ExecuteNonQuery(SqlHelper.connStrs, CommandType.StoredProcedure, strProcName, sqlParams);
+
+                if (iResult != -1)
+                    return 1;
+                else
+                    return 0;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
 
         /// <summary>
         /// 结算购物奖

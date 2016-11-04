@@ -108,6 +108,16 @@ namespace lgk.BLL
         {
             return dal.ExecProcedure(strProcName);
         }
+        /// <summary>
+        /// 执行给定的存储过程。
+        /// </summary>
+        /// <param name="strProcName">给定的存储过程</param>
+        /// <param name="sqlParams">参数</param>
+        /// <returns></returns>
+        public decimal ExecProcedure(string strProcName,decimal sqlParams)
+        {
+            return dal.ExecProcedure(strProcName, sqlParams);
+        }
 
         /// <summary>
         /// 结算购物奖

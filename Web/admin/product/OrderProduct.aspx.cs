@@ -220,7 +220,7 @@ namespace web.admin.product
 
                     if (order.OrderType == 0)
                     {
-                        add_journal(order.UserID, order.OrderTotal, 0, user.ShopAccount, 4, 0, "取消订单：" + order.OrderCode, "Delete orders", order.UserID);
+                        add_journal(order.UserID, order.OrderTotal, 0, user.ShopAccount, 4, "取消订单：" + order.OrderCode, "Delete orders", order.UserID);
                     }
                    // DeleteByCode(order.OrderCode);
                    // ob.Delete(order.OrderID);
