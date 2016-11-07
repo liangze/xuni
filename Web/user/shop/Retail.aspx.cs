@@ -27,7 +27,7 @@ namespace Web.user.shop
 
                 btnSubmit.Text = GetLanguage("Buy");//购买
             }
-        }
+        }  
 
         private void BindData()
         {
