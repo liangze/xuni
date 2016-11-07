@@ -164,7 +164,7 @@
                         </ItemTemplate>
                     </asp:Repeater>
                     <tr>
-                        <td colspan="7">
+                        <td colspan="9">
                             <div id="divno" runat="server" class="NoData">
                                 <span class="cBlack">
                                     <img src="../../images/ico_NoDate.gif" width="16" height="16" alt="" />
