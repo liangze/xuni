@@ -175,7 +175,7 @@ namespace Web.user.team
             }
             if (e.CommandName.Equals("open"))//
             {
-                AllCore acore = new AllCore();//1收入2支出
+                //AllCore acore = new AllCore();//1收入2支出
 
                 ////开通会员检查
                 //int i = acore.OpenCheck(model);
@@ -184,8 +184,9 @@ namespace Web.user.team
                 //    MessageBox.MyShow(this, acore.OpenCheckErrorMsg(i));
                 //    return;
                 //}
-                if (flag_open(UserID, 2) > 0)
-                {
+                model.IsOpend = 2;
+                if (userBLL.Update(model)==true)
+                { 
                     lgk.BLL.tb_user B_user = new lgk.BLL.tb_user();
                     lgk.Model.tb_user model_ = userBLL.GetModel(UserID);//选择的人
                      int dengji = model_.LevelID ; 
@@ -367,8 +368,8 @@ namespace Web.user.team
                             int zy = model_.Location;
                             if (zy==1)
                             {
-                                model_1.LeftScore += model_.LeftScore;
-                                model_1.LeftNewScore += model_.LeftNewScore;
+                                model_1.LeftScore += model_.User018;
+                                model_1.LeftNewScore += model_.User018;
                                 userBLL.Update(model_1);
 
                                 lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
@@ -386,8 +387,8 @@ namespace Web.user.team
                             }
                             if (zy == 2)
                             {
-                                model_1.RightScore += model_.RightScore;
-                                model_1.RightNewScore += model_.RightNewScore;
+                                model_1.RightScore += model_.User018;
+                                model_1.RightNewScore += model_.User018;
                                 userBLL.Update(model_1);
                                 continue;
                             }
@@ -399,8 +400,8 @@ namespace Web.user.team
                         DataTable dt = ds.Tables[0];
                         if (dt.Rows.Count < 2)
                         { 
-                            model_1.LeftScore += model_.LeftScore;
-                            model_1.LeftNewScore += model_.LeftNewScore;
+                            model_1.LeftScore += model_.User018;
+                            model_1.LeftNewScore += model_.User018;
                             userBLL.Update(model_1);
                             continue;
                         }
@@ -414,15 +415,15 @@ namespace Web.user.team
                             DataTable dt2 = ds1.Tables[1];
                             if (dt1.Rows.Count > 0)
                             {
-                                model_1.LeftScore += model_.LeftScore;
-                                model_1.LeftNewScore += model_.LeftNewScore;
+                                model_1.LeftScore += model_.User018;
+                                model_1.LeftNewScore += model_.User018;
                                 userBLL.Update(model_1);
                                 continue;
                             }
                             if (dt2.Rows.Count > 0)
                             {
-                                model_1.RightScore += model_.RightScore;
-                                model_1.RightNewScore += model_.RightNewScore;
+                                model_1.RightScore += model_.User018;
+                                model_1.RightNewScore += model_.User018;
                                 userBLL.Update(model_1);
                                 continue;
                             }
@@ -430,17 +431,18 @@ namespace Web.user.team
                     }
                   
 
-                    acore.add_userRecord(model.UserCode, DateTime.Now, model.RegMoney, 2);
+                    //acore.add_userRecord(model.UserCode, DateTime.Now, model.RegMoney, 2);
 
 
                    //对碰奖
                     MessageBox.MyShow(this, GetLanguage("OpenSuccess"));//开通成功
                 }
-                else 
+            }
+            else 
                 {
                     MessageBox.MyShow(this, GetLanguage("FailedToOpen")); //开通失败
                 }
-            }
+             
             //if (e.CommandName.Equals("open1"))//
             //{
             //    model.IsOpend = 3;//空单3 实单 2
