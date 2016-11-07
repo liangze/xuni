@@ -11,6 +11,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using Library;
+using System.Net;
+using System.IO;
 
 namespace Web.admin.finance
 {
@@ -123,6 +125,12 @@ namespace Web.admin.finance
             lgk.BLL.tb_systemMoney sy = new lgk.BLL.tb_systemMoney();
             //lgk.BLL.tb_rechargeable dotx = new lgk.BLL.tb_rechargeable();
             lgk.Model.tb_systemMoney system = sy.GetModel(1);
+            lgk.Model.tb_user user1 = userBLL.GetModel(ID);//
+            if (user1.PhoneNum == "")
+            {
+                MessageBox.ShowAndRedirect(this, "请填写手机号!", "TakeMoney.aspx");
+                return;
+            }
             if (cModel == null)
             {
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('该记录已删除,无法再进行此操作！');window.location.href='TakeMoney.aspx';", true);
@@ -144,9 +152,39 @@ namespace Web.admin.finance
                         cModel.Take006 = DateTime.Now;
                         if (takeBLL.Update(cModel) && UpdateSystemAccount("MoneyAccount", Convert.ToDecimal(cModel.RealityMoney), 0) > 0)
                         {
-                           //发送短信通知
-                            string content = GetLanguage("MessageTakeMoneyOK").Replace("{username}", user.UserCode).Replace("{time}", Convert.ToDateTime(cModel.TakeTime).ToString("yyyy年MM月dd日HH时mm分")).Replace("{timeEn}", Convert.ToDateTime(cModel.TakeTime).ToString("yyyy/MM/dd HH:mm"));
-                            SendMessage(Convert.ToInt32(cModel.UserID), user.PhoneNum, content);
+                            int dx = getParamInt("duanxin");
+                            if (dx==1)
+                            {
+                                //短信
+                                string DX = System.Configuration.ConfigurationManager.AppSettings["DX"];
+                                string DXMM = System.Configuration.ConfigurationManager.AppSettings["DXMM"];
+                                string uid = DX.ToString();
+                                string auth = DXMM.ToString();
+                                string mobile = user1.PhoneNum;
+                                string url = "http://sms.10690221.com:9011/hy/?uid=" + uid + "&auth=" + auth + "&mobile=" + mobile + "&msg=";
+
+                                //http://ip:port/hy/?uid=1234&auth=faea920f7412b5da7be0cf42b8c93759&mobile=13612345678&msg=hello&expid=0
+
+                                string content = "尊敬的云商会员您好！你的申请提现已处理，请注意查收！";
+                                string neirong = content;
+                                System.Text.Encoding encode = System.Text.Encoding.GetEncoding("GBK");
+                                content = HttpUtility.UrlEncode(content, encode);
+                                url += content;
+                                url += "&expid=0";
+                                string jieguo = GetHtmlFromUrl(url);
+                                string[] jiequ = jieguo.Split(',');
+                                lgk.BLL.tb_message m = new lgk.BLL.tb_message();
+                                lgk.Model.tb_message M_user = new lgk.Model.tb_message();
+                                M_user.Flag = jiequ[0];
+                                M_user.Mcontent = neirong;
+                                M_user.MobileNum = user1.PhoneNum;
+                                m.Add(M_user);
+
+                            }
+                            ////发送短信通知
+                            // string content = GetLanguage("MessageTakeMoneyOK").Replace("{username}", user.UserCode).Replace("{time}", Convert.ToDateTime(cModel.TakeTime).ToString("yyyy年MM月dd日HH时mm分")).Replace("{timeEn}", Convert.ToDateTime(cModel.TakeTime).ToString("yyyy/MM/dd HH:mm"));
+                            // SendMessage(Convert.ToInt32(cModel.UserID), user.PhoneNum, content);
+
                             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('操作成功！');window.location.href='TakeMoney.aspx';", true);
 
                         }
@@ -165,6 +203,35 @@ namespace Web.admin.finance
                         model.Journal01 = cModel.UserID;
                         if (journalBLL.Add(model) > 0 && UpdateAccount("BonusAccount", user.UserID, cModel.TakeMoney, 1) > 0 && takeBLL.Delete(ID))
                         {
+                            int dx = getParamInt("duanxin");
+                            if (dx == 1)
+                            {
+                                //短信
+                                string DX = System.Configuration.ConfigurationManager.AppSettings["DX"];
+                                string DXMM = System.Configuration.ConfigurationManager.AppSettings["DXMM"];
+                                string uid = DX.ToString();
+                                string auth = DXMM.ToString();
+                                string mobile = user1.PhoneNum;
+                                string url = "http://sms.10690221.com:9011/hy/?uid=" + uid + "&auth=" + auth + "&mobile=" + mobile + "&msg=";
+
+                                //http://ip:port/hy/?uid=1234&auth=faea920f7412b5da7be0cf42b8c93759&mobile=13612345678&msg=hello&expid=0
+
+                                string content = "尊敬的云商会员您好！你的银行账号错误，请尽快修改完善个人资料，谢谢！";
+                                string neirong = content;
+                                System.Text.Encoding encode = System.Text.Encoding.GetEncoding("GBK");
+                                content = HttpUtility.UrlEncode(content, encode);
+                                url += content;
+                                url += "&expid=0";
+                                string jieguo = GetHtmlFromUrl(url);
+                                string[] jiequ = jieguo.Split(',');
+                                lgk.BLL.tb_message m = new lgk.BLL.tb_message();
+                                lgk.Model.tb_message M_user = new lgk.Model.tb_message();
+                                M_user.Flag = jiequ[0];
+                                M_user.Mcontent = neirong;
+                                M_user.MobileNum = user1.PhoneNum;
+                                m.Add(M_user);
+                            }
+
                             MessageBox.MyShow(this, "取消成功");
                             BindData();
                         }
@@ -175,6 +242,39 @@ namespace Web.admin.finance
                     }
                 }
             }
+        }
+        /// <summary>
+        /// 短信
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public string GetHtmlFromUrl(string url)
+        {
+            string a = null;
+
+            if (url == null || url.Trim().ToString() == "")
+            {
+                return a;
+            }
+            string targeturl = url.Trim().ToString();
+            try
+            {
+                HttpWebRequest hr = (HttpWebRequest)WebRequest.Create(targeturl);
+                hr.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+                hr.Method = "Get";
+                hr.Timeout = 1000;
+                WebResponse hs = hr.GetResponse();
+                Stream sr = hs.GetResponseStream();
+                StreamReader ser = new StreamReader(sr, System.Text.Encoding.Default);
+                a = ser.ReadToEnd();
+                Response.Write("<br/>resp=" + ser.ReadToEnd());
+
+            }
+            catch (Exception ex)
+            {
+                a = ex.Message;
+            }
+            return a;
         }
         /// <summary>
         /// 分页申请记录
