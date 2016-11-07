@@ -8,4 +8,6 @@ m_user.ShopAccount = 0;// 消费积分	 7
 m_user.User011// 爱心基金	 8
 m_user.User012// 云购积分	 9
 user.User013//云商积分成本价
+User016 //拆分是否出局
+
 注册时发的PV写流水类型：10
