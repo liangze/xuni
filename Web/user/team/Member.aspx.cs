@@ -195,11 +195,8 @@ namespace Web.user.team
                         string sql = "select * from tb_globeParam where ParamName like 'VIP0';";
                         sql += "select * from tb_globeParam where ParamName like 'PV0'";
                         DataSet ds = B_user.getData_Chaxun(sql,"");
-                        model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());;
-                        model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.User018= decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString())/100 * model_.LeftScore;
+                        decimal a = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); 
+                        model_.User018= decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString())/100 * a;
                         model_.AllBonusAccount = model_.User018;
                         lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                         m_journal_pv.UserID = UserID;
@@ -237,11 +234,8 @@ namespace Web.user.team
                         string sql = "select * from tb_globeParam where ParamName like 'VIP1';";
                         sql += "select * from tb_globeParam where ParamName like 'PV1'";
                         DataSet ds = B_user.getData_Chaxun(sql, "");
-                        model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
-                        model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.User018 = decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString()) / 100 * model_.LeftScore;
+                        decimal a = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.User018 = decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString()) / 100 * a;
                         model_.AllBonusAccount = model_.User018;
                         lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                         m_journal_pv.UserID = UserID;
@@ -273,11 +267,8 @@ namespace Web.user.team
                         string sql = "select * from tb_globeParam where ParamName like 'VIP2';";
                         sql += "select * from tb_globeParam where ParamName like 'PV2'";
                         DataSet ds = B_user.getData_Chaxun(sql, "");
-                        model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
-                        model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.User018 = decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString()) / 100 * model_.LeftScore;
+                        decimal a = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        model_.User018 = decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString()) / 100 * a;
                         model_.AllBonusAccount = model_.User018;
                         lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                         m_journal_pv.UserID = UserID;
@@ -309,12 +300,9 @@ namespace Web.user.team
                         string sql = "select * from tb_globeParam where ParamName like 'VIP3';";
                         sql += "select * from tb_globeParam where ParamName like 'PV3'";
                         DataSet ds = B_user.getData_Chaxun(sql, "");
-                        model_.LeftScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.RightScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString()); ;
-                        model_.RightNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
-                        model_.LeftNewScore = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
+                        decimal a = decimal.Parse(ds.Tables[0].Rows[0]["ParamVarchar"].ToString());
 
-                        model_.User018 = decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString()) / 100 * model_.LeftScore;
+                        model_.User018 = decimal.Parse(ds.Tables[1].Rows[0]["ParamVarchar"].ToString()) / 100 * a;
                         model_.AllBonusAccount = model_.User018;
 
                         lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();

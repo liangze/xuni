@@ -445,30 +445,34 @@ namespace Web
 
                         if (userBLL.Update(model))
                         {
-                            //短信
-                            string DX = System.Configuration.ConfigurationManager.AppSettings["DX"];
-                            string DXMM = System.Configuration.ConfigurationManager.AppSettings["DXMM"];
-                            string uid = DX.ToString();
-                            string auth = DXMM.ToString();
-                            string mobile = model.PhoneNum;
-                            string url = "http://sms.10690221.com:9011/hy/?uid=" + uid + "&auth=" + auth + "&mobile=" + mobile + "&msg=";
+                            int dx = getParamInt("duanxin");
+                            if (dx == 1)
+                            {
+                                //短信
+                                string DX = System.Configuration.ConfigurationManager.AppSettings["DX"];
+                                string DXMM = System.Configuration.ConfigurationManager.AppSettings["DXMM"];
+                                string uid = DX.ToString();
+                                string auth = DXMM.ToString();
+                                string mobile = model.PhoneNum;
+                                string url = "http://sms.10690221.com:9011/hy/?uid=" + uid + "&auth=" + auth + "&mobile=" + mobile + "&msg=";
 
-                            //http://ip:port/hy/?uid=1234&auth=faea920f7412b5da7be0cf42b8c93759&mobile=13612345678&msg=hello&expid=0
+                                //http://ip:port/hy/?uid=1234&auth=faea920f7412b5da7be0cf42b8c93759&mobile=13612345678&msg=hello&expid=0
 
-                            string content = "尊敬的云商会员您好！您的会员账号 "+model.UserCode+" 已经注册成功，祝您生活愉快！。";
-                            string neirong = content;
-                            System.Text.Encoding encode = System.Text.Encoding.GetEncoding("GBK");
-                            content = HttpUtility.UrlEncode(content, encode);
-                            url += content;
-                            url += "&expid=0"; 
-                            string jieguo= GetHtmlFromUrl(url);
-                            string [] jiequ= jieguo.Split(','); 
-                            lgk.BLL.tb_message m = new lgk.BLL.tb_message();
-                            lgk.Model.tb_message M_user = new lgk.Model.tb_message();
-                            M_user.Flag = jiequ[0];
-                            M_user.Mcontent = neirong;
-                            M_user.MobileNum = model.PhoneNum; 
-                            m.Add(M_user);
+                                string content = "尊敬的云商会员您好！您的会员账号 " + model.UserCode + " 已经注册成功，祝您生活愉快！。";
+                                string neirong = content;
+                                System.Text.Encoding encode = System.Text.Encoding.GetEncoding("GBK");
+                                content = HttpUtility.UrlEncode(content, encode);
+                                url += content;
+                                url += "&expid=0";
+                                string jieguo = GetHtmlFromUrl(url);
+                                string[] jiequ = jieguo.Split(',');
+                                lgk.BLL.tb_message m = new lgk.BLL.tb_message();
+                                lgk.Model.tb_message M_user = new lgk.Model.tb_message();
+                                M_user.Flag = jiequ[0];
+                                M_user.Mcontent = neirong;
+                                M_user.MobileNum = model.PhoneNum;
+                                m.Add(M_user);
+                            }
                             //写流水
                             Response.Redirect("RegSuccess2.aspx?usercode=" + m_user.UserCode + "&asd=" + asd);
                             return;
