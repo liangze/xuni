@@ -70,7 +70,7 @@ namespace Web.user.shop
                 }
 
             }
-            //判断报单产品总金额是否等于等级要求
+            //判断报单产品总金额是否等于等级要求fdsf
             lgk.Model.tb_user userInfo = userBLL.GetModel(LoginUser.UserID);
 
             List<lgk.Model.tb_goodsCar> listCar = new List<lgk.Model.tb_goodsCar>();//购物车集合
