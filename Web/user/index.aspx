@@ -52,6 +52,7 @@
                         <li><a href="finance/dl_JournalAccount.aspx" target="mainfrom">个人账户</a></li>
                         <li><a href="finance/TakeMoney.aspx" target="mainfrom">会员提现</a></li>
                         <li><a href="finance/TransferToEmoney.aspx" target="mainfrom">转账管理</a></li>
+                        <li><a href="finance/Remit.aspx" target="mainfrom">充值申请</a></li>
                     </ul>
                 </li>
                 <li class="submenu"><a href="JavaScript:;"><span><i class="icon icon-briefcase"></i>交易管理</span></a>

@@ -516,14 +516,14 @@ div.yellow {
     padding-top: 5px;
     font-size: 14px;
     font-weight: bold;
-    color: #FFF;
+    /*color: #FFF;*/
 }
 .buttons {
     background-color: #F87E03;
     padding-top: 5px;
     font-size: 14px;
     font-weight: bold;
-    color: #FFF;
+    /*color: #FFF;*/
 }
 .t1 {
     border-left: 1px solid #CBCBCB;
@@ -531,7 +531,7 @@ div.yellow {
     border-right: none;
     border-bottom: none;
     margin-top: 10px;
-    background-color: #fffcda;
+    /*background-color: #fffcda;*/
 }
 .t1 tr {}
     .t1 td {
@@ -539,7 +539,7 @@ div.yellow {
         border-bottom: 1px #ccc solid;
         border-right: 1px #ccc solid;
         height: 30px;
-        background-color: #fffcda;
+        /*background-color: #fffcda;*/
     }
     .t1 th {
         font-weight: bold;
@@ -547,7 +547,7 @@ div.yellow {
         border-right: 1px #ccc solid;
         height: 30px;
         line-height: 30px;
-        background-color: #FDDD9B;
+        /*background-color: #FDDD9B;*/
     }
 .right_con tr th {
     color: #000;
@@ -726,7 +726,7 @@ div.yellow {
     height: 35px;
     border: none;
 }
-.btn {
+/*.btn {
     border-style: none;
     border-color: inherit;
     border-width: medium;
@@ -738,7 +738,7 @@ div.yellow {
     color: #666666;
     line-height: 20px;
     margin: 0px 5px;
-}
+}*/
 .btn1 {
     width:70px;
     height:27px;

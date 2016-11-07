@@ -50,7 +50,7 @@
                         <asp:ListItem Value="1" Text="增加"></asp:ListItem>
                         <asp:ListItem Value="2" Text="扣除"></asp:ListItem>
                     </asp:DropDownList>
-                    &nbsp;&nbsp; 充值金额：<asp:TextBox ID="txtMoney" class="easyui-numberbox input_select" runat="server" min="0" precision="2" tip="输入充值金额"></asp:TextBox>元
+                    &nbsp;&nbsp; 充值金额：<asp:TextBox ID="txtMoney" class="easyui-numberbox input_select" runat="server" min="0" precision="2" tip="输入充值金额"></asp:TextBox>$
     <asp:LinkButton ID="lbtnSubmit" runat="server" class="easyui-linkbutton"
         iconcls="icon-ok" OnClientClick="javascript:return confirm('确认给该会员充值？')" OnClick="lbtnSubmit_Click"> 提 交 </asp:LinkButton>
                     &nbsp;&nbsp;

@@ -6,9 +6,9 @@
 <head id="Head1" runat="server">
     <title>充值E币</title>
     <link href="../../css/indexcss.css" rel="stylesheet" type="text/css" />
-    <link href="../../style/index.css" rel="stylesheet" type="text/css" />
-    <link href="../../style/style.css" rel="stylesheet" type="text/css" />
-    <link href="../../style/ny.css" rel="stylesheet" type="text/css" />
+
+    <link href="../../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" language="javascript" src="../../Js/My97DatePicker/WdatePicker.js"></script>
     <style type="text/css">
         .inputLen {
             width: 160px;
@@ -21,70 +21,92 @@
     <form id="form1" class="box_con" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-        <div id="main">
-            <div class="right">
-                <div class="title">
-                    <span>当前位置：<a href="../default.aspx" class="hui">首页</a> &gt; 财务管理</span><h2>充值电子币</h2>
-                </div>
-                <div class="right_nr">
-
-        <div class="box box_width">
-            <div class="capositon">
-                <%=GetLanguage("CurrentPosition")%>：<%=GetLanguage("Financial")%>>><a href="javascript:void(0)"><%=GetLanguage("Chongzhi")%></a>
-            </div>
-            <div class="operation">
-                <fieldset class="fieldset">
-                    <legend class="legSearch">汇款单</legend>
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="">
-                        <tr id="trBank">
-                            <td>汇入银行：
+        <div class="right_content">
+            <h2>充值申请</h2>
+            <div class="filter">
+                <div class="row-fluid">
+                    <fieldset class="fieldset">
+                        <legend class="legSearch">汇款单</legend>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="">
+                            <tr id="trBank">
+                                <td>汇入银行：
                             <asp:DropDownList ID="dropBank" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropBank_SelectedIndexChanged">
-                            </asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;汇入账户：<a href="javascript:void(0)"><asp:Label ID="lblBankAccount" runat="server" Text=""></asp:Label></a>&nbsp;&nbsp;开户名：<a
-                                href="javascript:void(0)"><asp:Label ID="lblBankAccountUser" runat="server" Text=""></asp:Label></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>录入信息：请核实您的会员编号：<a href="javascript:void(0)"><%=LoginUser.UserCode %></a>&nbsp;您的姓名：<a href="javascript:void(0)"><%=LoginUser.TrueName %></a>&nbsp;您的级别：<a href="javascript:void(0)"><%=levelBLL.GetModel(Convert.ToInt32(LoginUser.LevelID)).LevelName%></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input id="param" type="hidden" runat="server" />
-                                <span style="color: Red;">*</span>汇款金额：<input name="jd" type="text" id="txtMoney" runat="server" onkeydown="if(event.keyCode==13)event.keyCode=9"
-                                    onkeypress="if ((event.keyCode<48 || event.keyCode>57 ) && event.keyCode!=46) event.returnValue=false;"
-                                    class="input_select inputLen" />元&nbsp;&nbsp;
-                            <span style="color: Red;">*</span>汇款具体时间：<asp:TextBox ID="txtTime" runat="server" class=" input_select inputLen" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span style="color: Red;">*</span>汇出银行：
-                                <input type="text" id="txtOutBank" runat="server" class="input_select inputLen" />
-                                &nbsp;&nbsp;&nbsp;
-                                <span style="color: Red;">*</span>汇出账户：
+                            </asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;汇入账户：<a href="javascript:void(0)"><asp:Label ID="lblBankAccount" runat="server" Text=""></asp:Label></a>&nbsp;&nbsp;
+                                    开户支行：<a href="javascript:void(0)"><asp:Label ID="lbtextBankAddress" runat="server" Text=""></asp:Label></a>&nbsp;&nbsp;
+                                    开户名：<a href="javascript:void(0)"><asp:Label ID="lblBankAccountUser" runat="server" Text=""></asp:Label></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>录入信息：请核实您的会员编号：<a href="javascript:void(0)"><%=LoginUser.UserCode %></a>&nbsp;您的姓名：<a href="javascript:void(0)"><%=LoginUser.TrueName %></a>&nbsp;您的级别：<a href="javascript:void(0)"><%=levelBLL.GetModel(Convert.ToInt32(LoginUser.LevelID)).LevelName%></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="param" type="hidden" runat="server" />
+                                    <span style="color: Red;">*</span>汇款金额：
+                                    <input name="jd" type="text" id="txtMoney" runat="server" onkeydown="if(event.keyCode==13)event.keyCode=9"
+                                        onkeypress="if ((event.keyCode<48 || event.keyCode>57 ) && event.keyCode!=46) event.returnValue=false;"
+                                        class="input_select inputLen" />$&nbsp;&nbsp;
+                                    <span style="color: Red;">*</span>汇款具体时间：<asp:TextBox ID="txtTime" runat="server" class=" input_select inputLen" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="color: Red;">*</span>汇出银行：
+                                    <input type="text" id="txtOutBank" runat="server" class="input_select inputLen" />
+                                    &nbsp;&nbsp;&nbsp;
+                                    <span style="color: Red;">*</span>开户支行：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <asp:TextBox ID="TextBoxBankadr" type="text" runat="server" class=" input_select inputLen" MaxLength="19"></asp:TextBox>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="color: Red;">*</span>汇出账户：
                                 <asp:TextBox ID="txtOutAccount" type="text" runat="server" class=" input_select inputLen" MaxLength="19"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>汇款备注：<asp:TextBox ID="txtRemark" class=" input_remark" runat="server" TextMode="MultiLine"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                <asp:Button ID="btnSubmit" runat="server" Style="margin: 0px;" Text="提 交" class="btn" OnClick="btnSubmit_Click" OnClientClick="javascript:return confirm('确定要充值吗？')" />
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <asp:Button ID="btnReset" runat="server" Style="margin: 0px;" Text="重 置" class="btn" OnClick="btnReset_Click" />
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
-                <fieldset class="fieldset">
-                    <legend class="legSearch">汇款记录</legend>
-                    申请日期：<asp:TextBox ID="txtStart" tip="输入申请日期" runat="server" onfocus="new WdatePicker()" class="input_select"></asp:TextBox>&nbsp;至&nbsp;<asp:TextBox ID="txtEnd" tip="输入申请日期" runat="server" onfocus="new WdatePicker()"
-                        class="input_select"></asp:TextBox>
-                    &nbsp;&nbsp;
-                <asp:Button ID="btnSearch" runat="server" Text="搜 索" class="btn" OnClick="btnSearch_Click" />
-                </fieldset>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <span style="color: Red;">*</span>开户姓名：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="text" id="TextBankna" runat="server" class="input_select inputLen" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>汇款备注：
+                                    <asp:TextBox ID="txtRemark" class=" input_remark" runat="server" TextMode="MultiLine"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <asp:Button ID="btnSubmit" runat="server" Text="提 交" class="btn" OnClick="btnSubmit_Click" OnClientClick="javascript:return confirm('确定要充值吗？')" />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <asp:Button ID="btnReset" runat="server" Text="重 置" class="btn" OnClick="btnReset_Click" />
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+            <h2>汇款记录</h2>
+            <div class="filter">
+                <div class="row-fluid">
+                    <p class="span3">
+                        <label>申请日期：</label>
+                        <span class="field">
+                            <asp:TextBox ID="txtStart" tip="输入申请日期" runat="server" onfocus="new WdatePicker()" class="input_select"></asp:TextBox>
+                        </span>
+                    </p>
+                    <p class="span3">
+                        <label>至</label>
+                        <span class="field">
+                            <asp:TextBox ID="txtEnd" tip="输入申请日期" runat="server" onfocus="new WdatePicker()"
+                                class="input_select"></asp:TextBox>
+                        </span>
+                    </p>
+                    <p class="span3">
+                        <asp:Button ID="btnSearch" runat="server" Text="搜 索" class="btn" OnClick="btnSearch_Click" />
+                    </p>
+                </div>
             </div>
             <div class="dataTable" align="center">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="t1">
@@ -95,7 +117,11 @@
                         </th>
                         <th align="center">汇出银行
                         </th>
+                        <th align="center">汇出支行
+                        </th>
                         <th align="center">汇出账户
+                        </th>
+                        <th align="center">汇出账户姓名
                         </th>
                         <th align="center">汇款备注
                         </th>
@@ -117,7 +143,13 @@
                                     <%#Eval("Remit003")%>
                                 </td>
                                 <td align="center">
+                                    <%#Eval("Remit007")%>
+                                </td>
+                                <td align="center">
                                     <%#Eval("Remit004")%>
+                                </td>
+                                <td align="center">
+                                    <%#Eval("Remit008")%>
                                 </td>
                                 <td align="center">
                                     <%#Eval("Remark")%>
@@ -152,9 +184,6 @@
                 </div>
             </div>
         </div>
-                    </div>
-                </div>
-            </div>
     </form>
 </body>
 </html>

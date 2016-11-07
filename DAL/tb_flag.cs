@@ -365,7 +365,7 @@ namespace lgk.DAL
         public DataSet GetRemitList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select r.ID,u.usercode,u.truename,r.BankName,r.BankAccount,r.BankAccountUser,r.RechargeableDate,r.AddDate,r.State,r.RemitMoney,r.YuAmount,r.Remark,r.UserID,r.PassDate,r.Remit001,r.Remit002,r.Remit003,r.Remit004,r.Remit005,r.Remit006 from tb_remit as r join tb_user as u on u.userid=r.userid");
+            strSql.Append("select r.ID,u.usercode,u.truename,r.BankName,r.BankAccount,r.BankAccountUser,r.RechargeableDate,r.AddDate,r.State,r.RemitMoney,r.YuAmount,r.Remark,r.UserID,r.PassDate,r.Remit001,r.Remit002,r.Remit003,r.Remit004,r.Remit005,r.Remit006,r.Remit007,r.Remit008 from tb_remit as r join tb_user as u on u.userid=r.userid");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
