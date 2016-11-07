@@ -1388,15 +1388,35 @@
     <Content Include="Scripts\CityData.Js" />
     <Content Include="Scripts\jq.js" />
     <Content Include="Scripts\User.js" />
+    <Content Include="static\css\add.css" />
+    <Content Include="static\css\article.css" />
+    <Content Include="static\css\base.css" />
+    <Content Include="static\css\bootstrap.min.css" />
+    <Content Include="static\css\flow2.min.css" />
     <Content Include="static\css\footable.core.css" />
     <Content Include="static\css\icons.gif" />
+    <Content Include="static\css\indexcss.css" />
     <Content Include="static\css\jquery.bxslider.css" />
     <Content Include="static\css\jquery.fancybox.css" />
     <Content Include="static\css\jquery.orgchart.css" />
     <Content Include="static\css\jquery.steps.css" />
     <Content Include="static\css\jquery.ui.all.css" />
+    <Content Include="static\css\jquery.ui.base.css" />
+    <Content Include="static\css\jquery.ui.core.css" />
+    <Content Include="static\css\jquery.ui.datepicker.css" />
+    <Content Include="static\css\jquery.ui.theme.css" />
     <Content Include="static\css\login.css" />
+    <Content Include="static\css\menu.css" />
+    <Content Include="static\css\mine.css" />
+    <Content Include="static\css\mll_common.css" />
+    <Content Include="static\css\mll_common.min.css" />
+    <Content Include="static\css\shop_indexcss.css" />
+    <Content Include="static\css\SpryTabbedPanels.css" />
     <Content Include="static\css\style.css" />
+    <Content Include="static\css\style1.css" />
+    <Content Include="static\css\StyleSheet.css" />
+    <Content Include="static\css\tuango.min.css" />
+    <Content Include="static\css\tuangou_detail.min.css" />
     <Content Include="static\css\ui.fancytree.css" />
     <Content Include="static\img\570LOGO-CN.png" />
     <Content Include="static\img\570LOGO-EN.png" />
@@ -1420,21 +1440,82 @@
     <Content Include="static\img\pattern\light_bg.gif" />
     <Content Include="static\img\yanzhengma.png" />
     <Content Include="static\img\未标题-1.png" />
+    <Content Include="static\js\AC_RunActiveContent.js" />
+    <Content Include="static\js\amcharts.js" />
+    <Content Include="static\js\amstock.js" />
+    <Content Include="static\js\bootstrap.min.js" />
+    <Content Include="static\js\bottom.js" />
+    <Content Include="static\js\converter.js" />
+    <Content Include="static\js\core.js" />
+    <Content Include="static\js\CreditLevel.js" />
+    <Content Include="static\js\cuntom.js" />
+    <Content Include="static\js\DD_belatedPNG_0.0.8a-min.js" />
+    <Content Include="static\js\DD_belatedPNG_0.0.8a.js" />
+    <Content Include="static\js\echarts.js" />
+    <Content Include="static\js\excanvas.js" />
+    <Content Include="static\js\faultmain.js" />
+    <Content Include="static\js\focus.js" />
     <Content Include="static\js\footable.js" />
     <Content Include="static\js\footable.paginate.js" />
     <Content Include="static\js\footable.sort.js" />
     <Content Include="static\js\functions.js" />
+    <Content Include="static\js\h.js" />
+    <Content Include="static\js\iepngfix_tilebg.js" />
+    <Content Include="static\js\img.js" />
     <Content Include="static\js\jquery-1.11.0.min.js" />
+    <Content Include="static\js\jquery-1.2.6.min.js" />
+    <Content Include="static\js\jquery-1.4.2.js" />
+    <Content Include="static\js\jquery-1.4.4.min.js" />
+    <Content Include="static\js\jquery-1.7.1.js" />
+    <Content Include="static\js\jquery-1.7.1.min.js" />
+    <Content Include="static\js\jquery-1[1].2.6.js" />
     <Content Include="static\js\jquery.bxslider.min.js" />
+    <Content Include="static\js\jquery.city.js" />
+    <Content Include="static\js\jquery.easyui.min.js" />
     <Content Include="static\js\jquery.fancybox.pack.js" />
     <Content Include="static\js\jquery.fancytree.js" />
     <Content Include="static\js\jquery.idTabs.min.js" />
+    <Content Include="static\js\jquery.jqChart.min.js" />
+    <Content Include="static\js\jquery.js" />
+    <Content Include="static\js\jquery.lightbox-0.5.pack.js" />
+    <Content Include="static\js\jquery.LoadImage.js" />
+    <Content Include="static\js\jquery.min.js" />
     <Content Include="static\js\jquery.orgchart.js" />
+    <Content Include="static\js\jquery.provincesBank.js" />
+    <Content Include="static\js\jquery.provincesCity.js" />
     <Content Include="static\js\jquery.steps.min.js" />
     <Content Include="static\js\jquery.ui.core.js" />
     <Content Include="static\js\jquery.ui.datepicker.js" />
+    <Content Include="static\js\jquery.ui.draggable.js" />
+    <Content Include="static\js\jquery.ui.mouse.js" />
     <Content Include="static\js\jquery.ui.widget.js" />
     <Content Include="static\js\jquery.validate.min.js" />
+    <Content Include="static\js\jquery1.2.js" />
+    <Content Include="static\js\login.js" />
+    <Content Include="static\js\login1.js" />
+    <Content Include="static\js\loginEn.js" />
+    <Content Include="static\js\lrscroll.js" />
+    <Content Include="static\js\menu.js" />
+    <Content Include="static\js\navbar.js" />
+    <Content Include="static\js\order.js" />
+    <Content Include="static\js\prototype.js" />
+    <Content Include="static\js\provincesdata.js" />
+    <Content Include="static\js\sb.js" />
+    <Content Include="static\js\serial.js" />
+    <Content Include="static\js\SpryTabbedPanels.js" />
+    <Content Include="static\js\sticky.js" />
+    <Content Include="static\js\superValidator.js" />
+    <Content Include="static\js\swfobject_modified.js" />
+    <Content Include="static\js\tagcss.css" />
+    <Content Include="static\js\tagjs.html" />
+    <Content Include="static\js\tagjs.js" />
+    <Content Include="static\js\tree.js" />
+    <Content Include="static\js\userlevel.js" />
+    <Content Include="static\js\userReg.js" />
+    <Content Include="static\js\ValidateData.js" />
+    <Content Include="static\js\WebResource.js" />
+    <Content Include="static\js\WebResource_002.js" />
+    <Content Include="static\js\WebUI.js" />
     <Content Include="style\box.css" />
     <Content Include="style\common.css" />
     <Content Include="style\index.css" />
@@ -1844,6 +1925,7 @@
     <Content Include="user\shop\WebForm1.aspx" />
     <Content Include="user\shop\xianshiqianggou.aspx" />
     <Content Include="user\Stock\BuyList.aspx" />
+    <Content Include="user\Stock\kchart.aspx" />
     <Content Include="user\Stock\SellList.aspx" />
     <Content Include="user\Stock\StockBuyList.aspx" />
     <Content Include="user\Stock\StockorderList.aspx" />
@@ -1854,6 +1936,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\business\Agent.aspx.cs">
@@ -3692,8 +3775,19 @@
     <Compile Include="user\Stock\BuyList.aspx.designer.cs">
       <DependentUpon>BuyList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="user\Stock\Cashorder.cs" />
     <Compile Include="user\Stock\HandlerLine.ashx.cs">
       <DependentUpon>HandlerLine.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="user\Stock\kchart.aspx.cs">
+      <DependentUpon>kchart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\Stock\kchart.aspx.designer.cs">
+      <DependentUpon>kchart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\Stock\Kcharts.ashx.cs">
+      <DependentUpon>Kcharts.ashx</DependentUpon>
     </Compile>
     <Compile Include="user\Stock\SellList.aspx.cs">
       <DependentUpon>SellList.aspx</DependentUpon>
@@ -3806,6 +3900,13 @@
     </Compile>
     <Compile Include="ValidatedCode.aspx.designer.cs">
       <DependentUpon>ValidatedCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -4830,6 +4931,7 @@
     <Content Include="user\shop\InsideSite.Master" />
     <Content Include="user\shop\ShopPay.Master" />
     <Content Include="user\Stock\HandlerLine.ashx" />
+    <Content Include="user\Stock\Kcharts.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="admin\business\File\" />

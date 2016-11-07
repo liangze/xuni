@@ -13,6 +13,7 @@ namespace lgk.BLL
         private readonly lgk.DAL.Cashorder dal = new lgk.DAL.Cashorder();
         public Cashorder()
         { }
+
         #region Method
 
         public bool Exists(long OrderID)
@@ -122,6 +123,72 @@ namespace lgk.BLL
         public DataSet GetOrderList(string strWhere)
         {
             return dal.GetOrderList(strWhere);
+        }
+
+        #endregion
+
+        #region 走势图
+        /// <summary>
+        /// 按分钟分组
+        /// </summary>
+        /// <param name="iMinute"></param>
+        /// <returns></returns>
+        public DataSet GetMimuteChart(int iMinute)
+        {
+            return dal.GetMimuteChart(iMinute);
+        }
+
+        /// <summary>
+        /// 按小时分组
+        /// </summary>
+        /// <param name="iMinute"></param>
+        /// <returns></returns>
+        public DataSet GetHourChart(int iMinute)
+        {
+            return dal.GetHourChart(iMinute);
+        }
+
+        /// <summary>
+        /// 按天分组
+        /// </summary>
+        /// <param name="iMinute"></param>
+        /// <returns></returns>
+        public DataSet GetDayChart(int iMinute)
+        {
+            return dal.GetDayChart(iMinute);
+        }
+
+        /// <summary>
+        /// 获取开盘价格
+        /// </summary>
+        /// <param name="dDtime">时间</param>
+        /// <param name="a">查询的时间段</param>
+        /// <param name="type">1：分钟，2：小时，3：天</param>
+        public decimal GetOpenPrice(string dDtime, int a, int type)
+        {
+            return dal.GetOpenPrice(dDtime, a, type);
+        }
+
+        /// <summary>
+        /// 获取收盘价格
+        /// </summary>
+        /// <param name="dDtime">时间</param>
+        /// <param name="a">查询的时间段</param>
+        /// <param name="type">1：分钟，2：小时，3：天</param>
+        public decimal GetClosePrice(string dDtime, int a, int type)
+        {
+            return dal.GetClosePrice(dDtime, a, type);
+        }
+
+        /// <summary>
+        /// 获取获取时间段内的总金额
+        /// </summary>
+        /// <param name="dDtime">时间</param>
+        /// <param name="a">查询的时间段</param>
+        /// <param name="type">1：分钟，2：小时，3：天</param>
+        public decimal GetSumAmount(string dDtime, int a, int type)
+        {
+            return dal.GetSumAmount(dDtime, a, type);
         }
 
         #endregion
