@@ -188,8 +188,9 @@ namespace Web.user.team
                 {
                     lgk.BLL.tb_user B_user = new lgk.BLL.tb_user();
                     lgk.Model.tb_user model_ = userBLL.GetModel(UserID);//选择的人
-                     int dengji = model_.LevelID ;
-                    if (dengji==1)
+                     int dengji = model_.LevelID ; 
+                
+                    if (dengji==0)
                     {
                         string sql = "select * from tb_globeParam where ParamName like 'VIP0';";
                         sql += "select * from tb_globeParam where ParamName like 'PV0'";
@@ -225,11 +226,13 @@ namespace Web.user.team
                         journalBLL.Add(m_journal_pv);
 
 
+
+
                         userBLL.Update(model_);
 
 
                     }
-                    if (dengji == 2)
+                    if (dengji == 1)
                     {
                         string sql = "select * from tb_globeParam where ParamName like 'VIP1';";
                         sql += "select * from tb_globeParam where ParamName like 'PV1'";
@@ -265,7 +268,7 @@ namespace Web.user.team
 
                         userBLL.Update(model_);
                     }
-                    if (dengji == 3)
+                    if (dengji == 2)
                     {
                         string sql = "select * from tb_globeParam where ParamName like 'VIP2';";
                         sql += "select * from tb_globeParam where ParamName like 'PV2'";
@@ -301,7 +304,7 @@ namespace Web.user.team
 
                         userBLL.Update(model_);
                     }
-                    if (dengji == 4)
+                    if (dengji == 3)
                     {
                         string sql = "select * from tb_globeParam where ParamName like 'VIP3';";
                         sql += "select * from tb_globeParam where ParamName like 'PV3'";
@@ -338,7 +341,30 @@ namespace Web.user.team
                         journalBLL.Add(m_journal_pv);
 
                         userBLL.Update(model_);
-                    } 
+                    }
+                    //报单奖
+                    string sql2 = "select * from tb_agent where ID = '" + model_.AgentsID + "';";
+                    sql2 += "select * from tb_globeParam where ParamName like 'Agent2'";
+                    DataSet ds2 = B_user.getData_Chaxun(sql2, "");
+                    DataTable dt5 = ds2.Tables[0];
+                    DataTable dt6 = ds2.Tables[1];
+
+                    string userid_DL = dt5.Rows[0]["UserID"].ToString();
+                    lgk.Model.tb_user DL = userBLL.GetModel(long.Parse(userid_DL));//选择的人
+
+                    lgk.Model.tb_journal m_journal_DL = new lgk.Model.tb_journal();
+                    m_journal_DL.UserID = DL.UserID;
+                    m_journal_DL.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 * (decimal.Parse(dt6.Rows[0]["ParamVarchar"].ToString())/100) + "报单奖";
+                    m_journal_DL.RemarkEn = "";
+                    m_journal_DL.InAmount = model_.User018 * decimal.Parse(dt6.Rows[0]["ParamVarchar"].ToString()) / 100;
+                    m_journal_DL.OutAmount = 0;
+                    m_journal_DL.BalanceAmount = DL.BonusAccount+ (model_.User018 * decimal.Parse(dt6.Rows[0]["ParamVarchar"].ToString()) / 100);
+                    m_journal_DL.JournalDate = DateTime.Now;
+                    m_journal_DL.JournalType = 2;
+                    m_journal_DL.Journal01 = DL.UserID;
+                    journalBLL.Add(m_journal_DL);
+
+
                     string path = model_.RecommendPath;
                     string[] ID = path.Split('-');
                     foreach (var id in ID)

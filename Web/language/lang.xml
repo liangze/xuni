@@ -2799,4 +2799,8 @@
     <langtype name="zh-cn">商品列表</langtype>
     <langtype name="en-us">List of goods</langtype>
   </key>
+  <key name="KChart">
+    <langtype name="zh-cn">K线图</langtype>
+    <langtype name="en-us">KChart</langtype>
+  </key>
 </lang>
