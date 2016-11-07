@@ -150,7 +150,7 @@
                             <%=GetLanguage("IDNumber")%>：
                         </label>
                         <div class="field">
-                            <input name="txtIdenCode" type="text" id="txtIdenCode" runat="server" class="input_reg" disabled="disabled" />
+                            <input name="txtIdenCode" type="text" id="txtIdenCode" runat="server" class="input_reg"  />
                         </div>
                     </div>
                     <div class="control-group">
@@ -158,7 +158,7 @@
                             <%=GetLanguage("ContactPhone")%>：
                         </label>
                         <div class="field">
-                            <input name="txtPhoneNum" type="text" id="txtPhoneNum" runat="server" class="input_reg" disabled="disabled" />
+                            <input name="txtPhoneNum" type="text" id="txtPhoneNum" runat="server" class="input_reg"   />
                         </div>
                     </div>
                     <div class="control-group">

@@ -176,14 +176,14 @@ namespace Web.user.team
             if (e.CommandName.Equals("open"))//
             {
                 AllCore acore = new AllCore();//1收入2支出
-                
-                //开通会员检查
-                int i = acore.OpenCheck(model);
-                if (i != 0)
-                {
-                    MessageBox.MyShow(this, acore.OpenCheckErrorMsg(i));
-                    return;
-                }
+
+                ////开通会员检查
+                //int i = acore.OpenCheck(model);
+                //if (i != 0)
+                //{
+                //    MessageBox.MyShow(this, acore.OpenCheckErrorMsg(i));
+                //    return;
+                //}
                 if (flag_open(UserID, 2) > 0)
                 {
                     lgk.BLL.tb_user B_user = new lgk.BLL.tb_user();
