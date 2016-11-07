@@ -36,15 +36,14 @@
                         </th>
                         <th>会员姓名
                         </th>
-                        <th>报单奖
+                        <th>代理中心奖    <%-- 1.代理中心奖, 2.推荐奖，3.静态月分红奖，4.对碰奖)--%>
                         </th>
                         <th>推荐奖
                         </th>
-                        <th>日分红奖
+                        <th>静态月分红奖
                         </th>
-                        <th>管理奖
-                        </th>
-                        <th>购物奖
+                        <th>对碰奖
+                       
                         </th>
                         <th>实发
                         </th>
@@ -63,20 +62,18 @@
                                     <%#Eval("TrueName")%><%--会员编号--%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("Entryprize")%><%--1.报单奖--%>
+                                    <%#Eval("Entryprize")%><%--1.代理中心奖--%><%-- 1.代理中心奖, 2.推荐奖，3.静态月分红奖，4.对碰奖)--%>
                                 </td>
                                 <td align="center">
                                     <%#Eval("Recommended")%><%--2.推荐奖--%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("Shareout")%><%--3.日分红奖--%>
+                                    <%#Eval("Shareout")%><%--3.静态月分红奖--%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("ManagementAward")%><%--4.管理奖--%>
+                                    <%#Eval("ManagementAward")%><%--4.对碰奖--%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("ShoppingAward")%><%--5.购物奖--%>
-                                </td>
+                               
                                 <td align="center">
                                     <%#Eval("sf")%><%--实发 6--%>
                                 </td>
