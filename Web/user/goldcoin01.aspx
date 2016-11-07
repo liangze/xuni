@@ -50,7 +50,7 @@
                             <%=GetLanguage("BusinessSummary")%>
                         </th>
                         <th align="center">
-                            <%=GetLanguage("AccountTypes")%>
+                            账户类型
                         </th>
                         <th align="center"><%=GetLanguage("CurrencyType")%><%--币种--%>
                         </th>
@@ -70,14 +70,7 @@
                         <ItemTemplate>
                             <tr class="<%# (this.Repeater1.Items.Count + 1) % 2 == 0 ? "odd":"even"%>">
                                 <td align="center">
-                                    <%if (Language == "zh-cn") %>
-                                    <%{ %>
-                                    <%#Eval("Remark")%><%-- 详情--%>
-                                    <%}
-                                        else
-                                        { %>
-                                    <%#Eval("Remarken")%><%-- 详情--%>
-                                    <%} %>
+                                    <%#Eval("Remark")%><%-- 详情--%>  
                                 </td>
                                 <td align="center">
                                     <%#AccountType(Eval("InAmount").ToString())%>
@@ -86,7 +79,7 @@
                                     <%#GoldType(Eval("JournalType").ToString())%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("InAmount").ToString() == "0.00" ? Eval("OutAmount") : Eval("InAmount")%>
+                                     <%#AccountType(Eval("InAmount").ToString()) == "支出" ? Eval("OutAmount") : Eval("InAmount")%>
                                 </td>
                                 <td align="center">
                                     <%#Eval("BalanceAmount")%>

@@ -54,12 +54,12 @@
                         </th>
                         <th>商品名称
                         </th>
-                        <th>一级分类
+                        <%--<th>一级分类
                         </th>
                         <th>二级分类
                         </th>
                         <th>三级分类
-                        </th>
+                        </th>--%>
                         <th>市场价
                         </th>
                         <th class="style1">状态
@@ -76,7 +76,7 @@
                                 <td align="center">
                                     <span title=' <%#Eval("GoodsName")%>'><%#Eval("GoodsName").ToString().Length>6?Eval("GoodsName").ToString().Substring(0,6)+"..":Eval("GoodsName") %></span>
                                 </td>
-                                <td align="center">
+                                <%--<td align="center">
                                     <%#Eval("OneName")%>
                                 </td>
                                 <td align="center">
@@ -84,7 +84,7 @@
                                 </td>
                                 <td align="center">
                                     <%#Eval("SypeName") %>
-                                </td>
+                                </td>--%>
                                 <td align="center">
                                     <%#Eval("Price")%>
                                 </td>

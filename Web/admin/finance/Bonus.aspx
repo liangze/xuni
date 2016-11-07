@@ -21,22 +21,18 @@
             <div class="dataTable">
                 <table width="99%" border="0" cellspacing="0" cellpadding="0" class="t1">
                     <tr>
-                        <th>报单奖累计
+                        <th>代理中心奖累计 <%--1.代理中心奖, 2.推荐奖，3.静态月分红奖，4.对碰奖)--%>
                         </th>
                         <th>推荐奖累计
                         </th>
-                        <th>日分红奖累计
+                        
+                        <th>静态月分红奖累计
                         </th>
-                        <th>管理奖累计
-                        </th>
-                        <th>购物奖累计
+                        <th>对碰奖累计
                         </th>
                         <th>奖金累计
                         </th>
-                        <th>流通币累计
-                        </th>
-                        <th>MDD钻币累计
-                        </th>
+                        
                         <th>平台费用累计
                         </th>
                     </tr>
@@ -53,17 +49,9 @@
                         <td align="center">
                             <%=GetBonus(0, 4)%>
                         </td>
-                        <td align="center">
-                            <%=GetBonus(0, 5)%>
-                        </td>
+                        
                         <td align="center">
                             <%=GetBonusAllTotal(0, "Amount")%>
-                        </td>
-                        <td align="center">
-                            <%=GetBonusAllTotal(0, "sf")%>
-                        </td>
-                        <td align="center">
-                            <%=GetBonusAllTotal(0, "Revenue")%>
                         </td>
                         <td align="center">
                             <%=GetBonusAllTotal(0, "Bonus005")%>
@@ -86,16 +74,15 @@
             <div class="dataTable">
                 <table width="99%" border="0" cellspacing="0" cellpadding="0" class="t1">
                     <tr>
-                        <th>报单奖
+                        <th>代理中心奖    <%--1.代理中心奖, 2.推荐奖，3.静态月分红奖，4.对碰奖)--%>
                         </th>
                         <th>推荐奖
                         </th>
-                        <th>日分红奖
+                        <th>静态月分红奖
                         </th>
-                        <th>管理奖
+                        <th>对碰奖
                         </th>
-                        <th>购物奖
-                        </th>
+                       
                         <th>实发
                         </th>
                         <th>结算日期
@@ -107,20 +94,18 @@
                         <ItemTemplate>
                             <tr>
                                 <td align="center">
-                                    <%#Eval("Entryprize")%><%--1.报单奖--%>
+                                    <%#Eval("Entryprize")%><%--1.代理中心奖--%><%--1.代理中心奖, 2.推荐奖，3.静态月分红奖，4.对碰奖)--%>
                                 </td>
                                 <td align="center">
                                     <%#Eval("Recommended")%><%--2.推荐奖--%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("Shareout")%><%--3.日分红奖--%>
+                                    <%#Eval("Shareout")%><%--3.静态月分红奖--%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("ManagementAward")%><%--4.管理奖--%>
+                                    <%#Eval("ManagementAward")%><%--4.对碰奖--%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("ShoppingAward")%><%--5.购物奖--%>
-                                </td>
+                                
                                 <td align="center">
                                     <%#Eval("sf")%><%--实发--%>
                                 </td>

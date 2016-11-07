@@ -21,6 +21,8 @@ using Library;
 using System.Text.RegularExpressions;
 using Web.MallInterface;
 using System.Data;
+using System.Net;
+using System.IO;
 
 namespace Web
 {
@@ -309,8 +311,8 @@ namespace Web
                 m_user.LevelID = int.Parse(DropDownList2.SelectedValue);
                 m_user.RecommendID = ModelRecommend.UserID;//推荐人ID
                 m_user.RecommendCode = ModelRecommend.UserCode;//推荐人编号
-                m_user.RecommendPath = ModelParent.RecommendPath; //路径
-                m_user.RecommendGenera = Convert.ToInt32(ModelParent.RecommendGenera + 1);//（推荐代数）第几代
+                m_user.RecommendPath = ModelRecommend.RecommendPath; //路径
+                m_user.RecommendGenera = Convert.ToInt32(ModelRecommend.RecommendGenera + 1);//（推荐代数）第几代
 
                 m_user.ParentID = ModelParent.UserID;//父节点ID
                 m_user.ParentCode = ModelParent.UserCode;//父节点編號
@@ -339,9 +341,8 @@ namespace Web
                 m_user.StockAccount = 0;//云积分
                 m_user.StockMoney = 0;//公积金
                 m_user.GLmoney = 0;//复投积分
-                m_user.ShopAccount = 0;//奖金币
-
                 decimal dRegMoney = decimal.Parse(txtRegMoney.Value);
+                m_user.ShopAccount = dRegMoney;//奖金币 
                 m_user.RegMoney = dRegMoney;
                 m_user.RegTime = DateTime.Now;//注册時間
                 m_user.OpenTime = DateTime.Now;
@@ -444,255 +445,30 @@ namespace Web
 
                         if (userBLL.Update(model))
                         {
-                            //#region 纯奖
-                            //string sql1 = "select * from tb_user  where UserCode='" + m_user.UserCode + "'";
-                            //string pWhere1 = " ";
-                            //DataSet ds1 = u.getData_Chaxun(sql1, pWhere1);
-                            //DataTable dt1 = ds1.Tables[0];
-                            //string guanxi = dt1.Rows[0]["RecommendPath"].ToString();//关系图
+                            //短信
+                            string DX = System.Configuration.ConfigurationManager.AppSettings["DX"];
+                            string DXMM = System.Configuration.ConfigurationManager.AppSettings["DXMM"];
+                            string uid = DX.ToString();
+                            string auth = DXMM.ToString();
+                            string mobile = model.PhoneNum;
+                            string url = "http://sms.10690221.com:9011/hy/?uid=" + uid + "&auth=" + auth + "&mobile=" + mobile + "&msg=";
 
-                            //string[] ID = guanxi.Split('-');
-                            //foreach (var id in ID)
-                            //{
-                            //    string sql2 = " select * from tb_user  where Userid='" + id + "';";
-                            //    sql2 += " select * from tb_user  where RecommendID='" + id + "' order by Userid;";
-                            //    string pWhere2 = " ";
-                            //    DataSet ds2 = u.getData_Chaxun(sql2, pWhere2);
-                            //    DataTable dt2 = ds2.Tables[0];
-                            //    DataTable dt3 = ds2.Tables[1];
-                            //    int ceng = int.Parse(dt2.Rows[0]["chunjiang"].ToString());
-                            //    int zuo = int.Parse(dt2.Rows[0]["zuo"].ToString());
-                            //    int you = int.Parse(dt2.Rows[0]["you"].ToString());
+                            //http://ip:port/hy/?uid=1234&auth=faea920f7412b5da7be0cf42b8c93759&mobile=13612345678&msg=hello&expid=0
 
-                            //    if (id == dt1.Rows[0]["UserID"].ToString())
-                            //    {
-                            //        continue;//是自己就跳回去
-                            //    }
-
-                            //    //第二层特殊处理
-                            //    #region 第二层特殊处理
-                            //    if (int.Parse(dt1.Rows[0]["RecommendGenera"].ToString()) - int.Parse(dt2.Rows[0]["RecommendGenera"].ToString()) == 1)
-                            //    {
-                            //        if (dt3.Rows.Count == 2)//够两个人就碰了
-                            //        {
-                            //            lgk.BLL.tb_bonus bonus = new lgk.BLL.tb_bonus();
-                            //            lgk.Model.tb_bonus m_bonus = new lgk.Model.tb_bonus();
-                            //            lgk.Model.tb_journal m_journal = new lgk.Model.tb_journal();
-                            //            m_bonus.UserID = int.Parse(id);//纯奖
-                            //            m_bonus.TypeID = 1;
-                            //            m_bonus.Amount = 5000;
-                            //            m_bonus.Revenue = 0;
-                            //            m_bonus.sf = 5000;
-                            //            m_bonus.AddTime = DateTime.Now;
-                            //            m_bonus.IsSettled = 1;
-                            //            m_bonus.Source = "获得线下第 1 层纯奖";
-                            //            m_bonus.SourceEn = "Get the line of the first 1 layers of pure Award";
-                            //            m_bonus.SttleTime = DateTime.Now;
-                            //            m_bonus.FromUserID = model.UserID;
-                            //            m_bonus.Bonus001 = int.Parse(getLoginID().ToString());
-                            //            m_bonus.Bonus002 = 0;
-                            //            m_bonus.Bonus003 = "";
-                            //            m_bonus.Bonus004 = "";
-                            //            m_bonus.Bonus005 = 0;
-                            //            m_bonus.Bonus006 = 0;
-                            //            m_bonus.Bonus007 = DateTime.Now;
-                            //            m_bonus.Batch = 0;
-
-                            //            bonus.Add(m_bonus);   //纯奖
-
-                            //            lgk.Model.tb_user userInfo_cj = new lgk.Model.tb_user();
-                            //            //dRegMoney = mysumcardd1; //注册金额
-                            //            userInfo_cj = userBLL.GetModel(int.Parse(id));//报单中心实体
-                            //            userInfo_cj.AllBonusAccount = userInfo_cj.AllBonusAccount + m_bonus.Amount;
-                            //            if (userBLL.Update(userInfo_cj))
-                            //            {
-
-                            //                m_journal.UserID = int.Parse(id);//纯奖
-                            //                m_journal.Remark = "获得线下第 1 层纯奖";
-                            //                m_journal.RemarkEn = "Get the line of the first 1 layers of pure Award";
-                            //                m_journal.InAmount = m_bonus.Amount;
-                            //                m_journal.OutAmount = 0;
-                            //                m_journal.BalanceAmount = userInfo_cj.AllBonusAccount;
-                            //                m_journal.JournalDate = DateTime.Now;
-                            //                m_journal.JournalType = 3;
-                            //                m_journal.Journal01 = int.Parse(model.UserID.ToString());
-                            //                journalBLL.Add(m_journal);
-                            //                SqlConnection conn = new SqlConnection(sconn);
-                            //                conn.Open();
-                            //                string sql = "update tb_user set chunjiang ='" + 1 + "',you='" + (you + 1) + "' where Userid='" + id + "' ;";
-                            //                SqlCommand cmd = new SqlCommand(sql, conn);
-                            //                int reInt = cmd.ExecuteNonQuery();
-                            //                conn.Close();
-                            //            }
-                            //            continue;
-                            //        }
-                            //        if (dt3.Rows.Count == 1)//不够就人头+1
-                            //        {
-                            //            SqlConnection conn = new SqlConnection(sconn);
-                            //            conn.Open();
-                            //            string sql = "update tb_user set  zuo='" + (zuo + 1) + "' where Userid='" + id + "' ;";
-                            //            SqlCommand cmd = new SqlCommand(sql, conn);
-                            //            int reInt = cmd.ExecuteNonQuery();
-                            //            conn.Close();
-                            //            continue;
-                            //        }
-                            //    }
-                            //    #endregion
-                            //    #region 第二层之后先加人数
-                            //    string sql5 = " select * from tb_user  where RecommendPath like '%" + dt3.Rows[0]["UserID"].ToString() + "%' and RecommendGenera='" + dt1.Rows[0]["RecommendGenera"].ToString() + "' and UserID='" + dt1.Rows[0]["UserID"].ToString() + "' ;";
-                            //    sql5 += " select * from tb_user  where RecommendPath  like '%" + dt3.Rows[1]["UserID"].ToString() + "%' and RecommendGenera='" + dt1.Rows[0]["RecommendGenera"].ToString() + "' and UserID='" + dt1.Rows[0]["UserID"].ToString() + "' ;";
-                            //    string pWhere5 = " ";
-                            //    DataSet ds5 = u.getData_Chaxun(sql5, pWhere5);
-                            //    DataTable dt5 = ds5.Tables[0];
-                            //    DataTable dt55 = ds5.Tables[1];
-
-                            //    if (dt5.Rows.Count > 0)
-                            //    {
-                            //        SqlConnection conn = new SqlConnection(sconn);
-                            //        conn.Open();
-                            //        string sql = "update tb_user set  zuo='" + (zuo + 1) + "' where Userid='" + id + "' ;";
-                            //        SqlCommand cmd = new SqlCommand(sql, conn);
-                            //        int reInt = cmd.ExecuteNonQuery();
-                            //        conn.Close();
-                            //    }
-                            //    if (dt55.Rows.Count > 0)
-                            //    {
-                            //        SqlConnection conn = new SqlConnection(sconn);
-                            //        conn.Open();
-                            //        string sql = "update tb_user set  you='" + (you + 1) + "' where Userid='" + id + "' ;";
-                            //        SqlCommand cmd = new SqlCommand(sql, conn);
-                            //        int reInt = cmd.ExecuteNonQuery();
-                            //        conn.Close();
-                            //    }
-
-                            //    #endregion
-
-                            //    if (int.Parse(dt2.Rows[0]["RecommendGenera"].ToString()) - int.Parse(dt1.Rows[0]["RecommendGenera"].ToString()) != ceng)
-                            //    {
-
-                            //        string sql4 = " select * from tb_user  where RecommendPath like '%" + dt3.Rows[0]["UserID"].ToString() + "%' and RecommendGenera='" + dt1.Rows[0]["RecommendGenera"].ToString() + "' ;";
-                            //        sql4 += " select * from tb_user  where RecommendPath  like '%" + dt3.Rows[1]["UserID"].ToString() + "%' and RecommendGenera='" + dt1.Rows[0]["RecommendGenera"].ToString() + "' ;";
-                            //        string pWhere4 = " ";
-                            //        DataSet ds4 = u.getData_Chaxun(sql4, pWhere4);
-                            //        DataTable dt4 = ds4.Tables[0];
-                            //        DataTable dt44 = ds4.Tables[1];
-                            //        #region 左边有人，右边刚来
-                            //        if (dt4.Rows.Count > 0 && dt44.Rows.Count == 1 && dt44.Rows[0]["UserID"].ToString() == dt1.Rows[0]["UserID"].ToString())
-                            //        {
-                            //            lgk.BLL.tb_bonus bonus = new lgk.BLL.tb_bonus();
-                            //            lgk.Model.tb_bonus m_bonus = new lgk.Model.tb_bonus();
-                            //            lgk.Model.tb_journal m_journal = new lgk.Model.tb_journal();
-                            //            m_bonus.UserID = int.Parse(id);//纯奖
-                            //            m_bonus.TypeID = 1;
-                            //            m_bonus.Amount = 5000;
-                            //            m_bonus.Revenue = 0;
-                            //            m_bonus.sf = 5000;
-                            //            m_bonus.AddTime = DateTime.Now;
-                            //            m_bonus.IsSettled = 1;
-                            //            m_bonus.Source = "获得线下第 " + (int.Parse(ceng.ToString()) + 1) + " 层纯奖";
-                            //            m_bonus.SourceEn = "Get the line of the first " + int.Parse(ceng.ToString()) + 1 + " layers of pure Award";
-                            //            m_bonus.SttleTime = DateTime.Now;
-                            //            m_bonus.FromUserID = model.UserID;
-                            //            m_bonus.Bonus001 = int.Parse(getLoginID().ToString());
-                            //            m_bonus.Bonus002 = 0;
-                            //            m_bonus.Bonus003 = "";
-                            //            m_bonus.Bonus004 = "";
-                            //            m_bonus.Bonus005 = 0;
-                            //            m_bonus.Bonus006 = 0;
-                            //            m_bonus.Bonus007 = DateTime.Now;
-                            //            m_bonus.Batch = 0;
-
-                            //            bonus.Add(m_bonus);   //纯奖
-
-                            //            lgk.Model.tb_user userInfo_cj = new lgk.Model.tb_user();
-                            //            //dRegMoney = mysumcardd1; //注册金额
-                            //            userInfo_cj = userBLL.GetModel(int.Parse(id));//报单中心实体
-                            //            userInfo_cj.AllBonusAccount = userInfo_cj.AllBonusAccount + m_bonus.Amount;
-                            //            if (userBLL.Update(userInfo_cj))
-                            //            {
-
-                            //                m_journal.UserID = int.Parse(id);//纯奖
-                            //                m_journal.Remark = "获得线下第 " + (int.Parse(ceng.ToString()) + 1) + " 层纯奖";
-                            //                m_journal.RemarkEn = "Get the line of the first " + (int.Parse(ceng.ToString()) + 1) + " layers of pure Award";
-                            //                m_journal.InAmount = m_bonus.Amount;
-                            //                m_journal.OutAmount = 0;
-                            //                m_journal.BalanceAmount = userInfo_cj.AllBonusAccount;
-                            //                m_journal.JournalDate = DateTime.Now;
-                            //                m_journal.JournalType = 3;
-                            //                m_journal.Journal01 = int.Parse(model.UserID.ToString());
-                            //                journalBLL.Add(m_journal);
-
-                            //                SqlConnection conn = new SqlConnection(sconn);
-                            //                conn.Open();
-                            //                string sql = "update tb_user set  chunjiang='" + (int.Parse(ceng.ToString()) + 1) + "' where Userid='" + id + "' ;";
-                            //                SqlCommand cmd = new SqlCommand(sql, conn);
-                            //                int reInt = cmd.ExecuteNonQuery();
-                            //                conn.Close();
-                            //            }
-                            //            continue;
-                            //        }
-                            //        #endregion
-                            //        #region 左边刚来，右边有人
-                            //        if (dt44.Rows.Count > 0 && dt4.Rows.Count == 1 && dt4.Rows[0]["UserID"].ToString() == dt1.Rows[0]["UserID"].ToString())
-                            //        {
-                            //            lgk.BLL.tb_bonus bonus = new lgk.BLL.tb_bonus();
-                            //            lgk.Model.tb_bonus m_bonus = new lgk.Model.tb_bonus();
-                            //            lgk.Model.tb_journal m_journal = new lgk.Model.tb_journal();
-                            //            m_bonus.UserID = int.Parse(id);//纯奖
-                            //            m_bonus.TypeID = 1;
-                            //            m_bonus.Amount = 5000;
-                            //            m_bonus.Revenue = 0;
-                            //            m_bonus.sf = 5000;
-                            //            m_bonus.AddTime = DateTime.Now;
-                            //            m_bonus.IsSettled = 1;
-                            //            m_bonus.Source = "获得线下第 " + (int.Parse(ceng.ToString()) + 1) + " 层纯奖";
-                            //            m_bonus.SourceEn = "Get the line of the first " + (int.Parse(ceng.ToString()) + 1) + " layers of pure Award";
-                            //            m_bonus.SttleTime = DateTime.Now;
-                            //            m_bonus.FromUserID = model.UserID;
-                            //            m_bonus.Bonus001 = int.Parse(getLoginID().ToString());
-                            //            m_bonus.Bonus002 = 0;
-                            //            m_bonus.Bonus003 = "";
-                            //            m_bonus.Bonus004 = "";
-                            //            m_bonus.Bonus005 = 0;
-                            //            m_bonus.Bonus006 = 0;
-                            //            m_bonus.Bonus007 = DateTime.Now;
-                            //            m_bonus.Batch = 0;
-
-                            //            bonus.Add(m_bonus);   //纯奖
-
-                            //            lgk.Model.tb_user userInfo_cj = new lgk.Model.tb_user();
-                            //            //dRegMoney = mysumcardd1; //注册金额
-                            //            userInfo_cj = userBLL.GetModel(int.Parse(id));//报单中心实体
-                            //            userInfo_cj.AllBonusAccount = userInfo_cj.AllBonusAccount + m_bonus.Amount;
-                            //            if (userBLL.Update(userInfo_cj))
-                            //            {
-
-                            //                m_journal.UserID = int.Parse(id);//纯奖
-                            //                m_journal.Remark = "获得线下第 " + (int.Parse(ceng.ToString()) + 1) + " 层纯奖";
-                            //                m_journal.RemarkEn = "Get the line of the first " + (int.Parse(ceng.ToString()) + 1) + " layers of pure Award";
-                            //                m_journal.InAmount = m_bonus.Amount;
-                            //                m_journal.OutAmount = 0;
-                            //                m_journal.BalanceAmount = userInfo_cj.AllBonusAccount;
-                            //                m_journal.JournalDate = DateTime.Now;
-                            //                m_journal.JournalType = 3;
-                            //                m_journal.Journal01 = int.Parse(model.UserID.ToString());
-                            //                journalBLL.Add(m_journal);
-
-                            //                SqlConnection conn = new SqlConnection(sconn);
-                            //                conn.Open();
-                            //                string sql = "update tb_user set  chunjiang='" + (int.Parse(ceng.ToString()) + 1) + "' where Userid='" + id + "' ;";
-                            //                SqlCommand cmd = new SqlCommand(sql, conn);
-                            //                int reInt = cmd.ExecuteNonQuery();
-                            //                conn.Close();
-                            //            }
-                            //            continue;
-                            //        }
-                            //        #endregion  
-                            //    }
-                            //}
-                            #endregion
-
-                    
+                            string content = "尊敬的云商会员您好！您的会员账号 "+model.UserCode+" 已经注册成功，祝您生活愉快！。";
+                            string neirong = content;
+                            System.Text.Encoding encode = System.Text.Encoding.GetEncoding("GBK");
+                            content = HttpUtility.UrlEncode(content, encode);
+                            url += content;
+                            url += "&expid=0"; 
+                            string jieguo= GetHtmlFromUrl(url);
+                            string [] jiequ= jieguo.Split(','); 
+                            lgk.BLL.tb_message m = new lgk.BLL.tb_message();
+                            lgk.Model.tb_message M_user = new lgk.Model.tb_message();
+                            M_user.Flag = jiequ[0];
+                            M_user.Mcontent = neirong;
+                            M_user.MobileNum = model.PhoneNum; 
+                            m.Add(M_user);
                             //写流水
                             Response.Redirect("RegSuccess2.aspx?usercode=" + m_user.UserCode + "&asd=" + asd);
                             return;
@@ -710,8 +486,39 @@ namespace Web
                 }
             }
         }
+        /// <summary>
+        /// 短信
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public string GetHtmlFromUrl(string url)
+        {
+            string a = null;
+      
+            if (url == null || url.Trim().ToString() == "")
+            {
+                return a;
+            }
+            string targeturl = url.Trim().ToString();
+            try
+            {
+                HttpWebRequest hr = (HttpWebRequest)WebRequest.Create(targeturl);
+                hr.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+                hr.Method = "Get";
+                hr.Timeout = 1000;
+                WebResponse hs = hr.GetResponse();
+                Stream sr = hs.GetResponseStream();
+                StreamReader ser = new StreamReader(sr, System.Text.Encoding.Default);
+                 a = ser.ReadToEnd();
+                Response.Write("<br/>resp=" + ser.ReadToEnd());
 
- 
+            }
+            catch (Exception ex)
+            {
+                a = ex.Message;
+            }
+            return a;
+        }
 
         #region 注册验证
         /// <summary>
@@ -1201,4 +1008,4 @@ namespace Web
         }
     }
 }
- 
+#endregion

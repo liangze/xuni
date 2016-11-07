@@ -58,11 +58,11 @@
                     <ul>
                         <%--<li><a href="Cash/TradingFloor.aspx" target="mainfrom">交易大厅</a></li>--%>
                         <li><a href="Stock/StockBuyList.aspx" target="mainfrom">交易大厅</a></li>
-                        <li><a href="Cash/CashOrderList.aspx" target="mainfrom">我的订单</a></li>
+                       <%-- <li><a href="Cash/CashOrderList.aspx" target="mainfrom">我的订单</a></li>--%>
                         <%--<li><a href="Stock/StockBuyList.aspx" target="mainfrom">走势图</a></li>--%>
-                        <li><a href="Stock/BuyList.aspx" target="mainfrom">已购列表</a></li>
-                        <li><a href="Stock/SellList.aspx" target="mainfrom">已卖列表</a></li>
-                        <li><a href="Stock/StockorderList.aspx" target="mainfrom">我的订单</a></li>
+                        <li><a href="Cash/CashbuyList.aspx" target="mainfrom">已购列表</a></li>
+                        <li><a href="Cash/CashsellList.aspx" target="mainfrom">已卖列表</a></li>
+                       <%-- <li><a href="Stock/StockorderList.aspx" target="mainfrom">我的订单</a></li>--%>
                     </ul>
                 </li>
                 <li class="submenu"><a href="JavaScript:;"><span><i class="icon icon-shopping-cart"></i>购物管理</span></a>

@@ -36,25 +36,17 @@
                         <th align="center">
                             <%=GetLanguage("BonusAmount")%><!--奖金金额-->
                         </th>
-                        <th align="center">
-                            <%=GetLanguage("CirculatingGold")%><!--流通金币-->
-                        </th>
-                        <th align="center">
-                            <%=GetLanguage("MDDDrill")%><!--MDD钻币-->
-                        </th>
+                        
                         <th align="center" style="display: none;">
                             <%=GetLanguage("Platform")%><!--平台费用-->
                         </th>
-                        <th align="center">
-                            <%=GetLanguage("Shoppingcurrency")%><!--购物币-->
-                        </th>
-                        <th align="center">
+                        <th>
                             <%=GetLanguage("SettlementDate")%><!--结算日期-->
                         </th>
                         <th align="center">
                             <%=GetLanguage("State")%><!--状态-->
                         </th>
-                        <th align="center">
+                        <th align="center" style="display: none;">
                             <%=GetLanguage("Batch")%><!--批次-->
                         </th>
                         <th align="center">
@@ -81,22 +73,12 @@
                                     <%#Eval("amount")%>
                                     <%--金额--%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("sf")%>
-                                    <%--金额--%>
-                                </td>
-                                <td align="center">
-                                    <%#Eval("Revenue")%>
-                                    <%--金额--%>
-                                </td>
+                                
                                 <td align="center" style="display: none;">
                                     <%#Eval("Bonus005")%>
                                     <%--金额--%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("Bonus006")%>
-                                    <%--金额--%>
-                                </td>
+                                
                                 <td align="center">
                                     <%#Eval("SttleTime")%><%--结算日期--%>
                                 </td>
@@ -112,7 +94,7 @@
                                     <%} %>
 
                                 </td>
-                                <th align="center">
+                                <th align="center" style="display: none;">
                                     <%#Eval("Batch")%><!--批次-->
                                 </th>
                                 <td align="center">

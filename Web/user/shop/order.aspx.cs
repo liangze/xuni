@@ -112,7 +112,7 @@ namespace Web.user.shop
                     user.BonusAccount += orderInfo.PVTotal;
                     userBLL.Update(user);
 
-                    add_journal(orderInfo.UserID, orderInfo.PVTotal, 0, user.BonusAccount, 1, 0, "删除订单", "Delete orders", orderInfo.UserID);
+                    add_journal(orderInfo.UserID, orderInfo.PVTotal, 0, user.BonusAccount, 1,"删除订单", "Delete orders", orderInfo.UserID);
 
                     DeleteByCode(orderInfo.OrderCode);
                     orderBLL.Delete(orderInfo.OrderID);

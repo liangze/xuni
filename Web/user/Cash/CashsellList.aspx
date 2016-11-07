@@ -19,7 +19,7 @@
             <div class="filter">
                 <div class="row-fluid">
                     <p class="span3">
-                        <label><%=GetLanguage("ReleaseTime")%><!--发布时间-->：</label>
+                        <label>卖出时间：</label>
                         <span class="field">
                             <%if (GetLanguage("LoginLable") == "zh-cn")
                               {%>
@@ -54,25 +54,17 @@
                     <tr>
                         <th align="center"><%=GetLanguage("Seller")%><%--卖家--%>
                         </th>
-                        <th align="center"><%=GetLanguage("SellerRatings")%><%--卖家评分--%>
+                        <th style="text-align: center;"><%=GetLanguage("CommodityPrices")%><%--商品单价--%>
                         </th>
-                        <th align="center"><%=GetLanguage("CommodityInfo")%><%--商品信息--%>
+                        <th style="text-align: center;">卖出数量
                         </th>
-                        <th align="center"><%=GetLanguage("Quantity")%><%--商品数量--%>
+                        <th style="text-align: center;"><%=GetLanguage("TotalAmount")%> <%--总额--%>
                         </th>
-                        <th align="center"><%=GetLanguage("CommodityPrices")%><%--商品单价--%>
+
+                        <th style="text-align: center;">交易时间
                         </th>
-                        <th align="center"><%=GetLanguage("GoodsAmount")%><%--商品金额--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("QuantityPayment")%><%--付款数量--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("QuantityArrival")%><%--到账数量--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("ReleaseTime")%><%--发布时间--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("State")%><%--状态--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("Operation")%><%--操作--%>
+
+                        <th style="text-align: center;">状态
                         </th>
                     </tr>
                 </thead>
@@ -81,45 +73,26 @@
                         <ItemTemplate>
                             <tr class="<%# (this.Repeater1.Items.Count + 1) % 2 == 0 ? "odd":"even"%>">
                                 <td align="center">
-                                    <%# Eval("UserCode")%>
+                                  <%#userBLL.GetUserCode(long.Parse(Eval("UserID").ToString()))%>
                                 </td>
-                                <td align="center">
-                                    <asp:Literal ID="ltSValues" runat="server"></asp:Literal>
-                                </td>
-                                <td align="center">
-                                    <a href="CashbuyDetail.aspx?CashsellID=<%#Eval("CashsellID")%>">
-                                        <%=GetLanguage("DetailsView")%></a>
-                                </td>
-                                <td align="center">
-                                    <%#Convert.ToDecimal(Eval("Number")) + Convert.ToDecimal(Eval("Charge"))%>
-                                </td>
-                                <td align="center">
+                                <td style="text-align: center;">
                                     <%#Eval("Price")%>
                                 </td>
-                                <td align="center">
+
+                                <td style="text-align: center;">
+                                    <%#Eval("SaleNum") %>
+                                </td>
+
+                                <td style="text-align: center;">
                                     <%#Eval("Amount")%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("Number")%>
+
+                                <td style="text-align: center;">
+                                    <%#Eval("SellDate") %>
                                 </td>
-                                <td align="center">
-                                    <%#Convert.ToDecimal(Eval("Number")) + (Convert.ToDecimal(Eval("Number")) * getParamAmount("Gold3") / 100)%>
-                                </td>
-                                <td align="center">
-                                    <%#Eval("SellDate")%>
-                                </td>
-                                <td><asp:Literal ID="ltStatus" runat="server"></asp:Literal></td>
-                                <td align="center">
-                                    <%if (currentCulture != "en-us")
-                                      {%>
-                                    <asp:LinkButton ID="lbtnCancel" class="btn" runat="server" CommandArgument='<%# Eval("CashsellID") %>'
-                                        CommandName="cancel" OnClientClick="javascript:return confirm('确认取消吗？')"><%=GetLanguage("Cancel")%><!--取消--></asp:LinkButton>
-                                    <%}
-                                      else
-                                      {%>
-                                    <asp:LinkButton ID="lbtnCancelEn" runat="server" class="btn" CommandArgument='<%# Eval("CashsellID") %>'
-                                        CommandName="cancel" OnClientClick="javascript:return confirm('Confirm to cancel?')"><%=GetLanguage("Cancel")%><!--取消--></asp:LinkButton>
-                                    <%} %>
+                                <td style="text-align: center;">
+                                    <%#Convert.ToInt32(Eval("IsSell")) == 1 ? "已完成" :"交易取消"%>
+                                   
                                 </td>
                             </tr>
                         </ItemTemplate>

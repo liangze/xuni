@@ -84,9 +84,9 @@ namespace Web.admin.Stock
             Response.Redirect("StockIssue.aspx");
         }
 
-        protected void lbtnSplit_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("SplitStock.aspx");
-        }
+        //protected void lbtnSplit_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("SplitStock.aspx");
+        //}
     }
 }

@@ -1,0 +1,30 @@
+.boright{
+	border-right:1px solid #CCCCCC ;
+}
+
+.mainBox p {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ccc;
+}
+.mainBox p a {
+    color: #46B8DA;
+}
+.main-right{
+	font-size:16px ;
+}
+.tes{
+	 text-align: right;height:20px; line-height:20px;
+}
+.tta table tr td{
+	border: none !important; 
+}
+.btop{
+	width: 100%; overflow: hidden;
+}
+.btop ul li{ 
+	width: 50%; text-align: center;height: 40px; 
+	line-height: 40px;font-size: 18px;}
+.ewm{
+	width: 100%; height: auto;
+}

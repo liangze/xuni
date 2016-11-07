@@ -122,7 +122,7 @@
                         <div style="height: 20px;"></div>
                         <table border="0" cellpadding="0" width="100%" cellspacing="0">
                             <tr runat="server" id="trType">
-                                <td align="right">一级分类：
+                                <%--<td align="right">一级分类：
                                 </td>
                                 <td>
                                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -137,7 +137,7 @@
                                             </asp:DropDownList>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
-                                </td>
+                                </td>--%>
                             </tr>
                             <tr>
                                 <td align="right" width="100px">商品编号：
@@ -154,14 +154,14 @@
                                 </td>
                             </tr>
                             <tr runat="server" id="trAddRecommend">
-                                <td align="right">加入推荐：
-                                </td>
-                                <td>
+                                <%--<td align="right">加入推荐：
+                                </td>--%>
+                                <%--<td>--%>
                                     <%--<asp:RadioButtonList ID="txtType" RepeatLayout="Flow" runat="server" RepeatDirection="Horizontal">
                                     <asp:ListItem Value="1">新品上市</asp:ListItem>
                                     <asp:ListItem Value="2">热销产品</asp:ListItem>
                                 </asp:RadioButtonList>--%>
-                                    <asp:CheckBoxList ID="checkList" runat="server" OnSelectedIndexChanged="Unnamed1_SelectedIndexChanged" RepeatDirection="Horizontal">
+                                  <%--  <asp:CheckBoxList ID="checkList" runat="server" OnSelectedIndexChanged="Unnamed1_SelectedIndexChanged" RepeatDirection="Horizontal">
                                         <asp:ListItem Value="1">新品上市</asp:ListItem>
                                         <asp:ListItem Value="2">折扣区</asp:ListItem>
                                         <asp:ListItem Value="3">每周推荐</asp:ListItem>
@@ -169,7 +169,7 @@
                                         <asp:ListItem Value="5">食品饮料</asp:ListItem>
                                         <asp:ListItem Value="6">个人护理</asp:ListItem>
                                     </asp:CheckBoxList>
-                                </td>
+                                </td>--%>
                             </tr>
                             <tr>
                                 <td align="right">库存数量：
@@ -188,22 +188,22 @@
                                 </td>
                             </tr>
 
-                            <tr>
+                            <%--<tr>
                                 <td align="right">本站价：</td>
                                 <td>
                                     <asp:TextBox ID="txtShopPrice" runat="server" min="0" class="easyui-numberbox input_select1"
                                         precision="1" Width="200px"></asp:TextBox><span>元</span>
                                 </td>
-                            </tr>
-                            <tr runat="server" id="trCity">
+                            </tr>--%>
+                            <%--<tr runat="server" id="trCity">
                                 <td align="right">所在城市：
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtCity" runat="server" min="0" class="input_select1"
                                         precision="1" Width="200px"></asp:TextBox><span></span>
                                 </td>
-                            </tr>
-                            <tr>
+                            </tr>--%>
+                            <%--<tr>
                                 <td align="right">商品图片：
                                 </td>
                                 <td>
@@ -211,7 +211,7 @@
                                 <asp:Button ID="btnUpload" runat="server" class="easyui-linkbutton" OnClick="btnUpload_Click" Text="上 传"></asp:Button><asp:Label ID="Label1" runat="server"
                                     Text="" ForeColor="Red">(上传商品图片长宽比例为565*374)</asp:Label>
                                 </td>
-                            </tr>
+                            </tr>--%>
                             <tr>
                                 <td style="text-align: right; vertical-align: top;">商品详情：
                                 </td>

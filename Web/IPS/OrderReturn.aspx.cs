@@ -275,7 +275,7 @@ public partial class OrderReturn : System.Web.UI.Page
                 }
                 new lgk.BLL.tb_user().Update(LoginUser);
 
-                ac.add_journal(getLoginID(), 0, jifen, Convert.ToDecimal(LoginUser.Emoney), 5, 0, "购物提交订单", "Submit shopping order", getLoginID());
+                ac.add_journal(getLoginID(), 0, jifen, Convert.ToDecimal(LoginUser.Emoney), 5, "购物提交订单", "Submit shopping order", getLoginID());
 
                 Session["NN1405501_" + getLoginID() + "_ShoppingCar"] = null;
 

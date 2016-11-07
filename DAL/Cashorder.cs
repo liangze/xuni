@@ -13,7 +13,8 @@ namespace lgk.DAL
     public partial class Cashorder
     {
         public Cashorder()
-		{ }
+        { }
+
         #region Method
 
         public bool Exists(long OrderID)
@@ -21,7 +22,7 @@ namespace lgk.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from Cashorder where OrderID = @OrderID");
             SqlParameter[] parameters = {
-					new SqlParameter("@OrderID", SqlDbType.BigInt,8)};
+                    new SqlParameter("@OrderID", SqlDbType.BigInt,8)};
             parameters[0].Value = OrderID;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
@@ -60,12 +61,13 @@ namespace lgk.DAL
             parameters[4].Value = model.OrderCode;
             parameters[5].Value = model.OrderDate;
             parameters[6].Value = model.BStatus;
-            parameters[7].Value = DBNull.Value;
+            parameters[7].Value = model.PayDate;//DBNull.Value;
             parameters[8].Value = model.BRemark;
             parameters[9].Value = model.SStatus;
-            parameters[10].Value = DBNull.Value;
+            parameters[10].Value = model.SendDate; //DBNull.Value;
             parameters[11].Value = model.SRemark;
             parameters[12].Value = model.Status;
+
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -100,7 +102,7 @@ namespace lgk.DAL
             strSql.Append(" Status = @Status");
             strSql.Append(" where OrderID=@OrderID");
             SqlParameter[] parameters = {
-			            new SqlParameter("@OrderID", SqlDbType.BigInt,8),
+                        new SqlParameter("@OrderID", SqlDbType.BigInt,8),
                         new SqlParameter("@CashbuyID", SqlDbType.BigInt,8),
                         new SqlParameter("@CashsellID", SqlDbType.BigInt,8),
                         new SqlParameter("@BUserID", SqlDbType.BigInt,8),
@@ -139,7 +141,7 @@ namespace lgk.DAL
                 return false;
             }
         }
-        
+
         /// <summary>
         /// 根据给定的用户ID和订单编号，修改订单状态（1付款，2确认已付款，3发货）。
         /// </summary>
@@ -281,7 +283,7 @@ namespace lgk.DAL
             strSql.Append("delete from Cashorder ");
             strSql.Append(" where OrderID=@OrderID");
             SqlParameter[] parameters = {
-					new SqlParameter("@OrderID", SqlDbType.BigInt,8)};
+                    new SqlParameter("@OrderID", SqlDbType.BigInt,8)};
             parameters[0].Value = OrderID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -324,7 +326,7 @@ namespace lgk.DAL
             strSql.Append(" from Cashorder ");
             strSql.Append(" where OrderID=@OrderID");
             SqlParameter[] parameters = {
-					new SqlParameter("@OrderID", SqlDbType.BigInt,8)};
+                    new SqlParameter("@OrderID", SqlDbType.BigInt,8)};
             parameters[0].Value = OrderID;
 
             lgk.Model.Cashorder model = new lgk.Model.Cashorder();
@@ -439,5 +441,149 @@ namespace lgk.DAL
         }
 
         #endregion
+
+        #region 走势图
+        public DataSet GetMimuteChart(int iMinute)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" declare @a int = " + iMinute + ";");
+            strSql.Append(" SELECT cast(floor(cast(BuyDate as float)*24*60/@a)*@a/60/24 as smalldatetime) as showtime,Max(Price) maxprice,MIN(Price) minprice");
+            strSql.Append(" from Cashbuy ");
+            strSql.Append(" group by cast(floor(cast(BuyDate as float)*24*60/@a)*@a/60/24 as smalldatetime) ");
+
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        public DataSet GetHourChart(int iHour)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" declare @a int = " + iHour + ";");
+            strSql.Append(" SELECT cast(floor(cast(BuyDate as float)*24/@a)*@a/24 as smalldatetime) as showtime,Max(Price) maxprice,MIN(Price) minprice");
+            strSql.Append(" from Cashbuy ");
+            strSql.Append(" group by cast(floor(cast(BuyDate as float)*24/@a)*@a/24 as smalldatetime) ");
+
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        public DataSet GetDayChart(int iHour)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" declare @a int = " + iHour + ";");
+            strSql.Append(" SELECT cast(floor(cast(b.BuyDate as float)/@a)*@a as smalldatetime) as showtime,Max(b.Price) maxprice,MIN(b.Price) minprice ");
+            strSql.Append(" from Cashorder as o right join Cashbuy as b on o.CashbuyID=b.CashbuyID ");
+            strSql.Append(" group by cast(floor(cast(b.BuyDate as float)/@a)*@a as smalldatetime)  ");
+
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        #region 获取开盘价格
+        /// <summary>
+        /// 获取开盘价格
+        /// </summary>
+        /// <param name="dDtime">时间</param>
+        /// <param name="a">查询的时间段</param>
+        /// <param name="type">1：分钟，2：小时，3：天</param>
+        /// <returns></returns>
+        public decimal GetOpenPrice(string dDtime, int a, int type)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select top 1 b.Price from Cashorder as o right join Cashbuy as b on o.CashbuyID=b.CashbuyID ");
+            if (type == 1)
+            {
+                strSql.Append(" where b.BuyDate between '" + dDtime + "' and dateAdd(minute," + a + ",'" + dDtime + "') order by b.BuyDate asc");
+            }
+            else if (type == 2)
+            {
+                strSql.Append(" where b.BuyDate between '" + dDtime + "' and dateAdd(hour," + a + ",'" + dDtime + "') order by b.BuyDate asc");
+            }
+            else if (type == 3)
+            {
+                strSql.Append(" where b.BuyDate between '" + dDtime + "' and dateAdd(day," + a + ",'" + dDtime + "') order by b.BuyDate asc");
+            }
+            object obj = DbHelperSQL.GetSingle(strSql.ToString());
+            if (obj != null)
+            {
+                return Convert.ToDecimal(obj);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        #endregion
+
+        #region 获取收盘价格
+        /// <summary>
+        /// 获取收盘价格
+        /// </summary>
+        /// <param name="dDtime">时间</param>
+        /// <param name="a">查询的时间段</param>
+        /// <param name="type">1：分钟，2：小时，3：天</param>
+        /// <returns></returns>
+        public decimal GetClosePrice(string dDtime, int a, int type)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select top 1 b.Price from Cashorder as o right join Cashbuy as b on o.CashbuyID=b.CashbuyID ");
+            if (type == 1)
+            {
+                strSql.Append(" where b.BuyDate between '" + dDtime + "' and dateAdd(minute," + a + ",'" + dDtime + "') order by b.BuyDate desc");
+            }
+            else if (type == 2)
+            {
+                strSql.Append(" where b.BuyDate between '" + dDtime + "' and dateAdd(hour," + a + ",'" + dDtime + "') order by b.BuyDate desc");
+            }
+            else if (type == 3)
+            {
+                strSql.Append(" where b.BuyDate between '" + dDtime + "' and dateAdd(day," + a + ",'" + dDtime + "') order by b.BuyDate desc");
+            }
+            object obj = DbHelperSQL.GetSingle(strSql.ToString());
+            if (obj != null)
+            {
+                return Convert.ToDecimal(obj);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        #endregion
+
+        #region 获取总数量
+        /// <summary>
+        /// 获取收盘价格
+        /// </summary>
+        /// <param name="dDtime">时间</param>
+        /// <param name="a">查询的时间段</param>
+        /// <param name="type">1：分钟，2：小时，3：天</param>
+        /// <returns></returns>
+        public decimal GetSumAmount(string dDtime, int a, int type)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select IsNull(sum(b.Amount),0) from Cashorder as o right join Cashbuy as b on o.CashbuyID=b.CashbuyID ");
+            if (type == 1)
+            {
+                strSql.Append(" where b.BuyDate between '" + dDtime + "' and dateAdd(minute," + a + ",'" + dDtime + "') ");
+            }
+            else if (type == 2)
+            {
+                strSql.Append(" where b.BuyDate between '" + dDtime + "' and dateAdd(hour," + a + ",'" + dDtime + "') ");
+            }
+            else if (type == 3)
+            {
+                strSql.Append(" where b.BuyDate between '" + dDtime + "' and dateAdd(day," + a + ",'" + dDtime + "') ");
+            }
+            object obj = DbHelperSQL.GetSingle(strSql.ToString());
+            if (obj != null)
+            {
+                return Convert.ToDecimal(obj);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        #endregion 
+        #endregion
+
     }
 }

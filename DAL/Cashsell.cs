@@ -13,7 +13,7 @@ namespace lgk.DAL
     public partial class Cashsell
     {
         public Cashsell()
-		{ }
+        { }
         #region Method
 
         public bool Exists(long CashsellID)
@@ -21,7 +21,7 @@ namespace lgk.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from Cashsell where CashsellID = @CashsellID");
             SqlParameter[] parameters = {
-					new SqlParameter("@CashsellID", SqlDbType.BigInt,8)};
+                    new SqlParameter("@CashsellID", SqlDbType.BigInt,8)};
             parameters[0].Value = CashsellID;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
@@ -99,7 +99,7 @@ namespace lgk.DAL
             strSql.Append(" PurchaseID = @PurchaseID");
             strSql.Append(" where CashsellID=@CashsellID ");
             SqlParameter[] parameters = {
-			            new SqlParameter("@CashsellID", SqlDbType.BigInt,8),
+                        new SqlParameter("@CashsellID", SqlDbType.BigInt,8),
                         new SqlParameter("@Title", SqlDbType.VarChar,60),
                         new SqlParameter("@UserID", SqlDbType.BigInt,8),
                         new SqlParameter("@Amount", SqlDbType.Decimal,9),
@@ -149,7 +149,7 @@ namespace lgk.DAL
             strSql.Append(" IsUndo = @IsUndo");
             strSql.Append(" where CashsellID=@CashsellID ");
             SqlParameter[] parameters = {
-			            new SqlParameter("@CashsellID", SqlDbType.BigInt,8),
+                        new SqlParameter("@CashsellID", SqlDbType.BigInt,8),
                         new SqlParameter("@IsUndo", SqlDbType.Int,4)};
             parameters[0].Value = iCashsellID;
             parameters[1].Value = iIsUndo;
@@ -174,7 +174,7 @@ namespace lgk.DAL
             strSql.Append("delete from Cashsell");
             strSql.Append(" where CashsellID=@CashsellID");
             SqlParameter[] parameters = {
-					new SqlParameter("@CashsellID", SqlDbType.BigInt,8)};
+                    new SqlParameter("@CashsellID", SqlDbType.BigInt,8)};
             parameters[0].Value = CashsellID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -216,7 +216,7 @@ namespace lgk.DAL
             strSql.Append("select * from Cashsell");
             strSql.Append(" where CashsellID=@CashsellID");
             SqlParameter[] parameters = {
-					new SqlParameter("@CashsellID", SqlDbType.BigInt,8)};
+                    new SqlParameter("@CashsellID", SqlDbType.BigInt,8)};
             parameters[0].Value = CashsellID;
 
             lgk.Model.Cashsell model = new lgk.Model.Cashsell();
@@ -274,7 +274,7 @@ namespace lgk.DAL
                 {
                     model.PurchaseID = long.Parse(ds.Tables[0].Rows[0]["PurchaseID"].ToString());
                 }
-                
+
                 return model;
             }
             else
@@ -372,7 +372,7 @@ namespace lgk.DAL
             strSql.Append(" AND IsUndo=@IsUndo");
             strSql.Append(" AND DATEDIFF (DAY , SellDate, GETDATE()) = 0");
             SqlParameter[] parameters = {
-					new SqlParameter("@UserID", SqlDbType.BigInt,8),
+                    new SqlParameter("@UserID", SqlDbType.BigInt,8),
                     new SqlParameter("@IsUndo", SqlDbType.Int,4)};
             parameters[0].Value = iUserID;
             parameters[1].Value = 0;
@@ -385,6 +385,28 @@ namespace lgk.DAL
             }
 
             return dEMoney;
+        }
+        /// <summary>
+        /// 今日已挂卖次数
+        /// </summary>
+        public int Getalready(string strWhere)
+        {
+            int dCount = 0;
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT COUNT(1) FROM Cashsell");
+            if (!string.IsNullOrEmpty(strWhere.Trim()))
+            {
+                strSql.Append(" WHERE "+ strWhere);
+            }
+           
+            object obj = DbHelperSQL.GetSingle(strSql.ToString());
+
+            if (obj != null)
+            {
+                dCount = int.Parse(obj.ToString());
+            }
+
+            return dCount;
         }
 
         /// <summary>

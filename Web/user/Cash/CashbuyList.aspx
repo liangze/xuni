@@ -19,14 +19,14 @@
             <div class="filter">
                 <div class="row-fluid">
                     <p class="span3">
-                        <label><%=GetLanguage("ReleaseTime")%><!--发布时间-->：</label>
+                        <label>购买时间：</label>
                         <span class="field">
                             <%if (GetLanguage("LoginLable") == "zh-cn")
-                              {%>
+                                {%>
                             <asp:TextBox ID="txtStart" tip="发布时间" runat="server" onfocus="WdatePicker()"></asp:TextBox>
                             <%}
-                              else
-                              {%>
+                                else
+                                {%>
                             <asp:TextBox ID="txtStartEn" tip="Release time" runat="server" onfocus="WdatePicker({lang:'en'})"></asp:TextBox>
                             <%} %>
                         </span>
@@ -35,11 +35,11 @@
                         <label><%=GetLanguage("To")%></label>
                         <span class="field">
                             <%if (GetLanguage("LoginLable") == "zh-cn")
-                              {%>
+                                {%>
                             <asp:TextBox ID="txtEnd" tip="" runat="server" onfocus="WdatePicker()"></asp:TextBox>
                             <%}
-                              else
-                              {%>
+                                else
+                                {%>
                             <asp:TextBox ID="txtEndEn" tip="Release time" runat="server" onfocus="WdatePicker({lang:'en'})"></asp:TextBox>
                             <%} %>
                         </span>
@@ -54,25 +54,17 @@
                     <tr>
                         <th align="center"><%=GetLanguage("Buyers")%><%--买家--%>
                         </th>
-                        <th align="center"><%=GetLanguage("Seller")%><%--卖家--%>
+                        <th style="text-align: center;"><%=GetLanguage("CommodityPrices")%><%--商品单价--%>
                         </th>
-                        <th align="center"><%=GetLanguage("SellerRatings")%><%--卖家评分--%>
+                        <th style="text-align: center;"><%=GetLanguage("PurchaseQuantity")%> <%--购买数量--%>
                         </th>
-                        <th align="center"><%=GetLanguage("CommodityInfo")%><%--商品信息--%>
+                        <th style="text-align: center;"><%=GetLanguage("TotalAmount")%> <%--总额--%>
                         </th>
-                        <th align="center"><%=GetLanguage("SellCount")%><%--卖出数量--%>
+
+                        <th style="text-align: center;"><%=GetLanguage("PurchaseTime")%><%--购买时间--%>
                         </th>
-                        <th align="center"><%=GetLanguage("CommodityPrices")%><%--商品单价--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("AmountOfPurchase")%><%--购买金额--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("QuantityPayment")%><%--付款数量--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("QuantityArrival")%><%--到账数量--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("PurchaseTime")%><%--购买时间--%>
-                        </th>
-                        <th align="center"><%=GetLanguage("State")%><%--状态--%>
+
+                        <th style="text-align: center;"><%=GetLanguage("State")%><%--状态--%>
                         </th>
                     </tr>
                 </thead>
@@ -81,38 +73,26 @@
                         <ItemTemplate>
                             <tr class="<%# (this.Repeater1.Items.Count + 1) % 2 == 0 ? "odd":"even"%>">
                                 <td align="center">
-                                    <asp:Literal ID="ltBUserCode" runat="server"></asp:Literal>
+                                    <%#userBLL.GetUserCode(long.Parse(Eval("UserID").ToString()))%>
                                 </td>
-                                <td align="center">
-                                    <asp:Literal ID="ltSUserCode" runat="server"></asp:Literal>
-                                </td>
-                                <td align="center">
-                                    <asp:Literal ID="ltSValues" runat="server"></asp:Literal>
-                                </td>
-                                <td align="center">
-                                    <a href="CashbuyDetail.aspx?CashsellID=<%#Eval("CashsellID")%>">
-                                        <%=GetLanguage("DetailsView")%></a>
-                                </td>
-                                <td align="center">
-                                    <%#Convert.ToDecimal(Eval("Number")) + (Convert.ToDecimal(Eval("Number")) * getParamAmount("Gold2") / 100)%>
-                                </td>
-                                <td align="center">
+                                <td style="text-align: center;">
                                     <%#Eval("Price")%>
                                 </td>
-                                <td align="center">
+
+                                <td style="text-align: center;">
+                                    <%#Eval("BuyNum") %>
+                                </td>
+
+                                <td style="text-align: center;">
                                     <%#Eval("Amount")%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("Number")%>
+
+                                <td style="text-align: center;">
+                                    <%#Eval("BuyDate") %>
                                 </td>
-                                <td align="center">
-                                    <%#Convert.ToDecimal(Eval("Number")) + (Convert.ToDecimal(Eval("Number")) * getParamAmount("Gold3") / 100)%>
+                                <td style="text-align: center;">
+                                    <%#Convert.ToInt32(Eval("IsBuy")) == 1 ? "已完成" :"交易取消"%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("BuyDate")%>
-                                </td>
-                                <td>
-                                    <asp:Literal ID="ltIsBuy" runat="server"></asp:Literal></td>
                             </tr>
                         </ItemTemplate>
                     </asp:Repeater>

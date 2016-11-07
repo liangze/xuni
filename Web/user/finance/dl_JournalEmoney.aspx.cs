@@ -37,29 +37,20 @@ namespace Web.user.finance
         /// </summary>
         public void BindCurrency()
         {
-            //if (currentCulture == "zh-cn")
-            //{
+            
             //journalType: 1、注册积分，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
-                dropCurrency.Items.Add(new ListItem("-请选择-", "0"));
-                dropCurrency.Items.Add(new ListItem("注册积分", "1"));
-                dropCurrency.Items.Add(new ListItem("电子积分", "3"));
-                dropCurrency.Items.Add(new ListItem("云商积分", "4"));
-                dropCurrency.Items.Add(new ListItem("感恩积分", "5"));
-                dropCurrency.Items.Add(new ListItem("购物积分", "6"));
-                dropCurrency.Items.Add(new ListItem("消费积分", "7"));
-                dropCurrency.Items.Add(new ListItem("爱心基金", "8"));
-                dropCurrency.Items.Add(new ListItem("云购积分", "8"));
+            dropCurrency.Items.Add(new ListItem("-请选择-", "0"));
+            dropCurrency.Items.Add(new ListItem("注册积分", "1"));
+            dropCurrency.Items.Add(new ListItem("奖金积分", "2"));
+            dropCurrency.Items.Add(new ListItem("电子积分", "3"));
+            dropCurrency.Items.Add(new ListItem("云商积分", "4"));
+            dropCurrency.Items.Add(new ListItem("感恩积分", "5"));
+            dropCurrency.Items.Add(new ListItem("购物积分", "6"));
+            dropCurrency.Items.Add(new ListItem("消费积分", "7"));
+            dropCurrency.Items.Add(new ListItem("爱心基金", "8"));
+            dropCurrency.Items.Add(new ListItem("云购积分", "8"));
 
-          //  }
-            //else
-            //{
-            //    dropCurrency.Items.Add(new ListItem("-Please choose-", "0"));
-            //    dropCurrency.Items.Add(new ListItem("Currency", "1"));
-            //    dropCurrency.Items.Add(new ListItem("MDD Drill", "2"));
-            //    dropCurrency.Items.Add(new ListItem("Shopping currency", "4"));
-            //    dropCurrency.Items.Add(new ListItem("Registered currency", "5"));
-            //}
-            //dropCurrency.Items.Add(new ListItem("平台费用", "3"));
+            
         }
 
         private void BindData()

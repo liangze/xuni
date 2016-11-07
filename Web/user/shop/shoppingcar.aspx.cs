@@ -412,7 +412,7 @@ namespace Web.user.shop
                 new lgk.BLL.tb_user().Update(LoginUser);
                 if (this.rdoMoney.Checked)
                 {
-                    add_journal(getLoginID(), 0, jifen, Convert.ToDecimal(LoginUser.Emoney), 2, 0, "购物提交订单", "Submit shopping order", getLoginID());
+                    add_journal(getLoginID(), 0, jifen, Convert.ToDecimal(LoginUser.Emoney), 2,"购物提交订单", "Submit shopping order", getLoginID());
                 }
                 Session["A128076_" + getLoginID() + "_ShoppingCar"] = null;
                 string url = Request.Url.ToString().ToLower().Replace("http://www", "vip");
@@ -573,7 +573,7 @@ namespace Web.user.shop
                 }
                 new lgk.BLL.tb_user().Update(LoginUser);
 
-                add_journal(getLoginID(), 0, jifen, Convert.ToDecimal(LoginUser.StockAccount), 3, 0, "购物提交订单", "Submit shopping order", getLoginID());
+                add_journal(getLoginID(), 0, jifen, Convert.ToDecimal(LoginUser.StockAccount), 3, "购物提交订单", "Submit shopping order", getLoginID());
 
                 bool hasproduct = HasProduct(car);
                 if (hasproduct == false)

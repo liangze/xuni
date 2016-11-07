@@ -273,28 +273,26 @@ namespace lgk.DAL
         /// <param name="remark">业务摘要</param>
         /// <param name="fromID">来自哪个会员</param>
         /// <returns></returns>
-        public int add_journal(long iUserID, decimal inamount, decimal outamount, decimal banlance, int jourtype, int type, string remark, string remarken, long iFromUserID)
+        public int add_journal(long iUserID, decimal inamount, decimal outamount, decimal BalanceAmount, int jourtype, string remark, string remarken, long iFromUserID)
         {
             int result;
             string prop = "proc_AddJournal";
             SqlParameter[] para = { new SqlParameter("@UserID", SqlDbType.Int),
                                    new SqlParameter("@InAmount", SqlDbType.Decimal),
                                    new SqlParameter("@OutAmount", SqlDbType.Decimal),
-                                   new SqlParameter("@balance", SqlDbType.Decimal),
-                                   new SqlParameter("@jourType", SqlDbType.Int),
-                                   new SqlParameter("@bonusType", SqlDbType.Int),
+                                   new SqlParameter("@BalanceAmount", SqlDbType.Decimal),
+                                   new SqlParameter("@JournalType", SqlDbType.Int),
                                    new SqlParameter("@Remark", SqlDbType.VarChar,200),
                                    new SqlParameter("@RemarkEn", SqlDbType.VarChar,200),
                                    new SqlParameter("@FromUserID", SqlDbType.Int)};
             para[0].Value = iUserID;
             para[1].Value = inamount;
             para[2].Value = outamount;
-            para[3].Value = banlance;
+            para[3].Value = BalanceAmount;
             para[4].Value = jourtype;
-            para[5].Value = type;
-            para[6].Value = remark;
-            para[7].Value = remarken;
-            para[8].Value = iFromUserID;
+            para[5].Value = remark;
+            para[6].Value = remarken;
+            para[7].Value = iFromUserID;
             DbHelperSQL.RunProcedure(prop, para, out result);
             return result;
         }
@@ -1175,14 +1173,17 @@ namespace lgk.DAL
         /// <returns></returns>
         public DataSet GetGoodsList(string strWhere)
         {
+           // (SELECT TypeName FROM tb_produceType WHERE ID = p.TypeID) AS OneName,
+  
+           //       (SELECT TypeName FROM tb_produceType WHERE ID = p.GoodsType) AS TypeName,
+    
+           //(SELECT TypeName FROM tb_produceType WHERE ID = p.Goods006) AS SypeName
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"select p.ID,p.GoodsCode,p.GoodsName,p.Price,p.RealityPrice,
                 p.Standard,p.IsHave,p.TypeID,p.GoodsType,p.Pic1,p.Pic2,p.Pic3,p.Pic4,p.Pic5,
                 p.Summary,p.Remarks,p.AddTime,p.Goods001,p.Goods002,p.Goods003,p.Goods004,p.Goods005,p.ShopPrice,
-                p.Goods006,p.Goods007,p.Goods008,p.StateType,p.City,
-                (SELECT TypeName FROM tb_produceType WHERE ID=p.TypeID) AS OneName,
-                (SELECT TypeName FROM tb_produceType WHERE ID=p.GoodsType) AS TypeName,
-       (SELECT TypeName FROM tb_produceType WHERE ID=p.Goods006) AS SypeName from tb_goods p JOIN tb_produceType t ON  t.ParentID=p.TypeID AND t.ID = p.GoodsType AND p.Goods003 <> '1'");
+                p.Goods006,p.Goods007,p.Goods008,p.StateType,p.City
+                 from tb_goods p");//p JOIN tb_produceType t ON  t.ParentID=p.TypeID AND t.ID = p.GoodsType AND p.Goods003 <> '1'
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

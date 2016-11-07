@@ -111,19 +111,15 @@
                                 <td align="center">
                                     <%#Eval("OrderTotal")%>
                                 </td>
-
-                                <td align="center">
-                                    <%#Eval("order7")%>
-                                </td>
-
-                                <td align="center">
-                                    <%#Eval("UserAddr")%>
-                                </td>
-
                                 <td align="center">
                                     <%#Eval("order6")%>
                                 </td>
-
+                                <td align="center">
+                                    <%#Eval("UserAddr")%>
+                                </td>
+                                <td align="center">
+                                    <%#Eval("Order5")%>
+                                </td>
                                 <td align="center">
                                     <asp:TextBox ID="txtGongsi" runat="server" Text='<%#Eval("order3")%>'></asp:TextBox>
                                     <asp:Literal ID="Literal1" runat="server"></asp:Literal>
@@ -134,7 +130,7 @@
                                 </td>
 
                                 <td align="center">
-                                    <%#Eval("OrderType").ToString()=="0"?"购物币":Eval("OrderType").ToString() =="1"?"购物币":Eval("OrderType").ToString() =="2"?"购物币":"购物币"%>
+                                    <%#Eval("OrderType").ToString()=="0"?"消费积分":Eval("OrderType").ToString() =="1"?"消费积分":Eval("OrderType").ToString() =="2"?"消费积分":"消费积分"%>
                                 </td>
                                 <td align="center">
                                     <%#GetState(Eval("IsSend").ToString(),Eval("IsDel").ToString())%>

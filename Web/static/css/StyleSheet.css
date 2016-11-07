@@ -1,0 +1,248 @@
+﻿
+
+/*==================(以下是公用样式)=====================*/
+body
+{
+    font-family: 微软雅黑,Arial,Helvetica,sans-serif;
+	font-size:14px;
+	line-height:20px;
+	overflow:auto; color:#FFE597;
+	/*background: none repeat scroll 0 0 #010D09;*/
+}
+.bodybg 
+{
+     margin:0 auto; background:#010D09; margin:0 auto;
+}
+
+.login_top{ background:url(../images/login.jpg) no-repeat left top; height:37px; line-height:37px;}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6,p, pre, form, fieldset, input, textarea, blockquote {
+	padding:0;
+	margin:0;
+}
+.body{ min-height:510px;}
+
+li {list-style-type:none;}
+
+table,td,tr,th{font-size:14px; padding:0px; margin:0px;}
+
+
+img {border:none; vertical-align: middle;}
+ol, ul {	list-style:none;}
+
+h1, h2, h3, h4, h5, h6 {font-size:12px;	font-weight:normal;}
+
+address, caption, cite, code, dfn, em, th, var {font-weight:normal;	font-style:normal;}
+.center{ margin:0 auto;}
+
+.wTable 
+    {
+	 background-color :#fff; margin-top:0px; padding-top:0px; margin-top:8px;
+	 border-top-width: 0px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-right-style:solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #000;
+	border-right-color: #000;
+	border-bottom-color: #000;
+	border-left-color: #000;
+    }
+.neiTable 
+    {
+	 background-color :#fff; margin-top:0px; padding-top:0px; margin-bottom:20px;
+	 border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style:solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #840400;
+	border-right-color: #840400;
+	border-bottom-color: #840400;
+	border-left-color: #840400;
+    }
+
+/*========= 链接样式 字体样式	--link font--===========*/
+
+/*============color 字体颜色 ==========*/
+
+
+
+/*============登录页面nav 导航样式 ==============*/  
+.nav_log{width:100%; height:30px; background-color:#68933e; text-align:center; background: url(images/nav_1.jpg) repeat-x;}
+.menu_log {float:left; width:750px;}
+
+.menu_log ul {padding:0; margin:0;list-style-type: none; }
+.menu_log ul li {float:left;position:relative;width:125px;  height:30px; text-align:center; font-size:14px; line-height:30px;}
+
+.menu_log ul li a, .menu ul li a:visited {display:block; width:90px;height:30px;  padding:0px; color:#fff;}
+.menu_log ul li ul {display: none;}
+.menu_log ul li:hover a {  height:30px;}
+.lia_log { background: url(images/mSeparator.gif) no-repeat right; }
+/*.menu_log ul li a:hover{ color: #fff; text-decoration: none; background: url(images/mItemHBack.gif);}*/
+.menu_log li ul li{ background:none; height:32px; line-height:32px; color:#FFF; font-size:12px; font-weight:normal;}
+
+.menu_log ul li:hover ul {display:block; position:absolute; top:30px; color:#FFF; left:0; }
+
+.menu_log ul li:hover ul li a {display:block; background: url(images/sub_nav_bg.jpg) no-repeat;height:32px;color:#fff; line-height:32px;
+}
+
+.menu_log ul li:hover ul li a:hover {background: url(images/sub_nav_hover.jpg) no-repeat; height:32px; color:#FFF; line-height:32px;}
+/*左边导航样式*/
+.baicu {
+	height:47px;width:164px;
+}
+.baicus {
+background: url(images/ggdi.gif) repeat-x left top; height:23px; line-height:23px;
+}
+.BAICU-1{background: url(images/xXt.jpg);height:58px;width:164px; margin-top:-19px;}
+#main_left_main {    background: none repeat scroll 0 0 #012218;
+    border-bottom: medium none;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 188px;}
+#main_left_main h2{
+    color: #18BA89;
+    font-size: 18px;
+    height: 39px;
+    line-height: 39px;
+    overflow: hidden;}
+#main_left_main dt {    border-top: 1px solid #012D20;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+     font-size:14px;
+    }
+#main_left_main dt a{color: #FFE597;
+    display: block;
+    padding-left:16px;
+    height: 30px;
+    line-height: 30px;
+}
+#main_left_main dt a:hover
+{
+ background:#012D20;
+}
+	
+
+#main_left_main .btn_quit{    background: url("images/btn_quit.png") no-repeat;
+    display: block;
+    height: 38px;
+    width:171px;
+    margin: 20px auto;
+    overflow: hidden;
+    text-indent: -999em;}
+
+#main_left_main ul{line-height:32px; padding-bottom:2px;}
+#main_left_main li {height:25px; line-height:25px;  overflow:hidden;}
+
+#main_left_main li a{    color: #009163;
+    display: block;
+    height: 38px;
+    padding-left: 20px;}
+#main_left_main li a:hover{ background:#006133;}
+    
+.left_main_0{float:left;background: url(images/bj_18.jpg);width:8px;height:27px;}
+.left_main_c{float:left; text-align:center;width:148px;background: url(images/bj_19.jpg);height:27px; line-height:27px; color:White; font-size:14px; font-weight:bold;}
+.left_main_t{float:right;background: url(images/bj_20.jpg);width:8px;height:27px;}
+/*.left_main_E{float:left;background: url(images/main_left_.jpg) repeat-x left top;  line-height:47px;height:47px;color:#000000;width:164px;font-weight:bold;}
+
+==============list列表--===============*/
+	.list{height:28px;line-height:28px; padding:0px 12px;font-size:12px;background:url(images/pic_jt.gif) no-repeat 3px  center;}
+	.list_bg{ background:#012218;}
+	.list_bg td{ border-bottom:#000 1px solid;}
+	
+	
+
+
+/*===========login 登录===============
+.login{ width:1002px; margin:0 auto;}
+.login_bg{ background:url(images/login_bg.jpg) repeat-x left top; background-color:#089EFD;}
+
+.input{ width:170px; height:20px; line-height:20px;}
+.inputCode{ width:70px; height:20px; line-height:20px;}
+
+.login_01{ height:230px;overflow:hidden;}
+.login_02 td{ height:28px; line-height:26px; color:#000; font-size:14px;}
+.login_03{ border-bottom:2px solid #000; width:380px; font-size:24px; font-weight:bold; line-height:30px;}
+.login_btn{ width:96px; height:30px; line-height:30px; text-align:center; background:url(images/buttom.jpg) no-repeat left bottom; border:none; margin-top:5px;}
+.login_i1{ height:53px; width:400px;  background:url(images/login_i1.jpg) no-repeat left top;}
+.login_i2{ height:20px; width:150px; background:url(images/login_i2.jpg) no-repeat left top;
+}*/
+/*===========login 登录===============
+.login{ background:url(images/ww.jpg) no-repeat center top}
+.login_bg{ background:#490011;}
+.login_left{ width:510px; height:260px; margin:0 auto;}
+.login_logo{ width:400px; margin:0 auto;background:url(images/logo1.jpg) no-repeat left bottom}
+.login_logo_zt { font-size:40px; font-family:"黑体"; line-height:40px; text-align:right; color:#AF620A; float:right; padding-right:20px;}
+.Botton{background:url(Images/BotonBg.jpg) repeat-x; color:#624300; font-size:20px;width:108px; height:57px; padding:0 12px; border:0; font-family:"黑体"}
+.input{ width:170px; height:20px; line-height:20px;}
+.inputCode{ width:70px; height:20px; line-height:20px;}
+
+.login_01{ height:70px;overflow:hidden; width:100%; }
+.login_02 td{ line-height:22px; color:#000; font-size:14px;
+}
+.login_03{ border-bottom:2px solid #000; width:380px; font-size:24px; font-weight:bold; line-height:30px;}
+.login_btn{ width:96px; height:30px; line-height:30px; text-align:center; background:url(images/buttom.jpg) no-repeat left bottom; border:none; margin-top:5px;}
+.foot_bg{ width:100%; margin:0 auto; height:108px;}
+
+*/
+
+
+/*===========login 登录==============width:1600px;=*/
+.login{  height:800px;margin:0 auto;background:url(../images/login_bg_1024.2.png) no-repeat scroll center top;background-color:#81c68f}
+.login_bg{ background:url(../images/login_bg.jpg) repeat-x left top; background-color:#089EFD;}
+.userBox 
+{
+	background:url("../images/d1k.png") no-repeat;
+    background: url("../images/dlk.png") no-repeat scroll center  0 rgba(0, 0, 0, 0)!important;
+    height: 344px;
+    width: 844px;
+    margin-top:250px;
+	margin-left:auto;
+    margin-right:auto;
+}
+.userBox ul {
+    padding: 54px 0 0 375px;
+}
+.userBox ul li {
+    clear: both;
+    height: 28px;
+    line-height: 28px;
+    margin-bottom:3px;
+    padding-left: 85px;
+}
+.userBox input {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #ccc;
+    color: #4E0911;
+    float: left;
+    font-size: 16px;
+    line-height: 28px;
+    margin-right: 15px;
+    width: 160px;
+}
+.userBox .btn  
+{
+	background: none;
+	border-style: none;
+    border-color: inherit;
+    border-width: medium;
+    background: ;
+    cursor: pointer;
+    opacity: 0;
+    overflow: hidden;
+    text-indent: 999em;
+    }
+.userBox .tip
+{
+ color:#F22; text-align:right; margin-right:180px;
+	}
+    

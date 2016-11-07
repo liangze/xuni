@@ -28,7 +28,7 @@ namespace Web.user.Cash
         /// </summary>
         private void BindData()
         {
-            bind_repeater(cashbuyBLL.GetInnerList(GetWhere()), Repeater1, "BuyDate desc", tr1, AspNetPager1);
+            bind_repeater(cashbuyBLL.GetList(GetWhere()), Repeater1, "BuyDate desc", tr1, AspNetPager1);
         }
 
         /// <summary>
@@ -76,48 +76,48 @@ namespace Web.user.Cash
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
-            {
-                long iUserID = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "UserID"));
-                long iSUserID = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "SUserID"));
-                int iIsBuy = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "IsBuy"));
+            //if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
+            //{
+            //    long iUserID = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "UserID"));
+            //    long iSUserID = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "SUserID"));
+            //    int iIsBuy = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "IsBuy"));
 
-                Literal ltBUserCode = (Literal)e.Item.FindControl("ltBUserCode");//买家
-                Literal ltSUserCode = (Literal)e.Item.FindControl("ltSUserCode");//卖家
-                Literal ltSValues = (Literal)e.Item.FindControl("ltSValues");//卖家评分
-                Literal ltIsBuy = (Literal)e.Item.FindControl("ltIsBuy");//状态
+            //    Literal ltBUserCode = (Literal)e.Item.FindControl("ltBUserCode");//买家
+            //    Literal ltSUserCode = (Literal)e.Item.FindControl("ltSUserCode");//卖家
+            //    Literal ltSValues = (Literal)e.Item.FindControl("ltSValues");//卖家评分
+            //    Literal ltIsBuy = (Literal)e.Item.FindControl("ltIsBuy");//状态
 
-                ltBUserCode.Text = userBLL.GetUserCode(iUserID);
-                ltSUserCode.Text = userBLL.GetUserCode(iSUserID);
+            //    ltBUserCode.Text = userBLL.GetUserCode(iUserID);
+            //    ltSUserCode.Text = userBLL.GetUserCode(iSUserID);
 
-                int iValue = cashcreditBLL.GetValues(iUserID, "SValues");
-                if (iValue > 0)
-                {
-                    for (int i = 0; i < iValue; i++)
-                    {
-                        ltSValues.Text += "<img alt='' src='../../images/start.png' />";
-                    }
-                }
+            //    int iValue = cashcreditBLL.GetValues(iUserID, "SValues");
+            //    if (iValue > 0)
+            //    {
+            //        for (int i = 0; i < iValue; i++)
+            //        {
+            //            ltSValues.Text += "<img alt='' src='../../images/start.png' />";
+            //        }
+            //    }
 
-                if (currentCulture == "en-us")
-                {
-                    if (iIsBuy == 0)
-                        ltIsBuy.Text = "Not Paid";
-                    else if (iIsBuy == 1)
-                        ltIsBuy.Text = "Non delivery";
-                    else if (iIsBuy == 2)
-                        ltIsBuy.Text = "Complete";
-                }
-                else
-                {
-                    if (iIsBuy == 0)
-                        ltIsBuy.Text = "未付款";
-                    else if (iIsBuy == 1)
-                        ltIsBuy.Text = "未发货";
-                    else if (iIsBuy == 2)
-                        ltIsBuy.Text = "完成";
-                }
-            }
+            //    if (currentCulture == "en-us")
+            //    {
+            //        if (iIsBuy == 0)
+            //            ltIsBuy.Text = "Not Paid";
+            //        else if (iIsBuy == 1)
+            //            ltIsBuy.Text = "Non delivery";
+            //        else if (iIsBuy == 2)
+            //            ltIsBuy.Text = "Complete";
+            //    }
+            //    else
+            //    {
+            //        if (iIsBuy == 0)
+            //            ltIsBuy.Text = "未付款";
+            //        else if (iIsBuy == 1)
+            //            ltIsBuy.Text = "未发货";
+            //        else if (iIsBuy == 2)
+            //            ltIsBuy.Text = "完成";
+            //    }
+           // }
         }
     }
 }
