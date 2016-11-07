@@ -41,20 +41,20 @@
                         </th>
                         <th align="center">奖金金额
                         </th>
-                        <th align="center">流通金币
+                        <%--<th align="center">流通金币
                         </th>
                         <th align="center">MDD钻币
-                        </th>
+                        </th>--%>
                         <th align="center">平台费用
                         </th>
-                        <th align="center">购物币
-                        </th>
+                        <%--<th align="center">购物币
+                        </th>--%>
                         <th align="center">结算日期
                         </th>
                         <th align="center">发放状态
                         </th>
-                        <th align="center">批次
-                        </th>
+                        <%--<th align="center">批次
+                        </th>--%>
                         <th align="center">详情
                         </th>
                     </tr>
@@ -68,31 +68,22 @@
                                     <%#Eval("amount")%>
                                     <%--金额--%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("sf")%>
-                                    <%--流通金币--%>
-                                </td>
-                                <td align="center">
-                                    <%#Eval("Revenue")%>
-                                    <%--金额--%>
-                                </td>
+                             
+                               
                                 <td align="center">
                                     <%#Eval("Bonus005")%>
-                                    <%--金额--%>
+                                    <%--平台费用--%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("Bonus006")%>
-                                    <%--金额--%>
-                                </td>
+                                
                                 <td align="center">
                                     <%#Eval("SttleTime")%>
                                 </td>
                                 <td align="center">
                                     <%#Convert.ToInt32(Eval("IsSettled")) == 1 ? "已发放" : "未发放"%>
                                 </td>
-                                <td align="center">
+                               <%-- <td align="center">
                                     <%#Eval("Batch")%>
-                                </td>
+                                </td>--%>
                                 <td align="center">
                                     <%#Eval("source")%>
                                 </td>

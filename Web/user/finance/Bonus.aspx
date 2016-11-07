@@ -15,30 +15,23 @@
             <table class="styled" style="font-size: inherit;">
                 <thead>
                     <tr>
-                        <th><%=GetLanguage("EntryCumulative")%>
-                            <!--报单奖累计-->
+                        <th>代理中心奖累计<%--1.代理中心奖, 2.推荐奖，3.静态月分红奖，4.对碰奖--%>
+                            <!--代理中心奖累计-->
                         </th>
-                        <th><%=GetLanguage("RecommendedCumulative")%>
+                        <th>推荐奖累计
                             <!--推荐奖累计-->
                         </th>
-                        <th><%=GetLanguage("ShareOutCumulative")%>
-                            <!--日分红奖累计-->
+                        <th>静态月分红奖累计
+                            <!--静态月分红奖累计-->
                         </th>
-                        <th><%=GetLanguage("ManagementCumulative")%>
-                            <!--管理奖累计-->
+                        <th>对碰奖累计
+                            <!--对碰奖累计-->
                         </th>
-                        <th><%=GetLanguage("ShoppingCumulative")%>
-                            <!--购物奖累计-->
-                        </th>
+                        
                         <th><%=GetLanguage("BonusCumulative")%>
                             <!--奖金累计-->
                         </th>
-                        <th><%=GetLanguage("CurrencyCumulative")%>
-                            <!--流通币累计-->
-                        </th>
-                        <th><%=GetLanguage("MDDCumulative")%>
-                            <!--MDD钻币累计-->
-                        </th>
+                        
                         <th style="display:none;"><%=GetLanguage("PlatformCumulative")%>
                             <!--平台费用累计-->
                         </th>
@@ -58,18 +51,11 @@
                         <td align="center">
                             <%=GetBonus(getLoginID(), 4)%>
                         </td>
-                        <td align="center">
-                            <%=GetBonus(getLoginID(), 5)%>
-                        </td>
+                       
                         <td align="center">
                             <%=GetBonusAllTotal(getLoginID(), "Amount")%>
                         </td>
-                        <td align="center">
-                            <%=GetBonusAllTotal(getLoginID(), "sf")%>
-                        </td>
-                        <td align="center">
-                            <%=GetBonusAllTotal(getLoginID(), "Revenue")%>
-                        </td>
+                        
                         <td align="center" style="display:none;">
                             <%=GetBonusAllTotal(getLoginID(), "Bonus005")%>
                         </td>
@@ -113,24 +99,21 @@
             <table class="styled" style="font-size: inherit;">
                 <thead>
                     <tr>
-                        <th><%=GetLanguage("Entryprize")%>
-                            <!--1.报单奖-->
+                        <th>代理中心奖<%--1.代理中心奖, 2.推荐奖，3.静态月分红奖，4.对碰奖--%>
+                         
                         </th>
                         <th>
-                            <%=GetLanguage("Recommended")%>
-                            <!--2.直推奖-->
+                            推荐奖
+                            <!--2.推荐奖-->
                         </th>
                         <th>
-                            <%=GetLanguage("Shareout")%>
-                            <!--3.日分红奖-->
+                            静态月分红奖
+                            <!--3.静态月分红奖-->
                         </th>
-                        <th><%=GetLanguage("ManagementAward")%>
-                            <!--4.管理奖-->
+                        <th>对碰奖
+                            <!--4.对碰奖-->
                         </th>
-                        <th>
-                            <%=GetLanguage("ShoppingAward")%>
-                            <!--5.购物奖-->
-                        </th>
+                       
                         <th>
                             <%=GetLanguage("RealHair")%>
                             <!--实发-->
@@ -150,20 +133,18 @@
                         <ItemTemplate>
                             <tr class="<%# (this.Repeater1.Items.Count + 1) % 2 == 0 ? "odd":"even"%>">
                                 <td align="center">
-                                    <%#Eval("Entryprize")%><%--1.报单奖--%>
+                                    <%#Eval("Entryprize")%><%--1.代理中心奖--%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("Recommended")%><%--2.直推奖--%>
+                                    <%#Eval("Recommended")%><%--2.推荐奖--%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("Shareout")%><%--3.日分红奖--%>
+                                    <%#Eval("Shareout")%><%--3.静态月分红奖--%>
                                 </td>
                                 <td align="center">
-                                    <%#Eval("ManagementAward")%><%--4.管理奖--%>
+                                    <%#Eval("ManagementAward")%><%--4.对碰奖--%>
                                 </td>
-                                <td align="center">
-                                    <%#Eval("ShoppingAward")%><%--5.购物奖--%>
-                                </td>
+                                
                                 <td align="center">
                                     <%#Eval("sf")%><%--实发--%>
                                 </td>
