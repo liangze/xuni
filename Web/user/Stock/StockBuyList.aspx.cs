@@ -153,21 +153,21 @@ namespace Web.user.Stock
             decimal NewPrice = getParamAmount("Shares3");//当前价格
             decimal talPrice = BuyNumber * NewPrice;//购买需要支付金额
             lgk.Model.tb_user user = userBLL.GetModel(1);//system作为公司账户，获取公司账户信息
-           
-            
+
+
             #region 判断云商积分是否已经售完
             if (issueInfo == null)//发行云商积分已售完
             {
-               
+
                 bonusBLL.ExecProcedure("proc_Split", 0);
-                if(user.StockAccount==0)
+                if (user.StockAccount == 0)
                 {
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('云商积分已售完');location.href='StockBuyList.aspx';", true);//云商积分已售完
                     return;
                 }
 
             }
-            if(issueInfo!=null)
+            if (issueInfo != null)
             {
                 if (issueInfo.SurplusAmount < BuyNumber)
                 {
@@ -233,24 +233,33 @@ namespace Web.user.Stock
             }
             #endregion
             #region 更新发行数量或者公司账户云商积分剩余量
-            if (issueInfo!=null)
+            if (issueInfo != null)
             {
-                if(issueInfo.SurplusAmount> BuyNumber)
+                if (issueInfo.SurplusAmount > BuyNumber)
                 {
                     issueInfo.SurplusAmount = issueInfo.SurplusAmount - BuyNumber;//更新挂售云商积分剩余量
                     stockIssueBLL.Update(issueInfo);
                 }
-                if(issueInfo.SurplusAmount< BuyNumber)
+                if (issueInfo.SurplusAmount < BuyNumber)
                 {
+                   
                     decimal Number = BuyNumber - issueInfo.SurplusAmount;//需要从公司账户购买的数量
                     issueInfo.SurplusAmount = 0;//更新挂售云商积分剩余量,发行数量
                     stockIssueBLL.Update(issueInfo);
-                    UpdateAccount("StockAccount", 1, Number, 0);
+                    #region 购买云商积分,公司账户云商积分减少
+                    lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
+                    systemMoney.MoneyAccount -= Number;//需要从公司账户购买的数量
+                    #endregion
+                   
                 }
             }
-            if(issueInfo==null)
+            if (issueInfo == null)
             {
-                UpdateAccount("StockAccount", 1, BuyNumber, 0);
+                
+                #region 购买云商积分,公司账户云商积分减少
+                lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
+                systemMoney.MoneyAccount -= BuyNumber;//需要从公司账户购买的数量
+                #endregion
             }
             #endregion
             #region 统计交易总量，当达到一定交易流执行涨价
@@ -258,10 +267,10 @@ namespace Web.user.Stock
             decimal shenPrice = getParamAmount("Shares5");//涨幅价格
             decimal jiaoNumber = getParamAmount("Tal") + BuyNumber;//累计交易总量
             UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
-            if (jiaoNumber>= jiaoyiNum)
+            if (jiaoNumber >= jiaoyiNum)
             {
                 bonusBLL.ExecProcedure("proc_Split", shenPrice);
-                UpdateParamVarchar("ParamVarchar","0.00", "Tal");
+                UpdateParamVarchar("ParamVarchar", "0.00", "Tal");
             }
             #endregion
             #region 交易密码
@@ -299,7 +308,7 @@ namespace Web.user.Stock
             userBLL.Update(userInfo);//更新成本价格
             #endregion
             UpdateAccount("StockAccount", userInfo.UserID, BuyNumber, 1);//买家云商积分账户更新
-           
+
 
             //云商积分加入流水线
             lgk.Model.tb_journal joadanInfo = new lgk.Model.tb_journal();
@@ -421,6 +430,13 @@ namespace Web.user.Stock
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('卖出总金额大于你每次可卖最大金额" + keSellAuPrice + ",请更改卖出金额！');location.href='StockBuyList.aspx';", true);//云商积分已售完
                 return;
             }
+            #region system账户可卖出云商积分判断
+            if (CanSellNum < SellNumber)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('可卖出数量不足！');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                return;
+            }
+            #endregion
             #region system账户卖出云商积分
             if (UserID == 1)
             {
@@ -442,6 +458,11 @@ namespace Web.user.Stock
                 cashsellBLL.Add(cashsellinfo);
 
                 UpdateAccount("StockAccount", userInfo.UserID, SellNumber, 0);//买家云商积分账户更新
+
+                #region 卖出云商积分,公司账户云商积分增加
+                lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
+                systemMoney.MoneyAccount += SellNumber;
+                #endregion
                 //云商积分加入流水线
                 string Remark = "卖出云商积分";
                 decimal BalanceAmount = userInfo.StockAccount - SellNumber;//结余账户余额;
@@ -509,12 +530,14 @@ namespace Web.user.Stock
                         }
                         #endregion
 
-                        # region 卖出云商积分,公司账户system云商积分增加
-                        UpdateAccount("StockAccount", 1, SellNumber, 1);//公司云商积分账户更新
-                        string RemaUser = "会员卖出云商积分";
-                        lgk.Model.tb_user useradmin = userBLL.GetModel(UserID);
-                        decimal balanAm = useradmin.StockAccount;//账户结余金额
-                        add_journal(1, SellNumber, 0, balanAm, 4, RemaUser, "", UserID);
+                        # region 卖出云商积分,公司账户云商积分增加
+                        lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
+                        systemMoney.MoneyAccount += SellNumber;
+                        //UpdateAccount("StockAccount", 1, SellNumber, 1);//公司云商积分账户更新
+                        //string RemaUser = "会员卖出云商积分";
+                        //lgk.Model.tb_user useradmin = userBLL.GetModel(UserID);
+                        //decimal balanAm = useradmin.StockAccount;//账户结余金额
+                        //add_journal(1, SellNumber, 0, balanAm, 4, RemaUser, "", UserID);
                         #endregion
                         //加入交易记录                                                           
                         lgk.Model.Cashsell cashsellinfo = new lgk.Model.Cashsell();
@@ -536,7 +559,7 @@ namespace Web.user.Stock
                         decimal chenbePrice = userInfo.User013;//获取会员当前云商积分成本价格
                         decimal stockAcont = userInfo.StockAccount;//获取当前会有云商积分余额
                         decimal talMoney = chenbePrice * stockAcont;//计算卖出前总的成本价格
-                        decimal dangPrice = Math.Round((talMoney- SellPrice) / (stockAcont - SellNumber), 4);//计算卖出后单价成本价格
+                        decimal dangPrice = Math.Round((talMoney - SellPrice) / (stockAcont - SellNumber), 4);//计算卖出后单价成本价格
                         userInfo.User013 = dangPrice;
                         userBLL.Update(userInfo);//更新成本价格
                         #endregion
