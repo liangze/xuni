@@ -1255,6 +1255,16 @@ namespace Library
         public string RechargeType(int type)
         {
             string bi = "";
+            //Emoney = 0;// 注册积分         写流水类型：1
+            //BonusAccount = 0;// 奖金积分 		2
+            //AllBonusAccount = 0;// 电子积分		3
+            //StockAccount = 0;// 云商积分		4
+            //StockMoney = 0;// 感恩积分		5
+            //GLmoney = 0;// 购物积分			6
+            //ShopAccount = 0;// 消费积分		7
+            //User011// 爱心基金	 8
+            //User012// 云购积分	 9
+
             if (type == 1)
             {
                 bi = "流通币";

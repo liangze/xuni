@@ -25,12 +25,25 @@
                     <legend class="legSearch">操作</legend>
                     会员编号：<asp:TextBox ID="txtUserCode" class="input_select" runat="server" tip="输入会员编号"></asp:TextBox>
                     &nbsp;&nbsp;金币类型：<asp:DropDownList ID="dropMoneyType" runat="server">
+                        <%--  Emoney = 0;// 注册积分         写流水类型：1
+                              BonusAccount = 0;// 奖金积分 	 2
+                              AllBonusAccount = 0;// 电子积分	 3
+                              StockAccount = 0;// 云商积分	 4
+                              StockMoney = 0;// 感恩积分	 5
+                              GLmoney = 0;// 购物积分	 6
+                              ShopAccount = 0;// 消费积分	 7
+                              User011// 爱心基金	 8
+                              User012// 云购积分	 9--%>
                         <asp:ListItem Value="0" Text="请选择"></asp:ListItem>
-                        <asp:ListItem Value="1" Text="流通币"></asp:ListItem>
-                        <asp:ListItem Value="2" Text="MDD钻币"></asp:ListItem>
-                        <asp:ListItem Value="3" Text="平台费用"></asp:ListItem>
-                        <asp:ListItem Value="4" Text="购物币"></asp:ListItem>
-                        <asp:ListItem Value="5" Text="注册币"></asp:ListItem>
+                        <asp:ListItem Value="1" Text="注册积分"></asp:ListItem>
+                        <asp:ListItem Value="2" Text="奖金积分"></asp:ListItem>
+                        <asp:ListItem Value="3" Text="电子积分"></asp:ListItem>
+                        <asp:ListItem Value="4" Text="云商积分"></asp:ListItem>
+                        <asp:ListItem Value="5" Text="感恩积分"></asp:ListItem>
+                        <asp:ListItem Value="6" Text="购物积分"></asp:ListItem>
+                        <asp:ListItem Value="7" Text="消费积分"></asp:ListItem>
+                        <asp:ListItem Value="8" Text="爱心基金"></asp:ListItem>
+                        <asp:ListItem Value="9" Text="云购积分"></asp:ListItem>
                     </asp:DropDownList>
                     &nbsp;&nbsp;充值类型：<asp:DropDownList ID="dropRechargeStyle" runat="server">
                         <asp:ListItem Value="0" Text="请选择"></asp:ListItem>

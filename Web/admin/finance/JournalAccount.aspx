@@ -32,15 +32,21 @@
                     </th>
                     <th align="center">会员姓名
                     </th>
-                    <th align="center">流通币账户余额
+                    <th align="center">注册积分账户余额
                     </th>
-                    <th align="center">MDD钻币账户余额
+                    <th align="center">奖金积分账户余额
                     </th>
-                    <th align="center">平台费用
+                     <th align="center">电子积分账户余额 
                     </th>
-                    <th align="center">购物币
+                    <th align="center">云商积分账户余额 
                     </th>
-                    <th align="center">注册币
+                    <th align="center">感恩积分账户余额
+                    </th>
+                    <th align="center">购物积分账户余额 
+                    </th>
+                    <th align="center">消费积分账户余额
+                    </th>
+                    <th align="center">爱心基金账户余额 
                     </th>
                 </tr>
                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
@@ -52,25 +58,37 @@
                             <td align="center">
                                 <%#Eval("TrueName")%>
                             </td>
+                             <td align="center">
+                                <asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%# Eval("UserID") %>'
+                                    CommandName="a_detail"><%#Eval("Emoney")%></asp:LinkButton>
+                            </td>
                             <td align="center">
                                 <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("UserID") %>'
                                     CommandName="b_detail"><%#Eval("BonusAccount")%></asp:LinkButton>
                             </td>
                             <td align="center">
-                                <asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%# Eval("UserID") %>'
-                                    CommandName="e_detail"><%#Eval("Emoney")%></asp:LinkButton>
-                            </td>
-                            <td align="center">
-                                <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%# Eval("UserID") %>'
-                                    CommandName="s_detail"><%#Eval("StockMoney")%></asp:LinkButton>
-                            </td>
-                            <td align="center">
-                                <asp:LinkButton ID="LinkButton4" runat="server" CommandArgument='<%# Eval("UserID") %>'
-                                    CommandName="h_detail"><%#Eval("ShopAccount")%></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton6" runat="server" CommandArgument='<%# Eval("UserID") %>'
+                                    CommandName="c_detail"><%#Eval("AllBonusAccount")%></asp:LinkButton>
                             </td>
                             <td align="center">
                                 <asp:LinkButton ID="LinkButton5" runat="server" CommandArgument='<%# Eval("UserID") %>'
-                                    CommandName="a_detail"><%#Eval("StockAccount")%></asp:LinkButton>
+                                    CommandName="d_detail"><%#Eval("StockAccount")%></asp:LinkButton>
+                            </td>
+                            <td align="center">
+                                <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%# Eval("UserID") %>'
+                                    CommandName="e_detail"><%#Eval("StockMoney")%></asp:LinkButton>
+                            </td>
+                             <td align="center">
+                                <asp:LinkButton ID="LinkButton7" runat="server" CommandArgument='<%# Eval("UserID") %>'
+                                    CommandName="f_detail"><%#Eval("GLmoney")%></asp:LinkButton>
+                            </td>
+                            <td align="center">
+                                <asp:LinkButton ID="LinkButton4" runat="server" CommandArgument='<%# Eval("UserID") %>'
+                                    CommandName="g_detail"><%#Eval("ShopAccount")%></asp:LinkButton>
+                            </td>
+                            <td align="center">
+                                <asp:LinkButton ID="LinkButton8" runat="server" CommandArgument='<%# Eval("UserID") %>'
+                                    CommandName="h_detail"><%#Eval("User011")%></asp:LinkButton>
                             </td>
                         </tr>
                     </ItemTemplate>
