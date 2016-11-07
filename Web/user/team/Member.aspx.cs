@@ -331,6 +331,7 @@ namespace Web.user.team
 
                         userBLL.Update(model_);
                     }
+                    DataSet ds11 = userBLL.GetList_Excel(int.Parse(model_.UserID.ToString()), "proc_Award_Recommended");
                     //报单奖
                     string sql2 = "select * from tb_agent where ID = '" + model_.AgentsID + "';";
                     sql2 += "select * from tb_globeParam where ParamName like 'Agent2'";
@@ -339,7 +340,7 @@ namespace Web.user.team
                     DataTable dt6 = ds2.Tables[1];
 
                     string userid_DL = dt5.Rows[0]["UserID"].ToString();
-                    lgk.Model.tb_user DL = userBLL.GetModel(long.Parse(userid_DL));//选择的人
+                    lgk.Model.tb_user DL = userBLL.GetModel(long.Parse(userid_DL));//报单中心
 
                     lgk.Model.tb_journal m_journal_DL = new lgk.Model.tb_journal();
                     m_journal_DL.UserID = DL.UserID;
@@ -352,6 +353,34 @@ namespace Web.user.team
                     m_journal_DL.JournalType = 2;
                     m_journal_DL.Journal01 = DL.UserID;
                     journalBLL.Add(m_journal_DL);
+                    //记录奖金表
+                    lgk.BLL.tb_bonus bonus = new lgk.BLL.tb_bonus();
+                    lgk.Model.tb_bonus m_bonus_bd = new lgk.Model.tb_bonus();
+
+                    m_bonus_bd.UserID = long.Parse(userid_DL);
+                    m_bonus_bd.TypeID = 1;
+                    m_bonus_bd.Amount = model_.User018 * (decimal.Parse(dt6.Rows[0]["ParamVarchar"].ToString()) / 100);
+                    m_bonus_bd.Revenue = 0;
+                    m_bonus_bd.sf = model_.User018 * (decimal.Parse(dt6.Rows[0]["ParamVarchar"].ToString()) / 100);
+                    m_bonus_bd.AddTime = DateTime.Now;
+                    m_bonus_bd.IsSettled = 1;
+                    m_bonus_bd.Source = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 * (decimal.Parse(dt6.Rows[0]["ParamVarchar"].ToString()) / 100) + "报单奖";
+                    m_bonus_bd.SourceEn = "";
+                    m_bonus_bd.SttleTime = DateTime.Now;
+                    m_bonus_bd.FromUserID = getLoginID();
+                    m_bonus_bd.Bonus001 = int.Parse(getLoginID().ToString());
+                    m_bonus_bd.Bonus002 = 0;
+                    m_bonus_bd.Bonus003 = "";
+                    m_bonus_bd.Bonus004 = "";
+                    m_bonus_bd.Bonus005 = 0;
+                    m_bonus_bd.Bonus006 = 0;
+                    m_bonus_bd.Bonus007 = DateTime.Now;
+                    m_bonus_bd.Batch = 0; 
+                    bonus.Add(m_bonus_bd);   //报单中心返利5% 
+                    string sql55 = "update tb_user set  BonusAccount+=" + model_.User018 * (decimal.Parse(dt6.Rows[0]["ParamVarchar"].ToString()) / 100) +  "";
+                    int aaa = B_user.UpdataData_Chaxun(sql55, (userid_DL));
+                    
+
 
 
                     string path = model_.RecommendPath;
@@ -373,7 +402,7 @@ namespace Web.user.team
                                 userBLL.Update(model_1);
 
                                 lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
-                                m_journal_pv.UserID = UserID;
+                                m_journal_pv.UserID = long.Parse(id);
                                 m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
                                 m_journal_pv.RemarkEn = "";
                                 m_journal_pv.InAmount = model_.User018;
@@ -383,6 +412,10 @@ namespace Web.user.team
                                 m_journal_pv.JournalType = 10;
                                 m_journal_pv.Journal01 = UserID;
                                 journalBLL.Add(m_journal_pv);
+
+
+
+
                                 continue;
                             }
                             if (zy == 2)
@@ -390,6 +423,19 @@ namespace Web.user.team
                                 model_1.RightScore += model_.User018;
                                 model_1.RightNewScore += model_.User018;
                                 userBLL.Update(model_1);
+
+                                lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
+                                m_journal_pv.UserID = long.Parse(id);
+                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                                m_journal_pv.RemarkEn = "";
+                                m_journal_pv.InAmount = model_.User018;
+                                m_journal_pv.OutAmount = 0;
+                                m_journal_pv.BalanceAmount = model_.User018;
+                                m_journal_pv.JournalDate = DateTime.Now;
+                                m_journal_pv.JournalType = 10;
+                                m_journal_pv.Journal01 = UserID;
+                                journalBLL.Add(m_journal_pv);
+
                                 continue;
                             }
                             continue;
@@ -403,6 +449,18 @@ namespace Web.user.team
                             model_1.LeftScore += model_.User018;
                             model_1.LeftNewScore += model_.User018;
                             userBLL.Update(model_1);
+
+                            lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
+                            m_journal_pv.UserID = long.Parse(id);
+                            m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                            m_journal_pv.RemarkEn = "";
+                            m_journal_pv.InAmount = model_.User018;
+                            m_journal_pv.OutAmount = 0;
+                            m_journal_pv.BalanceAmount = model_1.LeftScore;
+                            m_journal_pv.JournalDate = DateTime.Now;
+                            m_journal_pv.JournalType = 10;
+                            m_journal_pv.Journal01 = UserID;
+                            journalBLL.Add(m_journal_pv);
                             continue;
                         }
                         if (dt.Rows.Count>=2)
@@ -418,6 +476,18 @@ namespace Web.user.team
                                 model_1.LeftScore += model_.User018;
                                 model_1.LeftNewScore += model_.User018;
                                 userBLL.Update(model_1);
+
+                                lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
+                                m_journal_pv.UserID = long.Parse(id);
+                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                                m_journal_pv.RemarkEn = "";
+                                m_journal_pv.InAmount = model_.User018;
+                                m_journal_pv.OutAmount = 0;
+                                m_journal_pv.BalanceAmount = model_1.LeftScore;
+                                m_journal_pv.JournalDate = DateTime.Now;
+                                m_journal_pv.JournalType = 10;
+                                m_journal_pv.Journal01 = UserID;
+                                journalBLL.Add(m_journal_pv);
                                 continue;
                             }
                             if (dt2.Rows.Count > 0)
@@ -425,6 +495,18 @@ namespace Web.user.team
                                 model_1.RightScore += model_.User018;
                                 model_1.RightNewScore += model_.User018;
                                 userBLL.Update(model_1);
+
+                                lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
+                                m_journal_pv.UserID = long.Parse(id);
+                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                                m_journal_pv.RemarkEn = "";
+                                m_journal_pv.InAmount = model_.User018;
+                                m_journal_pv.OutAmount = 0;
+                                m_journal_pv.BalanceAmount = model_1.RightScore;
+                                m_journal_pv.JournalDate = DateTime.Now;
+                                m_journal_pv.JournalType = 10;
+                                m_journal_pv.Journal01 = UserID;
+                                journalBLL.Add(m_journal_pv);
                                 continue;
                             }
                         } 

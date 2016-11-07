@@ -778,6 +778,17 @@ namespace lgk.BLL
         {
             return dal.UpdataData_Chaxun(sql, UserID);
         }
+
+        /// <summary>
+        /// 存储过程
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public DataSet GetList_Excel(int Userid, string pTable)
+        {
+
+            return dal.GetList_Excel(Userid, pTable);
+        }
         #endregion  Method
     }
 }

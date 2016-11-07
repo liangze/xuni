@@ -2551,6 +2551,22 @@ namespace lgk.DAL
                 return 0;
             }
         }
+        /// <summary>
+        /// 存储过程
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public DataSet GetList_Excel( int Userid,string pTable)
+        {
+
+            SqlParameter[] para = { new SqlParameter("@UserID", SqlDbType.Int)
+                                 };
+            para[0].Value = Userid;
+            //DbHelperSQL.RunProcedure(prop, para, out result); 
+
+            return DbHelperSQL.RunProcedure(""+ pTable + "", para, "temp99");
+
+        }
 
         #endregion  Method
     }
