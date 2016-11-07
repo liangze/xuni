@@ -168,7 +168,7 @@ namespace Web.user.finance
             takeMoneyInfo.RealityMoney = resultNum - takeMoneyInfo.TakePoundage;
             takeMoneyInfo.Flag = 0;
             takeMoneyInfo.UserID = getLoginID();
-            takeMoneyInfo.BonusBalance = LoginUser.BonusAccount - takeMoneyInfo.TakeMoney*6;
+            takeMoneyInfo.BonusBalance = LoginUser.BonusAccount - takeMoneyInfo.TakeMoney;
 
             takeMoneyInfo.BankName = LoginUser.BankName;
             takeMoneyInfo.Take003 = LoginUser.BankBranch;
@@ -183,7 +183,7 @@ namespace Web.user.finance
             journalInfo.Remark = "会员提现";
             journalInfo.RemarkEn = "Cash withdrawal";
             journalInfo.InAmount = 0;
-            journalInfo.OutAmount = takeMoneyInfo.TakeMoney*6;
+            journalInfo.OutAmount = takeMoneyInfo.TakeMoney;
             journalInfo.BalanceAmount = takeMoneyInfo.BonusBalance;
             journalInfo.JournalDate = DateTime.Now;
             journalInfo.JournalType = 2;
@@ -191,7 +191,7 @@ namespace Web.user.finance
 
             #endregion
 
-            if (takeBLL.Add(takeMoneyInfo) > 0 && journalBLL.Add(journalInfo) > 0 && UpdateAccount("BonusAccount", getLoginID(), takeMoneyInfo.TakeMoney*6, 0) > 0)
+            if (takeBLL.Add(takeMoneyInfo) > 0 && journalBLL.Add(journalInfo) > 0 && UpdateAccount("BonusAccount", getLoginID(), takeMoneyInfo.TakeMoney, 0) > 0)
             {
                 //string ss = (GetLanguage("MessageTakeMoney").Replace("{username}", LoginUser.UserCode)).Replace("{time}", Convert.ToDateTime(journalInfo.JournalDate).ToString("yyyy年MM月dd日HH时mm分")).Replace("{timeEn}", Convert.ToDateTime(journalInfo.JournalDate).ToString("yyyy/MM/dd HH:mm"));//添加短信内容
                 //SendMessage((int)LoginUser.UserID, LoginUser.PhoneNum, ss);
@@ -239,14 +239,14 @@ namespace Web.user.finance
                 lgk.Model.tb_journal model = new lgk.Model.tb_journal();
                 model.UserID = take.UserID;
                 model.Remark = "取消提现";
-                model.InAmount = take.TakeMoney*6;
+                model.InAmount = take.TakeMoney;
                 model.OutAmount = 0;
-                model.BalanceAmount = user.BonusAccount + take.TakeMoney*6;
+                model.BalanceAmount = user.BonusAccount + take.TakeMoney;
                 model.JournalDate = DateTime.Now;
                 model.JournalType = 2;
                 model.Journal01 = take.UserID;
 
-                if (journalBLL.Add(model) > 0 && UpdateAccount("BonusAccount", take.UserID, take.TakeMoney*6, 1) > 0 && takeBLL.Delete(iID))
+                if (journalBLL.Add(model) > 0 && UpdateAccount("BonusAccount", take.UserID, take.TakeMoney, 1) > 0 && takeBLL.Delete(iID))
                 {
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("CancellationSuccess") + "');window.location.href='TakeMoney.aspx';", true);//取消成功
                 }

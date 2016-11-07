@@ -142,7 +142,7 @@ namespace Web.user.shop
                 decimal dPVTotal = listCar.Sum(p => p.TotalMoney); //总价格
                 if (userInfo.ShopAccount < dPVTotal)
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("EcurrencyBalance") + "');", true);//账户余额不足
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('消费积分账户余额不足');", true);//账户余额不足
                     return;
                 }
                 try
@@ -152,10 +152,16 @@ namespace Web.user.shop
                     //写入订单
                     orderInfo.UserID = userInfo.UserID;//用户
                     lgk.Model.tb_Address addressInfo = addressBLL.GetModel(userInfo.UserID);
+                    if(addressInfo==null)
+                    {
+                        MessageBox.Show(this, "请先设置地址");//请先设置默认地址
+                        return;
+                    }
                     DataSet addressDS = addressBLL.GetList("UserID=" + LoginUser.UserID + " and Address01=1");//获取用户的地址
+
                     if (addressDS.Tables[0].Rows.Count <= 0)
                     {
-                        MessageBox.Show(this, "" + GetLanguage("Rec111nfirm") + "");//请先设置默认地址
+                        MessageBox.Show(this, "请先设置默认地址");//请先设置默认地址
                         return;
                     }
                     orderInfo.OrderCode = code;//订单编号
@@ -229,10 +235,10 @@ namespace Web.user.shop
                     }
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Successful") + "');window.location.href='order.aspx';", true);
                 }
-                catch// (Exception ex)
+                catch//(Exception ex)
                 {
                     MessageBox.Show(this, "" + GetLanguage("OperationFailed") + "");
-                    // MessageBox.Show(this, ex.Message);
+                    //MessageBox.Show(this, ex.Message);
                 }
                 #endregion
 
