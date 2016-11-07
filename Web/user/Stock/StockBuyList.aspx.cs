@@ -153,7 +153,8 @@ namespace Web.user.Stock
             decimal NewPrice = getParamAmount("Shares3");//当前价格
             decimal talPrice = BuyNumber * NewPrice;//购买需要支付金额
             lgk.Model.tb_user user = userBLL.GetModel(1);//system作为公司账户，获取公司账户信息
-            decimal talNum = user.StockAccount + issueInfo.SurplusAmount;//挂售剩余总数量
+           
+            
             #region 判断云商积分是否已经售完
             if (issueInfo == null)//发行云商积分已售完
             {
@@ -166,12 +167,29 @@ namespace Web.user.Stock
                 }
 
             }
-            if (issueInfo.SurplusAmount < BuyNumber)
+            if(issueInfo!=null)
             {
-                if(talNum< BuyNumber)
+                if (issueInfo.SurplusAmount < BuyNumber)
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('购买数量大于在售数量，请更改购买数量！');location.href='StockBuyList.aspx';", true);//云商积分已售完
-                    return;
+                    if (issueInfo == null)
+                    {
+                        decimal talNum = user.StockAccount;//挂售剩余总数量
+                        if (talNum < BuyNumber)
+                        {
+                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('购买数量大于在售数量，请更改购买数量！');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        decimal talNum = user.StockAccount + issueInfo.SurplusAmount;//挂售剩余总数量
+                        if (talNum < BuyNumber)
+                        {
+                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('购买数量大于在售数量，请更改购买数量！');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                            return;
+                        }
+                    }
+
                 }
             }
             #endregion
@@ -229,6 +247,10 @@ namespace Web.user.Stock
                     stockIssueBLL.Update(issueInfo);
                     UpdateAccount("StockAccount", 1, Number, 0);
                 }
+            }
+            if(issueInfo==null)
+            {
+                UpdateAccount("StockAccount", 1, BuyNumber, 0);
             }
             #endregion
             #region 统计交易总量，当达到一定交易流执行涨价

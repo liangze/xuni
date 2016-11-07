@@ -123,7 +123,7 @@ namespace Web.admin.finance
             int iRechargeStyle = int.Parse(dropMoneyType.SelectedValue);
             rechargeInfo.UserID = userInfo.UserID;
             rechargeInfo.RechargeStyle = Convert.ToInt32(dropRechargeStyle.SelectedValue);//1：增加
-            rechargeInfo.RechargeType = iRechargeStyle;//1.流通币,2.MDD钻币,3.平台费用
+            rechargeInfo.RechargeType = iRechargeStyle;//1.注册积分,2.奖金积分,3.电子积分
             rechargeInfo.RechargeableMoney = dMoney;
             rechargeInfo.RechargeDate = DateTime.Now;
             rechargeInfo.Recharge001 = 1;  //后台充值
@@ -134,125 +134,240 @@ namespace Web.admin.finance
             lgk.Model.tb_journal jmodel = new lgk.Model.tb_journal();
             jmodel.UserID = userInfo.UserID;
             jmodel.JournalDate = DateTime.Now;
+
+            //Emoney = 0;// 注册积分         写流水类型：1
+            //BonusAccount = 0;// 奖金积分 	 2
+            //AllBonusAccount = 0;// 电子积分	 3
             
             if (rechargeInfo.RechargeStyle == 1)//增加
             {
-                if (rechargeInfo.RechargeType == 1)//流通币
-                {
-                    rechargeInfo.YuAmount = userInfo.BonusAccount + dMoney;
-                    jmodel.InAmount = dMoney;
-                    jmodel.OutAmount = 0;
-                    jmodel.BalanceAmount = userInfo.BonusAccount + dMoney;
-                    jmodel.Remark = "后台充值流通币(增加)";
-                    jmodel.JournalType = iRechargeStyle;
-                }
-                else if (rechargeInfo.RechargeType == 2)//MDD钻币
+                if (rechargeInfo.RechargeType == 1)//注册积分
                 {
                     rechargeInfo.YuAmount = userInfo.Emoney + dMoney;
-                    jmodel.InAmount = Convert.ToDecimal(this.txtMoney.Text.Trim());
+                    jmodel.InAmount = dMoney;
                     jmodel.OutAmount = 0;
                     jmodel.BalanceAmount = userInfo.Emoney + dMoney;
-                    jmodel.Remark = "后台充值MDD钻币(增加)";
+                    jmodel.Remark = "后台充值注册积分(增加)";
                     jmodel.JournalType = iRechargeStyle;
                 }
-                else if (rechargeInfo.RechargeType == 3)//平台费用
+                else if (rechargeInfo.RechargeType == 2)//奖金积分
                 {
-                    rechargeInfo.YuAmount = userInfo.StockMoney + dMoney;
+                    rechargeInfo.YuAmount = userInfo.BonusAccount + dMoney;
+                    jmodel.InAmount = Convert.ToDecimal(this.txtMoney.Text.Trim());
+                    jmodel.OutAmount = 0;
+                    jmodel.BalanceAmount = userInfo.BonusAccount + dMoney;
+                    jmodel.Remark = "后台充值奖金积分(增加)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                else if (rechargeInfo.RechargeType == 3)//电子积分
+                {
+                    rechargeInfo.YuAmount = userInfo.AllBonusAccount + dMoney;
                     jmodel.InAmount = dMoney;
                     jmodel.OutAmount = 0;
-                    jmodel.BalanceAmount = userInfo.StockMoney + dMoney;
-                    jmodel.Remark = "后台充值平台费用(增加)";
+                    jmodel.BalanceAmount = userInfo.AllBonusAccount + dMoney;
+                    jmodel.Remark = "后台充值奖金积分(增加)";
                     jmodel.JournalType = iRechargeStyle;
                 }
-                else if (rechargeInfo.RechargeType == 4)//购物币
-                {
-                    rechargeInfo.YuAmount = userInfo.ShopAccount + dMoney;
-                    jmodel.InAmount = dMoney;
-                    jmodel.OutAmount = 0;
-                    jmodel.BalanceAmount = userInfo.ShopAccount + dMoney;
-                    jmodel.Remark = "后台充值购物币(增加)";
-                    jmodel.JournalType = iRechargeStyle;
-                }
-                else if (rechargeInfo.RechargeType == 5)//平台费用
+                //StockAccount = 0;// 云商积分	 4
+                //StockMoney = 0;// 感恩积分	 5
+                
+                else if (rechargeInfo.RechargeType == 4)//云商积分
                 {
                     rechargeInfo.YuAmount = userInfo.StockAccount + dMoney;
                     jmodel.InAmount = dMoney;
                     jmodel.OutAmount = 0;
                     jmodel.BalanceAmount = userInfo.StockAccount + dMoney;
-                    jmodel.Remark = "后台充值注册币(增加)";
+                    jmodel.Remark = "后台充值云商积分(增加)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                else if (rechargeInfo.RechargeType == 5)//感恩积分
+                {
+                    rechargeInfo.YuAmount = userInfo.StockMoney + dMoney;
+                    jmodel.InAmount = dMoney;
+                    jmodel.OutAmount = 0;
+                    jmodel.BalanceAmount = userInfo.StockMoney + dMoney;
+                    jmodel.Remark = "后台充值感恩积分(增加)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                else if (rechargeInfo.RechargeType == 6)//购物积分
+                {
+                    rechargeInfo.YuAmount = userInfo.GLmoney + dMoney;
+                    jmodel.InAmount = dMoney;
+                    jmodel.OutAmount = 0;
+                    jmodel.BalanceAmount = userInfo.GLmoney + dMoney;
+                    jmodel.Remark = "后台充值购物积分(增加)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                //GLmoney = 0;// 购物积分	 6
+                //ShopAccount = 0;// 消费积分	 7
+                //User011// 爱心基金	 8
+                //User012// 云购积分	 9
+                else if (rechargeInfo.RechargeType == 7)//消费积分
+                {
+                    rechargeInfo.YuAmount = userInfo.ShopAccount + dMoney;
+                    jmodel.InAmount = dMoney;
+                    jmodel.OutAmount = 0;
+                    jmodel.BalanceAmount = userInfo.ShopAccount + dMoney;
+                    jmodel.Remark = "后台充值消费积分(增加)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                else if (rechargeInfo.RechargeType == 8)//爱心基金
+                {
+                    rechargeInfo.YuAmount = userInfo.User011 + dMoney;
+                    jmodel.InAmount = dMoney;
+                    jmodel.OutAmount = 0;
+                    jmodel.BalanceAmount = userInfo.User011 + dMoney;
+                    jmodel.Remark = "后台充值爱心基金(增加)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                else if (rechargeInfo.RechargeType == 9)//云购积分
+                {
+                    rechargeInfo.YuAmount = userInfo.User012 + dMoney;
+                    jmodel.InAmount = dMoney;
+                    jmodel.OutAmount = 0;
+                    jmodel.BalanceAmount = userInfo.User012 + dMoney;
+                    jmodel.Remark = "后台充值云购积分(增加)";
                     jmodel.JournalType = iRechargeStyle;
                 }
             }
             if (rechargeInfo.RechargeStyle == 2)//扣除
             {
+                //Emoney = 0;// 注册积分         写流水类型：1
+                //BonusAccount = 0;// 奖金积分 	 2
+                
                 if (rechargeInfo.RechargeType == 1)
-                {
-                    if (dMoney > userInfo.BonusAccount)
-                    {
-                        MessageBox.MyShow(this, "流通币余额不足!");
-                        return;
-                    }
-                    rechargeInfo.YuAmount = userInfo.BonusAccount - dMoney;
-                    jmodel.InAmount = 0;
-                    jmodel.OutAmount = dMoney;
-                    jmodel.BalanceAmount = userInfo.BonusAccount - dMoney;
-                    jmodel.Remark = "后台充值流通币(减少)";
-                    jmodel.JournalType = iRechargeStyle;
-                }
-                else if (rechargeInfo.RechargeType == 2)
                 {
                     if (dMoney > userInfo.Emoney)
                     {
-                        MessageBox.MyShow(this, "MDD钻币余额不足!");
+                        MessageBox.MyShow(this, "注册积分余额不足!");
                         return;
                     }
                     rechargeInfo.YuAmount = userInfo.Emoney - dMoney;
                     jmodel.InAmount = 0;
                     jmodel.OutAmount = dMoney;
                     jmodel.BalanceAmount = userInfo.Emoney - dMoney;
-                    jmodel.Remark = "后台充值MDD钻币(减少)";
+                    jmodel.Remark = "后台充值注册积分(减少)";
                     jmodel.JournalType = iRechargeStyle;
                 }
-                else if (rechargeInfo.RechargeType == 3)//平台费用
+                else if (rechargeInfo.RechargeType == 2)
                 {
-                    if (dMoney > userInfo.StockMoney)
+                    if (dMoney > userInfo.BonusAccount)
                     {
-                        MessageBox.MyShow(this, "平台费用余额不足!");
+                        MessageBox.MyShow(this, "奖金积分余额不足!");
                         return;
                     }
-                    rechargeInfo.YuAmount = userInfo.StockMoney - dMoney;
+                    rechargeInfo.YuAmount = userInfo.BonusAccount - dMoney;
                     jmodel.InAmount = 0;
                     jmodel.OutAmount = dMoney;
-                    jmodel.BalanceAmount = userInfo.StockMoney - dMoney;
-                    jmodel.Remark = "后台充值平台费用(减少)";
+                    jmodel.BalanceAmount = userInfo.BonusAccount - dMoney;
+                    jmodel.Remark = "后台充值奖金积分(减少)";
                     jmodel.JournalType = iRechargeStyle;
                 }
-                else if (rechargeInfo.RechargeType == 4)//购物币
+                //AllBonusAccount = 0;// 电子积分	 3
+                //StockAccount = 0;// 云商积分	 4
+          
+                else if (rechargeInfo.RechargeType == 3)//电子积分
                 {
-                    if (dMoney > userInfo.ShopAccount)
+                    if (dMoney > userInfo.AllBonusAccount)
                     {
-                        MessageBox.MyShow(this, "平台费用余额不足!");
+                        MessageBox.MyShow(this, "电子积分余额不足!");
                         return;
                     }
-                    rechargeInfo.YuAmount = userInfo.ShopAccount - dMoney;
+                    rechargeInfo.YuAmount = userInfo.AllBonusAccount - dMoney;
                     jmodel.InAmount = 0;
                     jmodel.OutAmount = dMoney;
-                    jmodel.BalanceAmount = userInfo.ShopAccount - dMoney;
-                    jmodel.Remark = "后台充值购物币(减少)";
+                    jmodel.BalanceAmount = userInfo.AllBonusAccount - dMoney;
+                    jmodel.Remark = "后台充值电子积分(减少)";
                     jmodel.JournalType = iRechargeStyle;
                 }
-                else if (rechargeInfo.RechargeType == 5)//注册币
+                else if (rechargeInfo.RechargeType == 4)//云商积分
                 {
                     if (dMoney > userInfo.StockAccount)
                     {
-                        MessageBox.MyShow(this, "平台费用余额不足!");
+                        MessageBox.MyShow(this, "云商积分余额不足!");
                         return;
                     }
                     rechargeInfo.YuAmount = userInfo.StockAccount - dMoney;
                     jmodel.InAmount = 0;
                     jmodel.OutAmount = dMoney;
                     jmodel.BalanceAmount = userInfo.StockAccount - dMoney;
-                    jmodel.Remark = "后台充值注册币(减少)";
+                    jmodel.Remark = "后台充值云商积分(减少)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                //StockMoney = 0;// 感恩积分	 5
+                //GLmoney = 0;// 购物积分	 6
+                
+                else if (rechargeInfo.RechargeType == 5)//感恩积分
+                {
+                    if (dMoney > userInfo.StockMoney)
+                    {
+                        MessageBox.MyShow(this, "感恩积分余额不足!");
+                        return;
+                    }
+                    rechargeInfo.YuAmount = userInfo.StockMoney - dMoney;
+                    jmodel.InAmount = 0;
+                    jmodel.OutAmount = dMoney;
+                    jmodel.BalanceAmount = userInfo.StockMoney - dMoney;
+                    jmodel.Remark = "后台充值感恩积分(减少)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                else if (rechargeInfo.RechargeType == 6)//购物积分
+                {
+                    if (dMoney > userInfo.GLmoney)
+                    {
+                        MessageBox.MyShow(this, "购物积分余额不足!");
+                        return;
+                    }
+                    rechargeInfo.YuAmount = userInfo.GLmoney - dMoney;
+                    jmodel.InAmount = 0;
+                    jmodel.OutAmount = dMoney;
+                    jmodel.BalanceAmount = userInfo.GLmoney - dMoney;
+                    jmodel.Remark = "后台充值购物积分(减少)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                //ShopAccount = 0;// 消费积分	 7
+                //User011// 爱心基金	 8
+                //User012// 云购积分	 9
+                else if (rechargeInfo.RechargeType == 7)//消费积分
+                {
+                    if (dMoney > userInfo.ShopAccount)
+                    {
+                        MessageBox.MyShow(this, "消费积分余额不足!");
+                        return;
+                    }
+                    rechargeInfo.YuAmount = userInfo.ShopAccount - dMoney;
+                    jmodel.InAmount = 0;
+                    jmodel.OutAmount = dMoney;
+                    jmodel.BalanceAmount = userInfo.ShopAccount - dMoney;
+                    jmodel.Remark = "后台充值消费积分(减少)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                else if (rechargeInfo.RechargeType == 8)//爱心基金
+                {
+                    if (dMoney > userInfo.User011)
+                    {
+                        MessageBox.MyShow(this, "爱心基金余额不足!");
+                        return;
+                    }
+                    rechargeInfo.YuAmount = userInfo.User011 - dMoney;
+                    jmodel.InAmount = 0;
+                    jmodel.OutAmount = dMoney;
+                    jmodel.BalanceAmount = userInfo.User011 - dMoney;
+                    jmodel.Remark = "后台充值爱心基金(减少)";
+                    jmodel.JournalType = iRechargeStyle;
+                }
+                else if (rechargeInfo.RechargeType == 9)//云购积分
+                {
+                    if (dMoney > userInfo.User012)
+                    {
+                        MessageBox.MyShow(this, "云购积分余额不足!");
+                        return;
+                    }
+                    rechargeInfo.YuAmount = userInfo.User012 - dMoney;
+                    jmodel.InAmount = 0;
+                    jmodel.OutAmount = dMoney;
+                    jmodel.BalanceAmount = userInfo.User012 - dMoney;
+                    jmodel.Remark = "后台充值云购积分(减少)";
                     jmodel.JournalType = iRechargeStyle;
                 }
             }
@@ -264,57 +379,118 @@ namespace Web.admin.finance
                 {
                     if (rechargeInfo.RechargeType == 1)
                     {
-                        UpdateAccount("BonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
+                        UpdateAccount("Emoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
                         UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     else if (rechargeInfo.RechargeType == 2)
                     {
-                        UpdateAccount("Emoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
+                        UpdateAccount("BonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
                         UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
+                    //Emoney = 0;// 注册积分         写流水类型：1
+                    //BonusAccount = 0;// 奖金积分 		2
+                    //AllBonusAccount = 0;// 电子积分		3
+                    //StockAccount = 0;// 云商积分		4
+                    //StockMoney = 0;// 感恩积分		5
                     else if (rechargeInfo.RechargeType == 3)
                     {
-                        UpdateAccount("StockMoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
+                        UpdateAccount("AllBonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
                         UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     else if (rechargeInfo.RechargeType == 4)
-                    {
-                        UpdateAccount("ShopAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
-                    }
-                    else if (rechargeInfo.RechargeType == 5)
                     {
                         UpdateAccount("StockAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
                         UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
+                    else if (rechargeInfo.RechargeType == 5)
+                    {
+                        UpdateAccount("StockMoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                    }
+                    //GLmoney = 0;// 购物积分			6
+                    //ShopAccount = 0;// 消费积分		7
+                    //User011// 爱心基金	 8
+                    //User012// 云购积分	 9
+                    else if (rechargeInfo.RechargeType == 6)
+                    {
+                        UpdateAccount("GLmoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                    }
+                    else if (rechargeInfo.RechargeType == 7)
+                    {
+                        UpdateAccount("ShopAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                    }
+                    else if (rechargeInfo.RechargeType == 8)
+                    {
+                        UpdateAccount("User011", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                    }
+                    else if (rechargeInfo.RechargeType == 9)
+                    {
+                        UpdateAccount("User012", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                    }
+
                 }
                 else if (rechargeInfo.RechargeStyle == 2)
                 {
+                    //Emoney = 0;// 注册积分         写流水类型：1
+                    //BonusAccount = 0;// 奖金积分 		2
+                    //AllBonusAccount = 0;// 电子积分		3
+                    //StockAccount = 0;// 云商积分		4
+                   
                     if (rechargeInfo.RechargeType == 1)
-                    {
-                        UpdateAccount("BonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
-                    }
-                    else if (rechargeInfo.RechargeType == 2)
                     {
                         UpdateAccount("Emoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
                         UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
+                    else if (rechargeInfo.RechargeType == 2)
+                    {
+                        UpdateAccount("BonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                    }
                     else if (rechargeInfo.RechargeType == 3)
                     {
-                        UpdateAccount("StockMoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
+                        UpdateAccount("AllBonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
                         UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
                     else if (rechargeInfo.RechargeType == 4)
                     {
-                        UpdateAccount("ShopAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
-                    }
-                    else if (rechargeInfo.RechargeType == 5)
-                    {
                         UpdateAccount("StockAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
                         UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
+                    //StockMoney = 0;// 感恩积分		5
+                    //GLmoney = 0;// 购物积分			6
+                    //ShopAccount = 0;// 消费积分		7
+                    //User011// 爱心基金	 8
+                    //User012// 云购积分	 9
+                    else if (rechargeInfo.RechargeType == 5)
+                    {
+                        UpdateAccount("StockMoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                    }
+                    else if (rechargeInfo.RechargeType == 6)
+                    {
+                        UpdateAccount("GLmoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                    }
+                    else if (rechargeInfo.RechargeType == 7)
+                    {
+                        UpdateAccount("ShopAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                    }
+                    else if (rechargeInfo.RechargeType == 8)
+                    {
+                        UpdateAccount("User011", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                    }
+                    else if (rechargeInfo.RechargeType == 9)
+                    {
+                        UpdateAccount("User012", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
+                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                    }
+
                 }
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('操作成功！');window.location.href='AddMoney.aspx';", true);
             }
