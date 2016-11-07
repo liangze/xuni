@@ -1236,7 +1236,7 @@ namespace Library
             {
                 if (type == 1)
                 {
-                    bi = "Currency to MDD drill";
+                    bi = "Currency to Registered currency";
                 }
                 else if (type == 2)
                 {
