@@ -121,11 +121,12 @@ namespace Web.admin.finance
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             long ID = Convert.ToInt64(e.CommandArgument); //ID
+
             lgk.Model.tb_takeMoney cModel = takeBLL.GetModel(ID);
             lgk.BLL.tb_systemMoney sy = new lgk.BLL.tb_systemMoney();
             //lgk.BLL.tb_rechargeable dotx = new lgk.BLL.tb_rechargeable();
             lgk.Model.tb_systemMoney system = sy.GetModel(1);
-            lgk.Model.tb_user user1 = userBLL.GetModel(ID);//
+            lgk.Model.tb_user user1 = userBLL.GetModel(cModel.UserID);//
             if (user1.PhoneNum == "")
             {
                 MessageBox.ShowAndRedirect(this, "请填写手机号!", "TakeMoney.aspx");
@@ -176,6 +177,15 @@ namespace Web.admin.finance
                                 lgk.BLL.tb_message m = new lgk.BLL.tb_message();
                                 lgk.Model.tb_message M_user = new lgk.Model.tb_message();
                                 M_user.Flag = jiequ[0];
+                                if (M_user.Flag != "0")
+                                {
+                                    M_user.Mcontent = neirong;
+                                    M_user.MobileNum = user1.PhoneNum;
+                                    m.Add(M_user);
+                                    GetHtmlFromUrl(url);
+                                    string[] jiequ1 = jieguo.Split(',');
+                                    M_user.Flag = jiequ1[0];
+                                }
                                 M_user.Mcontent = neirong;
                                 M_user.MobileNum = user1.PhoneNum;
                                 m.Add(M_user);
@@ -227,6 +237,15 @@ namespace Web.admin.finance
                                 lgk.BLL.tb_message m = new lgk.BLL.tb_message();
                                 lgk.Model.tb_message M_user = new lgk.Model.tb_message();
                                 M_user.Flag = jiequ[0];
+                                if (M_user.Flag != "0")
+                                {
+                                    M_user.Mcontent = neirong;
+                                    M_user.MobileNum = user1.PhoneNum;
+                                    m.Add(M_user);
+                                    GetHtmlFromUrl(url);
+                                    string[] jiequ1 = jieguo.Split(',');
+                                    M_user.Flag = jiequ1[0];
+                                }
                                 M_user.Mcontent = neirong;
                                 M_user.MobileNum = user1.PhoneNum;
                                 m.Add(M_user);
