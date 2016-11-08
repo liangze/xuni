@@ -416,6 +416,7 @@ namespace Web
                         model2.RightScore = 0;
                         model2.RightNewScore = 0;
                         model2.LeftNewScore = 0;
+                    
                         userBLL.Update(model2);
                         int reuserid = 1;
                         if (getLoginID() > 0)

@@ -225,13 +225,13 @@ namespace lgk.Model
         public DateTime RegTime
         {
             get { return _regtime; }
-            set { _regtime = value; }
+            set { _regtime = value; } 
         }
         /// <summary>
         /// OpenTime
         /// </summary>		
-        private DateTime _opentime;
-        public DateTime OpenTime
+        private DateTime? _opentime;
+        public DateTime? OpenTime
         {
             get { return _opentime; }
             set { _opentime = value; }
