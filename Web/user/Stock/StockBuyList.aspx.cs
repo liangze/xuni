@@ -244,13 +244,26 @@ namespace Web.user.Stock
                 {
                    
                     decimal Number = BuyNumber - issueInfo.SurplusAmount;//需要从公司账户购买的数量
-                    issueInfo.SurplusAmount = 0;//更新挂售云商积分剩余量,发行数量
-                    stockIssueBLL.Update(issueInfo);
-                    #region 购买云商积分,公司账户云商积分减少
                     lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
-                    systemMoney.MoneyAccount -= Number;//需要从公司账户购买的数量
-                    #endregion
-                   
+                    if(systemMoney==null)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('云商积分已售完');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                        return;
+                    }
+                    if(systemMoney.MoneyAccount< Number)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('平台云商积分出售数量不足');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                        return;
+                    }
+                    else
+                    {
+                        issueInfo.SurplusAmount = 0;//更新挂售云商积分剩余量,发行数量
+                        stockIssueBLL.Update(issueInfo);
+                        #region 购买云商积分,公司账户云商积分减少
+                        systemMoney.MoneyAccount -= Number;//需要从公司账户购买的数量
+                        systemBll.Update(systemMoney);
+                        #endregion
+                    }
                 }
             }
             if (issueInfo == null)
@@ -462,6 +475,7 @@ namespace Web.user.Stock
                 #region 卖出云商积分,公司账户云商积分增加
                 lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
                 systemMoney.MoneyAccount += SellNumber;
+                systemBll.Update(systemMoney);
                 #endregion
                 //云商积分加入流水线
                 string Remark = "卖出云商积分";
@@ -533,6 +547,7 @@ namespace Web.user.Stock
                         # region 卖出云商积分,公司账户云商积分增加
                         lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
                         systemMoney.MoneyAccount += SellNumber;
+                        systemBll.Update(systemMoney);
                         //UpdateAccount("StockAccount", 1, SellNumber, 1);//公司云商积分账户更新
                         //string RemaUser = "会员卖出云商积分";
                         //lgk.Model.tb_user useradmin = userBLL.GetModel(UserID);
