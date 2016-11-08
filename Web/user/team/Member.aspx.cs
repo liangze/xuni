@@ -185,6 +185,7 @@ namespace Web.user.team
                 //    return;
                 //}
                 model.IsOpend = 2;
+                model.OpenTime = DateTime.Now;
                 if (userBLL.Update(model)==true)
                 { 
                     lgk.BLL.tb_user B_user = new lgk.BLL.tb_user();
