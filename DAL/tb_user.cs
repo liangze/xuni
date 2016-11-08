@@ -575,7 +575,8 @@ namespace lgk.DAL
             strSql.Append("User018=@User018,");
             strSql.Append("Email=@Email,");
             strSql.Append("IsOut=@IsOut,");
-            strSql.Append("Batch=@Batch");
+            strSql.Append("Batch=@Batch,");
+            strSql.Append("OpenTime=@OpenTime");
             strSql.Append(" where UserID=@UserID");
             SqlParameter[] parameters = {
 					new SqlParameter("@UserCode", SqlDbType.VarChar,20),
@@ -654,7 +655,9 @@ namespace lgk.DAL
                     new SqlParameter("@Email", SqlDbType.VarChar,200),
                     new SqlParameter("@IsOut", SqlDbType.Int,4),
                     new SqlParameter("@Batch", SqlDbType.Int,4),
-                    new SqlParameter("@UserID", SqlDbType.BigInt,8)};
+                    new SqlParameter("@UserID", SqlDbType.BigInt,8),
+                    new SqlParameter("@OpenTime", SqlDbType.DateTime)};
+
             parameters[0].Value = model.UserCode;
             parameters[1].Value = model.LevelID;
             parameters[2].Value = model.RecommendID;
@@ -732,7 +735,7 @@ namespace lgk.DAL
             parameters[74].Value = model.IsOut;
             parameters[75].Value = model.Batch;
             parameters[76].Value = model.UserID;
-
+            parameters[77].Value = model.OpenTime;
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
             {
