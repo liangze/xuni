@@ -410,6 +410,7 @@
     <Content Include="admin\finance\PurchaseExam.aspx" />
     <Content Include="admin\finance\PurchaseList.aspx" />
     <Content Include="admin\finance\Scale.aspx" />
+    <Content Include="admin\finance\yungou.aspx" />
     <Content Include="admin\product\AuctionType.aspx" />
     <Content Include="admin\product\DescTime.aspx" />
     <Content Include="admin\product\JiFenList.aspx" />
@@ -2233,6 +2234,13 @@
     </Compile>
     <Compile Include="admin\finance\BonusByUser.aspx.designer.cs">
       <DependentUpon>BonusByUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\finance\yungou.aspx.cs">
+      <DependentUpon>yungou.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\finance\yungou.aspx.designer.cs">
+      <DependentUpon>yungou.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

@@ -23,7 +23,9 @@
             <div class="operation">
                 <fieldset class="fieldset">
                     <asp:LinkButton ID="LinkButton1" runat="server" class="easyui-linkbutton"
-                        iconcls="icon-back" PostBackUrl="JournalAccount.aspx"> 返 回 </asp:LinkButton>
+                        iconcls="icon-back" PostBackUrl="JournalAccount.aspx">返回账户明细</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton2" runat="server" class="easyui-linkbutton"
+                        iconcls="icon-back" PostBackUrl="yungou.aspx">返回云购积分解冻</asp:LinkButton>
                 </fieldset>
             </div>
             <div class="dataTable">

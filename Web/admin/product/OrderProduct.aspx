@@ -158,7 +158,7 @@
                         </ItemTemplate>
                     </asp:Repeater>
                     <tr runat="server" id="trNull">
-                        <td colspan="12" align="center">
+                        <td colspan="13" align="center">
                             <div id="divno" runat="server" class="NoData">
                                 <span class="cBlack">抱歉！目前数据库暂无数据显示。</span>
                             </div>
