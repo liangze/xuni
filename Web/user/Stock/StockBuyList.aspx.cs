@@ -322,6 +322,21 @@ namespace Web.user.Stock
             #endregion
             UpdateAccount("StockAccount", userInfo.UserID, BuyNumber, 1);//买家云商积分账户更新
 
+            #region  解冻推荐会员的云购积分
+            long UserID = getLoginID();//登陆会员Id
+            long RecommendID = userInfo.RecommendID;//获取推荐人ID
+            lgk.Model.tb_user orUerser = userBLL.GetModel(RecommendID);
+            string Remark = "会员"+GetUserCode(UserID)+"购买云商积分，解冻云购积分";
+            UpdateAccount("User012", RecommendID, BuyNumber, 0);//云购积分解冻更新
+            UpdateAccount("User014", RecommendID, BuyNumber, 1);//
+            UpdateAccount("StockAccount", RecommendID, BuyNumber, 1);//获得云商积分
+
+            decimal balanceAmount = orUerser.User012 - BuyNumber;//云购积分账户结余金额
+            add_journal(RecommendID, 0, BuyNumber, balanceAmount, 9, Remark, "", RecommendID);//云购积分加入流水线
+
+            decimal balanceAmount2 = orUerser.StockAccount + BuyNumber;//云商积分账户结余金额
+            add_journal(RecommendID, BuyNumber, 0, balanceAmount2, 4, Remark, "", RecommendID);//云商积分加入流水线
+            #endregion
 
             //云商积分加入流水线
             lgk.Model.tb_journal joadanInfo = new lgk.Model.tb_journal();
