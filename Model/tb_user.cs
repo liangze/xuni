@@ -225,7 +225,7 @@ namespace lgk.Model
         public DateTime RegTime
         {
             get { return _regtime; }
-            set { _regtime = value; }
+            set { _regtime = value; } 
         }
         /// <summary>
         /// OpenTime
