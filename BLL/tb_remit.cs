@@ -171,7 +171,15 @@ namespace lgk.BLL
 					{
 						model.Remit006=decimal.Parse(dt.Rows[n]["Remit006"].ToString());
 					}
-					modelList.Add(model);
+                    if (dt.Rows[n]["Remit007"] != null && dt.Rows[n]["Remit008"].ToString() != "")
+                    {
+                        model.Remit007 = dt.Rows[n]["Remit007"].ToString();
+                    }
+                    if (dt.Rows[n]["Remit008"] != null && dt.Rows[n]["Remit008"].ToString() != "")
+                    {
+                        model.Remit008 = dt.Rows[n]["Remit008"].ToString();
+                    }
+                    modelList.Add(model);
 				}
 			}
 			return modelList;

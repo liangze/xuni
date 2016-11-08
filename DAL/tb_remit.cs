@@ -37,9 +37,9 @@ namespace lgk.DAL
 		{
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into tb_remit(");
-            strSql.Append("BankName,BankAccount,BankAccountUser,RechargeableDate,AddDate,State,RemitMoney,YuAmount,Remark,UserID,PassDate,Remit001,Remit002,Remit003,Remit004,Remit005,Remit006");
+            strSql.Append("BankName,BankAccount,BankAccountUser,RechargeableDate,AddDate,State,RemitMoney,YuAmount,Remark,UserID,PassDate,Remit001,Remit002,Remit003,Remit004,Remit005,Remit006,Remit007,Remit008");
             strSql.Append(") values (");
-            strSql.Append("@BankName,@BankAccount,@BankAccountUser,@RechargeableDate,@AddDate,@State,@RemitMoney,@YuAmount,@Remark,@UserID,@PassDate,@Remit001,@Remit002,@Remit003,@Remit004,@Remit005,@Remit006");
+            strSql.Append("@BankName,@BankAccount,@BankAccountUser,@RechargeableDate,@AddDate,@State,@RemitMoney,@YuAmount,@Remark,@UserID,@PassDate,@Remit001,@Remit002,@Remit003,@Remit004,@Remit005,@Remit006,@Remit007,@Remit008");
             strSql.Append(") ");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
@@ -59,7 +59,9 @@ namespace lgk.DAL
                         new SqlParameter("@Remit003", SqlDbType.VarChar,50),
                         new SqlParameter("@Remit004", SqlDbType.VarChar,50),
                         new SqlParameter("@Remit005", SqlDbType.Decimal,9),
-                        new SqlParameter("@Remit006", SqlDbType.Decimal,9)
+                        new SqlParameter("@Remit006", SqlDbType.Decimal,9),
+                        new SqlParameter("@Remit007", SqlDbType.VarChar,50),
+                        new SqlParameter("@Remit008", SqlDbType.VarChar,50)
             };
             parameters[0].Value = model.BankName;
             parameters[1].Value = model.BankAccount;
@@ -78,6 +80,8 @@ namespace lgk.DAL
             parameters[14].Value = model.Remit004;
             parameters[15].Value = model.Remit005;
             parameters[16].Value = model.Remit006;
+            parameters[17].Value = model.Remit007;
+            parameters[18].Value = model.Remit008;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -114,7 +118,9 @@ namespace lgk.DAL
 			strSql.Append("Remit004=@Remit004,");
 			strSql.Append("Remit005=@Remit005,");
 			strSql.Append("Remit006=@Remit006");
-			strSql.Append(" where ID=@ID");
+            strSql.Append("Remit006=@Remit007");
+            strSql.Append("Remit006=@Remit008");
+            strSql.Append(" where ID=@ID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@BankName", SqlDbType.VarChar,50),
 					new SqlParameter("@BankAccount", SqlDbType.VarChar,50),
@@ -133,7 +139,9 @@ namespace lgk.DAL
 					new SqlParameter("@Remit004", SqlDbType.VarChar,50),
 					new SqlParameter("@Remit005", SqlDbType.Decimal,9),
 					new SqlParameter("@Remit006", SqlDbType.Decimal,9),
-					new SqlParameter("@ID", SqlDbType.BigInt,8)};
+                    new SqlParameter("@Remit007", SqlDbType.VarChar,50),
+                    new SqlParameter("@Remit008", SqlDbType.VarChar,50),
+                    new SqlParameter("@ID", SqlDbType.BigInt,8)};
 			parameters[0].Value = model.BankName;
 			parameters[1].Value = model.BankAccount;
 			parameters[2].Value = model.BankAccountUser;
@@ -151,7 +159,9 @@ namespace lgk.DAL
 			parameters[14].Value = model.Remit004;
 			parameters[15].Value = model.Remit005;
 			parameters[16].Value = model.Remit006;
-			parameters[17].Value = model.ID;
+            parameters[17].Value = model.Remit007;
+            parameters[18].Value = model.Remit008;
+            parameters[19].Value = model.ID;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -212,7 +222,7 @@ namespace lgk.DAL
 		public lgk.Model.tb_remit GetModel(long ID)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 ID,BankName,BankAccount,BankAccountUser,RechargeableDate,AddDate,State,RemitMoney,YuAmount,Remark,UserID,PassDate,Remit001,Remit002,Remit003,Remit004,Remit005,Remit006 from tb_remit ");
+			strSql.Append("select  top 1 ID,BankName,BankAccount,BankAccountUser,RechargeableDate,AddDate,State,RemitMoney,YuAmount,Remark,UserID,PassDate,Remit001,Remit002,Remit003,Remit004,Remit005,Remit006,Remit007,Remit008 from tb_remit ");
 			strSql.Append(" where ID=@ID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@ID", SqlDbType.BigInt)};
@@ -294,7 +304,15 @@ namespace lgk.DAL
 				{
 					model.Remit006=decimal.Parse(ds.Tables[0].Rows[0]["Remit006"].ToString());
 				}
-				return model;
+                if (ds.Tables[0].Rows[0]["Remit007"] != null && ds.Tables[0].Rows[0]["Remit007"].ToString() != "")
+                {
+                    model.Remit007 = ds.Tables[0].Rows[0]["Remit007"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Remit008"] != null && ds.Tables[0].Rows[0]["Remit008"].ToString() != "")
+                {
+                    model.Remit008 = ds.Tables[0].Rows[0]["Remit008"].ToString();
+                }
+                return model;
 			}
 			else
 			{
@@ -308,7 +326,7 @@ namespace lgk.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select ID,BankName,BankAccount,BankAccountUser,RechargeableDate,AddDate,State,RemitMoney,YuAmount,Remark,UserID,PassDate,Remit001,Remit002,Remit003,Remit004,Remit005,Remit006 ");
+			strSql.Append("select ID,BankName,BankAccount,BankAccountUser,RechargeableDate,AddDate,State,RemitMoney,YuAmount,Remark,UserID,PassDate,Remit001,Remit002,Remit003,Remit004,Remit005,Remit006,Remit007,Remit008 ");
 			strSql.Append(" FROM tb_remit ");
 			if(strWhere.Trim()!="")
 			{
@@ -328,7 +346,7 @@ namespace lgk.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" ID,BankName,BankAccount,BankAccountUser,RechargeableDate,AddDate,State,RemitMoney,YuAmount,Remark,UserID,PassDate,Remit001,Remit002,Remit003,Remit004,Remit005,Remit006 ");
+			strSql.Append(" ID,BankName,BankAccount,BankAccountUser,RechargeableDate,AddDate,State,RemitMoney,YuAmount,Remark,UserID,PassDate,Remit001,Remit002,Remit003,Remit004,Remit005,Remit006,Remit007,Remit008 ");
 			strSql.Append(" FROM tb_remit ");
 			if(strWhere.Trim()!="")
 			{

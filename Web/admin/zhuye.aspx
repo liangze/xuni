@@ -24,9 +24,11 @@
             &nbsp;
         </div>
         <div>
-            <asp:LinkButton ID="lbtnShareOut" runat="server" class="easyui-linkbutton" iconcls="icon-ok" OnClick="lbtnShareOut_Click"> 发放每日分红 </asp:LinkButton>
-            &nbsp;&nbsp;<asp:LinkButton ID="lbtnSettle" runat="server" class="easyui-linkbutton" iconcls="icon-ok" OnClick="lbtnSettle_Click"> 发放奖金 </asp:LinkButton>
-            &nbsp;&nbsp;<asp:LinkButton ID="lbtnBuy" runat="server" class="easyui-linkbutton" iconcls="icon-ok" OnClick="lbtnBuy_Click"> 购买股票 </asp:LinkButton>
+            <asp:LinkButton ID="lbtnShareOut" runat="server" class="easyui-linkbutton" iconcls="icon-ok" OnClick="lbtnShareOut_Click"> 发放静态月分红 </asp:LinkButton>
+           <%-- &nbsp;&nbsp;<asp:LinkButton ID="lbtnSettle" runat="server" class="easyui-linkbutton" iconcls="icon-ok" OnClick="lbtnSettle_Click"> 发放推荐奖 </asp:LinkButton>--%>
+            &nbsp;&nbsp;<asp:LinkButton ID="lbtnBuy" runat="server" class="easyui-linkbutton" iconcls="icon-ok" OnClick="lbtnBuy_Click"> 发放对碰奖 </asp:LinkButton>
+            &nbsp;&nbsp;<asp:LinkButton ID="lbtnBonusPayOne" runat="server" class="easyui-linkbutton" iconcls="icon-ok" OnClick="lbtnBonusPayOne_Click"> 日结奖金发放（推荐奖/对碰奖） </asp:LinkButton>
+            &nbsp;&nbsp;<asp:LinkButton ID="lbtnSplit" runat="server" class="easyui-linkbutton" iconcls="icon-ok" OnClick="lbtnSplit_Click"> 拆分 </asp:LinkButton>
         </div>
     </form>
 </body>

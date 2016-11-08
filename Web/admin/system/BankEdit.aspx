@@ -40,15 +40,18 @@
             <legend class="legSearch">账户设置</legend>
        <table width="100%">
             <tr id="tr1" runat="server">
-                <td width="67px" align="right"><font class="red">*</font>银行名称：
+                <td width="67px" align="right"><font class="red">*</font>开户银行：
                    </td>
                 <td width="210px"><input id="textBankName" type="text" runat="server" class="input_second" size="20" /></td>
+                <td width="67px" align="right"><font class="red">*</font>开户支行：
+                   </td>
+                <td width="210px"><input id="textBankAddress" type="text" runat="server" class="input_second" size="20" /></td>
                 <td width="67px" align="right">
-                   <font class="red">*</font>银行账号：</td>
+                   <font class="red">*</font>开户账号：</td>
                 <td width="210px">
                     <input id="textBankAccount" type="text" runat="server" class="input_second"  /></td>
                 <td width="67px" align="right">
-                   <font class="red">*</font>开户名：</td>
+                   <font class="red">*</font>开户姓名：</td>
                 <td >
                     <input id="textBankAccountUser" type="text" runat="server"  class="input_second" />
                     <asp:LinkButton ID="LinkButton2" runat="server" class="easyui-linkbutton" 

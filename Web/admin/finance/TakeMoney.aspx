@@ -120,7 +120,7 @@
                     </ItemTemplate>
                 </asp:Repeater>
                 <tr id="tr1" runat="server">
-                    <td colspan="1" align="center">
+                    <td colspan="11" align="center">
                         <div class="NoData">
                             <span class="cBlack">
                                 <img alt="" src="../../images/ico_NoDate.gif" width="16" height="16" />

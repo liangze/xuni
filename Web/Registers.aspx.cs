@@ -473,6 +473,15 @@ namespace Web
                                 lgk.BLL.tb_message m = new lgk.BLL.tb_message();
                                 lgk.Model.tb_message M_user = new lgk.Model.tb_message();
                                 M_user.Flag = jiequ[0];
+                                if (M_user.Flag!="0")
+                                {
+                                    M_user.Mcontent = neirong;
+                                    M_user.MobileNum = model.PhoneNum;
+                                    m.Add(M_user);
+                                    GetHtmlFromUrl(url);
+                                    string[] jiequ1 = jieguo.Split(','); 
+                                    M_user.Flag = jiequ1[0];
+                                }
                                 M_user.Mcontent = neirong;
                                 M_user.MobileNum = model.PhoneNum;
                                 m.Add(M_user);

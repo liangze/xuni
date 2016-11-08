@@ -255,7 +255,7 @@ namespace lgk.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select top 1 * from tb_Address");
-            strSql.Append(" where ID=@ID");
+            strSql.Append(" where UserID=@ID");
             SqlParameter[] parameters = {
 					new SqlParameter("@ID", SqlDbType.BigInt,8)};
             parameters[0].Value = ID;

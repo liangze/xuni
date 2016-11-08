@@ -68,19 +68,20 @@ namespace Web.admin.system
             string BankAccount = "";
             string BankName = "";
             string BankAccountUser = "";
-            
+            string BankAddress = "";
             switch (type)
             {
                 case 1:
                     BankAccount = textBankAccount.Value;
                     BankName = textBankName.Value;
                     BankAccountUser = textBankAccountUser.Value;
-
+                    BankAddress = textBankAddress.Value;
                     break;
             }
             lgk.Model.tb_systemBank bank = new lgk.Model.tb_systemBank();
             bank.BankAccount = BankAccount;
             bank.BankName = BankName;
+            bank.BankAddress = BankAddress;
             bank.BankAccountUser = BankAccountUser;
             bank.BankType = type;
             if (bankBLL.Add(bank) > 0)

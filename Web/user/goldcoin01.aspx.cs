@@ -16,7 +16,7 @@ namespace Web.user
 
             if (!IsPostBack)
             {
-                txtBonusAccount.Value = LoginUser.BonusAccount.ToString();
+                txtBonusAccount.Value = LoginUser.Emoney.ToString();
                 BindData();
             }
         }

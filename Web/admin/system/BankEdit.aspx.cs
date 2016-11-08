@@ -38,6 +38,7 @@ namespace Web.admin.system
                 textBankName.Value = bank.BankName;
                 textBankAccount.Value = bank.BankAccount;
                 textBankAccountUser.Value = bank.BankAccountUser;
+                textBankAddress.Value = bank.BankAddress;
                 tr1.Visible = true;
                 tr2.Visible = false;
                 tr3.Visible = false;
@@ -54,6 +55,7 @@ namespace Web.admin.system
                 textBankName.Value = bank.BankName;
                 textBankAccount.Value = bank.BankAccount;
                 textBankAccountUser.Value = bank.BankAccountUser;
+                textBankAddress.Value = bank.BankAddress;
                 tr1.Visible = true;
                 tr2.Visible = false;
                 tr3.Visible = false;
@@ -62,6 +64,7 @@ namespace Web.admin.system
             {
                 textRichesNum.Value = bank.BankAccount;
                 textRichesName.Value = bank.BankAccountUser;
+                textBankAddress.Value = bank.BankAddress;
                 tr1.Visible = false;
                 tr2.Visible = true;
                 tr3.Visible = false;
@@ -70,6 +73,7 @@ namespace Web.admin.system
             {
                 textPayNum.Value = bank.BankAccount;
                 textPayName.Value = bank.BankAccountUser;
+                textBankAddress.Value = bank.BankAddress;
                 tr1.Visible = false;
                 tr2.Visible = false;
                 tr3.Visible = true;
@@ -84,17 +88,23 @@ namespace Web.admin.system
         {
             if (textBankName.Value == "")
             {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('银行名称不能为空!');", true);
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('开户银行不能为空!');", true);
+                return;
+            }
+            if (textBankAddress.Value == "")
+            {
+
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('开户支行不能为空!');", true);
                 return;
             }
             if (textBankAccount.Value == "")
             {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('银行账号不能为空!');", true);
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('开户账号不能为空!');", true);
                 return;
             }
             if (textBankAccountUser.Value == "")
             {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('开户名不能为空!');", true);
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('开户姓名不能为空!');", true);
                 return;
             }
             lgk.Model.tb_systemBank bank = bankBLL.GetModel(getIntRequest("ID"));
@@ -103,6 +113,7 @@ namespace Web.admin.system
                 bank.BankAccount = textBankAccount.Value.Trim();
                 bank.BankName = textBankName.Value.Trim();
                 bank.BankAccountUser = textBankAccountUser.Value.Trim();
+                bank.BankAddress = textBankAddress.Value.Trim();
                 if (bankBLL.Update(bank))
                 {
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('设置成功！');window.location.href='AccountSet.aspx';", true);
@@ -120,6 +131,7 @@ namespace Web.admin.system
                 bank.BankAccount = textBankAccount.Value.Trim();
                 bank.BankName = textBankName.Value.Trim();
                 bank.BankAccountUser = textBankAccountUser.Value.Trim();
+                bank.BankAddress = textBankAddress.Value.Trim();
                 if (bankBLL.Add(bank) > 0)
                 {
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('设置成功！');window.location.href='AccountSet.aspx';", true);

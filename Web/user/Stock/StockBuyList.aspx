@@ -3,7 +3,7 @@
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server"> 
+<head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link rel="shortcut icon" href="../images/favicon.ico" type="images/x-icon" />
@@ -54,7 +54,7 @@
     <script src="../../JS/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script src="../../JS/echarts/esl.js" type="text/javascript"></script>
 
- 
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -64,67 +64,67 @@
                 <div class="row-fluid">
                     <div class="span12">
 
-                  
-                    <h2> <%=GetLanguage("KChart")%><%--K线图--%>
-                    </h2>
 
-                    <p />
-                    <p></p>
-                    <div class="criteriaTable">
-                    </div>
-                    <br>
-                    <!--内容-->
-                    <div class="row" style="background-color: black; color: white;">
-                        <div class="col-sm-9 boright" style="width: 100%">
-                            <div class="main-right">
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col-sm-12">
-                                        <span>Interval:</span>&nbsp;&nbsp;
+                        <h2>走势图
+                        </h2>
+
+                        <p />
+                        <p></p>
+                        <div class="criteriaTable">
+                        </div>
+                        <br>
+                        <!--内容-->
+                        <div class="row" style="background-color: black; color: white;">
+                            <div class="col-sm-9 boright" style="width: 100%">
+                                <div class="main-right">
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-12">
+                                            <span>Interval:</span>&nbsp;&nbsp;
                                         <a href="javascript:void(0)" onclick="hiddenput(1)" style="color: green;">5m</a>&nbsp;&nbsp;
                                         <a href="javascript:void(0)" onclick="hiddenput(2)" style="color: green;">15m</a>&nbsp;&nbsp;
                                         <a href="javascript:void(0)" onclick="hiddenput(3)" style="color: red;">30m</a>&nbsp;&nbsp;
                                         <a href="javascript:void(0)" onclick="hiddenput(4)" style="color: red;">1h</a>&nbsp;&nbsp;
                                         <a href="javascript:void(0)" onclick="hiddenput(5)" style="color: white;">1d</a>&nbsp;&nbsp;
                                         <a href="javascript:void(0)" onclick="hiddenput(6)" style="color: white;">1M</a>&nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div style="border: 1px solid #CCCCCA; width: 100%;">
-                                            <div id="main1" style="border: 0px solid rgb(204, 204, 202); width: 100%; margin-bottom: 20px; height: 350px; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: rgb(0, 0, 0);" _echarts_instance_="ec_1467333958695">
-                                                <div style="position: relative; overflow: hidden; width: 771px; height: 350px; cursor: default;">
-                                                    <canvas width="771" height="350" data-zr-dom-id="zr_0" style="-webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" class="auto-style1"></canvas>
-                                                </div>
-                                                <div style="position: absolute; display: none; border: 0px solid rgb(51, 51, 51); white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); border-radius: 4px; color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; font-family: 'Microsoft YaHei'; line-height: 21px; text-decoration: none; padding: 5px; left: 122.8px; top: 81px; background-color: rgba(50, 50, 50, 0.701961);">
-                                                    2016-07-01 08:45:06<br>
-                                                    Amount : 36489<br>
-                                                    Opening : 0.23  High : 0.23<br>
-                                                    Closing : 0.22  Low : 0.21
-                                                </div>
-                                            </div>
-                                            <div id="main2" style="border: 0px solid rgb(204, 204, 202); width: 100%; margin-bottom: 20px; height: 250px; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: rgb(0, 0, 0);" _echarts_instance_="ec_1467333958696">
-                                                <div style="position: relative; overflow: hidden; width: 771px; height: 250px; cursor: default;">
-                                                    <canvas width="771" height="250" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 771px; height: 250px; -webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
-                                                </div>
-                                                <div style="position: absolute; display: none; border: 0px solid rgb(51, 51, 51); white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); border-radius: 4px; color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; font-family: Arial, Verdana, sans-serif; line-height: 21px; text-decoration: none; padding: 5px; left: 122.8px; top: 187.412px; background-color: rgba(50, 50, 50, 0.701961);">
-                                                    2016-07-01 08:45:06<br>
-                                                    <span style="display: inline-block; margin-right: 5px; border-radius: 10px; width: 9px; height: 9px; background-color: #CD0000"></span>Amount : 36,489
-                                                </div>
-                                            </div>
                                         </div>
+                                        <div class="col-sm-12">
+                                            <div style="border: 1px solid #CCCCCA; width: 100%;">
+                                                <div id="main1" style="border: 0px solid rgb(204, 204, 202); width: 100%; margin-bottom: 20px; height: 350px; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: rgb(0, 0, 0);" _echarts_instance_="ec_1467333958695">
+                                                    <div style="position: relative; overflow: hidden; width: 771px; height: 350px; cursor: default;">
+                                                        <canvas width="771" height="350" data-zr-dom-id="zr_0" style="-webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" class="auto-style1"></canvas>
+                                                    </div>
+                                                    <div style="position: absolute; display: none; border: 0px solid rgb(51, 51, 51); white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); border-radius: 4px; color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; font-family: 'Microsoft YaHei'; line-height: 21px; text-decoration: none; padding: 5px; left: 122.8px; top: 81px; background-color: rgba(50, 50, 50, 0.701961);">
+                                                        2016-07-01 08:45:06<br>
+                                                        Amount : 36489<br>
+                                                        Opening : 0.23  High : 0.23<br>
+                                                        Closing : 0.22  Low : 0.21
+                                                    </div>
+                                                </div>
+                                                <div id="main2" style="border: 0px solid rgb(204, 204, 202); width: 100%; margin-bottom: 20px; height: 250px; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: rgb(0, 0, 0);" _echarts_instance_="ec_1467333958696">
+                                                    <div style="position: relative; overflow: hidden; width: 771px; height: 250px; cursor: default;">
+                                                        <canvas width="771" height="250" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 771px; height: 250px; -webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                                    </div>
+                                                    <div style="position: absolute; display: none; border: 0px solid rgb(51, 51, 51); white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); border-radius: 4px; color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; font-family: Arial, Verdana, sans-serif; line-height: 21px; text-decoration: none; padding: 5px; left: 122.8px; top: 187.412px; background-color: rgba(50, 50, 50, 0.701961);">
+                                                        2016-07-01 08:45:06<br>
+                                                        <span style="display: inline-block; margin-right: 5px; border-radius: 10px; width: 9px; height: 9px; background-color: #CD0000"></span>Amount : 36,489
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                        <div id="foot_order" style="height: 30px; text-align: center; display: none;">
-                                            <input type="button" class="btn btn-primary" value="停止刷新" onclick="Ecarts.BtnStopRefresh()" />&nbsp;
+                                            <div id="foot_order" style="height: 30px; text-align: center; display: none;">
+                                                <input type="button" class="btn btn-primary" value="停止刷新" onclick="Ecarts.BtnStopRefresh()" />&nbsp;
                                             <input type="button" class="btn btn-primary" value="手动刷新" onclick="Ecarts.BtnHandRefresh()" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
+
                         </div>
-                         
-                    </div>
-               
-                         <input type="hidden" runat="server" id="hdmoney" />
-        <input type="hidden" runat="server" id="hdprice" />
+
+                        <input type="hidden" runat="server" id="hdmoney" />
+                        <input type="hidden" runat="server" id="hdprice" />
                         <!--content start-->
                         <%--<div class="widget-box">
                             <div class="widget-title">
@@ -296,7 +296,7 @@
             </div>
         </div>
     </form>
-   <%-- <script type="text/javascript">
+    <%-- <script type="text/javascript">
         function getMaxDate() {
             var curDate = new Date();
             curDate.setMonth(curDate.getMonth());
@@ -441,7 +441,7 @@
         }
     </script>--%>
 </body>
-       <script type="text/javascript">
+<script type="text/javascript">
     function getMaxDate() {
         var curDate = new Date();
         curDate.setMonth(curDate.getMonth());
@@ -869,5 +869,5 @@
             }
         });
     });
-</script>   
+</script>
 </html>

@@ -172,6 +172,24 @@ namespace lgk.Model
             get { return _remit006; }
             set { _remit006 = value; }
         }
+        /// <summary>
+        /// Remit007
+        /// </summary>		
+        private string _remit007;
+        public string Remit007
+        {
+            get { return _remit007; }
+            set { _remit007 = value; }
+        }
+        /// <summary>
+        /// Remit008
+        /// </summary>		
+        private string _remit008;
+        public string Remit008
+        {
+            get { return _remit008; }
+            set { _remit008 = value; }
+        }
         #endregion Model
 
     }

@@ -1260,32 +1260,46 @@ namespace Library
             //AllBonusAccount = 0;// 电子积分		3
             //StockAccount = 0;// 云商积分		4
             //StockMoney = 0;// 感恩积分		5
+            if (type == 1)
+            {
+                bi = "注册积分";
+            }
+            else if (type == 2)
+            {
+                bi = "奖金积分";
+            }
+            else if (type == 3)
+            {
+                bi = "电子积分";
+            }
+            else if (type == 4)
+            {
+                bi = "云商积分";
+            }
+            else if (type == 5)
+            {
+                bi = "感恩积分";
+            }
             //GLmoney = 0;// 购物积分			6
             //ShopAccount = 0;// 消费积分		7
             //User011// 爱心基金	 8
             //User012// 云购积分	 9
-
-            if (type == 1)
+            else if (type == 6)
             {
-                bi = "流通币";
+                bi = "购物积分";
             }
-            else if (type == 2)
+            else if (type == 7)
             {
-                bi = "MDD钻币";
+                bi = "消费积分";
             }
-            else if (type == 3)
+            else if (type == 8)
             {
-                bi = "平台费用";
+                bi = "爱心基金";
             }
-            else if (type == 4)
+            else if (type == 9)
             {
-                bi = "购物币";
+                bi = "云购积分";
             }
-            else if (type == 5)
-            {
-                bi = "注册币";
-            }
-
             return bi;
         }
 

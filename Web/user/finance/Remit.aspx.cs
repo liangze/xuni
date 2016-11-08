@@ -104,12 +104,14 @@ namespace Web.user.finance
             {
                 lblBankAccount.Text = "";
                 lblBankAccountUser.Text = "";
+                lbtextBankAddress.Text = "";
             }
             else
             {
                 lgk.Model.tb_systemBank model = bankBLL.GetModel(strName);
                 lblBankAccount.Text = model.BankAccount;
                 lblBankAccountUser.Text = model.BankAccountUser;
+                lbtextBankAddress.Text = model.BankAddress;
             }
         }
 
@@ -258,7 +260,8 @@ namespace Web.user.finance
             remitInfo.BankName = dropBank.SelectedIndex == 0 ? string.Empty : dropBank.SelectedValue;
             remitInfo.BankAccount = this.lblBankAccount.Text;
             remitInfo.BankAccountUser = this.lblBankAccountUser.Text;
-
+            remitInfo.Remit007 = TextBoxBankadr.Text;//汇出银行支行
+            remitInfo.Remit008 = TextBankna.Value;//汇出银行开户姓名
             remitInfo.Remit003 = strOutBank;//汇出银行
             remitInfo.Remit004 = strOutAccount;//汇出账户
             remitInfo.Remit002 = 0;
@@ -268,7 +271,7 @@ namespace Web.user.finance
 
             if (iRemitID > 0)
             {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("application") + "');window.location.href='Remit.aspx';", true);//申请汇款成功
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('申请充值成功');window.location.href='Remit.aspx';", true);//申请汇款成功
             }
         }
 
