@@ -7,10 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Web.admin.finance {
+namespace Web.admin.team {
     
     
-    public partial class JournalDetail {
+    public partial class Rongyu {
         
         /// <summary>
         /// Head1 控件。
@@ -22,67 +22,67 @@ namespace Web.admin.finance {
         protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
         
         /// <summary>
-        /// form1 控件。
+        /// Form1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
         
         /// <summary>
-        /// LinkButton1 控件。
+        /// dropType 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.DropDownList dropType;
         
         /// <summary>
-        /// LinkButton2 控件。
+        /// txtInput 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtInput;
         
         /// <summary>
-        /// ltRemark 控件。
+        /// txtStar 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltRemark;
+        protected global::System.Web.UI.WebControls.TextBox txtStar;
         
         /// <summary>
-        /// ltIncome 控件。
+        /// txtEnd 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltIncome;
+        protected global::System.Web.UI.WebControls.TextBox txtEnd;
         
         /// <summary>
-        /// ltExpenditure 控件。
+        /// btnSearch 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltExpenditure;
+        protected global::System.Web.UI.WebControls.LinkButton btnSearch;
         
         /// <summary>
-        /// ltBalance 控件。
+        /// lbtnExport 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltBalance;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnExport;
         
         /// <summary>
         /// Repeater1 控件。
@@ -94,13 +94,13 @@ namespace Web.admin.finance {
         protected global::System.Web.UI.WebControls.Repeater Repeater1;
         
         /// <summary>
-        /// tr1 控件。
+        /// divno 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr1;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow divno;
         
         /// <summary>
         /// AspNetPager1 控件。

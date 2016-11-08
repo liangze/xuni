@@ -244,13 +244,26 @@ namespace Web.user.Stock
                 {
                    
                     decimal Number = BuyNumber - issueInfo.SurplusAmount;//需要从公司账户购买的数量
-                    issueInfo.SurplusAmount = 0;//更新挂售云商积分剩余量,发行数量
-                    stockIssueBLL.Update(issueInfo);
-                    #region 购买云商积分,公司账户云商积分减少
                     lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
-                    systemMoney.MoneyAccount -= Number;//需要从公司账户购买的数量
-                    #endregion
-                   
+                    if(systemMoney==null)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('云商积分已售完');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                        return;
+                    }
+                    if(systemMoney.MoneyAccount< Number)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('平台云商积分出售数量不足');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                        return;
+                    }
+                    else
+                    {
+                        issueInfo.SurplusAmount = 0;//更新挂售云商积分剩余量,发行数量
+                        stockIssueBLL.Update(issueInfo);
+                        #region 购买云商积分,公司账户云商积分减少
+                        systemMoney.MoneyAccount -= Number;//需要从公司账户购买的数量
+                        systemBll.Update(systemMoney);
+                        #endregion
+                    }
                 }
             }
             if (issueInfo == null)
@@ -309,6 +322,21 @@ namespace Web.user.Stock
             #endregion
             UpdateAccount("StockAccount", userInfo.UserID, BuyNumber, 1);//买家云商积分账户更新
 
+            #region  解冻推荐会员的云购积分
+            long UserID = getLoginID();//登陆会员Id
+            long RecommendID = userInfo.RecommendID;//获取推荐人ID
+            lgk.Model.tb_user orUerser = userBLL.GetModel(RecommendID);
+            string Remark = "会员"+GetUserCode(UserID)+"购买云商积分，解冻云购积分";
+            UpdateAccount("User012", RecommendID, BuyNumber, 0);//云购积分解冻更新
+            UpdateAccount("User014", RecommendID, BuyNumber, 1);//
+            UpdateAccount("StockAccount", RecommendID, BuyNumber, 1);//获得云商积分
+
+            decimal balanceAmount = orUerser.User012 - BuyNumber;//云购积分账户结余金额
+            add_journal(RecommendID, 0, BuyNumber, balanceAmount, 9, Remark, "", RecommendID);//云购积分加入流水线
+
+            decimal balanceAmount2 = orUerser.StockAccount + BuyNumber;//云商积分账户结余金额
+            add_journal(RecommendID, BuyNumber, 0, balanceAmount2, 4, Remark, "", RecommendID);//云商积分加入流水线
+            #endregion
 
             //云商积分加入流水线
             lgk.Model.tb_journal joadanInfo = new lgk.Model.tb_journal();
@@ -462,6 +490,7 @@ namespace Web.user.Stock
                 #region 卖出云商积分,公司账户云商积分增加
                 lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
                 systemMoney.MoneyAccount += SellNumber;
+                systemBll.Update(systemMoney);
                 #endregion
                 //云商积分加入流水线
                 string Remark = "卖出云商积分";
@@ -533,6 +562,7 @@ namespace Web.user.Stock
                         # region 卖出云商积分,公司账户云商积分增加
                         lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
                         systemMoney.MoneyAccount += SellNumber;
+                        systemBll.Update(systemMoney);
                         //UpdateAccount("StockAccount", 1, SellNumber, 1);//公司云商积分账户更新
                         //string RemaUser = "会员卖出云商积分";
                         //lgk.Model.tb_user useradmin = userBLL.GetModel(UserID);

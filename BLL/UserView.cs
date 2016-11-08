@@ -305,7 +305,7 @@ namespace lgk.BLL
                     {
                         map = "image5"; // 钻卡会员
                     }
-                    if (int.Parse(sd.LevelID.ToString()) == 5)
+                    if (int.Parse(sd.LevelID.ToString()) == 0)
                     {
                         map = "image4";//  创业合伙人
                     }

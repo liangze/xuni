@@ -98,6 +98,13 @@ namespace Web.admin.finance
                 ltExpenditure.Text = "爱心基金账户";
                 ltBalance.Text = "爱心基金账户";
             }
+            else if (iJournalType == 9)
+            {
+                ltRemark.Text = "云购积分账户";
+                ltIncome.Text = "云购积分账户";
+                ltExpenditure.Text = "云购积分账户";
+                ltBalance.Text = "云购积分账户";
+            }
 
             string strWhere = string.Format("JournalType=" + iJournalType + " and j.UserID=" + iUserID);
 
