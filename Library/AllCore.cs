@@ -1482,39 +1482,39 @@ namespace Library
             htb.Add("RecommendCode", "推荐人编号");
             htb.Add("UserCode", "会员编号");
             htb.Add("TrueName", "会员姓名");
-            htb.Add("RegMoney", "注册金额");
-            htb.Add("LevelName", "会员级别");
-            htb.Add("User006", "代理中心编号");
-            htb.Add("ParentCode", "安置人编号");
-            htb.Add("User008", "报单方式");
-            htb.Add("JhType", "激活方式");
-            htb.Add("ZhuQu", "注册区域");
+            //htb.Add("RegMoney", "注册金额");
+            //htb.Add("LevelName", "会员级别");
+            //htb.Add("User006", "代理中心编号");
+            //htb.Add("ParentCode", "安置人编号");
+            htb.Add("LevelID", "等级");
+            htb.Add("PhoneNum", "手机号码");
+            htb.Add("ZhuQu", "荣誉等级");
             htb.Add("RegTime", "注册日期");
-            htb.Add("OpenTime", "开通日期");
-            dt.Columns.Remove("User007");
-            dt.Columns.Remove("RegMoney");
-            dt.Columns.Remove("IsOpend");
+
+            ////dt.Columns.Remove("LevelName");
             dt.Columns.Remove("LevelID");
-            dt.Columns.Remove("UserID");
-            dt.Columns.Remove("User002");
-            dt.Columns.Remove("IsLock");
-            dt.Columns.Remove("Level03");
-            DataColumn col = new DataColumn() { ColumnName = "JhType", DefaultValue = "" };
-            dt.Columns.Add(col);
+            //dt.Columns.Remove("PhoneNum");
+
+            //dt.Columns.Remove("RegTime");  
+            //DataColumn col = new DataColumn() { ColumnName = "LevelName", DefaultValue = "" };
+            //dt.Columns.Add(col);
             DataColumn col2 = new DataColumn() { ColumnName = "ZhuQu", DefaultValue = "" };
             dt.Columns.Add(col2);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                int type = 0;
-                string user004 = dt.Rows[i]["User004"].ToString();
-                int.TryParse(user004, out type);
-                string jhType = JhType(type);
-                dt.Rows[i]["JhType"] = jhType;
-                string loction = dt.Rows[i]["Location"].ToString() == "1" ? "左区" : "右区";
+                //int type = 0;
+                //string user004 = dt.Rows[i]["User004"].ToString();
+                //int.TryParse(user004, out type);
+                //string jhType = JhType(type);
+                //dt.Rows[i]["JhType"] = jhType;
+               //string xx= 
+                string loction = decimal.Parse( dt.Rows[i]["RightNewScore"].ToString()) > decimal.Parse(dt.Rows[i]["LeftNewScore"].ToString()) ? Rongyu(decimal.Parse(dt.Rows[i]["RightNewScore"].ToString())) : Rongyu(decimal.Parse(dt.Rows[i]["LeftNewScore"].ToString()));
                 dt.Rows[i]["ZhuQu"] = loction;
             }
-            dt.Columns.Remove("User004");
-            dt.Columns.Remove("Location");
+            
+            dt.Columns.Remove("userid");
+            dt.Columns.Remove("RightNewScore");
+            dt.Columns.Remove("LeftNewScore");
             string title = "开通会员列表";
             return ed.daochu(dt, htb, path, title);
         } 
@@ -3091,6 +3091,34 @@ namespace Library
         public DataSet GetGoodsPropertySize(int goodsID)
         {
             return dal.GetGoodsPropertySize(goodsID);
+        }
+        /// <summary>
+        /// 荣誉会员
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public string Rongyu(decimal  type)
+        {
+            string str = "";
+
+            if (type>= getParamAmount("Static0")*10000&& type < getParamAmount("Static1") * 10000)
+            {
+                str = "主任";
+            }
+            if (type >= getParamAmount("Static1") * 10000 && type < getParamAmount("Static2") * 10000)
+            {
+                str = "经理";
+            }
+            if (type >= getParamAmount("Static2") * 10000 && type < getParamAmount("Static3") * 10000)
+            {
+                str = "总监";
+            } 
+            if (type >= getParamAmount("Static3") )
+            {
+                str = "董事"; 
+            }
+            return str;
+
         }
     }
 }

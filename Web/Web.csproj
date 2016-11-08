@@ -436,6 +436,7 @@
     <Content Include="admin\tb_Link\List.aspx" />
     <Content Include="admin\tb_Link\indexImgList.aspx" />
     <Content Include="admin\team\RecommendTree2.aspx" />
+    <Content Include="admin\team\Rongyu.aspx" />
     <Content Include="ckeditor\adapters\jquery.js" />
     <Content Include="ckeditor\CHANGES.html" />
     <Content Include="ckeditor\ckeditor.js" />
@@ -2757,6 +2758,13 @@
     </Compile>
     <Compile Include="admin\team\RecommendTree2.aspx.designer.cs">
       <DependentUpon>RecommendTree2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\team\Rongyu.aspx.cs">
+      <DependentUpon>Rongyu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\team\Rongyu.aspx.designer.cs">
+      <DependentUpon>Rongyu.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\tpwd.aspx.cs">
       <DependentUpon>tpwd.aspx</DependentUpon>
