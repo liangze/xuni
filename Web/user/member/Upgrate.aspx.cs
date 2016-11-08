@@ -46,32 +46,45 @@ namespace Web.user.member
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            int newLevelID = int.Parse(DropDownList1.SelectedValue);
-            if (newLevelID <= 0)
+            int nlevel = Convert.ToInt32(DropDownList1.SelectedValue);
+            lgk.Model.tb_user model = new lgk.Model.tb_user();
+            model = userBLL.GetModel(getLoginID());
+            if (model.LevelID < nlevel)
             {
-                DropDownList1.SelectedIndex = 0;
-                Response.Write("<script>alert('请选择升级等级');location.href=Upgrade.aspx;</script>");
-                return;
-            }
-            decimal pay = PayFor();
-            if (newLevelID >= 0 && (LoginUser.Emoney >= pay)) // 扣除100%注册币
-            {
-                // 存储过程，传入UID,pay,selectedValue,type1(1.100%;2.50%)
-                if (bonusBLL.Upgrade(LoginUser.UserID,pay, newLevelID) > 0)
+                int newLevelID = int.Parse(DropDownList1.SelectedValue);
+                if (newLevelID <= 0)
                 {
                     DropDownList1.SelectedIndex = 0;
-                    Response.Write("<script>alert('升级成功');location.href=Upgrade.aspx;</script>");
+                    Response.Write("<script>alert('请选择升级等级');location.href=Upgrade.aspx;</script>");
+                    return;
+                }
+                // decimal pay = PayFor();
+                decimal pay = levelBLL.GetModel(nlevel).RegMoney - levelBLL.GetModel(model.LevelID).RegMoney;
+                if (newLevelID >= 0 && (LoginUser.Emoney >= pay)) // 扣除100%注册币
+                {
+                    // 存储过程，传入UID,pay,selectedValue,type1(1.100%;2.50%)
+
+                    if (bonusBLL.Upgrade(LoginUser.UserID, pay, newLevelID) > 0)
+                    {
+                        DropDownList1.SelectedIndex = 0;
+                        Response.Write("<script>alert('升级成功');location.href=Upgrade.aspx;</script>");
+                    }
+                    else
+                    {
+                        DropDownList1.SelectedIndex = 0;
+                        Response.Write("<script>alert('升级失败');location.href=Upgrade.aspx;</script>");
+                    }
                 }
                 else
                 {
                     DropDownList1.SelectedIndex = 0;
-                    Response.Write("<script>alert('升级失败');location.href=Upgrade.aspx;</script>");
+                    Response.Write("<script>alert('注册币不足');location.href=Upgrade.aspx;</script>");
                 }
             }
             else
             {
                 DropDownList1.SelectedIndex = 0;
-                Response.Write("<script>alert('注册币不足');location.href=Upgrade.aspx;</script>");
+                Response.Write("<script>alert('升级等级小于当前等级');location.href=Upgrade.aspx;</script>");
             }
         }
         // 付款=升级至某等级的投资额-当前等级的投资额
