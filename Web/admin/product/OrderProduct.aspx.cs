@@ -124,13 +124,13 @@ namespace web.admin.product
 
             //tb_OrderDetail od=obd.GetModelByOrderID(ID);
             lgk.Model.tb_Order order = ob.GetModelByCode(e.CommandArgument.ToString());
-            lgk.Model.tb_user user1 = userBLL.GetModel(long.Parse(e.CommandArgument.ToString()));//推荐用户
+            //lgk.Model.tb_user user1 = userBLL.GetModel(long.Parse(e.CommandArgument.ToString()));//推荐用户
             //tb_level level2 = lb.GetModel(2);
             //tb_level level3 = lb.GetModel(3);
             //int pid = od.ProcudeID; //商品编号
             //int pv = pb.GetModel(pid).procudePV*od.OrderSum;
             //decimal emoney=od.OrderTotal;
-            if (user1.PhoneNum == "")
+            if (order.Order5 == "")
             {
                 MessageBox.ShowAndRedirect(this, "请填写手机号!", "OrderProduct.aspx");
                 return;
@@ -214,7 +214,7 @@ namespace web.admin.product
                                 string DXMM = System.Configuration.ConfigurationManager.AppSettings["DXMM"];
                                 string uid = DX.ToString();
                                 string auth = DXMM.ToString();
-                                string mobile = user1.PhoneNum;
+                                string mobile = order.Order5;
                                 string url = "http://sms.10690221.com:9011/hy/?uid=" + uid + "&auth=" + auth + "&mobile=" + mobile + "&msg=";
 
                                 //http://ip:port/hy/?uid=1234&auth=faea920f7412b5da7be0cf42b8c93759&mobile=13612345678&msg=hello&expid=0
@@ -233,14 +233,14 @@ namespace web.admin.product
                                 if (M_user.Flag != "0")
                                 {
                                     M_user.Mcontent = neirong;
-                                    M_user.MobileNum = user1.PhoneNum;
+                                    M_user.MobileNum = order.Order5;
                                     m.Add(M_user);
                                     GetHtmlFromUrl(url);
                                     string[] jiequ1 = jieguo.Split(',');
                                     M_user.Flag = jiequ1[0];
                                 }
                                 M_user.Mcontent = neirong;
-                                M_user.MobileNum = user1.PhoneNum;
+                                M_user.MobileNum = order.Order5;
                                 m.Add(M_user);
                             }
                             MessageBox.ShowAndRedirect(this, "发货已成功!", "OrderProduct.aspx");

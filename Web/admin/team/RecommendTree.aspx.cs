@@ -52,12 +52,12 @@ namespace Web.admin.team
             }
             else if (userInfo.IsOpend == 2)
             {
-                dd = "[已开通]";
+                dd = "[已开通]  [左区业绩]" + userInfo.LeftScore + "[右区业绩]" + userInfo.RightScore + "[左总业绩]" + userInfo.LeftNewScore + "[右总业绩]" + userInfo.RightNewScore;  
             }
 
             if (uid == 1)
             {
-                node.Text = userInfo.UserCode;
+                node.Text = userInfo.UserCode+"  [左区业绩]"+ userInfo.LeftScore+ " [右区业绩]"+ userInfo.RightScore + " [左总业绩]"+ userInfo.LeftNewScore + " [右总业绩]"+ userInfo.RightNewScore;
                 node.ImageUrl = "../../images/ico_admin.gif";
                 node.NavigateUrl = "RecommendTree.aspx?UserID=" + userInfo.UserID;
             }
