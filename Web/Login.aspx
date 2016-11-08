@@ -98,9 +98,45 @@
                 color: #fff;
             }
     </style>
+      <style type="text/css">
+        a.apk {
+            font-weight: bold;
+            font-size: 18px;
+            width: 100%;
+            text-align: center;
+            display: block;
+            margin-top: 20px;
+            background-color: rgba(0,0,0,0.5);
+            padding: 15px;
+            border: 1px solid rgba(0,0,0,0.7);
+            border-radius: 5px;
+        }
+
+            a.apk * {
+                vertical-align: middle;
+                margin-right: 10px;
+            }
+
+            a.apk img {
+                width: 15%;
+            }
+
+        .backdiv {
+            width: 500px;
+            overflow: hidden;
+            border: 6px solid #ccc;
+            padding: 15px;
+            position: absolute;
+            z-index: 400;
+            background-color: #fff;
+            display: none;
+        }
+    </style>
+     <script type="text/javascript" src="JS/jquery-1.7.1.min.js"></script>
+    <script src="../js/login.js?v=1.0" type="text/javascript"></script>
 </head>
 <body>
-
+   
     <div id="top"></div>
     <div id="content">
         <div class="container-fluid">
@@ -138,7 +174,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <div class="controls"><a href="javascript:void(0)" class="btn">找回密码</a></div>
+                                        <div class="controls"><a href="javascript:void(0)" class="thickbox">忘记密码?</a></div>
                                     </div>
                                     <div class="control-group">
 
@@ -146,6 +182,57 @@
                                             OnClick="btnLogin_Click" Text="提交" />
                                     </div>
                                 </asp:Panel>
+                                <div class="backdiv" style="left:0px">
+                        <a style="position: relative; top: -10px; left: 315px; color: Gray;" href="javascript:void(0)"
+                            id="cle">关闭</a>
+                        <div class="backinput" >
+                            <table>
+                                <tr>
+                                    <td align="right">
+                                        <span id="UserName">用户名</span>：
+                                    </td>
+                                    <td class="winput">
+                                        <asp:TextBox ID="txtUserCode" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <span id="question">密保问题</span>：
+                                    </td>
+                                    <td class="winput">
+                                        <asp:DropDownList ID="dropQuestion" runat="server">
+                                            <asp:ListItem Value="0">请选择</asp:ListItem>
+                                            <asp:ListItem Value="1">您的姓名是？</asp:ListItem>
+                                            <asp:ListItem Value="2">您的家乡是？</asp:ListItem>
+                                            <asp:ListItem Value="3">您最敬佩的人是？</asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:DropDownList ID="dropQuestionEn" runat="server" Style="display: none;">
+                                            <asp:ListItem Value="0">Please select</asp:ListItem>
+                                            <asp:ListItem Value="1">Your name is?</asp:ListItem>
+                                            <asp:ListItem Value="2">Your home is?</asp:ListItem>
+                                            <asp:ListItem Value="3">People you admire are?</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <span id="anwers">密保答案</span>：
+                                    </td>
+                                    <td class="winput">
+                                        <asp:TextBox ID="txtAnswer" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right"></td>
+                                    <td class="btns">
+                                       <%-- <input id="btnConfirm" type="button" value=" 确认 " style="width: 100px; height: 30px;" runat="server"
+                                           onclick="btnLogin_Click"/>--%>
+                                        <asp:Button ID="Button1" runat="server" Text="确认" style="width: 100px; height: 30px;  " OnClick="btnLogin_Click1" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                             </form>
                         </div>
                     </div>
@@ -159,6 +246,10 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/maruti.js"></script>
+        
     <%-- </form>--%>
+       
 </body>
+    
+   
 </html>

@@ -166,7 +166,36 @@ namespace Web
                 Response.Redirect("/user/index.aspx");
             }
         }
+        protected void btnLogin_Click1(object sender, EventArgs e)
+        {
+            lgk.Model.tb_user u = userBLL.GetModel(GetUserID(txtUserCode.Text.Trim()));
+            if (dropQuestion.SelectedValue=="0")
+            {
+                MessageBox.Show(this, "请选择问题");
+                return;
+            }
+            if (txtAnswer.Text == "")
+            {
+                MessageBox.Show(this, "答案不能为空");
+                return;
+            }
+            if (u.User008 == dropQuestion.SelectedItem.Text && u.User009 == txtAnswer.Text.Trim())
+            {
+                u.Password = "C4CA4238A0B923820DCC509A6F75849B";
+                u.SecondPassword = "C4CA4238A0B923820DCC509A6F75849B";
+                u.ThreePassword = "C4CA4238A0B923820DCC509A6F75849B";
+                userBLL.Update(u);
+                MessageBox.Show(this, "一二三级密码都设置为 1 ，请尽快登录修改 !");
+                return;
+            }
+            else
+            {
+                MessageBox.Show(this, "密保问题答案不正确");
+                return;
+            }
 
+
+        }
         protected void AdminEnter(string adminid, long iUserID)
         {
             lgk.Model.tb_user user = userBLL.GetModel(iUserID);
