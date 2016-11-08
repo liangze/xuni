@@ -118,6 +118,17 @@ namespace lgk.BLL
         {
             return dal.ExecProcedure(strProcName, sqlParams);
         }
+        /// <summary>
+        /// 执行会员升级存储过程
+        /// </summary>
+        /// <param name="userid">升级的会员ID</param>
+        /// <param name="money">补差额</param>
+        /// <param name="newlevel">新的等级</param>
+        /// <returns></returns>
+        public int Upgrade(long userid, decimal money, int newlevel)
+        {
+            return dal.Upgrade(userid, money, newlevel);
+        }
 
         /// <summary>
         /// 结算购物奖
