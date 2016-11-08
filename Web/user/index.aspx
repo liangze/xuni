@@ -32,7 +32,7 @@
                         <li><a href="index.aspx">首页</a></li>
                         <li><a href="member/PersonalInfo.aspx" target="mainfrom">会员资料</a></li>
                         <li><a href="member/ModifyPassWord.aspx" target="mainfrom">修改密码</a></li>
-                        <li><a href="member/Recast.aspx" target="mainfrom">账号复投</a></li>
+                        <li><a href="member/Upgrate.aspx" target="mainfrom">会员升级</a></li>
                     </ul>
                 </li>
                 <li class="submenu"><a href="JavaScript:;"><span><i class="icon icon-tasks"></i>业务管理</span></a>

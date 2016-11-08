@@ -519,7 +519,36 @@ new SqlParameter("@ID", SqlDbType.BigInt)
                 return -1;
             }
         }
-
+        /// <summary>
+        /// 执行会员升级存储过程
+        /// </summary>
+        /// <param name="userid">升级的会员ID</param>
+        /// <param name="money">补差额</param>
+        /// <param name="newlevel">新的等级</param>
+        /// <returns></returns>
+        public int Upgrade(long userid,decimal money,int newlevel)
+        {
+            int iResult = 0;
+            try
+            {
+                SqlParameter[] sqlParams = {
+                    new SqlParameter("@UserID", SqlDbType.BigInt),
+                    new SqlParameter("@Money",SqlDbType.Decimal),
+                    new SqlParameter("@NewLevel",SqlDbType.Int)};
+                sqlParams[0].Value = userid;
+                sqlParams[1].Value = money;
+                sqlParams[2].Value = newlevel;
+                iResult = SqlHelper.ExecuteNonQuery(SqlHelper.connStrs, CommandType.StoredProcedure, "proc_Upgrade", sqlParams);
+                if (iResult != -1)
+                    return 1;
+                else
+                    return 0;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
 
         /// <summary>
         /// 结算购物奖

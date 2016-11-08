@@ -431,6 +431,7 @@
     <Content Include="admin\system\Security.aspx" />
     <Content Include="admin\system\StockParam.aspx" />
     <Content Include="admin\tb_Link\shopImgList.aspx" />
+    <Content Include="admin\team\EmptyUpgrade.aspx" />
     <Content Include="admin\team\HonoraryAward.aspx" />
     <Content Include="admin\tb_Link\Add.aspx" />
     <Content Include="admin\tb_Link\delete.aspx" />
@@ -1656,6 +1657,7 @@
     <Content Include="user\JS\echarts\line.js" />
     <Content Include="user\member\Recast.aspx" />
     <Content Include="user\member\tpwd.aspx" />
+    <Content Include="user\member\Upgrate.aspx" />
     <Content Include="user\passwordupdata.aspx" />
     <Content Include="user\product\Address.aspx" />
     <Content Include="user\shop\Article.aspx" />
@@ -2732,6 +2734,13 @@
     <Compile Include="admin\team\chongxiaoList.aspx.designer.cs">
       <DependentUpon>chongxiaoList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\team\EmptyUpgrade.aspx.cs">
+      <DependentUpon>EmptyUpgrade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\team\EmptyUpgrade.aspx.designer.cs">
+      <DependentUpon>EmptyUpgrade.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\team\HonoraryAward.aspx.cs">
       <DependentUpon>HonoraryAward.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3429,6 +3438,13 @@
     </Compile>
     <Compile Include="user\member\Recast.aspx.designer.cs">
       <DependentUpon>Recast.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\member\Upgrate.aspx.cs">
+      <DependentUpon>Upgrate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\member\Upgrate.aspx.designer.cs">
+      <DependentUpon>Upgrate.aspx</DependentUpon>
     </Compile>
     <Compile Include="user\member\WealthPlan.aspx.cs">
       <DependentUpon>WealthPlan.aspx</DependentUpon>
