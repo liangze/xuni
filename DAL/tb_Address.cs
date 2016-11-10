@@ -335,6 +335,93 @@ namespace lgk.DAL
                 return null;
             }
         }
+        /// <summary>
+        /// 根据会员Id得到一个对象实体
+        /// </summary>
+        public lgk.Model.tb_Address GetUserModel(long UserID)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select top 1 * from tb_Address");
+            strSql.Append(" where UserID=@UserID");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@UserID", SqlDbType.BigInt,8)};
+            parameters[0].Value = UserID;
+
+            lgk.Model.tb_Address model = new lgk.Model.tb_Address();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["ID"] != null && ds.Tables[0].Rows[0]["ID"].ToString() != "")
+                {
+                    model.ID = long.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["UserID"] != null && ds.Tables[0].Rows[0]["UserID"].ToString() != "")
+                {
+                    model.UserID = long.Parse(ds.Tables[0].Rows[0]["UserID"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["TypeID"] != null && ds.Tables[0].Rows[0]["TypeID"].ToString() != "")
+                {
+                    model.TypeID = int.Parse(ds.Tables[0].Rows[0]["TypeID"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["AreaInProvince"] != null && ds.Tables[0].Rows[0]["AreaInProvince"].ToString() != "")
+                {
+                    model.AreaInProvince = ds.Tables[0].Rows[0]["AreaInProvince"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Address"] != null && ds.Tables[0].Rows[0]["Address"].ToString() != "")
+                {
+                    model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["AreaInCity"] != null && ds.Tables[0].Rows[0]["AreaInCity"].ToString() != "")
+                {
+                    model.AreaInCity = ds.Tables[0].Rows[0]["AreaInCity"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["PostCode"] != null && ds.Tables[0].Rows[0]["PostCode"].ToString() != "")
+                {
+                    model.PostCode = ds.Tables[0].Rows[0]["PostCode"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["MemberName"] != null && ds.Tables[0].Rows[0]["MemberName"].ToString() != "")
+                {
+                    model.MemberName = ds.Tables[0].Rows[0]["MemberName"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["PhoneNum"] != null && ds.Tables[0].Rows[0]["PhoneNum"].ToString() != "")
+                {
+                    model.PhoneNum = ds.Tables[0].Rows[0]["PhoneNum"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Phone"] != null && ds.Tables[0].Rows[0]["Phone"].ToString() != "")
+                {
+                    model.Phone = ds.Tables[0].Rows[0]["Phone"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Mail"] != null && ds.Tables[0].Rows[0]["Mail"].ToString() != "")
+                {
+                    model.Mail = ds.Tables[0].Rows[0]["Mail"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Remark"] != null && ds.Tables[0].Rows[0]["Remark"].ToString() != "")
+                {
+                    model.Remark = ds.Tables[0].Rows[0]["Remark"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Address01"] != null && ds.Tables[0].Rows[0]["Address01"].ToString() != "")
+                {
+                    model.Address01 = ds.Tables[0].Rows[0]["Address01"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Address02"] != null && ds.Tables[0].Rows[0]["Address02"].ToString() != "")
+                {
+                    model.Address02 = ds.Tables[0].Rows[0]["Address02"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Address03"] != null && ds.Tables[0].Rows[0]["Address03"].ToString() != "")
+                {
+                    model.Address03 = ds.Tables[0].Rows[0]["Address03"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Address04"] != null && ds.Tables[0].Rows[0]["Address04"].ToString() != "")
+                {
+                    model.Address04 = ds.Tables[0].Rows[0]["Address04"].ToString();
+                }
+                return model;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         /// <summary>
         /// 获得数据列表
