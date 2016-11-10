@@ -50,10 +50,10 @@
                         
                     </tr>
                     <tr>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
+                        <td align="center"><%=shuliang %></td>
+                        <td align="center"><%=leiji %></td>
+                        <td align="center"><%=jifen%></td>
+                        <td align="center"><%=jifenleiji%></td>
                         
                     </tr>
                 </tbody>
@@ -76,9 +76,9 @@
                     </tr>
                     <tr>
                         <td align="center"><%= AllIn%></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
+                        <td align="center"><%= Allyu %></td>
+                        <td align="center"><%=jiangjin %></td>
+                        <td align="center"><%=jiangjinleiji %></td>
                         
                     </tr>
                 </tbody>
@@ -102,8 +102,8 @@
                     <tr>
                         <td align="center"></td>
                         <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
+                        <td align="center"><%=aixing %></td>
+                        <td align="center"><%=zongyeji %></td>
                         
                     </tr>
                 </tbody>
@@ -125,10 +125,10 @@
                         
                     </tr>
                     <tr>
-                        <td align="center"></td>
-                        <td align="center"></td>  
-                         <td align="center"></td>
-                        <td align="center"></td>  
+                        <td align="center"><%=goumai %></td>
+                        <td align="center"><%=fahuo %></td>  
+                         <td align="center"><%=tixian %></td>
+                        <td align="center"><%=tixianchuli %></td>  
                     </tr>
                 </tbody>
             </table>
@@ -141,7 +141,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <td align="center"></td>
+                        <td align="center"><%=youjian %></td>
                     </tr>
                 </tbody>
             </table>
