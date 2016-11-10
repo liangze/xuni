@@ -460,6 +460,7 @@ namespace DataAccess
                     catch (System.Data.SqlClient.SqlException e)
                     {
                         connection.Close();
+                        //throw new Exception(e.Message);
                         throw e;
                     }
                 }

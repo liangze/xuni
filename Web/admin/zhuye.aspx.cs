@@ -22,10 +22,13 @@ namespace Web.admin
 {
     public partial class zhuye : AdminPageBase//System.Web.UI.Page
     {
+        public string AllIn = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
+                DataBing();
                 //
             }
         }
@@ -110,6 +113,13 @@ namespace Web.admin
             {
                 MessageBox.Show(this, "拆分失败！");
             }
+        }
+        private void DataBing()
+        {
+            string strWhere = "UserID<>1 AND DATEDIFF (DAY, SellDate, GETDATE()) = 0";
+            decimal zsy = cashsellBLL.GetAlready(strWhere);
+            AllIn = zsy.ToString();
+
         }
     }
 }

@@ -77,11 +77,11 @@ namespace lgk.BLL
         }
 
         /// <summary>
-        /// 今日已挂卖数量
+        /// 已挂卖数量
         /// </summary>
-        public decimal GetAlready(long iUserID)
+        public decimal GetAlready(string strWhere)
         {
-            return dal.GetAlready(iUserID);
+            return dal.GetAlready(strWhere);
         }
         /// <summary>
         /// 今日已挂卖次数
