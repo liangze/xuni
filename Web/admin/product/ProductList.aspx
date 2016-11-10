@@ -60,6 +60,8 @@
                         </th>
                         <th>三级分类
                         </th>--%>
+                        <th>库存数量
+                        </th>
                         <th>市场价
                         </th>
                         <th class="style1">状态
@@ -85,6 +87,9 @@
                                 <td align="center">
                                     <%#Eval("SypeName") %>
                                 </td>--%>
+                                <td align="center">
+                                    <%#Eval("Pic5")%>
+                                </td>
                                 <td align="center">
                                     <%#Eval("Price")%>
                                 </td>

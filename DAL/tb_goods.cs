@@ -409,7 +409,11 @@ namespace lgk.DAL
 				{
 					model.Goods008=DateTime.Parse(ds.Tables[0].Rows[0]["Goods008"].ToString());
 				}
-				return model;
+                if (ds.Tables[0].Rows[0]["StateType"] != null && ds.Tables[0].Rows[0]["StateType"].ToString() != "")
+                {
+                    model.StateType = int.Parse(ds.Tables[0].Rows[0]["StateType"].ToString());
+                }
+                return model;
 			}
 			else
 			{

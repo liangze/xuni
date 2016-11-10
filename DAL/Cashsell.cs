@@ -367,7 +367,7 @@ namespace lgk.DAL
         {
             decimal dEMoney = 0;
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT ISNULL(SUM([Number]),0) FROM Cashsell");
+            strSql.Append("SELECT ISNULL(SUM([Number]),0.00) FROM Cashsell");
             strSql.Append(" WHERE "+strWhere);
             object obj = DbHelperSQL.GetSingle(strSql.ToString());
 
