@@ -103,7 +103,7 @@
                         <div class="field">
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
-                                    <input name="txtUserCode" type="text" id="txtUserCode" runat="server" class="boxx" style="width:150px" />&nbsp;<asp:Button ID="btnCreateUser" runat="server" OnClick="btnCreateUser_Click" class="btn" Width="80px" />&nbsp;&nbsp;
+                                    <input name="txtUserCode" type="text" id="txtUserCode" runat="server" class="boxx"  style="width:80px"   />&nbsp;<asp:Button ID="btnCreateUser" runat="server" OnClick="btnCreateUser_Click" class="btn" Width="80px" />&nbsp;&nbsp;
                                     <asp:Button ID="btnValidate" runat="server" OnClick="btnValidate_Click" class="btn" Width="80px" />
                                 </ContentTemplate>
                                 <Triggers>
@@ -324,7 +324,7 @@
                             <input name="txtAddress" type="text" id="txtAddress" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
-                    <div class="control-group">
+                    <div class="control-group" style="display:none" >
                         <label for="memid">
                             <span style="color: #f00;"></span><%=GetLanguage("QQNumber")%>：
                         </label>
@@ -332,7 +332,7 @@
                             <input name="txtQQnumer" type="text" id="txtQQnumer" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
-                    <div class="control-group">
+                    <div class="control-group"style="display:none" >
                         <label for="memid">
                             <%=GetLanguage("Email")%>：
                         </label>
@@ -340,6 +340,29 @@
                             <input name="txtEmail" type="text" id="txtEmail" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
+                    iv class="control-group">
+                        <label for="memid">
+                            <span style="color: #f00;">*</span><%=GetLanguage("Secret")%>：
+                        </label>
+                        <div class="field">
+                             <asp:DropDownList ID="dropQuestion" runat="server">
+                                            <asp:ListItem Value="0">请选择</asp:ListItem>
+                                            <asp:ListItem Value="1">您的姓名是？</asp:ListItem>
+                                            <asp:ListItem Value="2">您的家乡是？</asp:ListItem>
+                                            <asp:ListItem Value="3">您最敬佩的人是？</asp:ListItem>
+                                        </asp:DropDownList>
+                            
+                        </div>
+                         </div>
+                         <div class="control-group">
+                        <label for="memid">
+                            <span style="color: #f00;">*</span><%=GetLanguage("answer")%>：
+                        </label>
+                        <div class="field">
+                            <input name="txtAddress" type="text" id="daan" runat="server" class="input_reg" />
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div>  

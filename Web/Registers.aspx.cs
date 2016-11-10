@@ -378,8 +378,8 @@ namespace Web
                 m_user.User007 = m_user.Location == 1 ? "左区" : "右区";
                 //int.TryParse(dropQuestion.SelectedValue, out q);
                 //string question = q > 0 && q <= 3 ? dropQuestion.SelectedItem.Text : string.Empty;
-                m_user.User009 = "0";// question;//密保问题
-                m_user.User010 = "0";// string.IsNullOrEmpty(question) ? string.Empty : txtAnswer.Text.Trim();//密保答案
+                m_user.User009 = dropQuestion.SelectedItem.Text;// question;//密保问题
+                m_user.User010 = daan.Value.Trim();// string.IsNullOrEmpty(question) ? string.Empty : txtAnswer.Text.Trim();//密保答案
                 m_user.User011 = 0;
                 m_user.User015 = 0;//购股币
                 m_user.User016 = 0;
@@ -930,16 +930,16 @@ namespace Web
             //    return false;
             //}
 
-            ////if (dropQuestion.SelectedValue.Trim() == "0")
-            ////{
-            ////    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseSelectQuestion") + "');", true);//请选择密保问题
-            ////    return false;
-            ////}
-            ////if (string.IsNullOrEmpty(txtAnswer.Text))
-            ////{
-            ////    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseAnswer") + "');", true);//请输入密保答案
-            ////    return false;
-            ////} 
+            if (dropQuestion.SelectedValue.Trim() == "0")
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseSelectQuestion") + "');", true);//请选择密保问题
+                return false;
+            }
+            if (string.IsNullOrEmpty(daan.Value))
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PleaseAnswer") + "');", true);//请输入密保答案
+                return false;
+            }
             #endregion
 
             return true;

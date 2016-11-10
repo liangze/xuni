@@ -169,6 +169,23 @@
                             <input name="txtAddress" type="text" id="txtAddress" runat="server" class="input_reg" />
                         </div>
                     </div>
+                         <div class="control-group">
+                        <label for="memid">
+                            <span style="color: #f00;"></span><%=GetLanguage("Secret")%>：
+                        </label>
+                        <div class="field">
+                           
+                              <input name="txtAddress" type="text" id="Text1" runat="server" class="input_reg" disabled="disabled" />
+                        </div>
+                         </div>
+                         <div class="control-group">
+                        <label for="memid">
+                            <span style="color: #f00;"></span><%=GetLanguage("answer")%>：
+                        </label>
+                        <div class="field">
+                            <input name="txtAddress" type="text" id="daan" runat="server" class="input_reg" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="action">

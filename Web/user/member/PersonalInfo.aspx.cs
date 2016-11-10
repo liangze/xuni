@@ -152,6 +152,8 @@ namespace Web.user.member
             txtPhoneNum.Value = userInfo.PhoneNum;
             txtAddress.Value = userInfo.Address;
             dropBank.SelectedValue = userInfo.BankName;
+            Text1.Value= userInfo.User009;
+            daan.Value = userInfo.User010;
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -173,14 +175,14 @@ namespace Web.user.member
                 m_user.NiceName = string.Empty;//this.txtNickName.Value.Trim();// "姓名";
                 m_user.TrueName = this.txtTrueName.Value.Trim();// "姓名";
                 //m_user.IdenCode = this.txtIdenCode.Value.Trim();// "身份证號";
-                //m_user.PhoneNum = this.txtPhoneNum.Value;// "手机號碼";
+                m_user.PhoneNum = this.txtPhoneNum.Value;// "手机號碼";
                 //m_user.QQnumer =txtQQnumer.Value.Trim();//QQ
                 //m_user.User005 = txtEmail.Value.Trim();//电子邮箱
                 //m_user.SafetyCodeQuestion = DropDownList4.SelectedItem.Text;
                 //m_user.SafetyCodeAnswer = DropDownList5.SelectedItem.Text;
                 m_user.Address = txtAddress.Value;//聯系地址
-                //m_user.User009 = ddlQuestion.SelectedItem.Text;//密保问题
-                //m_user.User010 =txtAnswer.Text.Trim();//密保答案
+                m_user.User009 = Text1.Value.Trim();//密保问题
+                m_user.User010 = daan.Value.Trim();//密保答案
                 if (userBLL.Update(m_user))
                 {
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("Modifications") + "');", true);//修改资料成功
