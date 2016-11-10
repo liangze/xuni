@@ -89,10 +89,10 @@
                         </div>
                     </div>
                     <div class="subMIdBlock fl">
-                        <div class="subMIdTxt">
+                        <div class="subMIdTxt" >
                             <p><i class="fa fa-money"></i></p>
                             <p><span>爱心基金</span></p>
-                            <p><a href="goldcoin08.aspx" style="color:white"><b></b><%=LoginUser.User011%></a></p>
+                            <p style="font-size: 20px; font-weight: bolder"><a href="goldcoin08.aspx" style="color:white"><b></b><%=LoginUser.User011%></a></p>
                         </div>
                     </div>
                     <div class="subMIdBlock fl">

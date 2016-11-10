@@ -152,7 +152,8 @@
                                     <%#Eval("SttleTime")%><%--结算日期--%>
                                 </td>
                                 <td align="center">
-                                    <asp:LinkButton ID="lbtnDetail" runat="server" PostBackUrl='<%#Eval("SttleTime","BonusDetail.aspx?SttleTime={0}") %>'><%=GetLanguage("ViewDetails")%><!--查看明细--></asp:LinkButton>
+                                    <asp:LinkButton ID="lbtnDetail" runat="server"  PostBackUrl='<%#Eval("SttleTime","BonusDetail.aspx?SttleTime={0}") %>'><%=GetLanguage("ViewDetails")%><!--查看明细--></asp:LinkButton>
+
                                 </td>
                             </tr>
                         </ItemTemplate>
