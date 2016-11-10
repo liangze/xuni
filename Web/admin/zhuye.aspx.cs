@@ -56,6 +56,10 @@ namespace Web.admin
             {
                 MessageBox.Show(this, "发放静态月分红成功！");
             }
+            else if(iResult == 0)
+            {
+                MessageBox.Show(this, "未到发奖日期！");
+            }
             else if (iResult == -1)
             {
                 MessageBox.Show(this, "发放静态月分红失败！");
