@@ -23,6 +23,7 @@ namespace Web.admin
     public partial class zhuye : AdminPageBase//System.Web.UI.Page
     {
         public string AllIn = string.Empty;
+        public string Allyu = string.Empty; 
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -117,9 +118,13 @@ namespace Web.admin
         private void DataBing()
         {
             string strWhere = "UserID<>1 AND DATEDIFF (DAY, SellDate, GETDATE()) = 0";
+            string strWhere1 = "UserID<>1";
             decimal zsy = cashsellBLL.GetAlready(strWhere);
+            decimal zsy1 = cashsellBLL.GetAlready(strWhere1);
             AllIn = zsy.ToString();
+            Allyu = zsy1.ToString();
 
         }
+        
     }
 }

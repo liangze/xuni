@@ -76,7 +76,7 @@
                     </tr>
                     <tr>
                         <td align="center"><%= AllIn%></td>
-                        <td align="center"></td>
+                        <td align="center"><%= Allyu%></td>
                         <td align="center"></td>
                         <td align="center"></td>
                         

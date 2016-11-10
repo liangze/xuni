@@ -32,7 +32,7 @@ namespace Web.user.shop
         private void BindData()
         {
             string strWhere = "";
-            strWhere = " Goods003<>'1' and StateType=1";//报单产品
+            strWhere = " Goods003<>'1' and StateType=1 AND Goods001=1";//报单产品
             bind_repeater(GetGoodsList(strWhere), rptProduct, " ID desc", tr1, AspNetPager1);
         }
 
