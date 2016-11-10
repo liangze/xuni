@@ -64,8 +64,7 @@
                             <td align="center">
                                 <%#Eval("RecommendCode")%>
                             </td>
-                            <td align="center">
-                                <a href="UserDetail.aspx?UserID=<%# Eval("UserID")%>">
+                            <td align="center"> 
                                     <%# Eval("UserCode")%></a>
                             </td>
                             <td align="center">

@@ -202,7 +202,7 @@ namespace Web.user.team
                         model_.AllBonusAccount = model_.User018;
                         lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                         m_journal_pv.UserID = UserID;
-                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 "+ model_.UserCode  + "获得 " + model_.User018 + " PV值";
+                        m_journal_pv.Remark =    model_.UserCode  + "获得 " + model_.User018 + " PV值";
                         m_journal_pv.RemarkEn = "";
                         m_journal_pv.InAmount = model_.User018;
                         m_journal_pv.OutAmount = 0;
@@ -214,7 +214,7 @@ namespace Web.user.team
 
                        
                         m_journal_pv.UserID = UserID;
-                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + "电子积分";
+                        m_journal_pv.Remark =     model_.UserCode + "获得 " + model_.User018 + "电子积分";
                         m_journal_pv.RemarkEn = "";
                         m_journal_pv.InAmount = model_.User018;
                         m_journal_pv.OutAmount = 0;
@@ -241,7 +241,7 @@ namespace Web.user.team
                         model_.AllBonusAccount = model_.User018;
                         lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                         m_journal_pv.UserID = UserID;
-                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                        m_journal_pv.Remark =   model_.UserCode + "获得 " + model_.User018 + " PV值";
                         m_journal_pv.RemarkEn = "";
                         m_journal_pv.InAmount = model_.User018;
                         m_journal_pv.OutAmount = 0;
@@ -252,7 +252,7 @@ namespace Web.user.team
                         journalBLL.Add(m_journal_pv);
 
                         m_journal_pv.UserID = UserID;
-                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + "电子积分";
+                        m_journal_pv.Remark =   model_.UserCode + "获得 " + model_.User018 + "电子积分";
                         m_journal_pv.RemarkEn = "";
                         m_journal_pv.InAmount = model_.User018;
                         m_journal_pv.OutAmount = 0;
@@ -274,7 +274,7 @@ namespace Web.user.team
                         model_.AllBonusAccount = model_.User018;
                         lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                         m_journal_pv.UserID = UserID;
-                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                        m_journal_pv.Remark =  model_.UserCode + "获得 " + model_.User018 + " PV值";
                         m_journal_pv.RemarkEn = "";
                         m_journal_pv.InAmount = model_.User018;
                         m_journal_pv.OutAmount = 0;
@@ -285,7 +285,7 @@ namespace Web.user.team
                         journalBLL.Add(m_journal_pv);
 
                         m_journal_pv.UserID = UserID;
-                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + "电子积分";
+                        m_journal_pv.Remark =    model_.UserCode + "获得 " + model_.User018 + "电子积分";
                         m_journal_pv.RemarkEn = "";
                         m_journal_pv.InAmount = model_.User018;
                         m_journal_pv.OutAmount = 0;
@@ -309,7 +309,7 @@ namespace Web.user.team
 
                         lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                         m_journal_pv.UserID = UserID;
-                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                        m_journal_pv.Remark =   model_.UserCode + "获得 " + model_.User018 + " PV值";
                         m_journal_pv.RemarkEn = "";
                         m_journal_pv.InAmount = model_.User018;
                         m_journal_pv.OutAmount = 0;
@@ -320,7 +320,7 @@ namespace Web.user.team
                         journalBLL.Add(m_journal_pv);
 
                         m_journal_pv.UserID = UserID;
-                        m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + "电子积分";
+                        m_journal_pv.Remark =   model_.UserCode + "获得 " + model_.User018 + "电子积分";
                         m_journal_pv.RemarkEn = "";
                         m_journal_pv.InAmount = model_.User018;
                         m_journal_pv.OutAmount = 0;
@@ -404,11 +404,11 @@ namespace Web.user.team
 
                                 lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                                 m_journal_pv.UserID = long.Parse(id);
-                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值(左区)";
                                 m_journal_pv.RemarkEn = "";
                                 m_journal_pv.InAmount = model_.User018;
                                 m_journal_pv.OutAmount = 0;
-                                m_journal_pv.BalanceAmount = model_.User018;
+                                m_journal_pv.BalanceAmount = model_1.LeftScore;
                                 m_journal_pv.JournalDate = DateTime.Now;
                                 m_journal_pv.JournalType = 10;
                                 m_journal_pv.Journal01 = UserID;
@@ -427,11 +427,11 @@ namespace Web.user.team
 
                                 lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                                 m_journal_pv.UserID = long.Parse(id);
-                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值（右区）";
                                 m_journal_pv.RemarkEn = "";
                                 m_journal_pv.InAmount = model_.User018;
                                 m_journal_pv.OutAmount = 0;
-                                m_journal_pv.BalanceAmount = model_.User018;
+                                m_journal_pv.BalanceAmount = model_1.RightScore;
                                 m_journal_pv.JournalDate = DateTime.Now;
                                 m_journal_pv.JournalType = 10;
                                 m_journal_pv.Journal01 = UserID;
@@ -453,7 +453,7 @@ namespace Web.user.team
 
                             lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                             m_journal_pv.UserID = long.Parse(id);
-                            m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                            m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值（左区）";
                             m_journal_pv.RemarkEn = "";
                             m_journal_pv.InAmount = model_.User018;
                             m_journal_pv.OutAmount = 0;
@@ -480,7 +480,7 @@ namespace Web.user.team
 
                                 lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                                 m_journal_pv.UserID = long.Parse(id);
-                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值（左区）";
                                 m_journal_pv.RemarkEn = "";
                                 m_journal_pv.InAmount = model_.User018;
                                 m_journal_pv.OutAmount = 0;
@@ -499,7 +499,7 @@ namespace Web.user.team
 
                                 lgk.Model.tb_journal m_journal_pv = new lgk.Model.tb_journal();
                                 m_journal_pv.UserID = long.Parse(id);
-                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值";
+                                m_journal_pv.Remark = "" + model_.RecommendCode + "开通会员 " + model_.UserCode + "获得 " + model_.User018 + " PV值（右区）";
                                 m_journal_pv.RemarkEn = "";
                                 m_journal_pv.InAmount = model_.User018;
                                 m_journal_pv.OutAmount = 0;
@@ -520,12 +520,13 @@ namespace Web.user.team
                    //对碰奖
                     MessageBox.MyShow(this, GetLanguage("OpenSuccess"));//开通成功
                 }
-            }
-            else 
+                else
                 {
                     MessageBox.MyShow(this, GetLanguage("FailedToOpen")); //开通失败
                 }
-             
+
+            }
+
             //if (e.CommandName.Equals("open1"))//
             //{
             //    model.IsOpend = 3;//空单3 实单 2

@@ -3127,7 +3127,7 @@ namespace Library
             {
                 str = "总监";
             } 
-            if (type >= getParamAmount("Static3") )
+            if (type >= getParamAmount("Static3") * 10000)
             {
                 str = "董事"; 
             }
