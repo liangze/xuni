@@ -77,12 +77,24 @@
         </div>
         <div class="operation">
             <fieldset class="fieldset">
-                <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/000.jpg');
+               <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/000.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
                     未开通</div>
                  <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/001.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
-                    VIP</div>
+                    一星会员</div>
+                <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/003.jpg');
+                    text-align: center; line-height: 20px; font-weight: bold;">
+                    二星会员</div>
+                <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/006.jpg');
+                    text-align: center; line-height: 20px; font-weight: bold;">
+                   三星会员</div>
+               <%-- <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/005.jpg');
+                    text-align: center; line-height: 20px; font-weight: bold;">
+                    白金玩家</div>--%>
+                <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/004.jpg');
+                    text-align: center; line-height: 20px; font-weight: bold;">
+                    体验会员</div>
                 <%--<div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/003.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
                     二星会员</div>

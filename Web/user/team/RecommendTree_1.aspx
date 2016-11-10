@@ -76,31 +76,31 @@
                 <asp:LinkButton ID="LinkButton5" runat="server" class="easyui-linkbutton" OnClick="LinkButton5_Click"> 确定 </asp:LinkButton>--%>
             </fieldset>
         </div>
-        <%--<div class="operation">
+        <div class="operation">
             <fieldset class="fieldset">
                 <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/000.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
                     未开通</div>
                  <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/001.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
-                    铜级玩家</div>
+                    一星会员</div>
                 <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/003.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
-                    白银玩家</div>
+                    二星会员</div>
                 <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/006.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
-                    黄金玩家</div>
-                <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/005.jpg');
+                   三星会员</div>
+               <%-- <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/005.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
-                    白金玩家</div>
+                    白金玩家</div>--%>
                 <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/004.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
-                    钻石玩家</div>
-                <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/002.jpg');
+                    体验会员</div>
+              <%--  <div style="width: 74px; height: 20px; float: left; color: #fff; background: url('../../images/002.jpg');
                     text-align: center; line-height: 20px; font-weight: bold;">
-                    翡翠玩家</div>
+                    翡翠玩家</div>--%>
             </fieldset>
-        </div>--%>
+        </div>
         <div class="dataTable" style="overflow: auto;">
             <asp:Literal ID="Literal1" runat="server" EnableViewState="False"></asp:Literal>
         </div>

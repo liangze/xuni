@@ -89,7 +89,7 @@ namespace Web.user.team
                 else
                 {
                     //node.Text = Model.UserCode + Model.TrueName + dd + "[个人]:" + Model.RegMoney + "[左总]:" + Model.LeftScore + "[右总]:" + Model.RightScore + "[左余]" + Model.LeftBalance + "[右余]" + Model.RightBalance + "[左新]" + Model.LeftNewScore + "[右新]" + Model.RightNewScore;
-                    node.Text = Model.UserCode + Model.TrueName + dd + "[已开通]";
+                    node.Text = Model.UserCode + Model.TrueName + dd + "[已开通][左区总业绩]" + Model.LeftScore + "[右区总业绩]" + Model.RightScore + "[左新业绩]" + Model.LeftNewScore + "[右新业绩]" + Model.RightNewScore;
                     node.NavigateUrl = "RecommendTree.aspx?userid=" + Model.UserID;
                 }
               

@@ -108,7 +108,7 @@ namespace Web.admin.team
         //推荐人账号，会员账号，级别，姓名，手机号，后台可以导出列表。
         public DataSet getDate( )
         {
-            string pWhere = GetWhere() + " and IsAgent=1 ";
+            string pWhere = GetWhere() + "   ";
             lgk.BLL.tb_user user  = new lgk.BLL.tb_user();
             string sql = "select userid,RecommendCode,UserCode,LevelID,PhoneNum,TrueName,RightNewScore,LeftNewScore,RegTime from tb_user ";
             DataSet ds = user.getData_Chaxun(sql, pWhere);

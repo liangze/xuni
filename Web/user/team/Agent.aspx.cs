@@ -31,7 +31,7 @@ namespace Web.user.team
                 ShowData();
                 ltAgent.Text = GetLanguage("DeclarationNumber");//代理中心编号
                 btnSubmit.Text = GetLanguage("Submit");//提交
-            }
+                getDate();            }
         }
 
         private void ShowData()
@@ -55,6 +55,14 @@ namespace Web.user.team
             else
             {
                 ltAudit.Visible = false;
+            }
+        }
+        public void getDate()
+        {
+
+            if (userBLL.GetMoney(getLoginID(), "LeftNewScore") < getParamInt("Static0") * 10000 && userBLL.GetMoney(getLoginID(), "RightNewScore") < getParamInt("Static0") * 10000)
+            {
+                btnSubmit.Visible = false;
             }
         }
 
