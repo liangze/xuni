@@ -101,7 +101,7 @@
                     </tr>
                     <tr>
                         <td align="center"></td>
-                        <td align="center"></td>
+                        <td align="center"> <%=caifen %></td>
                         <td align="center"><%=aixing %></td>
                         <td align="center"><%=zongyeji %></td>
                         

@@ -38,6 +38,9 @@ namespace Web.admin
         public string youjian { get; set; }
         public string tixian { get; set; }
         public string tixianchuli { get; set; }
+        public string caifen { get; set; }
+
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -190,12 +193,14 @@ namespace Web.admin
         }
         protected void gouwu() // 
         {
-            string sql = "select count(*)a from  tb_Order  ;select count(*)a from tb_Order where IsSend=2 ";
+            string sql = "select count(*)a from  tb_Order  ;select count(*)a from tb_Order where IsSend=2 ;  select SUM(InAmount)a   FROM[SZ1610231023].[dbo].[tb_journal] where Remark like '拆分%' and UserID<>1";
             DataSet ds = u.getData_Chaxun(sql, "");
             DataTable dt = ds.Tables[0];
             DataTable dt1 = ds.Tables[1];
+            DataTable dt2 = ds.Tables[2];
             goumai = dt.Rows[0]["a"].ToString();
             fahuo = dt1.Rows[0]["a"].ToString();
+            caifen= dt2.Rows[0]["a"].ToString();
         }
         protected void tixian1() // 
         {
@@ -209,7 +214,10 @@ namespace Web.admin
             tixian = dt.Rows[0]["a"].ToString();
             tixianchuli = dt1.Rows[0]["a"].ToString();
         }
+      
+   
 
+      
 
     }
 }
