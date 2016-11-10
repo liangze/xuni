@@ -42,6 +42,32 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color: Red;">*</span>充值币种：
+                                    <asp:DropDownList ID="dropMoneyType" runat="server">
+                                        <%--  Emoney = 0;// 注册积分         写流水类型：1
+                                              BonusAccount = 0;// 奖金积分 	 2
+                                              AllBonusAccount = 0;// 电子积分	 3
+                                              StockAccount = 0;// 云商积分	 4
+                                              StockMoney = 0;// 感恩积分	 5
+                                              GLmoney = 0;// 购物积分	 6
+                                              ShopAccount = 0;// 消费积分	 7
+                                              User011// 爱心基金	 8
+                                              User012// 云购积分	 9--%>
+                                        <asp:ListItem Value="0" Text="请选择"></asp:ListItem>
+                                        <asp:ListItem Value="1" Text="注册积分"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="奖金积分"></asp:ListItem>
+                                        <asp:ListItem Value="3" Text="电子积分"></asp:ListItem>
+                                        <asp:ListItem Value="4" Text="云商积分"></asp:ListItem>
+                                        <asp:ListItem Value="5" Text="感恩积分"></asp:ListItem>
+                                        <asp:ListItem Value="6" Text="购物积分"></asp:ListItem>
+                                        <asp:ListItem Value="7" Text="消费积分"></asp:ListItem>
+                                        <asp:ListItem Value="8" Text="爱心基金"></asp:ListItem>
+                                        <asp:ListItem Value="9" Text="云购积分"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <input id="param" type="hidden" runat="server" />
                                     <span style="color: Red;">*</span>汇款金额：
                                     <input name="jd" type="text" id="txtMoney" runat="server" onkeydown="if(event.keyCode==13)event.keyCode=9"
@@ -113,6 +139,8 @@
                     <tr>
                         <th align="center">汇款金额
                         </th>
+                        <th align="center">充值币种
+                        </th>
                         <th align="center">汇款具体时间
                         </th>
                         <th align="center">汇出银行
@@ -135,6 +163,9 @@
                             <tr>
                                 <td align="center">
                                     <%#Eval("RemitMoney")%>
+                                </td>
+                                <td align="center">
+                                   <%#RechargeType(Convert.ToInt32(Eval("Remit001")))%>
                                 </td>
                                 <td align="center">
                                     <%#Eval("RechargeableDate")%>
@@ -164,7 +195,7 @@
                         </ItemTemplate>
                     </asp:Repeater>
                     <tr>
-                        <td colspan="9">
+                        <td colspan="10">
                             <div id="divno" runat="server" class="NoData">
                                 <span class="cBlack">
                                     <img src="../../images/ico_NoDate.gif" width="16" height="16" alt="" />

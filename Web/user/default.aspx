@@ -107,9 +107,8 @@
             <h4>新闻中心</h4>
             <div class="row-fluid">
                 <div class="span12">
-                     
                     <div class="widget-box">
-                        <div style="height:30px;margin-top:12px;margin-left:20px;"><a href="member/NoticeList.aspx"> <img src="../images/more.jpg" /></a></div>
+                        <div style="height:30px;margin-top:12px;margin-left:20px;"><a href="member/NoticeList.aspx">更 多>> <%--<img src="../images/more.jpg" />--%></a></div>
                         <div class="widget-content nopadding">
                             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
                                 <div class=""></div>

@@ -279,11 +279,18 @@ namespace Web.user.Stock
             decimal jiaoyiNum = getParamAmount("Shares4");//达到某交易数量执行升价
             decimal shenPrice = getParamAmount("Shares5");//涨幅价格
             decimal jiaoNumber = getParamAmount("Tal") + BuyNumber;//累计交易总量
-            UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
+            if(jiaoNumber < jiaoyiNum)
+            {
+                UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
+            }
+            
             if (jiaoNumber >= jiaoyiNum)
             {
-                bonusBLL.ExecProcedure("proc_Split", shenPrice);
-                UpdateParamVarchar("ParamVarchar", "0.00", "Tal");
+                int beishu = Convert.ToInt32(jiaoNumber/jiaoyiNum);
+                
+                bonusBLL.ExecProcedure("proc_Split", beishu*shenPrice);
+                decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
+                UpdateParamVarchar("ParamVarchar", yueNum.ToString(), "Tal");
             }
             #endregion
             #region 交易密码
@@ -324,23 +331,26 @@ namespace Web.user.Stock
 
             #region  解冻推荐会员的云购积分
             long UserID = getLoginID();//登陆会员Id
-            if(UserID==1)
+            if(UserID!=1)
             {
                 long RecommendID = userInfo.RecommendID;//获取推荐人ID
                 lgk.Model.tb_user orUerser = userBLL.GetModel(RecommendID);
-                string Remark = "会员" + GetUserCode(UserID) + "购买云商积分，解冻云购积分";
-                UpdateAccount("User012", RecommendID, BuyNumber, 0);//云购积分解冻更新
-                UpdateAccount("User014", RecommendID, BuyNumber, 1);//
-                UpdateAccount("StockAccount", RecommendID, BuyNumber, 1);//获得云商积分
+                if(orUerser!=null)
+                {
+                    string Remark = "会员" + GetUserCode(UserID) + "购买云商积分，解冻云购积分";
+                    UpdateAccount("User012", RecommendID, BuyNumber, 0);//云购积分解冻更新
+                    UpdateAccount("User014", RecommendID, BuyNumber, 1);//
+                    UpdateAccount("StockAccount", RecommendID, BuyNumber, 1);//获得云商积分
 
-                decimal balanceAmount = orUerser.User012 - BuyNumber;//云购积分账户结余金额
-                add_journal(RecommendID, 0, BuyNumber, balanceAmount, 9, Remark, "", RecommendID);//云购积分加入流水线
+                    decimal balanceAmount = orUerser.User012 - BuyNumber;//云购积分账户结余金额
+                    add_journal(RecommendID, 0, BuyNumber, balanceAmount, 9, Remark, "", RecommendID);//云购积分加入流水线
 
-                decimal balanceAmount2 = orUerser.StockAccount + BuyNumber;//云商积分账户结余金额
-                add_journal(RecommendID, BuyNumber, 0, balanceAmount2, 4, Remark, "", RecommendID);//云商积分加入流水线
-                #endregion
+                    decimal balanceAmount2 = orUerser.StockAccount + BuyNumber;//云商积分账户结余金额
+                    add_journal(RecommendID, BuyNumber, 0, balanceAmount2, 4, Remark, "", RecommendID);//云商积分加入流水线
+                } 
             }
-            
+            #endregion
+
             //云商积分加入流水线
             lgk.Model.tb_journal joadanInfo = new lgk.Model.tb_journal();
             joadanInfo.UserID = getLoginID();

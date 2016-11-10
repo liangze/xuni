@@ -151,7 +151,7 @@ namespace Web.user.shop
                     string code = DateTime.Now.ToString("yyyyMMddhhmmssffff");//订单编号
                     //写入订单
                     orderInfo.UserID = userInfo.UserID;//用户
-                    lgk.Model.tb_Address addressInfo = addressBLL.GetModel(userInfo.UserID);
+                    lgk.Model.tb_Address addressInfo = addressBLL.GetUserModel(userInfo.UserID);
                     if(addressInfo==null)
                     {
                         MessageBox.Show(this, "请先设置地址");//请先设置默认地址

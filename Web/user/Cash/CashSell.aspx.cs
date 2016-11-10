@@ -104,7 +104,7 @@ namespace Web.user.Cash
             dBaseNumber = getParamAmount("Gold6");
             dBNumber = getParamAmount("Gold7");
             dMaxNumber = dBaseNumber + dBNumber * userBLL.GetCount("RecommendID = " + LoginUser.UserID + " AND IsOpend = 2");//每日挂卖基数
-            dANumber = cashsellBLL.GetAlready(LoginUser.UserID) + dNumber;
+           // dANumber = cashsellBLL.GetAlready(LoginUser.UserID) + dNumber;
 
             if (dANumber > dMaxNumber)
             {

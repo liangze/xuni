@@ -75,6 +75,13 @@ namespace lgk.BLL
         {
             return dal.GetModel(ID);
         }
+        /// <summary>
+        ///根据会员ID 得到一个对象实体
+        /// </summary>
+        public lgk.Model.tb_Address GetUserModel(long UserID)
+        {
+            return dal.GetUserModel(UserID);
+        }
 
         /// <summary>
         /// 获得数据列表

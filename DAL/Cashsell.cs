@@ -361,23 +361,15 @@ namespace lgk.DAL
         }
 
         /// <summary>
-        /// 今日已挂卖数量
+        /// 已挂卖数量
         /// </summary>
-        public decimal GetAlready(long iUserID)
+        public decimal GetAlready(string strWhere)
         {
             decimal dEMoney = 0;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT ISNULL(SUM([Number]),0) FROM Cashsell");
-            strSql.Append(" WHERE UserID=@UserID");
-            strSql.Append(" AND IsUndo=@IsUndo");
-            strSql.Append(" AND DATEDIFF (DAY , SellDate, GETDATE()) = 0");
-            SqlParameter[] parameters = {
-                    new SqlParameter("@UserID", SqlDbType.BigInt,8),
-                    new SqlParameter("@IsUndo", SqlDbType.Int,4)};
-            parameters[0].Value = iUserID;
-            parameters[1].Value = 0;
-
-            object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
+            strSql.Append(" WHERE "+strWhere);
+            object obj = DbHelperSQL.GetSingle(strSql.ToString());
 
             if (obj != null)
             {

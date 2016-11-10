@@ -460,6 +460,7 @@ namespace DataAccess
                     catch (System.Data.SqlClient.SqlException e)
                     {
                         connection.Close();
+                        //throw new Exception(e.Message);
                         throw e;
                     }
                 }
@@ -621,8 +622,8 @@ namespace DataAccess
                     }
                     catch (System.Data.SqlClient.SqlException e)
                     {
-                        throw e;
-                        //throw (new Exception(SQLString));
+                        //throw e;
+                        throw (new Exception(SQLString));
                     }
                 }
             }
