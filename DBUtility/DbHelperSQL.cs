@@ -621,8 +621,8 @@ namespace DataAccess
                     }
                     catch (System.Data.SqlClient.SqlException e)
                     {
-                        throw e;
-                        //throw (new Exception(SQLString));
+                        //throw e;
+                        throw (new Exception(SQLString));
                     }
                 }
             }

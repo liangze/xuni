@@ -92,6 +92,7 @@ namespace Web.admin.finance
         {
             long id = Convert.ToInt64(e.CommandArgument);
             lgk.Model.tb_remit remit = remitBLL.GetModel(id);
+            int bix = remit.Remit001;//获取充值币种
             if (remit == null)
             {
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('该记录已删除，无法再进行此操作!');window.location.href='RemitManage.aspx';", true);
@@ -113,12 +114,59 @@ namespace Web.admin.finance
                         jmodel.Remark = "汇款充值";
                         jmodel.InAmount = remit.RemitMoney;
                         jmodel.OutAmount = 0;
-                        jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).Emoney + remit.RemitMoney;
                         jmodel.JournalDate = DateTime.Now;
-                        jmodel.JournalType = 2;
+                        jmodel.JournalType = bix;//充值币种
                         jmodel.Journal01 = remit.UserID;
-
-                        if (remitBLL.Update(remit) && journalBLL.Add(jmodel) > 0 && UpdateSystemAccount("MoneyAccount", remit.RemitMoney, 1) > 0 && UpdateAccount("Emoney", remit.UserID, remit.RemitMoney, 1) > 0)
+                        //更新会员账户
+                        //journalType : 1、注册积分，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
+                        if(bix==1)
+                        {
+                            jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).Emoney + remit.RemitMoney;
+                            journalBLL.Add(jmodel);
+                            UpdateAccount("Emoney", remit.UserID, remit.RemitMoney, 1);
+                        }
+                        if (bix == 2)
+                        {
+                            jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).BonusAccount + remit.RemitMoney;
+                            UpdateAccount("BonusAccount", remit.UserID, remit.RemitMoney, 1);
+                        }
+                        if (bix == 3)
+                        {
+                            jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).AllBonusAccount + remit.RemitMoney;
+                            UpdateAccount("AllBonusAccount", remit.UserID, remit.RemitMoney, 1);
+                        }
+                        if (bix == 4)
+                        {
+                            jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).StockAccount + remit.RemitMoney;
+                            UpdateAccount("StockAccount", remit.UserID, remit.RemitMoney, 1);
+                        }
+                        if (bix == 5)
+                        {
+                            jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).StockMoney + remit.RemitMoney;
+                            UpdateAccount("StockMoney", remit.UserID, remit.RemitMoney, 1);
+                        }
+                        if (bix == 6)
+                        {
+                            jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).GLmoney + remit.RemitMoney;
+                            UpdateAccount("GLmoney", remit.UserID, remit.RemitMoney, 1);
+                        }
+                        if (bix == 7)
+                        {
+                            jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).ShopAccount + remit.RemitMoney;
+                            UpdateAccount("ShopAccount", remit.UserID, remit.RemitMoney, 1);
+                        }
+                        if (bix == 8)
+                        {
+                            jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).User011 + remit.RemitMoney;
+                            UpdateAccount("User011", remit.UserID, remit.RemitMoney, 1);
+                        }
+                        if (bix == 9)
+                        {
+                            jmodel.BalanceAmount = userBLL.GetModel(remit.UserID).User012 + remit.RemitMoney;
+                            UpdateAccount("User012", remit.UserID, remit.RemitMoney, 1);
+                        }
+                       
+                        if (remitBLL.Update(remit) && UpdateSystemAccount("MoneyAccount", remit.RemitMoney, 1) > 0 )
                         {
                             //UpdateFiled("IsReport", "1", Convert.ToInt32(remit.UserID));
                             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('确认成功!');", true);

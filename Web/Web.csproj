@@ -1118,6 +1118,7 @@
     <Content Include="css\tuango.min.css" />
     <Content Include="css\tuangou_detail.min.css" />
     <Content Include="css\uniform.css" />
+    <Content Include="doc\remit.txt" />
     <Content Include="doc\tb_journal.txt" />
     <Content Include="doc\tb_User.txt" />
     <Content Include="doc\奖金类型.txt" />

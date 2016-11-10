@@ -117,9 +117,9 @@ namespace lgk.DAL
 			strSql.Append("Remit003=@Remit003,");
 			strSql.Append("Remit004=@Remit004,");
 			strSql.Append("Remit005=@Remit005,");
-			strSql.Append("Remit006=@Remit006");
-            strSql.Append("Remit006=@Remit007");
-            strSql.Append("Remit006=@Remit008");
+			strSql.Append("Remit006=@Remit006,");
+            strSql.Append("Remit007=@Remit007,");
+            strSql.Append("Remit008=@Remit008");
             strSql.Append(" where ID=@ID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@BankName", SqlDbType.VarChar,50),

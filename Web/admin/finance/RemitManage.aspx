@@ -46,6 +46,7 @@
                         <th>会员编号</th>
                         <th>会员姓名</th>
                         <th>汇款金额</th>
+                        <th>充值币种</th>
                         <th>汇款具体时间</th>
                         <th>汇出银行</th>
                         <th>汇出账户</th>
@@ -63,6 +64,7 @@
                                 <td align="center"><%#Eval("UserCode")%></td>
                                 <td align="center"><%#Eval("Truename")%></td>
                                 <td align="center"><%#Eval("RemitMoney")%></td>
+                                <td align="center"><%#RechargeType(Convert.ToInt32(Eval("Remit001")))%></td>
                                 <td align="center"><%#Eval("RechargeableDate")%></td>
                                 <td align="center"><%#Eval("Remit003")%></td>
                                 <td align="center"><%#Eval("Remit004")%></td>
@@ -82,7 +84,7 @@
                         </ItemTemplate>
                     </asp:Repeater>
                     <tr id="tr1" runat="server">
-                        <td colspan="10">
+                        <td colspan="11">
                             <div id="divno" runat="server" class="NoData">
                                 <span class="cBlack">
                                     <img src="../../images/ico_NoDate.gif" width="16" height="16" />

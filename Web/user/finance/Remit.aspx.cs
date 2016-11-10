@@ -175,6 +175,13 @@ namespace Web.user.finance
             }
             #endregion
 
+            #region 充值币种验证
+            if(dropMoneyType.SelectedValue=="0")
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请选择充值币种');", true);//请选择充值币种
+                return;
+            }
+            #endregion
             #region 汇款金额验证
             if (txtMoney.Value == "")
             {
@@ -265,6 +272,7 @@ namespace Web.user.finance
             remitInfo.Remit003 = strOutBank;//汇出银行
             remitInfo.Remit004 = strOutAccount;//汇出账户
             remitInfo.Remit002 = 0;
+            remitInfo.Remit001 = Convert.ToInt32(dropMoneyType.SelectedValue);
             remitInfo.PassDate = DateTime.Now;
 
             long iRemitID = remitBLL.Add(remitInfo);
