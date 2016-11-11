@@ -516,6 +516,27 @@ namespace Web.user.Stock
 
                 UpdateAccount("StockAccount", userInfo.UserID, SellNumber, 0);//买家云商积分账户更新
 
+                #region 判断交易总量是否达到涨价要求
+                decimal jiaoyiNum = getParamAmount("Shares4");//执行升价的某交易数量
+                decimal shenPrice = getParamAmount("Shares5");//涨幅价格
+                decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
+                UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
+
+                if (jiaoNumber < jiaoyiNum)
+                {
+                    UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
+                }
+
+                if (jiaoNumber >= jiaoyiNum)
+                {
+                    int beishu = Convert.ToInt32(jiaoNumber / jiaoyiNum);
+
+                    bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
+                    decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
+                    UpdateParamVarchar("ParamVarchar", yueNum.ToString(), "Tal");
+                }
+                #endregion
+
                 #region 卖出云商积分,公司账户云商积分增加
                 lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
                 systemMoney.MoneyAccount += SellNumber;
@@ -581,10 +602,19 @@ namespace Web.user.Stock
                         decimal shenPrice = getParamAmount("Shares5");//涨幅价格
                         decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
                         UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
+
+                        if (jiaoNumber < jiaoyiNum)
+                        {
+                            UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
+                        }
+
                         if (jiaoNumber >= jiaoyiNum)
                         {
-                            bonusBLL.ExecProcedure("proc_Split", shenPrice);
-                            UpdateParamVarchar("ParamVarchar", "0.00", "Tal");
+                            int beishu = Convert.ToInt32(jiaoNumber / jiaoyiNum);
+
+                            bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
+                            decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
+                            UpdateParamVarchar("ParamVarchar", yueNum.ToString(), "Tal");
                         }
                         #endregion
 
