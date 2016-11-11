@@ -286,7 +286,7 @@ namespace Web.user.Stock
             
             if (jiaoNumber >= jiaoyiNum)
             {
-                int beishu = Convert.ToInt32(jiaoNumber/jiaoyiNum);
+                int beishu = (int)(jiaoNumber/jiaoyiNum);
                 
                 bonusBLL.ExecProcedure("proc_Split", beishu*shenPrice);
                 decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
@@ -529,7 +529,7 @@ namespace Web.user.Stock
 
                 if (jiaoNumber >= jiaoyiNum)
                 {
-                    int beishu = Convert.ToInt32(jiaoNumber / jiaoyiNum);
+                    int beishu = (int)(jiaoNumber / jiaoyiNum);
 
                     bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
                     decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
@@ -610,7 +610,7 @@ namespace Web.user.Stock
 
                         if (jiaoNumber >= jiaoyiNum)
                         {
-                            int beishu = Convert.ToInt32(jiaoNumber / jiaoyiNum);
+                            int beishu = (int)(jiaoNumber / jiaoyiNum);
 
                             bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
                             decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
