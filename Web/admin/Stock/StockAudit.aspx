@@ -65,7 +65,7 @@
                                 <%#Eval("SellDate")%>
                             </td>
                             <td align="center">
-                                <%#Eval("IsSell").ToString()=="0"?"已完成":"挂单中"%>
+                                <%#Eval("IsSell").ToString()=="1"?"已完成":"挂单中"%>
                             </td>
                            
                         </tr>
