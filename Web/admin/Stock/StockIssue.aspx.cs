@@ -33,7 +33,7 @@ namespace Web.admin.Stock
             if (issueInfo != null)
             {
                 lbtnOK.Visible = false;
-                ltWarning.Text = "MDD金币已发行，不能重复发行！";
+                ltWarning.Text = "云商积分已发行，不能重复发行！";
                 txtNum.Text = getParamInt("Shares1").ToString("0");//本期发行量
             }
             else
