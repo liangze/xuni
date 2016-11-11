@@ -103,15 +103,7 @@ namespace Web.user.Stock
             }
             return true;
         }
-        /// <summary>
-        ///查询条件
-        /// </summary>
-        /// <returns></returns>
-        private string GetWhere()
-        {
-            string strWhere = "IsSell=1AND SurplusAmount>0";
-            return strWhere;
-        }
+        
         /// <summary>
         ///查询条件
         /// </summary>
@@ -148,51 +140,13 @@ namespace Web.user.Stock
                 return;
             }
 
-            lgk.Model.tb_StockIssue issueInfo = stockIssueBLL.GetModel(GetWhere());//获取当前出售的云商积分
+            string strWhere = "IsSell=1AND SurplusAmount>0";
+            lgk.Model.tb_StockIssue issueInfo = stockIssueBLL.GetModel(strWhere);//获取当前出售的云商积分
             int BuyNumber = int.Parse(txtBuyNum.Text.ToString());//购买数量
             decimal NewPrice = getParamAmount("Shares3");//当前价格
             decimal talPrice = BuyNumber * NewPrice;//购买需要支付金额
             lgk.Model.tb_user user = userBLL.GetModel(1);//system作为公司账户，获取公司账户信息
 
-
-            #region 判断云商积分是否已经售完
-            if (issueInfo == null)//发行云商积分已售完
-            {
-
-                bonusBLL.ExecProcedure("proc_Split", 0);
-                if (user.StockAccount == 0)
-                {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('云商积分已售完');location.href='StockBuyList.aspx';", true);//云商积分已售完
-                    return;
-                }
-
-            }
-            if (issueInfo != null)
-            {
-                if (issueInfo.SurplusAmount < BuyNumber)
-                {
-                    if (issueInfo == null)
-                    {
-                        decimal talNum = user.StockAccount;//挂售剩余总数量
-                        if (talNum < BuyNumber)
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('购买数量大于在售数量，请更改购买数量！');location.href='StockBuyList.aspx';", true);//云商积分已售完
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        decimal talNum = user.StockAccount + issueInfo.SurplusAmount;//挂售剩余总数量
-                        if (talNum < BuyNumber)
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('购买数量大于在售数量，请更改购买数量！');location.href='StockBuyList.aspx';", true);//云商积分已售完
-                            return;
-                        }
-                    }
-
-                }
-            }
-            #endregion
             #region 判断支付账户余额
             int iTypeID = int.Parse(dropCurrency.SelectedValue);//支付类型
             if (iTypeID != 0)
@@ -232,6 +186,14 @@ namespace Web.user.Stock
                 }
             }
             #endregion
+           
+            #region 判断云商积分是否已经售完
+            if (issueInfo == null)//发行云商积分已售完
+            {
+                bonusBLL.ExecProcedure("proc_Split", 0);
+            }
+            #endregion
+
             #region 更新发行数量或者公司账户云商积分剩余量
             if (issueInfo != null)
             {
@@ -240,7 +202,7 @@ namespace Web.user.Stock
                     issueInfo.SurplusAmount = issueInfo.SurplusAmount - BuyNumber;//更新挂售云商积分剩余量
                     stockIssueBLL.Update(issueInfo);
                 }
-                if (issueInfo.SurplusAmount < BuyNumber)
+                if (issueInfo.SurplusAmount <= BuyNumber)
                 {
                    
                     decimal Number = BuyNumber - issueInfo.SurplusAmount;//需要从公司账户购买的数量
@@ -258,7 +220,9 @@ namespace Web.user.Stock
                     else
                     {
                         issueInfo.SurplusAmount = 0;//更新挂售云商积分剩余量,发行数量
+                        issueInfo.IsSell = 0;//0，是卖完，1是挂售中
                         stockIssueBLL.Update(issueInfo);
+
                         #region 购买云商积分,公司账户云商积分减少
                         systemMoney.MoneyAccount -= Number;//需要从公司账户购买的数量
                         systemBll.Update(systemMoney);
@@ -268,10 +232,25 @@ namespace Web.user.Stock
             }
             if (issueInfo == null)
             {
-                
                 #region 购买云商积分,公司账户云商积分减少
                 lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
-                systemMoney.MoneyAccount -= BuyNumber;//需要从公司账户购买的数量
+                if (systemMoney == null)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('云商积分已售完');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                    return;
+                }
+                if (systemMoney.MoneyAccount < BuyNumber)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('平台云商积分出售数量不足');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                    return;
+                }
+                else
+                {
+                    #region 购买云商积分,公司账户云商积分减少
+                    systemMoney.MoneyAccount -= BuyNumber;//
+                    systemBll.Update(systemMoney);
+                    #endregion
+                }
                 #endregion
             }
             #endregion
@@ -286,7 +265,7 @@ namespace Web.user.Stock
             
             if (jiaoNumber >= jiaoyiNum)
             {
-                int beishu = Convert.ToInt32(jiaoNumber/jiaoyiNum);
+                int beishu = (int)(jiaoNumber/jiaoyiNum);
                 
                 bonusBLL.ExecProcedure("proc_Split", beishu*shenPrice);
                 decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
@@ -520,7 +499,7 @@ namespace Web.user.Stock
                 decimal jiaoyiNum = getParamAmount("Shares4");//执行升价的某交易数量
                 decimal shenPrice = getParamAmount("Shares5");//涨幅价格
                 decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
-                UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
+                //UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
 
                 if (jiaoNumber < jiaoyiNum)
                 {
@@ -529,7 +508,7 @@ namespace Web.user.Stock
 
                 if (jiaoNumber >= jiaoyiNum)
                 {
-                    int beishu = Convert.ToInt32(jiaoNumber / jiaoyiNum);
+                    int beishu = (int)(jiaoNumber / jiaoyiNum);
 
                     bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
                     decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
@@ -601,7 +580,7 @@ namespace Web.user.Stock
                         decimal jiaoyiNum = getParamAmount("Shares4");//执行升价的某交易数量
                         decimal shenPrice = getParamAmount("Shares5");//涨幅价格
                         decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
-                        UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
+                        //UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
 
                         if (jiaoNumber < jiaoyiNum)
                         {
@@ -610,7 +589,7 @@ namespace Web.user.Stock
 
                         if (jiaoNumber >= jiaoyiNum)
                         {
-                            int beishu = Convert.ToInt32(jiaoNumber / jiaoyiNum);
+                            int beishu = (int)(jiaoNumber / jiaoyiNum);
 
                             bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
                             decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
