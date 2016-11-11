@@ -380,12 +380,12 @@ namespace Web.admin.finance
                     if (rechargeInfo.RechargeType == 1)
                     {
                         UpdateAccount("Emoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     else if (rechargeInfo.RechargeType == 2)
                     {
                         UpdateAccount("BonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     //Emoney = 0;// 注册积分         写流水类型：1
                     //BonusAccount = 0;// 奖金积分 		2
@@ -395,17 +395,17 @@ namespace Web.admin.finance
                     else if (rechargeInfo.RechargeType == 3)
                     {
                         UpdateAccount("AllBonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     else if (rechargeInfo.RechargeType == 4)
                     {
                         UpdateAccount("StockAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                        //UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     else if (rechargeInfo.RechargeType == 5)
                     {
                         UpdateAccount("StockMoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                        //UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     //GLmoney = 0;// 购物积分			6
                     //ShopAccount = 0;// 消费积分		7
@@ -414,22 +414,22 @@ namespace Web.admin.finance
                     else if (rechargeInfo.RechargeType == 6)
                     {
                         UpdateAccount("GLmoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                        //UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     else if (rechargeInfo.RechargeType == 7)
                     {
                         UpdateAccount("ShopAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     else if (rechargeInfo.RechargeType == 8)
                     {
                         UpdateAccount("User011", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                        //UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
                     else if (rechargeInfo.RechargeType == 9)
                     {
                         UpdateAccount("User012", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
 
                 }
@@ -443,22 +443,22 @@ namespace Web.admin.finance
                     if (rechargeInfo.RechargeType == 1)
                     {
                         UpdateAccount("Emoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
                     else if (rechargeInfo.RechargeType == 2)
                     {
                         UpdateAccount("BonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
                     else if (rechargeInfo.RechargeType == 3)
                     {
                         UpdateAccount("AllBonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                      //  UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
                     else if (rechargeInfo.RechargeType == 4)
                     {
                         UpdateAccount("StockAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
                     //StockMoney = 0;// 感恩积分		5
                     //GLmoney = 0;// 购物积分			6
@@ -468,27 +468,27 @@ namespace Web.admin.finance
                     else if (rechargeInfo.RechargeType == 5)
                     {
                         UpdateAccount("StockMoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
                     else if (rechargeInfo.RechargeType == 6)
                     {
                         UpdateAccount("GLmoney", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
                     else if (rechargeInfo.RechargeType == 7)
                     {
                         UpdateAccount("ShopAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
                     else if (rechargeInfo.RechargeType == 8)
                     {
                         UpdateAccount("User011", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
                     else if (rechargeInfo.RechargeType == 9)
                     {
                         UpdateAccount("User012", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 0);//各人账户减少
-                        UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
+                       // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 1);//公司账户增加
                     }
 
                 }
