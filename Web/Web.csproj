@@ -432,6 +432,7 @@
     <Content Include="admin\system\StockParam.aspx" />
     <Content Include="admin\tb_Link\shopImgList.aspx" />
     <Content Include="admin\team\EmptyUpgrade.aspx" />
+    <Content Include="admin\team\EmptyUpgrade1.aspx" />
     <Content Include="admin\team\HonoraryAward.aspx" />
     <Content Include="admin\tb_Link\Add.aspx" />
     <Content Include="admin\tb_Link\delete.aspx" />
@@ -2816,6 +2817,13 @@
     </Compile>
     <Compile Include="admin\team\EmptyUpgrade.aspx.designer.cs">
       <DependentUpon>EmptyUpgrade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\team\EmptyUpgrade1.aspx.cs">
+      <DependentUpon>EmptyUpgrade1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\team\EmptyUpgrade1.aspx.designer.cs">
+      <DependentUpon>EmptyUpgrade1.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\team\HonoraryAward.aspx.cs">
       <DependentUpon>HonoraryAward.aspx</DependentUpon>

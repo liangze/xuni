@@ -1,8 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EmptyUpgrade.aspx.cs" Inherits="Web.admin.team.EmptyUpgrade" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EmptyUpgrade1.aspx.cs" Inherits="Web.admin.team.EmptyUpgrade1" %>
 
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
-<!DOCTYPE html>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
@@ -17,12 +16,13 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="operation">
-            <fieldset class="fieldset">
-                <legend class="legSearch">查询</legend>
-                <table width="99%" border="0" cellspacing="0" cellpadding="0" class="">
-                    <tr>
-                        <td>选择下拉：<asp:DropDownList ID="dropType" runat="server">
+    <div class="operation">
+        <fieldset class="fieldset">
+            <legend class="legSearch">查询</legend>
+            <table width="99%" border="0" cellspacing="0" cellpadding="0" class="">
+                <tr>
+                    <td>
+                        选择下拉：<asp:DropDownList ID="dropType" runat="server">
                             <asp:ListItem Value="0">请选择</asp:ListItem>
                             <asp:ListItem Value="1">会员编号</asp:ListItem>
                             <asp:ListItem Value="2">会员姓名</asp:ListItem>
@@ -30,28 +30,31 @@
                             <asp:ListItem Value="4">安置人编号</asp:ListItem>
                             <asp:ListItem Value="5">代理中心编号</asp:ListItem>
                         </asp:DropDownList>
-                            <input name="txtInput" id="txtInput" class="input_select" runat="server" type="text" />
-                            &nbsp;
+                        <input name="txtInput" id="txtInput" class="input_select" runat="server" type="text" />
+                        &nbsp;
                         会员级别：<asp:DropDownList ID="dropLevel" runat="server"></asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>注册日期：<asp:TextBox ID="txtRegStart" tip="输入开通日期" runat="server" onfocus="WdatePicker()"
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        注册日期：<asp:TextBox ID="txtRegStart" tip="输入开通日期" runat="server" onfocus="WdatePicker()"
                             class="input_select"></asp:TextBox>
-                            至<asp:TextBox ID="txtRegEnd" tip="输入开通日期" runat="server" onfocus="WdatePicker()"
-                                class="input_select"></asp:TextBox>
-                            开通日期：<asp:TextBox ID="txtOpenStart" tip="输入开通日期" runat="server" onfocus="WdatePicker()"
-                                class="input_select"></asp:TextBox>至<asp:TextBox ID="txtOpenEnd" tip="输入开通日期" runat="server"
-                                    onfocus="WdatePicker()" class="input_select"></asp:TextBox>
-                            &nbsp;&nbsp;
+                        至<asp:TextBox ID="txtRegEnd" tip="输入开通日期" runat="server" onfocus="WdatePicker()"
+                            class="input_select"></asp:TextBox>
+                        开通日期：<asp:TextBox ID="txtOpenStart" tip="输入开通日期" runat="server" onfocus="WdatePicker()"
+                            class="input_select"></asp:TextBox>至<asp:TextBox ID="txtOpenEnd" tip="输入开通日期" runat="server"
+                                onfocus="WdatePicker()" class="input_select"></asp:TextBox>
+                        &nbsp;&nbsp;
                         <asp:LinkButton ID="btnSearch" runat="server" class="easyui-linkbutton"
                             iconcls="icon-search" OnClick="btnSearch_Click"> 搜 索 </asp:LinkButton>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </div>
-        <div class="dataTable">
+                        <asp:LinkButton ID="lbtnExport" runat="server" class="easyui-linkbutton" iconcls="icon-print"
+                            OnClick="lbtnExport_Click"> 导出Excel </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    <div class="dataTable">
             <table width="99%" border="0" cellspacing="0" cellpadding="0" class="t1">
                 <tr>
                     <th align="center">会员编号
@@ -144,3 +147,4 @@
     </form>
 </body>
 </html>
+
