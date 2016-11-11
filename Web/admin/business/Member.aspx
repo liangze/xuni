@@ -56,8 +56,8 @@
                     </th>--%>
                     <th align="center">注册日期
                     </th>
-                    <th align="center">操作
-                    </th>
+                    <%--<th align="center">操作
+                    </th>--%>
                 </tr>
                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                     <ItemTemplate>
@@ -87,7 +87,7 @@
                             <td align="center">
                                 <%#Eval("RegTime")%>
                             </td>
-                            <td align="center">
+                            <%--<td align="center">
                                 <asp:LinkButton ID="lbtnOpend" runat="server" CommandArgument='<%# Eval("UserID") %>'
                                     class="easyui-linkbutton" iconcls="icon-ok" Visible='true' CommandName="open"
                                     OnClientClick="javascript:return confirm('确定要开通会员吗？')">开通</asp:LinkButton>
@@ -97,7 +97,7 @@
                                 <asp:LinkButton ID="lbtnRemove" runat="server" CommandArgument='<%# Eval("UserID") %>' class="easyui-linkbutton"
                                     iconcls="icon-no" Visible='<%#Eval("IsOpend").ToString()=="0"?true:false %>'
                                     CommandName="Remove" OnClientClick="javascript:return confirm('确定要删除此会员吗？')">删除</asp:LinkButton>
-                            </td>
+                            </td>--%>
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
