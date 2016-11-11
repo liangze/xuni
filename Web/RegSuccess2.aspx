@@ -9,7 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="box box_width">
+    <div class="box box_width" style="height:250px">
         <div class="capositon">
             当前位置：首页>><a href="javascript:void(0)">注册</a></div>
         <div class="dataTable">

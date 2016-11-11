@@ -78,7 +78,7 @@
                             <%=GetLanguage("ReferenceNumber")%><!--推荐人编号-->
                         </th>
                         <th align="center">
-                            <%=GetLanguage("DeclarationNumber")%><!--代理中心编号-->
+                            安置人
                         </th>
                         <th align="center">
                             <%=GetLanguage("RegistrationHours")%><!--注册日期-->

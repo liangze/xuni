@@ -174,7 +174,7 @@
                             <span style="color: #f00;">*</span><%=GetLanguage("ReferenceNumber")%>：
                         </label>
                         <div class="field">
-                            <input name="txtRecommendCode" type="text" id="txtRecommendCode" runat="server" class="input_reg"  />
+                            <input name="txtRecommendCode" type="text" id="txtRecommendCode" runat="server" disabled="disabled" class="input_reg"  />
                         </div>
                     </div>
                        <div class="control-group"  >

@@ -1522,13 +1522,13 @@ namespace Library
                 //string jhType = JhType(type);
                 //dt.Rows[i]["JhType"] = jhType;
                //string xx= 
-                string loction = decimal.Parse( dt.Rows[i]["RightNewScore"].ToString()) > decimal.Parse(dt.Rows[i]["LeftNewScore"].ToString()) ? Rongyu(decimal.Parse(dt.Rows[i]["RightNewScore"].ToString())) : Rongyu(decimal.Parse(dt.Rows[i]["LeftNewScore"].ToString()));
+                string loction = decimal.Parse( dt.Rows[i]["RightScore"].ToString()) > decimal.Parse(dt.Rows[i]["LeftScore"].ToString()) ? Rongyu(decimal.Parse(dt.Rows[i]["RightScore"].ToString())) : Rongyu(decimal.Parse(dt.Rows[i]["LeftScore"].ToString()));
                 dt.Rows[i]["ZhuQu"] = loction;
             }
             
             dt.Columns.Remove("userid");
-            dt.Columns.Remove("RightNewScore");
-            dt.Columns.Remove("LeftNewScore");
+            dt.Columns.Remove("RightScore");
+            dt.Columns.Remove("LeftScore");
             string title = "开通会员列表";
             return ed.daochu(dt, htb, path, title);
         } 

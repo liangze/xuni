@@ -35,16 +35,27 @@ namespace Web
                 usercode = model.UserCode;
                 levelname = levelBLL.GetLevelName(model.LevelID);
                 RegMoney = model.RegMoney.ToString();
-                string shouji = model.PhoneNum.ToString();
+           
                 int dx = getParamInt("duanxin");
                 if (dx == 1)
                 {
+                    string shouji = "";
+                    try
+                    {
+                          shouji = model.PhoneNum.ToString();
+                    }
+                    catch (Exception)
+                    {
+
+                        shouji = "0";
+                    }
+                   
                     //短信
                     string DX = System.Configuration.ConfigurationManager.AppSettings["DX"];
                     string DXMM = System.Configuration.ConfigurationManager.AppSettings["DXMM"];
                     string uid = DX.ToString();
                     string auth = DXMM.ToString();
-                    string mobile = model.PhoneNum;
+                    string mobile = shouji;
                     string url = "http://sms.10690221.com:9011/hy/?uid=" + uid + "&auth=" + auth + "&mobile=" + mobile + "&msg=";
 
                     //http://ip:port/hy/?uid=1234&auth=faea920f7412b5da7be0cf42b8c93759&mobile=13612345678&msg=hello&expid=0
@@ -63,14 +74,14 @@ namespace Web
                     if (M_user.Flag != "0")
                     {
                         M_user.Mcontent = neirong;
-                        M_user.MobileNum = model.PhoneNum;
+                        M_user.MobileNum = shouji;
                         m.Add(M_user);
                         GetHtmlFromUrl(url);
                         string[] jiequ1 = jieguo.Split(',');
                         M_user.Flag = jiequ1[0];
                     }
                     M_user.Mcontent = neirong;
-                    M_user.MobileNum = model.PhoneNum;
+                    M_user.MobileNum = shouji;
                     m.Add(M_user);
                 }
             }

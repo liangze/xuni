@@ -60,7 +60,7 @@ namespace Web.user.team
         public void getDate()
         {
 
-            if (userBLL.GetMoney(getLoginID(), "LeftNewScore") < getParamInt("Static0") * 10000 && userBLL.GetMoney(getLoginID(), "RightNewScore") < getParamInt("Static0") * 10000)
+            if (userBLL.GetMoney(getLoginID(), "LeftScore") < getParamAmount("Static0") * 10000 && userBLL.GetMoney(getLoginID(), "RightScore") < getParamAmount("Static0") * 10000)
             {
                 btnSubmit.Visible = false;
             }
@@ -81,7 +81,7 @@ namespace Web.user.team
                 return;
             } 
              
-            if (userBLL.GetMoney(getLoginID(), "LeftNewScore") < getParamInt("Static0") *10000 && userBLL.GetMoney(getLoginID(), "RightNewScore") < getParamInt("Static0") * 10000)
+            if (userBLL.GetMoney(getLoginID(), "LeftScore") < getParamAmount("Static0") *10000 && userBLL.GetMoney(getLoginID(), "RightScore") < getParamAmount("Static0") * 10000)
             {
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('业绩不足，无法开通代理中心');", true);//推荐人数不足
                 return;

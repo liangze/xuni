@@ -152,7 +152,8 @@
                                     <%#Eval("SttleTime")%><%--结算日期--%>
                                 </td>
                                 <td align="center">
-                                    <asp:LinkButton ID="lbtnDetail" runat="server" PostBackUrl='<%#Eval("SttleTime","BonusDetail.aspx?SttleTime={0}") %>'><%=GetLanguage("ViewDetails")%><!--查看明细--></asp:LinkButton>
+                                    <asp:LinkButton ID="lbtnDetail" runat="server" Visible ='<%#Eval("SttleTime").ToString()!=""?true:false%>'  PostBackUrl='<%#Eval("SttleTime","BonusDetail.aspx?SttleTime={0}") %>'><%=GetLanguage("ViewDetails")%><!--查看明细--></asp:LinkButton>
+                                    <asp:Label ID="Label1" runat="server"  Visible ='<%#Eval("SttleTime").ToString()==""?true:false%>'>奖金待发放</asp:Label>   <%--结算日期--%>
                                 </td>
                             </tr>
                         </ItemTemplate>
