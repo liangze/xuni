@@ -45,10 +45,10 @@ namespace Web.admin.business
         /// </summary>
         private void BindLevel()
         {
-            IList<lgk.Model.tb_level> List = new lgk.BLL.tb_level().GetModelList(" LevelID>3");
+            IList<lgk.Model.tb_level> List = new lgk.BLL.tb_level().GetModelList("");
             dropLevel.Items.Clear();
             ListItem li = new ListItem();
-            li.Value = "0";
+            li.Value = "-1";
             li.Text = "-请选择-";
             dropLevel.Items.Add(li);
             foreach (lgk.Model.tb_level item in List)
@@ -80,9 +80,9 @@ namespace Web.admin.business
             {
                 strWhere += " and TrueName like  '%" + trueName.Trim() + "%'";
             }
-            if (dropLevel.SelectedValue != "0")
+            if (dropLevel.SelectedValue != "-1")
             {
-                strWhere += " and tb_user.LevelID=" + dropLevel.SelectedValue;
+                strWhere += " and u.LevelID=" + dropLevel.SelectedValue;
             }
             if (StarTime != "")
             {
