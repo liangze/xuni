@@ -39,8 +39,9 @@ namespace Web.admin
         public string tixian { get; set; }
         public string tixianchuli { get; set; }
         public string caifen { get; set; }
+        public string all { get; set; }
 
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -154,16 +155,20 @@ namespace Web.admin
         {
 
             DateTime time = DateTime.Now.Date;
-            string sql = "select *from  tb_user where RegTime>= '" + time + "';select * from tb_user ;select sum(User011)a from tb_user where userid<>1 ; select sum(LeftScore +RightScore)a from tb_user where userid=1 ";
-            DataSet ds = u.getData_Chaxun(sql, "");
+            string sql = "select *from  tb_user where RegTime>= '" + time + "';select * from tb_user ;select sum(User011)a from tb_user where userid<>1 ; select sum(LeftScore +RightScore)a from tb_user where userid=1; select sum(StockAccount)a FROM[tb_user];";
+            
+
+           DataSet ds = u.getData_Chaxun(sql, "");
             DataTable dt = ds.Tables[0];
             DataTable dt1 = ds.Tables[1];
             DataTable dt2 = ds.Tables[2];
             DataTable dt3 = ds.Tables[3];
+            DataTable dt4 = ds.Tables[4];
             zongyeji = dt3.Rows[0]["a"].ToString();
             aixing = dt2.Rows[0]["a"].ToString();
             shuliang = dt.Rows.Count;
             leiji = dt1.Rows.Count;
+            all = dt4.Rows[0]["a"].ToString();
         }
 
         protected void jifen1() // 
