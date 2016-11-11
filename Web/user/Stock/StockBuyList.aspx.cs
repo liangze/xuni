@@ -520,7 +520,7 @@ namespace Web.user.Stock
                 decimal jiaoyiNum = getParamAmount("Shares4");//执行升价的某交易数量
                 decimal shenPrice = getParamAmount("Shares5");//涨幅价格
                 decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
-                UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
+                //UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
 
                 if (jiaoNumber < jiaoyiNum)
                 {
@@ -601,7 +601,7 @@ namespace Web.user.Stock
                         decimal jiaoyiNum = getParamAmount("Shares4");//执行升价的某交易数量
                         decimal shenPrice = getParamAmount("Shares5");//涨幅价格
                         decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
-                        UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
+                        //UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
 
                         if (jiaoNumber < jiaoyiNum)
                         {
