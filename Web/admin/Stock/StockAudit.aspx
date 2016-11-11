@@ -20,7 +20,7 @@
     <form id="form1" runat="server">
         <div class="operation">
             <fieldset class="fieldset">
-                <legend class="legSearch">MDD金币预购查询</legend>会员编号：<asp:TextBox
+                <legend class="legSearch">云商积分卖出</legend>会员编号：<asp:TextBox
                     ID="txtUserCode" tip="输入购买日期" runat="server" class="input_select"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;购买日期：<asp:TextBox
                     ID="txtStart" tip="输入购买日期" runat="server" onfocus="WdatePicker()" class="input_select"></asp:TextBox>
                 至<asp:TextBox ID="txtEnd" tip="输入购买日期" runat="server" onfocus="WdatePicker()" class="input_select"></asp:TextBox>
