@@ -338,15 +338,31 @@ namespace Web.user.Stock
                 if(orUerser!=null)
                 {
                     string Remark = "会员" + GetUserCode(UserID) + "购买云商积分，解冻云购积分";
-                    UpdateAccount("User012", RecommendID, BuyNumber, 0);//云购积分解冻更新
-                    UpdateAccount("User014", RecommendID, BuyNumber, 1);//
-                    UpdateAccount("StockAccount", RecommendID, BuyNumber, 1);//获得云商积分
+                    if(orUerser.User012>= BuyNumber)
+                    {
+                        UpdateAccount("User012", RecommendID, BuyNumber, 0);//云购积分解冻更新
+                        UpdateAccount("User014", RecommendID, BuyNumber, 1);//
+                        UpdateAccount("StockAccount", RecommendID, BuyNumber, 1);//获得云商积分
 
-                    decimal balanceAmount = orUerser.User012 - BuyNumber;//云购积分账户结余金额
-                    add_journal(RecommendID, 0, BuyNumber, balanceAmount, 9, Remark, "", RecommendID);//云购积分加入流水线
+                        decimal balanceAmount = orUerser.User012 - BuyNumber;//云购积分账户结余金额
+                        add_journal(RecommendID, 0, BuyNumber, balanceAmount, 9, Remark, "", RecommendID);//云购积分加入流水线
 
-                    decimal balanceAmount2 = orUerser.StockAccount + BuyNumber;//云商积分账户结余金额
-                    add_journal(RecommendID, BuyNumber, 0, balanceAmount2, 4, Remark, "", RecommendID);//云商积分加入流水线
+                        decimal balanceAmount2 = orUerser.StockAccount + BuyNumber;//云商积分账户结余金额
+                        add_journal(RecommendID, BuyNumber, 0, balanceAmount2, 4, Remark, "", RecommendID);//云商积分加入流水线
+                    }
+                    else if(orUerser.User012>0)
+                    {
+                        UpdateAccount("User012", RecommendID, orUerser.User012, 0);//云购积分解冻更新
+                        UpdateAccount("User014", RecommendID, orUerser.User012, 1);//
+                        UpdateAccount("StockAccount", RecommendID, orUerser.User012, 1);//获得云商积分
+
+                        decimal balanceAmount = 0;//orUerser.User012 - BuyNumber;//云购积分账户结余金额
+                        add_journal(RecommendID, 0, BuyNumber, balanceAmount, 9, Remark, "", RecommendID);//云购积分加入流水线
+
+                        decimal balanceAmount2 = orUerser.StockAccount + orUerser.User012;//云商积分账户结余金额
+                        add_journal(RecommendID, orUerser.User012, 0, balanceAmount2, 4, Remark, "", RecommendID);//云商积分加入流水线
+                    }
+                    
                 } 
             }
             #endregion
