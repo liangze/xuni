@@ -9,7 +9,7 @@ using System.Data;
 
 namespace Web.admin.team
 {
-    public partial class EmptyUpgrade1 : AdminPageBase
+    public partial class LevelUp : AdminPageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -52,7 +52,7 @@ namespace Web.admin.team
             string strRegEnd = txtRegEnd.Text.Trim();
             string strOpenStart = txtOpenStart.Text.Trim();
             string strOpenEnd = txtOpenEnd.Text.Trim();
-            string strWhere = "houtai=1";
+            string strWhere = "IsOpend=2";
             #region 会员类型
             if (this.dropType.SelectedValue != "0")
             {
@@ -239,13 +239,29 @@ namespace Web.admin.team
         }
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+            int iUserID = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "UserID"));
+            // 会员注册时的等级
             if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
             {
-                int iUserID = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "UserID"));
-
                 string levelName = DataBinder.Eval(e.Item.DataItem, "LevelName").ToString();
                 Literal ltlLevelName = (Literal)e.Item.FindControl("ltlLevelName"); // 等级名称
                 ltlLevelName.Text = levelName;
+            }
+            int BackgroundLevel = (int)userBLL.GetModel(iUserID).User017;
+            // 后台调整的等级
+            if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+                // int iUserID = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "UserID"));
+                if (BackgroundLevel==-1)
+                {
+                    Literal Literal1 = (Literal)e.Item.FindControl("Literal1");
+                    Literal1.Text = "";
+                }
+                else
+                {
+                    Literal Literal1 = (Literal)e.Item.FindControl("Literal1");
+                    Literal1.Text = levelBLL.GetModel(BackgroundLevel).LevelName;
+                }
             }
         }
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -256,28 +272,28 @@ namespace Web.admin.team
             {
                 spd.jumpAdminUrl1(this.Page, 1);//跳转三级密码
 
-                userInfo.LevelID = 0;
+                userInfo.User017 = 0;
                 userBLL.Update(userInfo);
                 MessageBox.MyShow(this, "操作成功!");
             }
             if (e.CommandName == "er")// 
             {
                 spd.jumpAdminUrl1(this.Page, 1);//跳转三级密码
-                userInfo.LevelID = 1;
+                userInfo.User017 = 1;
                 userBLL.Update(userInfo);
                 MessageBox.MyShow(this, "操作成功!");
             }
             if (e.CommandName == "san")// 
             {
                 spd.jumpAdminUrl1(this.Page, 1);//跳转三级密码
-                userInfo.LevelID = 2;
+                userInfo.User017 = 2;
                 userBLL.Update(userInfo);
                 MessageBox.MyShow(this, "操作成功!");
             }
             if (e.CommandName == "si")// 
             {
                 spd.jumpAdminUrl1(this.Page, 1);//跳转三级密码
-                userInfo.LevelID = 3;
+                userInfo.User017 = 3;
                 userBLL.Update(userInfo);
                 MessageBox.MyShow(this, "操作成功!");
             }
