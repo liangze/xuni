@@ -52,7 +52,7 @@ namespace Web.admin.team
             string strRegEnd = txtRegEnd.Text.Trim();
             string strOpenStart = txtOpenStart.Text.Trim();
             string strOpenEnd = txtOpenEnd.Text.Trim();
-            string strWhere = "IsOpend=2";
+            string strWhere = "IsOpend<>2";
             #region 会员类型
             if (this.dropType.SelectedValue != "0")
             {

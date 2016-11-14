@@ -60,11 +60,12 @@ namespace Web.user.member
                 }
                 // decimal pay = PayFor();
                 decimal pay = levelBLL.GetModel(nlevel).RegMoney - levelBLL.GetModel(model.LevelID).RegMoney;
+                decimal newRegMoney = levelBLL.GetModel(nlevel).RegMoney;
                 if (newLevelID >= 0 && (LoginUser.Emoney >= pay)) // 扣除100%注册币
                 {
-                    // 存储过程，传入UID,pay,selectedValue,type1(1.100%;2.50%)
+                    // 存储过程，传入UID,newRegMoney,selectedValue
 
-                    if (bonusBLL.Upgrade(LoginUser.UserID, pay, newLevelID) > 0)
+                    if (bonusBLL.Upgrade(LoginUser.UserID, newRegMoney, newLevelID) > 0)
                     {
                         DropDownList1.SelectedIndex = 0;
                         Response.Write("<script>alert('升级成功');location.href=Upgrade.aspx;</script>");
