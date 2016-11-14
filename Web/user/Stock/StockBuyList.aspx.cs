@@ -159,7 +159,7 @@ namespace Web.user.Stock
                 return;
             }
 
-            string strWhere = "IsSell=1AND SurplusAmount>0";
+            string strWhere = "IsSell=1 AND SurplusAmount>0";
             lgk.Model.tb_StockIssue issueInfo = stockIssueBLL.GetModel(strWhere);//获取当前出售的云商积分
             int BuyNumber = int.Parse(txtBuyNum.Text.ToString());//购买数量
             decimal NewPrice = getParamAmount("Shares3");//当前价格
@@ -213,33 +213,16 @@ namespace Web.user.Stock
             }
             #endregion
 
-            #region 更新发行数量或者公司账户云商积分剩余量
+            #region 更新发行数量和公司账户云商积分剩余量
             if (issueInfo != null)
             {
-                if (issueInfo.SurplusAmount > BuyNumber)
+                lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
+                decimal Number = BuyNumber;// - issueInfo.SurplusAmount;//需要从公司账户购买的数量
+                if(systemMoney!=null)
                 {
-                    issueInfo.SurplusAmount = issueInfo.SurplusAmount - BuyNumber;//更新挂售云商积分剩余量
-                    stockIssueBLL.Update(issueInfo);
-                }
-                if (issueInfo.SurplusAmount <= BuyNumber)
-                {
-
-                    decimal Number = BuyNumber - issueInfo.SurplusAmount;//需要从公司账户购买的数量
-                    lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
-                    if (systemMoney == null)
+                    if (issueInfo.SurplusAmount > BuyNumber)
                     {
-                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('云商积分已售完');location.href='StockBuyList.aspx';", true);//云商积分已售完
-                        return;
-                    }
-                    if (systemMoney.MoneyAccount < Number)
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('平台云商积分出售数量不足');location.href='StockBuyList.aspx';", true);//云商积分已售完
-                        return;
-                    }
-                    else
-                    {
-                        issueInfo.SurplusAmount = 0;//更新挂售云商积分剩余量,发行数量
-                        issueInfo.IsSell = 0;//0，是卖完，1是挂售中
+                        issueInfo.SurplusAmount = issueInfo.SurplusAmount - BuyNumber;//更新发行记录云商积分剩余量
                         stockIssueBLL.Update(issueInfo);
 
                         #region 购买云商积分,公司账户云商积分减少
@@ -247,8 +230,31 @@ namespace Web.user.Stock
                         systemBll.Update(systemMoney);
                         #endregion
                     }
-                }
-            }
+                    if (issueInfo.SurplusAmount <= BuyNumber)
+                    {
+                        if (systemMoney == null)
+                        {
+                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('云商积分已售完');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                            return;
+                        }
+                        if (systemMoney.MoneyAccount < Number)
+                        {
+                            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('平台云商积分出售数量不足');location.href='StockBuyList.aspx';", true);//云商积分已售完
+                            return;
+                        }
+                        else
+                        {
+                            issueInfo.SurplusAmount = 0;//更新发行云商积分剩余量,发行数量
+                            issueInfo.IsSell = 0;//0，是卖完，1是挂售中
+                            stockIssueBLL.Update(issueInfo);
+
+                            #region 购买云商积分,公司账户云商积分减少
+                            systemMoney.MoneyAccount -= Number;//需要从公司账户购买的数量
+                            systemBll.Update(systemMoney);
+                            #endregion
+                        }
+                    }
+                }            }
             if (issueInfo == null)
             {
                 #region 购买云商积分,公司账户云商积分减少

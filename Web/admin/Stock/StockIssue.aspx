@@ -23,7 +23,7 @@
             <fieldset class="fieldset">
                 <legend class="legSearch">云商积分</legend>
                 公司账户:<asp:TextBox ID="ToalNumber" ReadOnly="true" runat="server"
-                    class="easyui-numberbox input_select"></asp:TextBox>个
+                    class="easyui-numberbox input_select"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;
             </fieldset>
         </div>
@@ -31,7 +31,7 @@
             <fieldset class="fieldset">
                 <legend class="legSearch">发行</legend>
                 发行量:<asp:TextBox ID="txtNum" ReadOnly="true" runat="server"
-                    class="easyui-numberbox input_select"></asp:TextBox>个
+                    class="easyui-numberbox input_select"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:LinkButton ID="lbtnOK" runat="server" class="easyui-linkbutton" iconcls="icon-add"
                 OnClick="lbtnOK_Click"> 云商积分发行 </asp:LinkButton><asp:Literal ID="ltWarning" runat="server"></asp:Literal>

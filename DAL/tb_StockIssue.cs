@@ -60,6 +60,23 @@ namespace lgk.DAL
 
             return DbHelperSQL.Exists(strSql.ToString());
         }
+        /// <summary>
+        /// 根据给定的ID，判断是否存在该记录。
+        /// </summary>
+        /// <param name="IssueID">给定的ID</param>
+        /// <returns></returns>
+        public int Existss()
+        {
+            int dCount = 0;
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from tb_StockIssue");
+            object obj = DbHelperSQL.GetSingle(strSql.ToString());
+            if (obj != null)
+            {
+                dCount = int.Parse(obj.ToString());
+            }
+            return dCount;
+        }
 
         /// <summary>
         /// 根据给定的条件，判断记录是否存在。
