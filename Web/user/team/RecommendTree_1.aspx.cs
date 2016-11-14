@@ -22,7 +22,7 @@ namespace Web.user.team
         {
             spd.jumpUrl(this.Page, 1);//跳转二级密码
             spd.jumpAdminUrl(this.Page, 1);//跳转二级密碼
-
+            
             if (!IsPostBack)
             {
                 BindTreeRe();
@@ -41,7 +41,7 @@ namespace Web.user.team
 
         private void BindTreeRe()
         {
-            int id = GetID();
+            int id = int.Parse(getLoginID().ToString());
             lgk.BLL.UserView uview = new UserView(id, y, z, _selectPlatform, 1, "zh-cn");
             Literal1.Text = uview.AddTable();
         }
@@ -57,7 +57,8 @@ namespace Web.user.team
 
         private void BindTree()
         {
-            UserView uview = new UserView(x, y, z, _selectPlatform, 1, "zh-cn");
+            int id = int.Parse(getLoginID().ToString());
+            UserView uview = new UserView(id, y, z, _selectPlatform, 1, "zh-cn");
             Literal1.Text = uview.AddTable();
         }
 

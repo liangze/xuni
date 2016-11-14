@@ -205,7 +205,7 @@
                             <input name="txtAgentCode" type="text" id="txtAgentCode" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
-                    <div class="control-group">
+                    <div class="control-group"  style="display:none">
                         <label for="memid">
                             <span style="color: #f00;">*</span><%=GetLanguage("ReferenceNumber")%>：
                         </label>

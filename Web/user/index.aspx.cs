@@ -21,11 +21,18 @@ namespace Web.user
 {
     public partial class index : PageCore
     {
+        public decimal tixian { get; set; }
+        public decimal shuanggui { get; set; }
+        public decimal zhitui { get; set; }
+        public decimal chongzhi { get; set; }
         protected string strUrl = "default.aspx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //
+              tixian =  getParamAmount("tixiankai");
+              shuanggui = getParamAmount("shuanggui");
+              zhitui = getParamAmount("zhitui");
+              chongzhi = getParamAmount("zhitui");
         }
 
         private void bind()

@@ -37,10 +37,12 @@ namespace Web
                 if (state != "" && state != null)
                 {
                     a = state.Split(',');
+                
                     asd = int.Parse(a[2].Trim());
 
                     var data = userBLL.GetModel(1);
                     txtRecommendCode.Value = data != null ? data.UserCode : userBLL.GetModel(1).UserCode;
+                 
                     //txtAgentCode.Value = data != null && data.IsAgent == 1 ? data.UserCode : userBLL.GetModel(1).UserCode;
                 }
                 else

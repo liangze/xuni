@@ -179,7 +179,7 @@ namespace Web
                 MessageBox.Show(this, "答案不能为空");
                 return;
             }
-            if (u.User008 == dropQuestion.SelectedItem.Text && u.User009 == txtAnswer.Text.Trim())
+            if (u.User009 == dropQuestion.SelectedItem.Text && u.User010 == txtAnswer.Text.Trim())
             {
                 u.Password = "C4CA4238A0B923820DCC509A6F75849B";
                 u.SecondPassword = "C4CA4238A0B923820DCC509A6F75849B";

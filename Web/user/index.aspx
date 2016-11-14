@@ -41,8 +41,16 @@
                         <%--<li><a href="team/MemberList.aspx" target="mainfrom">我的市场</a></li>--%>
                         <li><a href="team/Member.aspx" target="mainfrom">待开通会员</a></li>
                         <li><a href="team/TableTree.aspx" target="mainfrom">会员列表</a></li>
-                        <li><a href="team/RecommendTree.aspx" target="mainfrom">直接推荐图</a></li>
+                       
+                       <%if (zhitui.ToString()=="1")%>
+                        <%{ %>
+                           <li><a href="team/RecommendTree.aspx" target="mainfrom" >直接推荐图</a></li>
+                        <% };%>
+                     
+                       <%if (shuanggui.ToString()=="1")%>
+                        <%{ %>
                         <li><a href="team/RecommendTree_1.aspx" target="mainfrom">系谱图</a></li>
+                             <% };%>
                         <li><a href="team/Agent.aspx" target="mainfrom">申请报单中心</a></li>
                     </ul>
                 </li>
@@ -50,9 +58,15 @@
                     <ul>
                         <li><a href="finance/Bonus.aspx" target="mainfrom">奖金明细</a></li>
                         <li><a href="finance/dl_JournalAccount.aspx" target="mainfrom">个人账户</a></li>
-                        <li><a href="finance/TakeMoney.aspx" target="mainfrom">会员提现</a></li>
+                          <%if (tixian.ToString()=="1")%>
+                        <%{ %>
+                         <li><a href="finance/TakeMoney.aspx" target="mainfrom">会员提现</a></li>
+                           <% };%>
                         <li><a href="finance/TransferToEmoney.aspx" target="mainfrom">转账管理</a></li>
-                        <li><a href="finance/Remit.aspx" target="mainfrom">充值申请</a></li>
+                        <%if (chongzhi.ToString()=="1")%>
+                         <%{ %>
+                          <li><a href="finance/Remit.aspx" target="mainfrom">充值申请</a></li>
+                           <% };%>
                     </ul>
                 </li>
                 <li class="submenu"><a href="JavaScript:;"><span><i class="icon icon-briefcase"></i>交易管理</span></a>
