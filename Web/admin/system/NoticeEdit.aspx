@@ -39,7 +39,7 @@
                         <asp:ListItem Value="3">新闻中心</asp:ListItem>
                         <asp:ListItem Value="4">疑问解答</asp:ListItem>
                         <asp:ListItem Value="5">商城公告</asp:ListItem>
-                        <asp:ListItem Value="6">关于MDD易购</asp:ListItem>
+                        <asp:ListItem Value="6">关于故乡云商</asp:ListItem>
                         <asp:ListItem Value="7">新手指南</asp:ListItem>
                         <asp:ListItem Value="8">配送安装</asp:ListItem>
                         <asp:ListItem Value="9">售后服务</asp:ListItem>

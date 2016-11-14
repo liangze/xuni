@@ -24,7 +24,7 @@
                 <fieldset class="fieldset">
                     <legend class="legSearch">操作</legend>
                     会员编号：<asp:TextBox ID="txtUserCode" class="input_select" runat="server" tip="输入会员编号"></asp:TextBox>
-                    &nbsp;&nbsp;金币类型：<asp:DropDownList ID="dropMoneyType" runat="server">
+                    &nbsp;&nbsp;币种类型：<asp:DropDownList ID="dropMoneyType" runat="server">
                         <%--  Emoney = 0;// 注册积分         写流水类型：1
                               BonusAccount = 0;// 奖金积分 	 2
                               AllBonusAccount = 0;// 电子积分	 3

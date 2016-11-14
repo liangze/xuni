@@ -50,7 +50,7 @@ namespace Web.user.shop
             string baodanID = Request["baodanID"];
             if (string.IsNullOrEmpty(baodanID) || baodanID.Trim() == string.Empty)
             {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("ChooseProducts") + "');", true);//请选择报单产品
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请选择商品');", true);//请选择报单产品
                 return false;
             }
             string[] baodanIDs = baodanID.Split(',');
@@ -59,13 +59,13 @@ namespace Web.user.shop
                 string num = Request["num_" + id];
                 if (string.IsNullOrEmpty(num) || num.Trim() == string.Empty)
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("ProductQuantity") + "');", true);//请选择报单产品
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请选择商品');", true);//请选择报单产品
                     return false;
                 }
                 int n;
                 if (int.TryParse(num, out n) == false)
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NumberError") + "');", true);//数量格式错误
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('数量格式错误');", true);//数量格式错误
                     return false;
                 }
 
@@ -83,14 +83,14 @@ namespace Web.user.shop
 
                 if (Convert.ToInt32(tb_goodsModel.Pic5) < num) //判断库存量
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("InventoryProblem") + "');", true);
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('库存不足');", true);
                     return false;
                 }
 
                 dMoney += tb_goodsModel.Price * num;
-                if (userInfo.BonusAccount < dMoney)
+                if (userInfo.ShopAccount < dMoney)
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NotCurrent") + "');", true);
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('消费积分余额不足');", true);
                     return false;
                 }
             }
@@ -229,7 +229,7 @@ namespace Web.user.shop
                         }
                         else
                         {
-                            MessageBox.Show(this, "" + GetLanguage("InventoryProblem") + ""); //库存不足
+                            MessageBox.Show(this, "库存不足"); //库存不足
                             return;
                         }
                     }

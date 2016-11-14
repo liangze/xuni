@@ -20,6 +20,12 @@
                 OnClick="lbtnIssue_Click"> 股份发行 </asp:LinkButton>--%>
             <%--asp:LinkButton ID="lbtnSplit" runat="server" class="easyui-linkbutton" iconcls="icon-search"
                 OnClick="lbtnSplit_Click" > 拆分管理 </asp:LinkButton>--%>
+            <fieldset class="fieldset">
+                <legend class="legSearch">云商积分</legend>
+                公司账户:<asp:TextBox ID="ToalNumber" ReadOnly="true" runat="server"
+                    class="easyui-numberbox input_select"></asp:TextBox>个
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            </fieldset>
         </div>
         <div class="operation">
             <fieldset class="fieldset">
@@ -28,7 +34,7 @@
                     class="easyui-numberbox input_select"></asp:TextBox>个
             &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:LinkButton ID="lbtnOK" runat="server" class="easyui-linkbutton" iconcls="icon-add"
-                OnClick="lbtnOK_Click"> MDD金币发行 </asp:LinkButton><asp:Literal ID="ltWarning" runat="server"></asp:Literal>
+                OnClick="lbtnOK_Click"> 云商积分发行 </asp:LinkButton><asp:Literal ID="ltWarning" runat="server"></asp:Literal>
             </fieldset>
         </div>
         <div class="dataTable">

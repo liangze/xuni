@@ -1179,6 +1179,7 @@ namespace lgk.DAL
     
            //(SELECT TypeName FROM tb_produceType WHERE ID = p.Goods006) AS SypeName
             StringBuilder strSql = new StringBuilder();
+
             strSql.Append(@"select p.ID,p.GoodsCode,p.GoodsName,p.Price,p.RealityPrice,
                 p.Standard,p.IsHave,p.TypeID,p.GoodsType,p.Pic1,p.Pic2,p.Pic3,p.Pic4,p.Pic5,
                 p.Summary,p.Remarks,p.AddTime,p.Goods001,p.Goods002,p.Goods003,p.Goods004,p.Goods005,p.ShopPrice,
