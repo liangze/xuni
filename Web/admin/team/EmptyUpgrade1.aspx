@@ -47,8 +47,8 @@
                         &nbsp;&nbsp;
                         <asp:LinkButton ID="btnSearch" runat="server" class="easyui-linkbutton"
                             iconcls="icon-search" OnClick="btnSearch_Click"> 搜 索 </asp:LinkButton>
-                        <asp:LinkButton ID="lbtnExport" runat="server" class="easyui-linkbutton" iconcls="icon-print"
-                            OnClick="lbtnExport_Click"> 导出Excel </asp:LinkButton>
+                        <%--<asp:LinkButton ID="lbtnExport" runat="server" class="easyui-linkbutton" iconcls="icon-print"
+                            OnClick="lbtnExport_Click"> 导出Excel </asp:LinkButton>--%>
                     </td>
                 </tr>
             </table>
