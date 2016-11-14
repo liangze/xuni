@@ -26,13 +26,13 @@
             <div class="filter">
                 <div class="row-fluid">
                     <p class="span3">
-                        <label><%=GetLanguage("CirculatingGold")%><%--奖金币--%>(￥)：</label>
+                        <label><%=GetLanguage("CirculatingGold")%><%--奖金币--%>($)：</label>
                         <span class="field">
                             <input name="txtBonusAccount" id="txtBonusAccount" runat="server" type="text" disabled="disabled" />
                         </span>
                     </p>
                     <p class="span3">
-                        <label><%=GetLanguage("Registeredcurrency")%><%--注册币--%>(￥)：</label>
+                        <label><%=GetLanguage("Registeredcurrency")%><%--注册币--%>($)：</label>
                         <span class="field">
                             <input name="txtEmoney" id="Emoney" runat="server" type="text" disabled="disabled" />
                         </span>

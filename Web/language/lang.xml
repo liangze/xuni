@@ -357,8 +357,8 @@
 		<langtype name="en-us">Profit total</langtype>
 	</key>
 	<key name="USD">
-		<langtype name="zh-cn">元</langtype>
-		<langtype name="en-us">Yuan</langtype>
+		<langtype name="zh-cn">$</langtype>
+		<langtype name="en-us">$</langtype>
 	</key>
 	<key name="RecommendedNumber">
 		<langtype name="zh-cn">推荐编号</langtype>
