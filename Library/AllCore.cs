@@ -933,7 +933,7 @@ namespace Library
 
                     iFlag = 0;
 
-                    UpdateSystemAccount("MoneyAccount", dRegMoney, 1);
+                    //UpdateSystemAccount("MoneyAccount", dRegMoney, 1);
                 }
                 else
                 {
