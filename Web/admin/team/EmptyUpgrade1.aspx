@@ -105,13 +105,7 @@
                             <td align="center">
                                 <%#Eval("OpenTime")%>
                             </td>
-
                             <td align="center">
-                                 <asp:LinkButton ID="LinkButton1" runat="server" 
-                                        class="easyui-linkbutton" iconcls="icon-remove"  >下 架</asp:LinkButton>
-
-
-
                                 <asp:LinkButton ID="lbtnLock" runat="server" CommandName="yi" CommandArgument='<%#Eval("UserID")%>'
                                     class="easyui-linkbutton" iconcls="icon-ok" Visible='<%#Convert.ToInt32(Eval("LevelID"))!=0?true:false %>'>体验级别</asp:LinkButton>
                                 <asp:LinkButton ID="LinkButton2" runat="server" CommandName="er" CommandArgument='<%#Eval("UserID")%>'
