@@ -1123,6 +1123,7 @@
     <Content Include="doc\tb_journal.txt" />
     <Content Include="doc\tb_User.txt" />
     <Content Include="doc\奖金类型.txt" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="getemailcode.aspx" />
     <Content Include="images\06.jpg" />
     <Content Include="images\ad2.jpg" />
@@ -4066,6 +4067,11 @@
     <None Include="ckeditor\.htaccess" />
     <None Include="ckeditor\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <None Include="ckeditor\ckfinder\userfiles\.htaccess" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="hdm\images\Thumbs.db" />
     <Content Include="MallInterface\BonusAccount.ashx" />
     <Content Include="MallInterface\Eliminate.ashx" />
@@ -5059,7 +5065,6 @@
     <Folder Include="admin\finance\File\" />
     <Folder Include="admin\info\" />
     <Folder Include="admin\system\DataBack\" />
-    <Folder Include="fonts\" />
     <Folder Include="images\backgrounds\" />
     <Folder Include="images\gallery\" />
     <Folder Include="sync\" />
