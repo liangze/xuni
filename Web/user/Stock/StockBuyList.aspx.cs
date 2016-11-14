@@ -56,10 +56,29 @@ namespace Web.user.Stock
         private void BindCurrency()
         {
             dropCurrency.Items.Add(new ListItem("-请选择-", "0"));
-            dropCurrency.Items.Add(new ListItem("电子积分", "1"));
-            dropCurrency.Items.Add(new ListItem("注册积分", "2"));
-            dropCurrency.Items.Add(new ListItem("奖金积分", "3"));
-            dropCurrency.Items.Add(new ListItem("感恩积分", "4"));
+            var iOpen1 = getParamInt("PayTransfer0");
+            if (iOpen1 == 1)//电子积分支付功能是否开启
+            {
+                dropCurrency.Items.Add(new ListItem("电子积分", "1"));
+                 
+            }
+            var iOpen2 = getParamAmount("PayTransfer1");
+            if (iOpen2 == 1)//注册积分支付功能是否开启
+            {
+                dropCurrency.Items.Add(new ListItem("注册积分", "2"));
+            }
+
+            var iOpen3 = getParamAmount("PayTransfer2");
+            if (iOpen3 == 1)//奖金积分支付是否开启
+            {
+                dropCurrency.Items.Add(new ListItem("奖金积分", "3"));
+            }
+
+            var iOpen4 = getParamAmount("PayTransfer3");
+            if (iOpen4 == 1)//感恩积分支付功能是否开启
+            {
+                dropCurrency.Items.Add(new ListItem("感恩积分", "4"));
+            }
         }
         private bool CheckOpen(string value)
         {
@@ -103,7 +122,7 @@ namespace Web.user.Stock
             }
             return true;
         }
-        
+
         /// <summary>
         ///查询条件
         /// </summary>
@@ -186,7 +205,7 @@ namespace Web.user.Stock
                 }
             }
             #endregion
-           
+
             #region 判断云商积分是否已经售完
             if (issueInfo == null)//发行云商积分已售完
             {
@@ -204,15 +223,15 @@ namespace Web.user.Stock
                 }
                 if (issueInfo.SurplusAmount <= BuyNumber)
                 {
-                   
+
                     decimal Number = BuyNumber - issueInfo.SurplusAmount;//需要从公司账户购买的数量
                     lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
-                    if(systemMoney==null)
+                    if (systemMoney == null)
                     {
                         ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('云商积分已售完');location.href='StockBuyList.aspx';", true);//云商积分已售完
                         return;
                     }
-                    if(systemMoney.MoneyAccount< Number)
+                    if (systemMoney.MoneyAccount < Number)
                     {
                         ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('平台云商积分出售数量不足');location.href='StockBuyList.aspx';", true);//云商积分已售完
                         return;
@@ -258,16 +277,16 @@ namespace Web.user.Stock
             decimal jiaoyiNum = getParamAmount("Shares4");//达到某交易数量执行升价
             decimal shenPrice = getParamAmount("Shares5");//涨幅价格
             decimal jiaoNumber = getParamAmount("Tal") + BuyNumber;//累计交易总量
-            if(jiaoNumber < jiaoyiNum)
+            if (jiaoNumber < jiaoyiNum)
             {
                 UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
             }
-            
+
             if (jiaoNumber >= jiaoyiNum)
             {
-                int beishu = (int)(jiaoNumber/jiaoyiNum);
-                
-                bonusBLL.ExecProcedure("proc_Split", beishu*shenPrice);
+                int beishu = (int)(jiaoNumber / jiaoyiNum);
+
+                bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
                 decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
                 UpdateParamVarchar("ParamVarchar", yueNum.ToString(), "Tal");
             }
@@ -310,14 +329,14 @@ namespace Web.user.Stock
 
             #region  解冻推荐会员的云购积分
             long UserID = getLoginID();//登陆会员Id
-            if(UserID!=1)
+            if (UserID != 1)
             {
                 long RecommendID = userInfo.RecommendID;//获取推荐人ID
                 lgk.Model.tb_user orUerser = userBLL.GetModel(RecommendID);
-                if(orUerser!=null)
+                if (orUerser != null)
                 {
                     string Remark = "会员" + GetUserCode(UserID) + "购买云商积分，解冻云购积分";
-                    if(orUerser.User012>= BuyNumber)
+                    if (orUerser.User012 >= BuyNumber)
                     {
                         UpdateAccount("User012", RecommendID, BuyNumber, 0);//云购积分解冻更新
                         UpdateAccount("User014", RecommendID, BuyNumber, 1);//
@@ -329,7 +348,7 @@ namespace Web.user.Stock
                         decimal balanceAmount2 = orUerser.StockAccount + BuyNumber;//云商积分账户结余金额
                         add_journal(RecommendID, BuyNumber, 0, balanceAmount2, 4, Remark, "", RecommendID);//云商积分加入流水线
                     }
-                    else if(orUerser.User012>0)
+                    else if (orUerser.User012 > 0)
                     {
                         UpdateAccount("User012", RecommendID, orUerser.User012, 0);//云购积分解冻更新
                         UpdateAccount("User014", RecommendID, orUerser.User012, 1);//
@@ -341,8 +360,8 @@ namespace Web.user.Stock
                         decimal balanceAmount2 = orUerser.StockAccount + orUerser.User012;//云商积分账户结余金额
                         add_journal(RecommendID, orUerser.User012, 0, balanceAmount2, 4, Remark, "", RecommendID);//云商积分加入流水线
                     }
-                    
-                } 
+
+                }
             }
             #endregion
 
@@ -394,7 +413,7 @@ namespace Web.user.Stock
                 //买家账户余额更新
                 UpdateAccount("StockMoney", userInfo.UserID, talPrice, 0);
                 joadanInf1.BalanceAmount = userInfo.StockMoney - talPrice;//结余账户余额;
-                joadanInf1.JournalType = 3;//journalType : 1、注册积分，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
+                joadanInf1.JournalType = 5;//journalType : 1、注册积分，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
                 journalBLL.Add(joadanInf1);//增加一条数据
             }
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('购买成功');location.href='StockBuyList.aspx';", true);
@@ -495,26 +514,26 @@ namespace Web.user.Stock
 
                 UpdateAccount("StockAccount", userInfo.UserID, SellNumber, 0);//买家云商积分账户更新
 
-                #region 判断交易总量是否达到涨价要求
-                decimal jiaoyiNum = getParamAmount("Shares4");//执行升价的某交易数量
-                decimal shenPrice = getParamAmount("Shares5");//涨幅价格
-                decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
-                //UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
+                //#region 判断交易总量是否达到涨价要求
+                //decimal jiaoyiNum = getParamAmount("Shares4");//执行升价的某交易数量
+                //decimal shenPrice = getParamAmount("Shares5");//涨幅价格
+                //decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
+                ////UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
 
-                if (jiaoNumber < jiaoyiNum)
-                {
-                    UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
-                }
+                //if (jiaoNumber < jiaoyiNum)
+                //{
+                //    UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
+                //}
 
-                if (jiaoNumber >= jiaoyiNum)
-                {
-                    int beishu = (int)(jiaoNumber / jiaoyiNum);
+                //if (jiaoNumber >= jiaoyiNum)
+                //{
+                //    int beishu = (int)(jiaoNumber / jiaoyiNum);
 
-                    bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
-                    decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
-                    UpdateParamVarchar("ParamVarchar", yueNum.ToString(), "Tal");
-                }
-                #endregion
+                //    bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
+                //    decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
+                //    UpdateParamVarchar("ParamVarchar", yueNum.ToString(), "Tal");
+                //}
+                //#endregion
 
                 #region 卖出云商积分,公司账户云商积分增加
                 lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
@@ -576,26 +595,25 @@ namespace Web.user.Stock
                     }
                     else
                     {
-                        #region 判断交易总量是否达到涨价要求
-                        decimal jiaoyiNum = getParamAmount("Shares4");//执行升价的某交易数量
-                        decimal shenPrice = getParamAmount("Shares5");//涨幅价格
-                        decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
-                        //UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
+                        //#region 判断交易总量是否达到涨价要求
+                        //decimal jiaoyiNum = getParamAmount("Shares4");//执行升价的某交易数量
+                        //decimal shenPrice = getParamAmount("Shares5");//涨幅价格
+                        //decimal jiaoNumber = getParamAmount("Tal") + SellNumber;//累计交易总量
+                        ////UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");//更新交易总量
+                        //if (jiaoNumber < jiaoyiNum)
+                        //{
+                        //    UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
+                        //}
 
-                        if (jiaoNumber < jiaoyiNum)
-                        {
-                            UpdateParamVarchar("ParamVarchar", jiaoNumber.ToString(), "Tal");
-                        }
+                        //if (jiaoNumber >= jiaoyiNum)
+                        //{
+                        //    int beishu = (int)(jiaoNumber / jiaoyiNum);
 
-                        if (jiaoNumber >= jiaoyiNum)
-                        {
-                            int beishu = (int)(jiaoNumber / jiaoyiNum);
-
-                            bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
-                            decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
-                            UpdateParamVarchar("ParamVarchar", yueNum.ToString(), "Tal");
-                        }
-                        #endregion
+                        //    bonusBLL.ExecProcedure("proc_Split", beishu * shenPrice);
+                        //    decimal yueNum = jiaoNumber - jiaoyiNum * beishu;
+                        //    UpdateParamVarchar("ParamVarchar", yueNum.ToString(), "Tal");
+                        //}
+                        //#endregion
 
                         # region 卖出云商积分,公司账户云商积分增加
                         lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);

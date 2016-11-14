@@ -18,6 +18,8 @@ namespace Web.admin.Stock
 
             if (!IsPostBack)
             {
+                lgk.Model.tb_systemMoney ToalMoney = systemBll.GetModel(1);
+                ToalNumber.Text = ToalMoney.MoneyAccount.ToString();
                 ShowData();
                 BindData();
             }

@@ -52,9 +52,9 @@
             <table class="styled">
                 <thead>
                     <tr>
-                        <th align="center"><%=GetLanguage("Seller")%><%--卖家--%>
+                        <th align="center">会员账号
                         </th>
-                        <th style="text-align: center;"><%=GetLanguage("CommodityPrices")%><%--商品单价--%>
+                        <th style="text-align: center;">云商积分价格
                         </th>
                         <th style="text-align: center;">卖出数量
                         </th>

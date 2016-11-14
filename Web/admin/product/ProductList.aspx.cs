@@ -39,7 +39,7 @@ namespace web.admin.product
         private void BindData()
         {
             string strWhere = " ";
-            strWhere = "1=1";
+            strWhere = "1=1 AND Goods003 <> '1'";
 
             if (txtCode.Value.Trim() != "")
             {

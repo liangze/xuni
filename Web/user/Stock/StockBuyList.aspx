@@ -205,7 +205,7 @@
                                                             </td>
                                                         </tr>
                                                         <tr style="height: 50px;">
-                                                            <td style="width: 30.9%; text-align: right;">购买总价:
+                                                            <td style="width: 30.9%; text-align: right;">购买总价：
                                                             </td>
                                                             <td align="left">
                                                                 <asp:Label ID="Label6" runat="server" Text="" class="span5"></asp:Label>
@@ -261,11 +261,11 @@
                                                             </td>
                                                             <td align="left">
                                                                 <%--<input runat="server" type="text" class="span6" name="SellNum" id="SellNum" value="" />--%>
-                                                                <asp:TextBox ID="txtSellNum" runat="server" AutoPostBack="true" OnTextChanged="txtSellNum_TextChanged"></asp:TextBox>
+                                                                <asp:TextBox ID="txtSellNum" runat="server" class="span6" AutoPostBack="true" OnTextChanged="txtSellNum_TextChanged"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr style="height: 50px;">
-                                                            <td style="width: 30.9%; text-align: right;">卖出总价:
+                                                            <td style="width: 30.9%; text-align: right;">卖出总价：
                                                             </td>
                                                             <td align="left">
                                                                 <asp:Label ID="Label7" runat="server" Text="" class="span5"></asp:Label>
@@ -278,6 +278,13 @@
                                                             <td align="left">
                                                                 <input runat="server" type="password" class="span6" name="PayPass" id="PayPass" value="" />
                                                             </td>
+                                                        </tr>
+                                                        <tr style="height: 50px;">
+                                                           <%-- <td style="width: 30.9%; text-align: right;">
+                                                            </td>
+                                                            <td align="left">
+                                                                <input runat="server" type="password" class="span6" name="PayPass"  value="" />
+                                                            </td>--%>
                                                         </tr>
                                                     </tbody>
                                                 </ContentTemplate>

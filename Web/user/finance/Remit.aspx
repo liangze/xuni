@@ -55,14 +55,14 @@
                                               User012// 云购积分	 9--%>
                                         <asp:ListItem Value="0" Text="请选择"></asp:ListItem>
                                         <asp:ListItem Value="1" Text="注册积分"></asp:ListItem>
-                                        <asp:ListItem Value="2" Text="奖金积分"></asp:ListItem>
+                                        <%--<asp:ListItem Value="2" Text="奖金积分"></asp:ListItem>
                                         <asp:ListItem Value="3" Text="电子积分"></asp:ListItem>
                                         <asp:ListItem Value="4" Text="云商积分"></asp:ListItem>
                                         <asp:ListItem Value="5" Text="感恩积分"></asp:ListItem>
                                         <asp:ListItem Value="6" Text="购物积分"></asp:ListItem>
                                         <asp:ListItem Value="7" Text="消费积分"></asp:ListItem>
                                         <asp:ListItem Value="8" Text="爱心基金"></asp:ListItem>
-                                        <asp:ListItem Value="9" Text="云购积分"></asp:ListItem>
+                                        <asp:ListItem Value="9" Text="云购积分"></asp:ListItem>--%>
                                     </asp:DropDownList>
                                 </td>
                             </tr>
