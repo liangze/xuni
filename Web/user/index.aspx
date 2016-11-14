@@ -114,7 +114,7 @@
                 frameborder="0" width="100%" scrolling="auto"></iframe>
         </div>
         <div class="row-fluid">
-            <div id="footer" class="span12">Copyright © 2016 All Rights Reserved</div>
+            <div id="footer" class="span12">故乡云商</div>
         </div>
 
     </form>
