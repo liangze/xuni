@@ -268,22 +268,22 @@
                             <input name="txtAddress" type="text" id="txtAddress" runat="server" class="input_reg" />
                         </td>
                     </tr>
-                                           <tr>
-                        <td width="200" align="right">
+                                          <%-- <tr >
+                        <td width="200" align="right"   >
                           <span class="cRed">*</span>电子邮箱：
                         </td>
                         <td align="left">
                             <input name="txtEmail" type="text" id="txtEmail" runat="server" class="input_reg" />
                         </td>
-                    </tr>
-                         <tr>
+                    </tr>--%>
+                        <%-- <tr>
                     <td width="200" align="right">
                         <span class="cRed">*</span>Q Q号码：
                     </td>
                     <td align="left">
                         <input name="txtQQnumer" type="text" id="txtQQnumer" runat="server" class="input_reg" />
                     </td>
-                </tr>
+                </tr>--%>
    <%--                  <tr>
                         <td width="200" align="right">
                            <span class="cRed">*</span>密保答案：

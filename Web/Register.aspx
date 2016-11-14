@@ -340,7 +340,7 @@
                             <input name="txtEmail" type="text" id="txtEmail" runat="server" class="input_reg" style="width:150px" />
                         </div>
                     </div>
-                    iv class="control-group">
+                    <div class="control-group">
                         <label for="memid">
                             <span style="color: #f00;">*</span><%=GetLanguage("Secret")%>：
                         </label>

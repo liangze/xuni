@@ -112,19 +112,19 @@ namespace Web.admin.business
             lgk.Model.tb_agent amodel = agentBLL.GetModel("UserID=" + model.UserID);
             if (getID() != 0)
             {
-                dropBank.Enabled = false;
-                dropProvince.Enabled = false;
+                //dropBank.Enabled = false;
+                //dropProvince.Enabled = false;
                 //DropDownList1.Enabled = false;
                 //DropDownList4.Enabled = false;
                 //DropDownList5.Enabled = false;
-                txtBankBranch.Disabled = true;
-                txtBankAccount.Disabled = true;
-                txtBankAccountUser.Disabled = true;
-                txtTrueName.Disabled = true;
-                txtAddress.Disabled = true;
-                txtEmail.Disabled = true;
+                //txtBankBranch.Disabled = true;
+                //txtBankAccount.Disabled = false;
+                //txtBankAccountUser.Disabled = true;
+                //txtTrueName.Disabled = true;
+                //txtAddress.Disabled = true;
+                //txtEmail.Disabled = true;
                 //txtQQnumer.Disabled = true;
-                btnSubmit.Visible = false;
+                btnSubmit.Visible = true;
                 //txtNickName.Disabled = true;
                 //txtCaiCode.Disabled = true;
             }
@@ -160,14 +160,14 @@ namespace Web.admin.business
             //lt1.Text = model.SafetyCodeAnswer;
             //this.DropDownList5.Items.Add(lt1);
             //this.DropDownList5.SelectedValue = model.SafetyCodeAnswer;
-            txtEmail.Value = model.Email;
-            txtQQnumer.Value = model.QQnumer;
+            //txtEmail.Value = model.Email;
+            //txtQQnumer.Value = model.QQnumer;
             txtBankBranch.Value = model.BankBranch;
             txtBankAccount.Value = model.BankAccount;
             txtBankAccountUser.Value = model.BankAccountUser;
             txtTrueName.Value = model.TrueName;
             txtIdenCode.Value = model.IdenCode;
-            //txtPhoneNum.Value = model.PhoneNum;
+            txtPhoneNum.Value = model.PhoneNum;
             txtAddress.Value = model.Address;
             //txtNickName.Value = model.NiceName;
             dropBank.SelectedValue = model.BankName;
@@ -204,12 +204,12 @@ namespace Web.admin.business
                 m_user.TrueName = this.txtTrueName.Value.Trim();// "姓名";
                 m_user.IdenCode = this.txtIdenCode.Value.Trim();// "身份证號";
                 m_user.PhoneNum = this.txtPhoneNum.Value;// "手机號碼";
-                m_user.QQnumer =txtQQnumer.Value.Trim();//QQ
-                m_user.User005 = txtEmail.Value.Trim();//电子邮箱
+                //m_user.QQnumer =txtQQnumer.Value.Trim();//QQ
+                //m_user.User005 = txtEmail.Value.Trim();//电子邮箱
                 //m_user.SafetyCodeQuestion = DropDownList4.SelectedItem.Text;
                 //m_user.SafetyCodeAnswer = DropDownList5.SelectedItem.Text;
                 m_user.Address = txtAddress.Value;//聯系地址
-                m_user.Email = txtEmail.Value;//郵編號碼
+                //m_user.Email = txtEmail.Value;//郵編號碼
                 //m_user.User006 = txtQQnumer.Value;//QQ號碼
                 //m_user.User007 = txtCaiCode.Value;//财付通号
                 //m_user.User008 = txtCaiName.Value;//财付通名
@@ -253,11 +253,11 @@ namespace Web.admin.business
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('银行卡号不能为空!');", true);
                 return false;
             }
-            if (!PageValidate.RegexTrueBank(this.txtBankAccount.Value))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('银行卡号输入错误!');", true);
-                return false;
-            }
+            //if (!PageValidate.RegexTrueBank(this.txtBankAccount.Value))
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('银行卡号输入错误!');", true);
+            //    return false;
+            //}
             if (this.txtBankAccountUser.Value.Trim() == "")
             {
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('开户名不能为空!');", true);
@@ -285,24 +285,24 @@ namespace Web.admin.business
             //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('昵称不能为空!');", true);
             //    return false;
             //}
-            string email = this.txtEmail.Value.Trim();
-            if (email == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('Email不能为空!');", true);//
-                return false;
-            }
-            int emailnum = userBLL.GetCount(" Email='" + email + "'");
-            if (emailnum > 0)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('此Email已被注册!');", true);//
-                return false;
-            }
+            //string email = this.txtEmail.Value.Trim();
+            //if (email == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('Email不能为空!');", true);//
+            //    return false;
+            //}
+            //int emailnum = userBLL.GetCount(" Email='" + email + "'");
+            //if (emailnum > 0)
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('此Email已被注册!');", true);//
+            //    return false;
+            //}
 
-            if (this.txtQQnumer.Value == "")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('QQ不能为空哦 !!');", true);//联系地址不能为空
-                return false;
-            }
+            //if (this.txtQQnumer.Value == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('QQ不能为空哦 !!');", true);//联系地址不能为空
+            //    return false;
+            //}
             if (this.txtIdenCode.Value.Trim() == "")
             {
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('身份证号不能为空!');", true);

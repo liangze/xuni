@@ -404,7 +404,7 @@ namespace Web
                 m_user.User011 = 0;
                 m_user.User015 = 0;//购股币
                 m_user.User016 = 0;
-                m_user.User017 = 0;
+                m_user.User017 = -1;
                 m_user.User018 = 0;//--用户竞拍该扣未扣的奖金币
 
                 int aid = GetUserID(txtUserCode.Value.Trim());
