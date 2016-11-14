@@ -36,6 +36,15 @@ namespace lgk.BLL
         }
 
         /// <summary>
+        /// 根据给定的ID，判断是否存在该记录。
+        /// </summary>
+        /// <param name="IssueID">给定的ID</param>
+        /// <returns></returns>
+        public int Existss()
+        {
+            return dal.Existss();
+        }
+        /// <summary>
         /// 根据给定的条件，判断记录是否存在。
         /// </summary>
         /// <param name="strWhere">给定的条件</param>

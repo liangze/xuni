@@ -169,11 +169,11 @@ namespace web.admin.product
                 //}
                 //  upload1 = upload1.Substring(upload1.LastIndexOf("/") + 1, upload1.Length - upload1.LastIndexOf("/") - 1);
 
-                if (this.textPubContext.Text.Trim() == "")
-                {
-                    MessageBox.Show(this, "请输入商品详情");
-                    return;
-                }
+                //if (this.textPubContext.Text.Trim() == "")
+                //{
+                //    MessageBox.Show(this, "请输入商品详情");
+                //    return;
+                //}
 
                 lgk.Model.tb_goods model = new lgk.Model.tb_goods();
                 model.Goods001 = 1;

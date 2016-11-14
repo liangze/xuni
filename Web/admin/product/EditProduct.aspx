@@ -111,7 +111,7 @@
             </asp:ScriptManager>
             <table border="0" cellpadding="0" width="100%" cellspacing="0" style="border: 1px #8a8b8b solid;">
                 <tr>
-                    <td style="padding-left: 20px; padding-top: 35px;" valign="top" class="style1">
+                    <td style="padding-left: 20px; display:none; padding-top: 35px;" valign="top" class="style1">
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                             <ContentTemplate>
                                 <asp:Image ID="Image1" runat="server" Width="240px" Height="154px" />
@@ -184,7 +184,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtPrice" runat="server" min="0" class="easyui-numberbox input_select1"
-                                        precision="1" Width="200px"></asp:TextBox><span>元</span>
+                                        precision="1" Width="200px"></asp:TextBox><span>$</span>
                                 </td>
                             </tr>
 
@@ -212,7 +212,7 @@
                                     Text="" ForeColor="Red">(上传商品图片长宽比例为565*374)</asp:Label>
                                 </td>
                             </tr>--%>
-                            <tr>
+                            <tr style="display:none;">
                                 <td style="text-align: right; vertical-align: top;">商品详情：
                                 </td>
                                 <td>
@@ -293,7 +293,7 @@
             <input type="hidden" id="hGid" value="<%=GetPID() %>" />
 
             <!--添加属性窗口-->
-            <div>
+            <div style="display:none;" >
                 <a href="javascript:void(0)" class="easyui-linkbutton" id="btnadd" onclick="showDialog()">添加属性</a>
                 <div class="dataTable">
                     <table class="t1" style="width: 300px">

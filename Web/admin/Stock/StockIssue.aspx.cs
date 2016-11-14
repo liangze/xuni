@@ -34,13 +34,16 @@ namespace Web.admin.Stock
 
             if (issueInfo != null)
             {
+               
                 lbtnOK.Visible = false;
                 ltWarning.Text = "云商积分已发行，不能重复发行！";
                 txtNum.Text = getParamInt("Shares1").ToString("0");//本期发行量
+               
             }
             else
             {
-                txtNum.Text = "0";//本期发行量
+                //txtNum.Text = "0";//本期发行量
+                txtNum.Text = getParamInt("Shares1").ToString("0");//本期发行量
             }
         }
 
@@ -58,19 +61,26 @@ namespace Web.admin.Stock
         {
             if (stockIssueBLL.Exists())
             {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('MDD金币已发行，不能重复发行！');", true);
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('云商积分已发行，不能重复发行！');", true);
                 return;
             }
             else
             {
                 lgk.Model.tb_StockIssue issueInfo = new lgk.Model.tb_StockIssue();
-
-                issueInfo.IssueAmount = getParamAmount("Shares1");
-                issueInfo.SurplusAmount = getParamAmount("Shares1");
+                int ciNumber = stockIssueBLL.Existss();//获取发行期数
+                decimal Number = getParamAmount("Shares1");//
+                issueInfo.IssueAmount = Number;
+                issueInfo.SurplusAmount = Number;
                 issueInfo.IssuePrice = getParamAmount("Shares2");
-                issueInfo.Periods = 1;
+                issueInfo.Periods = ciNumber+1;
                 issueInfo.AddDate = DateTime.Now;
                 issueInfo.IsSell = 1;
+
+                #region 购买云商积分,公司账户云商积分增加
+                lgk.Model.tb_systemMoney systemMoney = systemBll.GetModel(1);
+                systemMoney.MoneyAccount += Number;//公司账户增加
+                systemBll.Update(systemMoney);
+                #endregion
 
                 int iIssueID = stockIssueBLL.Add(issueInfo);
 

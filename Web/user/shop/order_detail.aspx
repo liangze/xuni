@@ -116,7 +116,8 @@
                                 <a href='<%#Eval("ProcudeID","detail.aspx?type=1&id={0}&payment=2") %>' target="_blank"><%#Eval("GoodsCode")%></a>
                             </td>--%>
                             <td align="center">
-                                <a href='<%#Eval("ProcudeID","detail.aspx?type=1&id={0}&payment=2") %>' target="_blank"><%#Eval("GoodsName")%></a>
+                                <%--<a href='<%#Eval("ProcudeID","detail.aspx?type=1&id={0}&payment=2") %>' target="_blank"></a>--%>
+                                <%#Eval("GoodsName")%>
                                 <%--<br />
                                 <span>尺码：<%# Eval("gSize") %></span>
                                 <br />
