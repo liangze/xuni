@@ -32,7 +32,7 @@ namespace Web.user
               tixian =  getParamAmount("tixiankai");
               shuanggui = getParamAmount("shuanggui");
               zhitui = getParamAmount("zhitui");
-              chongzhi = getParamAmount("zhitui");
+            chongzhi = getParamAmount("chongzhi");
         }
 
         private void bind()
