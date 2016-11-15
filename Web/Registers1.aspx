@@ -181,9 +181,13 @@
                         <label for="memid">
                             <span style="color: #f00;">*</span><%=GetLanguage("Placement")%>：
                         </label>
+                             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                <ContentTemplate>
                         <div class="field">
                             <input name="txtParentCode" type="text" id="txtParentCode" runat="server" class="input_reg"  />
                         </div>
+                                    </ContentTemplate>
+                                 </asp:UpdatePanel>
                     </div>
                     <div class="control-group" style="display:none">
                         <label for="memid">
@@ -202,7 +206,10 @@
                             <%--<span style="color: #f00;">*</span>--%><%--<%=GetLanguage("ReferenceNumber")%>：--%>
                           <span style="color: #f00">*</span><%=GetLanguage("Registration")%><!--区域-->：
                         </label>
+                           <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                <ContentTemplate>
                         <div class="field">
+
                             <asp:RadioButton ID="radMarketOne" runat="server" AutoPostBack="True" OnCheckedChanged="RadioButton1_CheckedChanged"   />1<%=GetLanguage("Market")%>
                              <asp:RadioButton ID="radMarketTwo" runat="server" AutoPostBack="True" OnCheckedChanged="RadioButton2_CheckedChanged"   />2<%=GetLanguage("Market")%>
 
@@ -214,6 +221,8 @@
                             2
                             <%=GetLanguage("Market")%><!--市场-->--%>
                         </div>
+                                    </ContentTemplate>
+                               </asp:UpdatePanel>
                     </div> 
                 </div>
             </div>

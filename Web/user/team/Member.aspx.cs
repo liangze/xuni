@@ -355,6 +355,8 @@ namespace Web.user.team
                     DataTable dt5 = ds2.Tables[0];
                     DataTable dt6 = ds2.Tables[1];
 
+                    if (dt5.Rows[0]["Flag"].ToString()=="1")
+               { 
                     string userid_DL = dt5.Rows[0]["UserID"].ToString();
                     lgk.Model.tb_user DL = userBLL.GetModel(long.Parse(userid_DL));//报单中心
 
@@ -395,8 +397,8 @@ namespace Web.user.team
                     bonus.Add(m_bonus_bd);   //报单中心返利5% 
                     string sql55 = "update tb_user set  BonusAccount+=" + model_.User018 * (decimal.Parse(dt6.Rows[0]["ParamVarchar"].ToString()) / 100) +  "";
                     int aaa = B_user.UpdataData_Chaxun(sql55, (userid_DL));
-                    
 
+               }
 
 
                     string path = model_.UserPath;

@@ -113,7 +113,7 @@
                                 </td>
                                 <td>
                                     <asp:LinkButton ID="lbtnOpend" runat="server" CommandArgument='<%# Eval("UserID") %>'
-                                        Visible='true' CommandName="open" OnClientClick="javascript:return confirm('确定要开通会员吗？')"><%=GetLanguage("Open")%><!--开通--></asp:LinkButton>/
+                                        Visible='true' CommandName="open" OnClientClick="javascript:return confirm('确定要开通会员吗？')"><%=GetLanguage("Open")%><!--开通--></asp:LinkButton>
                                     <%--<asp:LinkButton ID="lbtnRemove" runat="server" CommandArgument='<%# Eval("UserID") %>'
                                         class="easyui-linkbutton" iconcls="icon-no" Visible='<%#Eval("IsOpend").ToString()=="0"?true:false %>'
                                         CommandName="Remove" OnClientClick="javascript:return confirm('确定要删除此会员吗？')"><%=GetLanguage("Delete")%><!--删除--></asp:LinkButton>
