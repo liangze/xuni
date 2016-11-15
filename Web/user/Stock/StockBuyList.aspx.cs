@@ -230,7 +230,7 @@ namespace Web.user.Stock
                         systemBll.Update(systemMoney);
                         #endregion
                     }
-                    if (issueInfo.SurplusAmount <= BuyNumber)
+                    else if (issueInfo.SurplusAmount <= BuyNumber)
                     {
                         if (systemMoney == null)
                         {
@@ -244,14 +244,14 @@ namespace Web.user.Stock
                         }
                         else
                         {
-                            issueInfo.SurplusAmount = 0;//更新发行云商积分剩余量,发行数量
-                            issueInfo.IsSell = 0;//0，是卖完，1是挂售中
-                            stockIssueBLL.Update(issueInfo);
-
                             #region 购买云商积分,公司账户云商积分减少
                             systemMoney.MoneyAccount -= Number;//需要从公司账户购买的数量
                             systemBll.Update(systemMoney);
                             #endregion
+
+                            issueInfo.SurplusAmount = 0;//更新发行云商积分剩余量,发行数量
+                            issueInfo.IsSell = 0;//0，是卖完，1是挂售中
+                            stockIssueBLL.Update(issueInfo);
                         }
                     }
                 }            }

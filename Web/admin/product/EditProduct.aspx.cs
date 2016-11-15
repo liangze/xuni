@@ -188,7 +188,7 @@ namespace web.admin.product
                 //model.ShopPrice = Convert.ToDecimal(txtShopPrice.Text.Trim());
                 model.Pic5 = txtRealityPrice.Text.Trim();//库存
                 model.RealityPrice = 0;//--折扣价
-                model.Remarks = textPubContext.Text;
+                model.Remarks = "无";//textPubContext.Text;
                 model.UserCode = "";
 
                 model.Goods003 = "0";//1:隐藏
