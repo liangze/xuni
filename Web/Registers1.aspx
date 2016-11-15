@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registers.aspx.cs" Inherits="Web.Registers" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registers1.aspx.cs" Inherits="Web.Registers1" %>
 
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -203,15 +203,16 @@
                           <span style="color: #f00">*</span><%=GetLanguage("Registration")%><!--区域-->：
                         </label>
                         <div class="field">
-                            <asp:RadioButton ID="RadioButton1" runat="server" AutoPostBack="True"  Visible="false" OnCheckedChanged="RadioButton1_CheckedChanged"   /><%--1<%=GetLanguage("Market")%>--%>
+                            <asp:RadioButton ID="radMarketOne" runat="server" AutoPostBack="True" OnCheckedChanged="RadioButton1_CheckedChanged"   />1<%=GetLanguage("Market")%>
+                             <asp:RadioButton ID="radMarketTwo" runat="server" AutoPostBack="True" OnCheckedChanged="RadioButton2_CheckedChanged"   />2<%=GetLanguage("Market")%>
 
 
-                           <input id="radMarketOne" type="radio"   name="Market" runat="server" />
+                           <%--<input id="radMarketOne" type="radio"   name="Market" runat="server" />
                             1
                             <%=GetLanguage("Market")%><!--市场--> 
                             <input id="radMarketTwo" type="radio"   name="Market" runat="server" />
                             2
-                            <%=GetLanguage("Market")%><!--市场-->
+                            <%=GetLanguage("Market")%><!--市场-->--%>
                         </div>
                     </div> 
                 </div>

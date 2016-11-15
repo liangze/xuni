@@ -10,7 +10,7 @@
 namespace Web {
     
     
-    public partial class Registers {
+    public partial class Registers1 {
         
         /// <summary>
         /// Form1 控件。
@@ -184,22 +184,13 @@ namespace Web {
         protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
         
         /// <summary>
-        /// RadioButton1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton1;
-        
-        /// <summary>
         /// radMarketOne 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton radMarketOne;
+        protected global::System.Web.UI.WebControls.RadioButton radMarketOne;
         
         /// <summary>
         /// radMarketTwo 控件。
@@ -208,7 +199,7 @@ namespace Web {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton radMarketTwo;
+        protected global::System.Web.UI.WebControls.RadioButton radMarketTwo;
         
         /// <summary>
         /// dropBank 控件。

@@ -1464,6 +1464,7 @@
     <Content Include="MallInterface\Test1.aspx" />
     <Content Include="Pay\OrderReturn.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="Registers1.aspx" />
     <Content Include="RegSuccess2.aspx" />
     <Content Include="Scripts\All.js" />
     <Content Include="Scripts\ana.min.js" />
@@ -3011,6 +3012,13 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registers1.aspx.cs">
+      <DependentUpon>Registers1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registers1.aspx.designer.cs">
+      <DependentUpon>Registers1.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegSuccess2.aspx.cs">
       <DependentUpon>RegSuccess2.aspx</DependentUpon>
