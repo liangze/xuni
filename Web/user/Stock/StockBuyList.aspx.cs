@@ -230,7 +230,7 @@ namespace Web.user.Stock
                         systemBll.Update(systemMoney);
                         #endregion
                     }
-                    if (issueInfo.SurplusAmount <= BuyNumber)
+                    else if (issueInfo.SurplusAmount <= BuyNumber)
                     {
                         if (systemMoney == null)
                         {
