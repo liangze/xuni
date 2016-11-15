@@ -40,6 +40,9 @@
                         卖出单价
                     </th>
                     <th>
+                        卖出数量
+                    </th>
+                    <th>
                         卖出时间
                     </th>
                     <th>
@@ -60,6 +63,9 @@
                             </td>
                             <td align="center">
                                 <%#Eval("Price")%>
+                            </td>
+                            <td align="center">
+                                <%#Eval("SaleNum")%>
                             </td>
                             <td align="center">
                                 <%#Eval("SellDate")%>
