@@ -37,7 +37,7 @@
                 </li>
                 <li class="submenu"><a href="JavaScript:;"><span><i class="icon icon-tasks"></i>业务管理</span></a>
                     <ul>
-                        <li><a href="../Registers.aspx" target="mainfrom">会员注册</a></li>
+                        <li><a href="../Registers1.aspx" target="mainfrom">会员注册</a></li>
                         <%--<li><a href="team/MemberList.aspx" target="mainfrom">我的市场</a></li>--%>
                         <li><a href="team/Member.aspx" target="mainfrom">待开通会员</a></li>
                         <li><a href="team/TableTree.aspx" target="mainfrom">会员列表</a></li>

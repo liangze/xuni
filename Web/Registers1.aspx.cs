@@ -1,15 +1,4 @@
-﻿/*********************************************************************************
-* Copyright(c)  	2012 ZXHLRJ.COM
- * 创建日期：		2012-4-13 17:39:15 
- * 文 件 名：		Registers.cs 
- * CLR 版本: 		2.0.50727.3053 
- * 创 建 人：		King
- * 文件版本：		1.0.0.0
- * 修 改 人： 
- * 修改日期： 
- * 备注描述：         
-***************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,9 +13,10 @@ using System.Data;
 using System.Net;
 using System.IO;
 
+
 namespace Web
 {
-    public partial class Registers : PageCore//AllCore//System.Web.UI.Page
+    public partial class Registers1 : PageCore
     {
         static string sconn = System.Configuration.ConfigurationManager.AppSettings["SocutDataLink"];
 
@@ -65,10 +55,10 @@ namespace Web
 
                         txtAgentCode.Value = "system";
                     }
-                
-                    if (a[1]=="1")
+
+                    if (a[1] == "1")
                     {
-                        radMarketOne.Checked= true;
+                        radMarketOne.Checked = true;
                     }
                     if (a[1] == "2")
                     {
@@ -79,7 +69,7 @@ namespace Web
                 else
                 {
                     var user = userBLL.GetModel(getLoginID());
-                    string code = user != null ? user.UserCode : ""; 
+                    string code = user != null ? user.UserCode : "";
                     txtRecommendCode.Value = code;
                     txtParentCode.Value = code;
                     if (user != null)
@@ -128,7 +118,7 @@ namespace Web
         //}
 
 
-        public void getDate() 
+        public void getDate()
         {
             lgk.BLL.tb_user u = new lgk.BLL.tb_user();
             string sql = "select * from tb_globeParam where ParamName like 'VIP%'";
@@ -260,8 +250,8 @@ namespace Web
             if (Type == "p") { strSql = @"select count(0) from tb_user where ParentID =" + UserID; }
             return Convert.ToInt32(DbHelperSQL.GetSingle(strSql));
         }
-     
-      
+
+
 
         #region 确定推荐人，安置会员是否在同一条推荐线上
         /// <summary>
@@ -310,8 +300,8 @@ namespace Web
                         return;
                     }
                 }
-              
-                 
+
+
                 #region 注册用户插入tb_user 
                 lgk.Model.tb_user m_user = new lgk.Model.tb_user();
                 lgk.Model.tb_user ModelRecommend = userBLL.GetModel(GetUserID(this.txtRecommendCode.Value.Trim()));//推荐用户
@@ -430,7 +420,7 @@ namespace Web
                         model.UserPath = model.UserPath + "-" + model.UserID.ToString();
                         model.RecommendPath = model.RecommendPath + "-" + model.UserID.ToString();
 
-                      
+
 
                         lgk.Model.tb_user model2 = userBLL.GetModel(model.UserID);
                         model2.RegMoney = 0;
@@ -438,7 +428,7 @@ namespace Web
                         model2.RightScore = 0;
                         model2.RightNewScore = 0;
                         model2.LeftNewScore = 0;
-                    
+
                         userBLL.Update(model2);
                         int reuserid = 1;
                         if (getLoginID() > 0)
@@ -473,7 +463,7 @@ namespace Web
 
                         if (userBLL.Update(model))
                         {
-                            
+
                             //写流水
                             Response.Redirect("RegSuccess2.aspx?usercode=" + m_user.UserCode + "&asd=" + asd);
                             return;
@@ -491,7 +481,7 @@ namespace Web
                 }
             }
         }
-    
+
         #region 注册验证
         /// <summary>
         /// 注册验证
@@ -504,8 +494,8 @@ namespace Web
             lgk.Model.tb_agent ModelAgent = new lgk.Model.tb_agent();
             lgk.Model.tb_user ModelParent = new lgk.Model.tb_user();
 
-        
-           
+
+
 
             #region 用户编号验证
             if (txtRecommendCode.Value == "")
@@ -959,9 +949,9 @@ namespace Web
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
             lgk.BLL.tb_user u = new lgk.BLL.tb_user();
-            string sql = "select * from tb_globeParam where ParamName like 'VIP%'"; 
+            string sql = "select * from tb_globeParam where ParamName like 'VIP%'";
             DataSet ds = u.getData_Chaxun(sql, "");
-            if (DropDownList2.SelectedValue=="0")
+            if (DropDownList2.SelectedValue == "0")
             {
                 txtRegMoney.Value = ds.Tables[0].Rows[0]["ParamVarchar"].ToString();
             }
@@ -981,10 +971,54 @@ namespace Web
 
         protected void RadioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            radMarketTwo.Checked = false;
             var data = userBLL.GetModel(g());
             txtParentCode.Value = data.UserCode;
 
         }
+        protected void RadioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            radMarketOne.Checked = false;
+            var data = userBLL.GetModel(w());
+            txtParentCode.Value = data.UserCode;
+        }
+        public int w()
+        {
+            int userid1 = 0;
+            string sql = "select Layer from tb_user order by Layer desc   ";
+            DataTable dt = userBLL.getData_Chaxun(sql, "").Tables[0];
+            int xunhuan = int.Parse(dt.Rows[0]["Layer"].ToString());
+            string sql1 = "select * from tb_user where ParentID=1 order by Location desc";
+            DataTable dt1 = userBLL.getData_Chaxun(sql1, "").Tables[0];
+            if (dt1.Rows.Count < 2)//第二层特殊处理
+            {
+                userid1 = 1;
+                return userid1;
+            }
+            int userid = int.Parse(dt1.Rows[0]["UserID"].ToString());
+
+            for (int i = 0; i < xunhuan; i++)
+            {
+                string sql2 = "select * from tb_user where ParentID=" + userid + " order by Location desc";
+                DataTable dt2 = userBLL.getData_Chaxun(sql2, "").Tables[0];
+                if (dt2.Rows.Count >= 2)
+                {
+                    userid = int.Parse(dt2.Rows[0]["UserID"].ToString());
+                    continue;
+                }
+                if (dt2.Rows.Count < 2)
+                {
+
+                    return userid;
+
+                }
+
+
+
+            }
+            return userid1;
+        }
+
         public int g()
         {
             int userid1 = 0;
@@ -998,27 +1032,27 @@ namespace Web
                 userid1 = 1;
                 return userid1;
             }
-            int userid = int.Parse(dt1.Rows[0]["UserID"].ToString()); 
-      
-       for (int i = 0; i < xunhuan; i++)
-          { 
-            string sql2 = "select * from tb_user where ParentID=" + userid + " order by Location";
-            DataTable dt2 = userBLL.getData_Chaxun(sql2, "").Tables[0];
-            if (dt2.Rows.Count >= 1) 
-                { 
-                userid = int.Parse(dt2.Rows[0]["UserID"].ToString());
+            int userid = int.Parse(dt1.Rows[0]["UserID"].ToString());
+
+            for (int i = 0; i < xunhuan; i++)
+            {
+                string sql2 = "select * from tb_user where ParentID=" + userid + " order by Location";
+                DataTable dt2 = userBLL.getData_Chaxun(sql2, "").Tables[0];
+                if (dt2.Rows.Count >= 1)
+                {
+                    userid = int.Parse(dt2.Rows[0]["UserID"].ToString());
                     continue;
                 }
                 if (dt2.Rows.Count < 1)
                 {
-                 
+
                     return userid;
-                   
+
                 }
 
-              
-               
-          }
+
+
+            }
             return userid1;
         }
     }

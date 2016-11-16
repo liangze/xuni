@@ -56,8 +56,10 @@ namespace Web.admin.team
             StarTime = txtStar.Text.Trim();
             EndTime = txtEnd.Text.Trim();
             strType = dropType.SelectedValue;
+            decimal you = (getParamAmount("Static0") * 10000);
+            decimal zuo = (getParamAmount("Static0") * 10000);
 
-            strWhere = " IsOpend=2 and RightScore>=" + getParamAmount("Static0") + " or  LeftScore>=" + getParamAmount("Static0") + "";
+            strWhere = " IsOpend=2 and RightScore>=" + you + " or  LeftScore>=" + zuo + "";
 
             if (strType != "0")
             {
@@ -110,7 +112,7 @@ namespace Web.admin.team
         {
             string pWhere = GetWhere() + "   ";
             lgk.BLL.tb_user user  = new lgk.BLL.tb_user();
-            string sql = "select userid,RecommendCode,UserCode,LevelID,PhoneNum,TrueName,RightScore,LeftScore,RegTime from tb_user ";
+            string sql = "select distinct(userid) userid,RecommendCode,UserCode,LevelID,PhoneNum,TrueName,RightScore,LeftScore,RegTime from tb_user ";
             DataSet ds = user.getData_Chaxun(sql, pWhere);
             return ds;
         }
