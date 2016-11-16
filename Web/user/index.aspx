@@ -39,19 +39,19 @@
                     <ul>
                         <li><a href="../Registers1.aspx" target="mainfrom">会员注册</a></li>
                         <%--<li><a href="team/MemberList.aspx" target="mainfrom">我的市场</a></li>--%>
-                        <li><a href="team/Member.aspx" target="mainfrom">待开通会员</a></li>
+                        <li><a href="team/Member.aspx" target="mainfrom">开通会员</a></li>
                         <li><a href="team/TableTree.aspx" target="mainfrom">会员列表</a></li>
                        
                        <%if (zhitui.ToString()=="1")%>
                         <%{ %>
-                           <li><a href="team/RecommendTree.aspx" target="mainfrom" >直接推荐图</a></li>
+                           <li><a href="team/RecommendTree.aspx" target="mainfrom" >直接推荐</a></li>
                         <% };%>
                      
                        <%if (shuanggui.ToString()=="1")%>
                         <%{ %>
-                        <li><a href="team/RecommendTree_1.aspx" target="mainfrom">系谱图</a></li>
+                        <li><a href="team/RecommendTree_1.aspx" target="mainfrom">网络图谱</a></li>
                              <% };%>
-                        <li><a href="team/Agent.aspx" target="mainfrom">申请报单中心</a></li>
+                        <li><a href="team/Agent.aspx" target="mainfrom">申请报单</a></li>
                     </ul>
                 </li>
                 <li class="submenu"><a href="JavaScript:;"><span><i class="icon icon-list-alt"></i>财务管理</span></a>

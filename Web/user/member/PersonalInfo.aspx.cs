@@ -174,7 +174,7 @@ namespace Web.user.member
 
                 m_user.NiceName = string.Empty;//this.txtNickName.Value.Trim();// "姓名";
                 m_user.TrueName = this.txtTrueName.Value.Trim();// "姓名";
-                //m_user.IdenCode = this.txtIdenCode.Value.Trim();// "身份证號";
+                m_user.IdenCode = this.txtIdenCode.Value.Trim();// "身份证號";
                 m_user.PhoneNum = this.txtPhoneNum.Value;// "手机號碼";
                 //m_user.QQnumer =txtQQnumer.Value.Trim();//QQ
                 //m_user.User005 = txtEmail.Value.Trim();//电子邮箱
@@ -221,11 +221,11 @@ namespace Web.user.member
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("BankCardIsNull") + "');", true);//银行卡号不能为空
                 return false;
             }
-            if (!PageValidate.RegexTrueBank(this.txtBankAccount.Value))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("BankCardErrors") + "');", true);//银行卡号输入错误
-                return false;
-            }
+            //if (!PageValidate.RegexTrueBank(this.txtBankAccount.Value))
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("BankCardErrors") + "');", true);//银行卡号输入错误
+            //    return false;
+            //}
             if (this.txtBankAccountUser.Value.Trim() == "")
             {
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NameIsNull") + "');", true);//开户名不能为空
@@ -259,11 +259,11 @@ namespace Web.user.member
                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("CardIDIsNull") + "');", true);//身份证号不能为空
                 return false;
             }
-            if (!PageValidate.RegexIden(txtIdenCode.Value.Trim()))
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("CardIDMust") + "');", true);//身份证号格式错误
-                return false;
-            }
+            //if (!PageValidate.RegexIden(txtIdenCode.Value.Trim()))
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("CardIDMust") + "');", true);//身份证号格式错误
+            //    return false;
+            //}
 
             string phone = this.txtPhoneNum.Value.Trim();
             if (string.IsNullOrEmpty(phone))

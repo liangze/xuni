@@ -270,7 +270,25 @@ namespace Web.admin.business
             if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
             {
                 int iUserID = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "UserID"));
+                lgk.Model.tb_user model = userBLL.GetModel(iUserID);
+                int ForceID = model.LevelID;
+                int BackgroundLevel = (int)model.User017;
 
+                // 后台调整的等级
+                if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
+                {
+                    // int iUserID = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "UserID"));
+                    if (BackgroundLevel > ForceID)
+                    {
+                        Literal Literal1 = (Literal)e.Item.FindControl("ltllevel");
+                        Literal1.Text = levelBLL.GetModel(BackgroundLevel).LevelName;
+                    }
+                    else
+                    {
+                        Literal Literal1 = (Literal)e.Item.FindControl("ltllevel");
+                        Literal1.Text = levelBLL.GetModel(ForceID).LevelName;
+                    }
+                }
                 //LinkButton lbtnOpend = (LinkButton)e.Item.FindControl("lbtnOpend");
 
                 //if (GetRecommend(iUserID) && GetBonus(iUserID))
