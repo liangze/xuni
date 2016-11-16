@@ -95,7 +95,7 @@ body {
 #sidebar > ul > li { list-style-type:none; float:left; display:block; margin:0px; position:relative; cursor:pointer;} 
 #sidebar > ul > li > a { height: 120px; display: block; line-height: 80px; padding: 20px; box-sizing: border-box; font-size: 16px;}
 #sidebar > ul > li > a .icon{ display: none;}
-#sidebar > ul > li:hover a{color: #950101;}
+#sidebar > ul > li:hover a,#sidebar > ul > li.open a{color: #950101;}
 #sidebar > ul > li:hover > ul{ display:block;}
 #sidebar > ul li ul { margin:0px; padding:0px; display:none; z-index:999;  position:absolute; border-radius:3px; left:50%; top:90px; margin-left: -75px;  background:#fff; width:150px; border-top: 2px solid #950101;} 
 #sidebar > ul li ul li { list-style-type:none; margin:0px; font-size:14px;line-height:30px; text-align: center;} 
@@ -586,7 +586,6 @@ body {
 	
     border-bottom: 1px solid #CDCDCD;
     height: 36px;
-
 }
 .widget-title .nav-tabs {
     border-bottom: 0 none;
@@ -1135,10 +1134,6 @@ div.dataTables_wrapper .ui-widget-header {
 	text-align: center;
 	color: #666666;
 }
-
-
-.row-fluid .span20{ width:97.8%}
-
 .table.with-check tr th:first-child, .table.with-check tr td:first-child {
 	width: 10px;
 }
@@ -1250,8 +1245,7 @@ form {
 .row-fluid .span20{ width:97.8%}
 .form-horizontal .form-actions {
 	margin-top: 0;
-	margin-bottom:0;
-    
+	margin-bottom: 0;
 }
 .help-block, .help-inline {
     color: #999999;
