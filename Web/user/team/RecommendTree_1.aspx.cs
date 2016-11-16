@@ -21,7 +21,6 @@ namespace Web.user.team
         protected void Page_Load(object sender, EventArgs e)
         {
             spd.jumpUrl(this.Page, 1);//跳转二级密码
-            spd.jumpAdminUrl(this.Page, 1);//跳转二级密碼
             
             if (!IsPostBack)
             {
