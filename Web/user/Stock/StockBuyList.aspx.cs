@@ -160,7 +160,7 @@ namespace Web.user.Stock
             }
 
             string strWhere = "IsSell=1 AND SurplusAmount>0";
-            lgk.Model.tb_StockIssue issueInfo = stockIssueBLL.GetModel(strWhere);//获取当前出售的云商积分
+            lgk.Model.tb_StockIssue issueInfo = stockIssueBLL.GetModel(strWhere);//获取发售记录的云商积分
             int BuyNumber = int.Parse(txtBuyNum.Text.ToString());//购买数量
             decimal NewPrice = getParamAmount("Shares3");//当前价格
             decimal talPrice = BuyNumber * NewPrice;//购买需要支付金额
@@ -205,14 +205,7 @@ namespace Web.user.Stock
                 }
             }
             #endregion
-
-            #region 判断云商积分是否已经售完
-            if (issueInfo == null)//发行云商积分已售完
-            {
-                bonusBLL.ExecProcedure("proc_Split", 0);
-            }
-            #endregion
-
+            
             #region 更新发行数量和公司账户云商积分剩余量
             if (issueInfo != null)
             {
@@ -422,6 +415,14 @@ namespace Web.user.Stock
                 joadanInf1.JournalType = 5;//journalType : 1、注册积分，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
                 journalBLL.Add(joadanInf1);//增加一条数据
             }
+            #region 判断第一次发行的云商积分是否售完，售完执行拆分
+            string strWhere2 = "IsSell=1 AND SurplusAmount=0 AND Periods=1";
+            lgk.Model.tb_StockIssue issueo = stockIssueBLL.GetModel(strWhere2);//获取发售记录的云商积分
+            if (issueo != null)//
+            {
+                bonusBLL.ExecProcedure("proc_Split", 0);
+            }
+            #endregion
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('购买成功');location.href='StockBuyList.aspx';", true);
             return;
         }
