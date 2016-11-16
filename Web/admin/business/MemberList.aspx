@@ -112,7 +112,7 @@
                             <%#Eval("TrueName")%>
                         </td>
                         <td align="center">
-                            <%#Eval("LevelName")%>
+                            <asp:Literal ID="ltllevel" runat="server"></asp:Literal><%--<%#Eval("LevelName")%>--%>
                         </td>
                         <td align="center">
                             <%#Eval("RecommendCode")%>
