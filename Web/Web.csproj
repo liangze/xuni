@@ -2013,6 +2013,7 @@
     <Content Include="user\Stock\SellList.aspx" />
     <Content Include="user\Stock\StockBuyList.aspx" />
     <Content Include="user\Stock\StockorderList.aspx" />
+    <Content Include="user\team\Member1.aspx" />
     <Content Include="user\team\RecommendTree_1.aspx" />
     <Content Include="user\team\TreeList.aspx" />
     <Content Include="user\team\UpdateUser.aspx" />
@@ -3963,6 +3964,13 @@
     </Compile>
     <Compile Include="user\team\Member.aspx.designer.cs">
       <DependentUpon>Member.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\team\Member1.aspx.cs">
+      <DependentUpon>Member1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\team\Member1.aspx.designer.cs">
+      <DependentUpon>Member1.aspx</DependentUpon>
     </Compile>
     <Compile Include="user\team\MemberList.aspx.cs">
       <DependentUpon>MemberList.aspx</DependentUpon>
