@@ -41,8 +41,28 @@ namespace Web
                     asd = int.Parse(a[2].Trim());
 
                     var data = userBLL.GetModel(1);
+                    var data1 = userBLL.GetModel(int.Parse(a[0]));
                     txtRecommendCode.Value = data != null ? data.UserCode : userBLL.GetModel(1).UserCode;
-                 
+
+                    txtParentCode.Value = data1.UserCode;
+                    try
+                    {
+                        txtAgentCode.Value = GetUserCode(agentBLL.GetModel(data.AgentsID).UserID);
+                    }
+                    catch (Exception)
+                    {
+
+                        txtAgentCode.Value = "system";
+                    }
+
+                    if (a[1] == "1")
+                    {
+                        radMarketOne.Checked = true;
+                    }
+                    if (a[1] == "2")
+                    {
+                        radMarketTwo.Checked = true;
+                    }
                     //txtAgentCode.Value = data != null && data.IsAgent == 1 ? data.UserCode : userBLL.GetModel(1).UserCode;
                 }
                 else
