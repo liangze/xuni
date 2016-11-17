@@ -416,7 +416,7 @@ namespace Web.user.Stock
                 journalBLL.Add(joadanInf1);//增加一条数据
             }
             #region 判断第一次发行的云商积分是否售完，售完执行拆分
-            string strWhere2 = "IsSell=1 AND SurplusAmount=0 AND Periods=1";
+            string strWhere2 = " SurplusAmount=0 AND Periods=1";
             lgk.Model.tb_StockIssue issueo = stockIssueBLL.GetModel(strWhere2);//获取发售记录的云商积分
             if (issueo != null)//
             {
