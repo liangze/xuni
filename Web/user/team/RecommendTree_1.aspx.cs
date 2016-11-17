@@ -54,10 +54,16 @@ namespace Web.user.team
             return 1;
         }
 
-        private void BindTree()
+        private void BindTree1()
         {
             int id = int.Parse(getLoginID().ToString());
             UserView uview = new UserView(id, y, z, _selectPlatform, 1, "zh-cn");
+            Literal1.Text = uview.AddTable();
+        }
+        private void BindTree()
+        {
+           
+            UserView uview = new UserView(x, y, z, _selectPlatform, 1, "zh-cn");
             Literal1.Text = uview.AddTable();
         }
 
@@ -89,9 +95,7 @@ namespace Web.user.team
 
         protected void btnMy_Click(object sender, EventArgs e)
         {
-            x = 1;
-            ViewState["x"] = x;
-            BindTree();
+            BindTreeRe();
         }
 
         protected void Button1_Click(object sender, EventArgs e)

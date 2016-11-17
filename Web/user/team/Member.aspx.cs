@@ -413,6 +413,7 @@ namespace Web.user.team
                         if (id == model_.ParentID.ToString())//倒数第二层特殊处理
                         {
                             int zy = model_.Location;
+                            
                             if (zy==1)
                             {
                                 model_1.LeftScore += model_.User018;
