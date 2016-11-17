@@ -307,11 +307,11 @@ namespace Web
                 lgk.Model.tb_user ModelRecommend = userBLL.GetModel(GetUserID(this.txtRecommendCode.Value.Trim()));//推荐用户
                 lgk.Model.tb_user ModelParent = userBLL.GetModel(GetUserID(this.txtParentCode.Value.Trim()));//父节点用户
                                                                                                              //lgk.Model.tb_user ModelAgent = userBLL.GetModel(GetUserID(txtAgentCode.Value.Trim()));//报单会员
-                if (ModelRecommend.Emoney < decimal.Parse(txtRegMoney.Value))
-                {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('注册币不足');", true);// 
-                    return;
-                }
+                //if (ModelRecommend.Emoney < decimal.Parse(txtRegMoney.Value))
+                //{
+                //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('注册币不足');", true);// 
+                //    return;
+                //}
                 long agentUserID = 1;
                 if (ModelRecommend.IsAgent == 1)
                 {
