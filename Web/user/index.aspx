@@ -52,6 +52,7 @@
                         <li><a href="team/RecommendTree_1.aspx" target="mainfrom">网络图谱</a></li>
                              <% };%>
                         <li><a href="team/Agent.aspx" target="mainfrom">申请报单</a></li>
+                          <li><a href="team/Member1.aspx" target="mainfrom">业绩查询</a></li>
                     </ul>
                 </li>
                 <li class="submenu"><a href="JavaScript:;"><span><i class="icon icon-list-alt"></i>财务管理</span></a>
