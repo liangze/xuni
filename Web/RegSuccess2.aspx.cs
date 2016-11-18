@@ -35,8 +35,8 @@ namespace Web
                 usercode = model.UserCode;
                 levelname = levelBLL.GetLevelName(model.LevelID);
                 RegMoney = model.RegMoney.ToString();
-           
-              
+
+
             }
             else
             {

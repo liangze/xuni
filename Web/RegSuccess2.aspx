@@ -6,8 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>注册成功</title>
     <link href="css/indexcss.css" rel="stylesheet" type="text/css" />
+    <script>
+        function changeHeight() {
+            var oParent = parent.window.document.getElementById('mainfrom');
+            oParent.height = this.document.body.clientHeight * 0.9;
+            parent.window.document.documentElement.scrollTop = 0;
+        }
+    </script>
 </head>
-<body>
+<body onload="changeHeight()">
     <form id="form1" runat="server">
     <div class="box box_width" style="height:250px">
         <div class="capositon">
