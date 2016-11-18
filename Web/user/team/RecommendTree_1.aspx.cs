@@ -21,11 +21,11 @@ namespace Web.user.team
         protected void Page_Load(object sender, EventArgs e)
         {
             spd.jumpUrl(this.Page, 1);//跳转二级密码
-            
+
             if (!IsPostBack)
             {
                 BindTreeRe();
-                x = GetID();
+                x = int.Parse(getLoginID().ToString());
                 ViewState["x"] = x;
                 ViewState["y"] = y;
                 ViewState["z"] = z;
@@ -54,15 +54,8 @@ namespace Web.user.team
             return 1;
         }
 
-        private void BindTree1()
-        {
-            int id = int.Parse(getLoginID().ToString());
-            UserView uview = new UserView(id, y, z, _selectPlatform, 1, "zh-cn");
-            Literal1.Text = uview.AddTable();
-        }
         private void BindTree()
         {
-           
             UserView uview = new UserView(x, y, z, _selectPlatform, 1, "zh-cn");
             Literal1.Text = uview.AddTable();
         }
@@ -95,7 +88,13 @@ namespace Web.user.team
 
         protected void btnMy_Click(object sender, EventArgs e)
         {
-            BindTreeRe();
+            x = int.Parse(getLoginID().ToString());
+            ViewState["x"] = x;
+            ViewState["y"] = 2;
+            ViewState["z"] = 3;
+            BindTree();
+
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "11", "parent.document.all('mainFrame').style.height=document.body.scrollHeight;", true);
         }
 
         protected void Button1_Click(object sender, EventArgs e)

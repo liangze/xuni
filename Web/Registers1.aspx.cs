@@ -386,7 +386,24 @@ namespace Web
                 m_user.User002 = getLoginID();//
                 m_user.User003 = 0;//
                 m_user.User004 = 0;//
-                m_user.Location = 1;
+                if (radMarketOne.Checked == true)
+                {
+                    m_user.Location = 1;
+
+                }
+                    if (radMarketTwo.Checked==true)
+                {
+
+               
+                if (m_user.ParentCode == ModelRecommend.UserCode)
+                {
+                    m_user.Location = 2;
+                }
+                else
+                {
+                    m_user.Location = 1;
+                }
+                }
                 m_user.User007 = m_user.Location == 1 ? "左区" : "右区";
                 //int.TryParse(dropQuestion.SelectedValue, out q);
                 //string question = q > 0 && q <= 3 ? dropQuestion.SelectedItem.Text : string.Empty;
@@ -512,11 +529,11 @@ namespace Web
                     ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("featuredNotExist") + "');", true);//该推荐玩家不存在
                     return false;
                 }
-                if (ModelRecommend.IsOpend == 0)
-                {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("MemberISNull") + "');", true);//该玩家尚未开通，不能作为推荐玩家
-                    return false;
-                }
+                //if (ModelRecommend.IsOpend == 0)
+                //{
+                //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("MemberISNull") + "');", true);//该玩家尚未开通，不能作为推荐玩家
+                //    return false;
+                //}
             }
             if (txtParentCode.Value == "")
             {
@@ -534,11 +551,11 @@ namespace Web
                 }
                 else
                 {
-                    if (ModelParent.IsOpend == 0)
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PlacementIsopen") + "');", true);//该安置玩家未开通
-                        return false;
-                    }
+                    //if (ModelParent.IsOpend == 0)
+                    //{
+                    //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("PlacementIsopen") + "');", true);//该安置玩家未开通
+                    //    return false;
+                    //}
                 }
             }
             if (radMarketOne.Checked != true && radMarketTwo.Checked != true)
