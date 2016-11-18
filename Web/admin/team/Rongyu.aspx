@@ -77,7 +77,7 @@
                                 <%#Eval("PhoneNum")%>
                             </td>
                              <td align="center">
-                                 <asp:Label ID="Label1" runat="server" Text=' <%#decimal.Parse(Eval("RightScore").ToString()) >= decimal.Parse(Eval("LeftScore").ToString())? Rongyu(decimal.Parse(Eval("RightScore").ToString())):Rongyu(decimal.Parse(Eval("LeftScore").ToString()))%>'></asp:Label>
+                                 <asp:Label ID="Label1" runat="server" Text=' <%#decimal.Parse(Eval("RightScore").ToString()) >= decimal.Parse(Eval("LeftScore").ToString())? Rongyu(decimal.Parse(Eval("LeftScore").ToString())):Rongyu(decimal.Parse(Eval("RightScore").ToString()))%>'></asp:Label>
                         <%-- <%#decimal.Parse(Eval("RightNewScore").ToString())%> > <%#decimal.Parse(Eval("LeftNewScore").ToString())%>? <%# Rongyu(decimal.Parse(Eval("RightNewScore").ToString()))%>:<%#Rongyu(decimal.Parse(Eval("LeftNewScore").ToString()))%>--%>
                             </td>
      <%--                       <td align="center">

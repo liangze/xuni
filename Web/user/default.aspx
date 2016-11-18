@@ -34,7 +34,18 @@
                                 <dl>
                                     <dd>姓名：<%=LoginUser.TrueName%></dd>
                                     <dd>帐号：<%=LoginUser.UserCode%></dd>
-                                    <dd>消费级别：<%=LoginUser.LevelID>LoginUser.User017?levelBLL.GetLevelName(LoginUser.LevelID):levelBLL.GetLevelName(Convert.ToInt32(LoginUser.User017)) %> </dd>
+                                    <dd>消费级别：<%if(dengji==0)  %> 
+                                       <%  {%>
+                                        <%=LoginUser.LevelID>LoginUser.User017?levelBLL.GetLevelName(LoginUser.LevelID):levelBLL.GetLevelName(Convert.ToInt32(LoginUser.User017)) %> 
+                                      <%  }%>
+                                       <% else  %> 
+                                        <%  {%>
+                                        <%=rongyu(dengji) %>
+                                         <%  }%>
+
+                                      </dd>  
+                                        
+                                        
                                 </dl>
                             </div>
                         </div>

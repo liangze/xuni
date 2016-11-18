@@ -2415,6 +2415,28 @@ namespace Library
         {
             return dal.GetFenHong(where);
         }
+        public string rongyu(int tepy)
+        {
+            string aa = "";
+            int a= tepy;
+            if (a==1)
+            {
+                aa = "主任";
+            }
+            if (a == 2)
+            {
+                aa = "经理";
+            }
+            if (a == 3)
+            {
+                aa = "总监";
+            }
+            if (a == 4)
+            {
+                aa = "董事";
+            }
+            return aa;
+        }
         /// <summary>
         /// 获得奖金累计
         /// </summary>

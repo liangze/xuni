@@ -59,7 +59,7 @@ namespace Web.admin.team
             decimal you = (getParamAmount("Static0") * 10000);
             decimal zuo = (getParamAmount("Static0") * 10000);
 
-            strWhere = " IsOpend=2 and RightScore>=" + you + " and LeftScore>1  or IsOpend=2 and LeftScore>=" + zuo + " and RightScore>1";
+            strWhere = " IsOpend=2 and RightScore>=" + you + " and LeftScore>"+zuo+"  or IsOpend=2 and LeftScore>=" + zuo + " and RightScore>"+you+"";
 
             if (strType != "0")
             {

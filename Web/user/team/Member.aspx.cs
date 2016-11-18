@@ -453,7 +453,7 @@ namespace Web.user.team
                                     }
                                     if (dt1.Rows.Count == 0)
                                     {
-                                        if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static0"))
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static0")*10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -466,7 +466,7 @@ namespace Web.user.team
 
                                     if (dt1.Rows.Count == 1)
                                     {
-                                        if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static1"))
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static1") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -478,7 +478,7 @@ namespace Web.user.team
                                     }
                                     if (dt1.Rows.Count == 2)
                                     {
-                                        if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static2"))
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static2") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -490,7 +490,7 @@ namespace Web.user.team
                                     }
                                     if (dt1.Rows.Count == 3)
                                     {
-                                        if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static3"))
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static3") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -540,7 +540,7 @@ namespace Web.user.team
                                     }
                                     if (dt11.Rows.Count == 0)
                                     {
-                                        if (model_1.RightScore > model_1.LeftScore && model_1.RightScore > getParamAmount("Static0"))
+                                        if (model_1.RightScore > model_1.LeftScore && model_1.LeftScore > getParamAmount("Static0") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -553,7 +553,7 @@ namespace Web.user.team
 
                                     if (dt11.Rows.Count == 1)
                                     {
-                                        if (model_1.RightScore > model_1.LeftScore && model_1.RightScore > getParamAmount("Static1"))
+                                        if (model_1.RightScore > model_1.LeftScore && model_1.LeftScore > getParamAmount("Static1") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -565,7 +565,7 @@ namespace Web.user.team
                                     }
                                     if (dt11.Rows.Count == 2)
                                     {
-                                        if (model_1.RightScore > model_1.LeftScore && model_1.RightScore > getParamAmount("Static2"))
+                                        if (model_1.RightScore > model_1.LeftScore && model_1.LeftScore > getParamAmount("Static2") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -577,7 +577,7 @@ namespace Web.user.team
                                     }
                                     if (dt11.Rows.Count == 3)
                                     {
-                                        if (model_1.RightScore > model_1.LeftScore && model_1.RightScore > getParamAmount("Static3"))
+                                        if (model_1.RightScore > model_1.LeftScore && model_1.LeftScore > getParamAmount("Static3") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -635,7 +635,7 @@ namespace Web.user.team
                                 }
                                 if (dt1.Rows.Count == 0)
                                 {
-                                    if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static0") * 10000)
+                                    if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static0") * 10000)
                                     {
                                         SqlConnection conn1 = new SqlConnection(sconn);
                                         conn1.Open();
@@ -648,7 +648,7 @@ namespace Web.user.team
 
                                 if (dt1.Rows.Count == 1)
                                 {
-                                    if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static1") * 10000)
+                                    if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static1") * 10000)
                                     {
                                         SqlConnection conn1 = new SqlConnection(sconn);
                                         conn1.Open();
@@ -660,7 +660,7 @@ namespace Web.user.team
                                 }
                                 if (dt1.Rows.Count == 2)
                                 {
-                                    if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static2") * 10000)
+                                    if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static2") * 10000)
                                     {
                                         SqlConnection conn1 = new SqlConnection(sconn);
                                         conn1.Open();
@@ -672,7 +672,7 @@ namespace Web.user.team
                                 }
                                 if (dt1.Rows.Count == 3)
                                 {
-                                    if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static3") * 10000)
+                                    if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static3") * 10000)
                                     {
                                         SqlConnection conn1 = new SqlConnection(sconn);
                                         conn1.Open();
@@ -731,7 +731,7 @@ namespace Web.user.team
                                     }
                                     if (dt11.Rows.Count == 0)
                                     {
-                                        if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static0") * 10000)
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static0") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -744,7 +744,7 @@ namespace Web.user.team
 
                                     if (dt11.Rows.Count == 1)
                                     {
-                                        if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static1") * 10000)
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static1") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -756,7 +756,7 @@ namespace Web.user.team
                                     }
                                     if (dt11.Rows.Count == 2)
                                     {
-                                        if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static2") * 10000)
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static2") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -768,7 +768,7 @@ namespace Web.user.team
                                     }
                                     if (dt11.Rows.Count == 3)
                                     {
-                                        if (model_1.LeftScore > model_1.RightScore && model_1.LeftScore > getParamAmount("Static3") * 10000)
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static3") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -819,7 +819,7 @@ namespace Web.user.team
                                     }
                                     if (dt11.Rows.Count == 0)
                                     {
-                                        if (model_1.RightScore > model_1.LeftScore && model_1.RightScore > getParamAmount("Static0") * 10000)
+                                        if (model_1.RightScore > model_1.LeftScore && model_1.LeftScore > getParamAmount("Static0") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -832,7 +832,7 @@ namespace Web.user.team
 
                                     if (dt11.Rows.Count == 1)
                                     {
-                                        if (model_1.RightScore > model_1.LeftScore && model_1.RightScore > getParamAmount("Static1") * 10000)
+                                        if (model_1.RightScore > model_1.LeftScore && model_1.LeftScore > getParamAmount("Static1") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -844,7 +844,7 @@ namespace Web.user.team
                                     }
                                     if (dt11.Rows.Count == 2)
                                     {
-                                        if (model_1.RightScore > model_1.LeftScore && model_1.RightScore > getParamAmount("Static2") * 10000)
+                                        if (model_1.RightScore > model_1.LeftScore && model_1.LeftScore > getParamAmount("Static2") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();
@@ -856,7 +856,7 @@ namespace Web.user.team
                                     }
                                     if (dt11.Rows.Count == 3)
                                     {
-                                        if (model_1.RightScore > model_1.LeftScore && model_1.RightScore > getParamAmount("Static3") * 10000)
+                                        if (model_1.RightScore > model_1.LeftScore && model_1.LeftScore > getParamAmount("Static3") * 10000)
                                         {
                                             SqlConnection conn1 = new SqlConnection(sconn);
                                             conn1.Open();

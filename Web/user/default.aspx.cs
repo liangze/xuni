@@ -16,17 +16,32 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Library;
+using System.Data;
 
 namespace Web.user
 {
     public partial class _default : PageCore
     {
+        public int dengji { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                
                 BindData();
+                string sql = "select * from tb_agent1 where userid="+getLoginID()+ " order by AgentType desc ";
+                DataTable dt = userBLL.getData_Chaxun(sql,"").Tables[0];
+                if (dt.Rows.Count>0)
+                {
+                    dengji = int.Parse(dt.Rows[0]["AgentType"].ToString());
+                }
+                else
+                {
+                    dengji = 0;
+                }
+             
+
+                
             }
         }
 
