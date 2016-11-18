@@ -103,13 +103,13 @@ namespace Web.user.Stock {
         protected global::System.Web.UI.WebControls.TextBox txtBuyNum;
         
         /// <summary>
-        /// Label6 控件。
+        /// TextTolPrice 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.TextBox TextTolPrice;
         
         /// <summary>
         /// dropCurrency 控件。
@@ -166,13 +166,13 @@ namespace Web.user.Stock {
         protected global::System.Web.UI.WebControls.TextBox txtSellNum;
         
         /// <summary>
-        /// Label7 控件。
+        /// TextStoalPri 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.TextBox TextStoalPri;
         
         /// <summary>
         /// PayPass 控件。

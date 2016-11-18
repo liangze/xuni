@@ -208,7 +208,8 @@
                                                             <td style="width: 30.9%; text-align: right;">购买总价：
                                                             </td>
                                                             <td align="left">
-                                                                <asp:Label ID="Label6" runat="server" Text="" class="span5"></asp:Label>
+                                                                <%--<asp:Label ID="Label6" runat="server" Text="" class="span5"></asp:Label>--%>
+                                                                <asp:TextBox ID="TextTolPrice" class="span5" runat="server" AutoPostBack="true" OnTextChanged="TextTolPrice_TextChanged"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr style="height: 50px;">
@@ -268,7 +269,8 @@
                                                             <td style="width: 30.9%; text-align: right;">卖出总价：
                                                             </td>
                                                             <td align="left">
-                                                                <asp:Label ID="Label7" runat="server" Text="" class="span5"></asp:Label>
+                                                               <%-- <asp:Label ID="Label7" runat="server" Text="" class="span5"></asp:Label>--%>
+                                                                <asp:TextBox ID="TextStoalPri" runat="server" class="span6" AutoPostBack="true" OnTextChanged="TextStoalPri_TextChanged"></asp:TextBox>
                                                             </td>
                                                         </tr>
 

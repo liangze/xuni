@@ -439,7 +439,7 @@ namespace Web.user.Stock
                     return;
                 }
                 decimal tal = Math.Round(NewPrice * Number, 4);//购买商品总价格
-                Label6.Text = tal.ToString();
+                TextTolPrice.Text = tal.ToString();
             }
 
         }
@@ -715,7 +715,48 @@ namespace Web.user.Stock
                     return;
                 }
                 decimal tal = Math.Round(NewPrice * sellNumber, 4);//购买商品总价格
-                Label7.Text = tal.ToString();
+                TextStoalPri.Text = tal.ToString();
+            }
+        }
+        /// <summary>
+        /// 输入购买金额换算成购买数量
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void TextTolPrice_TextChanged(object sender, EventArgs e)
+        {
+            decimal NewPrice = getParamAmount("Shares3");//当前价格
+            if (TextTolPrice.Text.Trim() != "")
+            {
+                decimal Number = 0;//购买金额
+                if (!decimal.TryParse(TextTolPrice.Text.Trim(), out Number))
+                {
+                    MessageBox.MyShow(this, "请输入有效数据");//请输入有效数据
+                    return;
+                }
+                decimal tal = Math.Round(Number/ NewPrice, 0);//购买商品总数量
+                txtBuyNum.Text = tal.ToString();
+            }
+        }
+
+        /// <summary>
+        /// 输入卖出金额，换算成卖出数量
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void TextStoalPri_TextChanged(object sender, EventArgs e)
+        {
+            decimal NewPrice = getParamAmount("Shares3");//当前价格
+            if (TextStoalPri.Text.Trim() != "")
+            {
+                int sellNumber = 0;//卖出金额
+                if (!int.TryParse(TextStoalPri.Text.Trim(), out sellNumber))
+                {
+                    MessageBox.MyShow(this, "请输入整数数据");//请输入有效数据
+                    return;
+                }
+                decimal tal = Math.Round(sellNumber/ NewPrice, 0);//卖出数量
+                txtSellNum.Text = tal.ToString();
             }
         }
     }
