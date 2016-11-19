@@ -29,7 +29,7 @@ namespace Web.user
             {
                
                 BindData();
-                string sql = "select * from tb_agent1 where userid="+getLoginID()+ " order by AgentType desc ";
+                 string sql = "select * from tb_agent1 where userid="+getLoginID()+ " order by AgentType desc ";
                 DataTable dt = userBLL.getData_Chaxun(sql,"").Tables[0];
                 if (dt.Rows.Count>0)
                 {
