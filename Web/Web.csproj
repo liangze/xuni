@@ -4109,6 +4109,7 @@
     <Content Include="img\demo\Thumbs.db" />
     <Content Include="img\icons\32\Thumbs.db" />
     <Content Include="img\Thumbs.db" />
+    <None Include="Properties\PublishProfiles\1.pubxml" />
     <None Include="SpryAssets\imgbox\Thumbs.db" />
     <None Include="JS\JQPlot\plugins\vssver2.scc" />
     <None Include="JS\JQPlot\vssver2.scc" />
