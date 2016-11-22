@@ -1,0 +1,7 @@
+
+设置为每日23:50分执行作业
+
+EXEC proc_Award_ShareOutBonus
+EXEC proc_Dateduipeng
+EXEC proc_PresentPrice
+EXEC proc_bonusPayOne
