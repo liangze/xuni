@@ -98,6 +98,585 @@ namespace Web.user.member
                     if (bonusBLL.Upgrade(LoginUser.UserID, newRegMoney, newLevelID) > 0)
                     {
                         DropDownList1.SelectedIndex = 0;
+                        lgk.BLL.tb_user B_user = new lgk.BLL.tb_user();
+                        lgk.Model.tb_user model_ = userBLL.GetModel(getLoginID());//选择的人
+                        long UserID = long.Parse(getLoginID().ToString());
+
+                        #region 线上升级判断升级
+                        string path = model_.UserPath;
+                        string[] ID = path.Split('-');
+                        foreach (var id in ID)
+                        {
+                            if (id == UserID.ToString())
+                            {
+                                continue;
+                            }
+                            lgk.Model.tb_user model_1 = userBLL.GetModel(long.Parse(id)); //头上的人
+                            if (id == model_.ParentID.ToString())//倒数第二层特殊处理
+                            {
+                                int zy = model_.Location;
+
+                                if (zy == 1)
+                                {
+                                    
+                                    string sql9 = "select * from tb_user where  ParentID=" + id + "";
+                                    DataTable dt9 = userBLL.getData_Chaxun(sql9, "").Tables[0];
+                                    if (dt9.Rows.Count == 2)
+                                    {
+                                        SqlConnection conn = new SqlConnection(sconn);
+                                        conn.Open();
+                                        string sql1 = string.Format("select * from tb_agent1 where AgentCode='" + model_1.UserCode + "'");
+                                        SqlDataAdapter da = new SqlDataAdapter(sql1, conn);
+                                        DataTable dt1 = new DataTable();
+                                        da.Fill(dt1);
+                                        conn.Close();
+
+
+
+                                        if (dt1.Rows.Count == 4)
+                                        {
+                                            continue;
+                                        }
+                                        if (dt1.Rows.Count == 0)
+                                        {
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static0") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql11 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 1 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql11, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static0") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 1 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+
+                                        if (dt1.Rows.Count == 1)
+                                        {
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static1") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql11 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 2 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql11, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static1") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 2 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                        if (dt1.Rows.Count == 2)
+                                        {
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static2") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql11 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 3 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql11, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static2") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 3 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                        if (dt1.Rows.Count == 3)
+                                        {
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static3") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql11 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 4 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql11, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static3") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 4 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                    }
+                                    continue;
+                                }
+                                if (zy == 2)
+                                {
+                                  
+                                    string sql9 = "select * from tb_user where  ParentID=" + id + "";
+                                    DataTable dt9 = userBLL.getData_Chaxun(sql9, "").Tables[0];
+                                    if (dt9.Rows.Count == 2)
+                                    {
+                                        SqlConnection conn = new SqlConnection(sconn);
+                                        conn.Open();
+                                        string sql11 = string.Format("select * from tb_agent1 where AgentCode='" + model_1.UserCode + "'");
+                                        SqlDataAdapter da = new SqlDataAdapter(sql11, conn);
+                                        DataTable dt11 = new DataTable();
+                                        da.Fill(dt11);
+                                        conn.Close();
+
+
+                                        if (dt11.Rows.Count == 4)
+                                        {
+                                            continue;
+                                        }
+                                        if (dt11.Rows.Count == 0)
+                                        {
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static0") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 1 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static0") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 1 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+
+                                        if (dt11.Rows.Count == 1)
+                                        {
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static1") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 2 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static1") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 2 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                        if (dt11.Rows.Count == 2)
+                                        {
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static2") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 3 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static2") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 3 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                        if (dt11.Rows.Count == 3)
+                                        {
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static3") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 4 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static3") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "','" + model_1.UserID + "','" + 4 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                    }
+                                    continue;
+                                }
+
+                                continue;
+                            }
+
+                            string sql = "select * from tb_user  where ParentID = '" + id + "' order by Location";
+                            DataSet ds = B_user.getData_Chaxun(sql, "");
+                            DataTable dt = ds.Tables[0];
+                            if (dt.Rows.Count < 2)
+                            { 
+                                string sql9 = "select * from tb_user where  ParentID=" + id + "";
+                                DataTable dt9 = userBLL.getData_Chaxun(sql9, "").Tables[0];
+                                if (dt9.Rows.Count == 2)
+                                {
+                                    SqlConnection conn = new SqlConnection(sconn);
+                                    conn.Open();
+                                    string sql1 = string.Format("select * from tb_agent1 where AgentCode='" + model_1.UserCode + "'");
+                                    SqlDataAdapter da = new SqlDataAdapter(sql1, conn);
+                                    DataTable dt1 = new DataTable();
+                                    da.Fill(dt1);
+                                    conn.Close();
+
+
+                                    if (dt1.Rows.Count == 4)
+                                    {
+                                        continue;
+                                    }
+                                    if (dt1.Rows.Count == 0)
+                                    {
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static0") * 10000)
+                                        {
+                                            SqlConnection conn1 = new SqlConnection(sconn);
+                                            conn1.Open();
+                                            string sql11 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 1 + "',getdate() )";
+                                            SqlCommand cmd = new SqlCommand(sql11, conn1);
+                                            int reInt = cmd.ExecuteNonQuery();
+                                            conn1.Close();
+                                        }
+                                        if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static0") * 10000)
+                                        {
+                                            SqlConnection conn1 = new SqlConnection(sconn);
+                                            conn1.Open();
+                                            string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 1 + "',getdate() )";
+                                            SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                            int reInt = cmd.ExecuteNonQuery();
+                                            conn1.Close();
+                                        }
+                                    }
+
+                                    if (dt1.Rows.Count == 1)
+                                    {
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static1") * 10000)
+                                        {
+                                            SqlConnection conn1 = new SqlConnection(sconn);
+                                            conn1.Open();
+                                            string sql11 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 2 + "',getdate() )";
+                                            SqlCommand cmd = new SqlCommand(sql11, conn1);
+                                            int reInt = cmd.ExecuteNonQuery();
+                                            conn1.Close();
+                                        }
+                                        if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static1") * 10000)
+                                        {
+                                            SqlConnection conn1 = new SqlConnection(sconn);
+                                            conn1.Open();
+                                            string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 2 + "',getdate() )";
+                                            SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                            int reInt = cmd.ExecuteNonQuery();
+                                            conn1.Close();
+                                        }
+                                    }
+                                    if (dt1.Rows.Count == 2)
+                                    {
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static2") * 10000)
+                                        {
+                                            SqlConnection conn1 = new SqlConnection(sconn);
+                                            conn1.Open();
+                                            string sql11 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 3 + "',getdate() )";
+                                            SqlCommand cmd = new SqlCommand(sql11, conn1);
+                                            int reInt = cmd.ExecuteNonQuery();
+                                            conn1.Close();
+                                        }
+                                        if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static2") * 10000)
+                                        {
+                                            SqlConnection conn1 = new SqlConnection(sconn);
+                                            conn1.Open();
+                                            string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 3 + "',getdate() )";
+                                            SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                            int reInt = cmd.ExecuteNonQuery();
+                                            conn1.Close();
+                                        }
+                                    }
+                                    if (dt1.Rows.Count == 3)
+                                    {
+                                        if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static3") * 10000)
+                                        {
+                                            SqlConnection conn1 = new SqlConnection(sconn);
+                                            conn1.Open();
+                                            string sql11 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 4 + "',getdate() )";
+                                            SqlCommand cmd = new SqlCommand(sql11, conn1);
+                                            int reInt = cmd.ExecuteNonQuery();
+                                            conn1.Close();
+                                        }
+                                        if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static3") * 10000)
+                                        {
+                                            SqlConnection conn1 = new SqlConnection(sconn);
+                                            conn1.Open();
+                                            string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 4 + "',getdate() )";
+                                            SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                            int reInt = cmd.ExecuteNonQuery();
+                                            conn1.Close();
+                                        }
+                                    }
+                                }
+                                continue;
+                            }
+                            if (dt.Rows.Count == 2)
+                            {
+                                string zuo = dt.Rows[0]["UserID"].ToString();
+                                string you = dt.Rows[1]["UserID"].ToString();
+                                string sql1 = "select * from tb_user  where UserID = '" + UserID + "' and UserPath like '%" + zuo + "%'  ;select * from tb_user  where UserID = '" + UserID + "' and UserPath like '%" + you + "%';";
+                                DataSet ds1 = B_user.getData_Chaxun(sql1, "");
+                                DataTable dt1 = ds1.Tables[0];
+                                DataTable dt2 = ds1.Tables[1];
+                                if (dt1.Rows.Count > 0)
+                                {
+                                    
+
+
+                                    string sql9 = "select * from tb_user where  ParentID=" + id + "";
+                                    DataTable dt9 = userBLL.getData_Chaxun(sql9, "").Tables[0];
+                                    if (dt9.Rows.Count == 2)
+                                    {
+                                        SqlConnection conn = new SqlConnection(sconn);
+                                        conn.Open();
+                                        string sql11 = string.Format("select * from tb_agent1 where AgentCode='" + model_1.UserCode + "'");
+                                        SqlDataAdapter da = new SqlDataAdapter(sql11, conn);
+                                        DataTable dt11 = new DataTable();
+                                        da.Fill(dt11);
+                                        conn.Close();
+
+
+                                        if (dt11.Rows.Count == 4)
+                                        {
+                                            continue;
+                                        }
+                                        if (dt11.Rows.Count == 0)
+                                        {
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static0") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 1 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static0") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 1 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+
+                                        if (dt11.Rows.Count == 1)
+                                        {
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static1") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 2 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static1") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 2 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                        if (dt11.Rows.Count == 2)
+                                        {
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static2") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 3 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static2") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 3 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                        if (dt11.Rows.Count == 3)
+                                        {
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static3") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 4 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static3") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 4 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                    }
+                                    continue;
+                                }
+                                if (dt2.Rows.Count > 0)
+                                { 
+                                    string sql9 = "select * from tb_user where  ParentID=" + id + "";
+                                    DataTable dt9 = userBLL.getData_Chaxun(sql9, "").Tables[0];
+                                    if (dt9.Rows.Count == 2)
+                                    {
+
+                                        SqlConnection conn = new SqlConnection(sconn);
+                                        conn.Open();
+                                        string sql11 = string.Format("select * from tb_agent1 where AgentCode='" + model_1.UserCode + "'");
+                                        SqlDataAdapter da = new SqlDataAdapter(sql11, conn);
+                                        DataTable dt11 = new DataTable();
+                                        da.Fill(dt11);
+                                        conn.Close();
+
+
+                                        if (dt11.Rows.Count == 4)
+                                        {
+                                            continue;
+                                        }
+                                        if (dt11.Rows.Count == 0)
+                                        {
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static0") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 1 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static0") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 1 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+
+                                        if (dt11.Rows.Count == 1)
+                                        {
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static1") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 2 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static1") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 2 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                        if (dt11.Rows.Count == 2)
+                                        {
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static2") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 3 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static2") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 3 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                        if (dt11.Rows.Count == 3)
+                                        {
+                                            if (model_1.RightScore >= model_1.LeftScore && model_1.LeftScore >= getParamAmount("Static3") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 4 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                            if (model_1.LeftScore > model_1.RightScore && model_1.RightScore > getParamAmount("Static3") * 10000)
+                                            {
+                                                SqlConnection conn1 = new SqlConnection(sconn);
+                                                conn1.Open();
+                                                string sql111 = "insert into tb_agent1(AgentCode,Flag,UserID,AgentType,OpenTime)values('" + model_1.UserCode + "','" + 1 + "'," + model_1.UserID + ",'" + 4 + "',getdate() )";
+                                                SqlCommand cmd = new SqlCommand(sql111, conn1);
+                                                int reInt = cmd.ExecuteNonQuery();
+                                                conn1.Close();
+                                            }
+                                        }
+                                    }
+                                    continue;
+                                }
+                            }
+                        }
+                        #endregion
+
                         Response.Write("<script>alert('升级成功');location.href=Upgrade.aspx;</script>");
                     }
                     else
