@@ -307,11 +307,11 @@ namespace Web
                 lgk.Model.tb_user ModelRecommend = userBLL.GetModel(GetUserID(this.txtRecommendCode.Value.Trim()));//推荐用户
                 lgk.Model.tb_user ModelParent = userBLL.GetModel(GetUserID(this.txtParentCode.Value.Trim()));//父节点用户
                                                                                                              //lgk.Model.tb_user ModelAgent = userBLL.GetModel(GetUserID(txtAgentCode.Value.Trim()));//报单会员
-                //if (ModelRecommend.Emoney < decimal.Parse(txtRegMoney.Value))
-                //{
-                //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('注册币不足');", true);// 
-                //    return;
-                //}
+                                                                                                             //if (ModelRecommend.Emoney < decimal.Parse(txtRegMoney.Value))
+                                                                                                             //{
+                                                                                                             //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('注册币不足');", true);// 
+                                                                                                             //    return;
+                                                                                                             //}
                 long agentUserID = 1;
                 if (ModelRecommend.IsAgent == 1)
                 {
@@ -391,18 +391,31 @@ namespace Web
                     m_user.Location = 1;
 
                 }
-                    if (radMarketTwo.Checked==true)
+                if (radMarketTwo.Checked == true)
                 {
 
-               
-                if (m_user.ParentCode == ModelRecommend.UserCode)
-                {
-                    m_user.Location = 2;
-                }
-                else
-                {
-                    m_user.Location = 1;
-                }
+                    string sql1 = "select * from tb_user where ParentID=" + getLoginID() + " order by Location";
+                    DataTable dt1 = userBLL.getData_Chaxun(sql1, "").Tables[0];
+
+                    if (m_user.ParentCode == ModelRecommend.UserCode)
+                    {
+                        m_user.Location = 2;
+                    }
+                    else
+                    {
+                        m_user.Location = 1;
+                    }
+                    if (dt1.Rows.Count == 0)
+                    {
+                        if (m_user.ParentCode == ModelRecommend.UserCode)
+                        {
+                            m_user.Location = 1;
+                        }
+                        else
+                        {
+                            m_user.Location = 1;
+                        }
+                    }
                 }
                 m_user.User007 = m_user.Location == 1 ? "左区" : "右区";
                 //int.TryParse(dropQuestion.SelectedValue, out q);
@@ -1005,13 +1018,18 @@ namespace Web
             string sql = "select Layer from tb_user order by Layer desc   ";
             DataTable dt = userBLL.getData_Chaxun(sql, "").Tables[0];
             int xunhuan = int.Parse(dt.Rows[0]["Layer"].ToString());
-            string sql1 = "select * from tb_user where ParentID="+ getLoginID()+ " order by Location desc";
+            string sql1 = "select * from tb_user where ParentID=" + getLoginID() + " order by Location desc";
             DataTable dt1 = userBLL.getData_Chaxun(sql1, "").Tables[0];
             if (dt1.Rows.Count < 2)//第二层特殊处理
             {
-                if (dt1.Rows[0]["Location"].ToString() == "2")
+                if (dt1.Rows.Count == 1)
                 {
-                    userid1 = int.Parse(dt1.Rows[0]["UserID"].ToString());
+                    if (dt1.Rows[0]["Location"].ToString() == "2")
+                    {
+                        userid1 = int.Parse(dt1.Rows[0]["UserID"].ToString());
+                        return userid1;
+                    }
+                    userid1 = int.Parse(getLoginID().ToString());
                     return userid1;
                 }
                 userid1 = int.Parse(getLoginID().ToString());
@@ -1023,7 +1041,7 @@ namespace Web
             {
                 string sql2 = "select * from tb_user where ParentID=" + userid + " order by Location ";
                 DataTable dt2 = userBLL.getData_Chaxun(sql2, "").Tables[0];
-                if (dt2.Rows.Count >=1)
+                if (dt2.Rows.Count >= 1)
                 {
                     userid = int.Parse(dt2.Rows[0]["UserID"].ToString());
                     continue;
@@ -1047,13 +1065,13 @@ namespace Web
             string sql = "select Layer from tb_user order by Layer desc   ";
             DataTable dt = userBLL.getData_Chaxun(sql, "").Tables[0];
             int xunhuan = int.Parse(dt.Rows[0]["Layer"].ToString());
-            string sql1 = "select * from tb_user where ParentID="+getLoginID()+" order by Location";
+            string sql1 = "select * from tb_user where ParentID=" + getLoginID() + " order by Location";
             DataTable dt1 = userBLL.getData_Chaxun(sql1, "").Tables[0];
             if (dt1.Rows.Count <= 1)//第二层特殊处理
             {
                 if (dt1.Rows[0]["Location"].ToString() == "2")
                 {
-                     userid1 = int.Parse(getLoginID().ToString());
+                    userid1 = int.Parse(getLoginID().ToString());
                     return userid1;
                 }
                 userid1 = int.Parse(getLoginID().ToString());
@@ -1067,7 +1085,7 @@ namespace Web
                 DataTable dt2 = userBLL.getData_Chaxun(sql2, "").Tables[0];
                 if (dt2.Rows.Count >= 1)
                 {
-                    
+
                     userid = int.Parse(dt2.Rows[0]["UserID"].ToString());
                     continue;
                 }
