@@ -590,11 +590,11 @@ namespace Web
             int location = 0;
             if (radMarketOne.Checked == true) { location = 1; }
             if (radMarketTwo.Checked == true) { location = 2; }
-            //if (FlagLocation(GetUserID(this.txtParentCode.Value.Trim()), location, 0) == 2)
-            //{
-            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("hasMember") + "');", true);//该区域已有玩家
-            //    return false;
-            //}
+            if (FlagLocation(GetUserID(this.txtParentCode.Value.Trim()), location, 0) == 2)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("hasMember") + "');", true);//该区域已有玩家
+                return false;
+            }
             //if ((location == 2 && FlagLocation(GetUserID(this.txtParentCode.Value.Trim()), 1, 0) == 1))
             //{
             //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("leftIsnull") + "');", true);//该接点玩家左区未有人，不能注册右区!
@@ -1067,13 +1067,9 @@ namespace Web
             int xunhuan = int.Parse(dt.Rows[0]["Layer"].ToString());
             string sql1 = "select * from tb_user where ParentID=" + getLoginID() + " order by Location";
             DataTable dt1 = userBLL.getData_Chaxun(sql1, "").Tables[0];
-            if (dt1.Rows.Count <= 1)//第二层特殊处理
+            if (dt1.Rows.Count < 1)//第二层特殊处理
             {
-                if (dt1.Rows[0]["Location"].ToString() == "2")
-                {
-                    userid1 = int.Parse(getLoginID().ToString());
-                    return userid1;
-                }
+                
                 userid1 = int.Parse(getLoginID().ToString());
                 return userid1;
             }
