@@ -117,13 +117,13 @@ namespace Web.user.finance
                 MessageBox.Show(this, "" + GetLanguage("transferMoneyIsnull") + "");//转账金额不能为空
                 return;
             }
-            string strMoney = txtMoney.Text.Trim();
-            int aa = int.Parse(strMoney) % 100;
-            if (aa != 0)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请输入100的倍数金额');", true);//奖金币转拍币功能未开放
-                return;
-            }
+            //string strMoney = txtMoney.Text.Trim();
+            //int aa = int.Parse(strMoney) % int.Parse(getParamAmount("ATM3").ToString());
+            //if (aa != 0)
+            //{
+            //    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请输入"+getParamAmount("ATM3") +"的倍数金额');", true);//奖金币转拍币功能未开放
+            //    return;
+            //}
 
             decimal dResult = 0;
             if (decimal.TryParse(txtMoney.Text.Trim(), out dResult))
@@ -146,7 +146,7 @@ namespace Web.user.finance
             {
                 if (iTypeID == 1 && dResult > userInfo.BonusAccount)
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('" + GetLanguage("NotCurrent") + "');", true);
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('奖金积分余额不足');", true);
                     return;
                 }
                 else if (iTypeID == 2 && dResult > userInfo.Emoney)
@@ -395,10 +395,10 @@ namespace Web.user.finance
             if (strMoney != "")
             {
                 btnSubmit.Enabled = false;
-                int aa = int.Parse(strMoney) % 100;
+                int aa = int.Parse(strMoney) % int.Parse(getParamAmount("zhuanzhang_5").ToString());
                 if (aa != 0)
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请输入100的倍数金额');", true);//奖金币转拍币功能未开放
+                    ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "info", "alert('请输入"+ getParamAmount("zhuanzhang_5") + "的倍数金额');", true);//奖金币转拍币功能未开放
                     return;
                 }
 

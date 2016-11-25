@@ -1009,6 +1009,11 @@ namespace Web
             DataTable dt1 = userBLL.getData_Chaxun(sql1, "").Tables[0];
             if (dt1.Rows.Count < 2)//第二层特殊处理
             {
+                if (dt1.Rows[0]["Location"].ToString() == "2")
+                {
+                    userid1 = int.Parse(dt1.Rows[0]["UserID"].ToString());
+                    return userid1;
+                }
                 userid1 = int.Parse(getLoginID().ToString());
                 return userid1;
             }
@@ -1044,8 +1049,13 @@ namespace Web
             int xunhuan = int.Parse(dt.Rows[0]["Layer"].ToString());
             string sql1 = "select * from tb_user where ParentID="+getLoginID()+" order by Location";
             DataTable dt1 = userBLL.getData_Chaxun(sql1, "").Tables[0];
-            if (dt1.Rows.Count < 1)//第二层特殊处理
+            if (dt1.Rows.Count <= 1)//第二层特殊处理
             {
+                if (dt1.Rows[0]["Location"].ToString() == "2")
+                {
+                     userid1 = int.Parse(getLoginID().ToString());
+                    return userid1;
+                }
                 userid1 = int.Parse(getLoginID().ToString());
                 return userid1;
             }
@@ -1057,6 +1067,7 @@ namespace Web
                 DataTable dt2 = userBLL.getData_Chaxun(sql2, "").Tables[0];
                 if (dt2.Rows.Count >= 1)
                 {
+                    
                     userid = int.Parse(dt2.Rows[0]["UserID"].ToString());
                     continue;
                 }
