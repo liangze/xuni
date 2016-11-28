@@ -76,7 +76,7 @@ namespace Web
             UserCookie["Id"] = ds.Tables[0].Rows[0]["ID"].ToString();
             UserCookie["name"] = Convert.ToString(txtUserName.Value);
             Response.AppendCookie(UserCookie);
-            Response.Redirect("admin/index.aspx");
+            Response.Redirect("../admin/index.aspx");
         }
     }
 }

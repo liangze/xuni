@@ -1691,7 +1691,7 @@
     <Content Include="JS\tagjs.js" />
     <Content Include="JS\userReg.js" />
     <Content Include="loginout.aspx" />
-    <Content Include="ManageLogin.aspx" />
+    <Content Include="GuXiangYunShang2016\ManageLogin.aspx" />
     <Content Include="manageloginout.aspx" />
     <Content Include="RegSuccess.aspx" />
     <Content Include="user\Cash\CancelOrder.aspx" />
@@ -3051,11 +3051,11 @@
     <Compile Include="loginout.aspx.designer.cs">
       <DependentUpon>loginout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ManageLogin.aspx.cs">
+    <Compile Include="GuXiangYunShang2016\ManageLogin.aspx.cs">
       <DependentUpon>ManageLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManageLogin.aspx.designer.cs">
+    <Compile Include="GuXiangYunShang2016\ManageLogin.aspx.designer.cs">
       <DependentUpon>ManageLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="manageloginout.aspx.cs">

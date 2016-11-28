@@ -6,9 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
     <title>登录</title>
-    <link href="css/login.css" rel="stylesheet" type="text/css" />
-    <script src="JS/jquery-1.7.1.min.js" type="text/javascript"></script>
-    <script src="js/login1.js" type="text/javascript"></script>
+    <link href="../css/login.css" rel="stylesheet" type="text/css" />
+    <script src="../JS/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="../js/login1.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
         function replace(o) {
             var obj = document.getElementById(o)
