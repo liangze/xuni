@@ -17,7 +17,8 @@
     <script src="js/login.js?v=1.0" type="text/javascript"></script>
     <style type="text/css">
         body {
-            background: url("img/loginBg.png");
+            /*background: url("img/loginBg.png");*/
+              background: url("img/Login_11.jpg");
         }
 
         #top {

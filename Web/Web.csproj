@@ -1391,6 +1391,8 @@
     <Content Include="img\login-ico.png" />
     <Content Include="img\login-logo.png" />
     <Content Include="img\loginBg.png" />
+    <Content Include="img\Login_1.jpg" />
+    <Content Include="img\Login_11.jpg" />
     <Content Include="img\login_bg.jpg" />
     <Content Include="img\logo.png" />
     <Content Include="img\menu-active.png" />
