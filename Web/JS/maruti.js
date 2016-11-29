@@ -4,7 +4,7 @@ $(document).ready(function(){
 	
 	
     // === Sidebar navigation === //
-    /*
+    
     $('.submenu > a').click(function (e) {
         e.preventDefault();
         var submenus = $('#sidebar li.submenu ul');
@@ -12,26 +12,21 @@ $(document).ready(function(){
         var submenu = $(this).siblings('ul');
         var li = $(this).parents('li');
         if (li.hasClass('open')) {
-            if (($(window).width() > 768) || ($(window).width() < 479)) {
+            if ($(window).width() < 479) {
                 submenu.slideUp('normal', function () {
                     submenu.attr("style", "");
                 });
-            } else {
-                submenu.fadeOut(250);
             }
             li.removeClass('open');
         } else {
-            if (($(window).width() > 768) || ($(window).width() < 479)) {
+            if ($(window).width() < 479) {
                 submenus.slideUp();
                 submenu.slideDown();
-            } else {
-                submenus.fadeOut(250);
-                submenu.fadeIn(250);
             }
             submenus_parents.removeClass('open');
             li.addClass('open');
         }
-    });*/
+    });
 	$('.submenu > a').hover(function () {
 		clearTimeout($(this).next()[0].timers);
 	},function(e){
