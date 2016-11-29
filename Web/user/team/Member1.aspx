@@ -72,16 +72,16 @@
                             <%=GetLanguage("MemberName")%><!--会员姓名-->
                         </th>
                         <th align="center">
-                         左区业绩
+                         1市场业绩
                         </th>
                         <th align="center">
-                          右区业绩
+                          2市场业绩
                         </th>
                         <th align="center">
-                         左新业绩
+                         1市场新业绩
                         </th>
                         <th align="center">
-                         右新业绩
+                         2市场新业绩
                         </th>
                        
                     </tr>
