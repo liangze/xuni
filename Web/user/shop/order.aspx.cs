@@ -109,10 +109,10 @@ namespace Web.user.shop
                 lgk.Model.tb_user user = userBLL.GetModel(orderInfo.UserID);
                 try
                 {
-                    user.BonusAccount += orderInfo.PVTotal;
+                    user.ShopAccount += orderInfo.PVTotal;
                     userBLL.Update(user);
 
-                    add_journal(orderInfo.UserID, orderInfo.PVTotal, 0, user.BonusAccount, 1,"删除订单", "Delete orders", orderInfo.UserID);
+                    add_journal(orderInfo.UserID, orderInfo.PVTotal, 0, user.ShopAccount, 7,"删除订单", "Delete orders", orderInfo.UserID);
 
                     DeleteByCode(orderInfo.OrderCode);
                     orderBLL.Delete(orderInfo.OrderID);

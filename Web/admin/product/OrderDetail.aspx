@@ -23,7 +23,7 @@
         <div class="Member_right">
             <div class="operation">
                 <asp:LinkButton ID="btn_s1" runat="server" class="easyui-linkbutton" iconcls="icon-back">  
-           <a href="javascript:history.go(-1)"> 返 回</a> </asp:LinkButton><br />
+           <a href="OrerProduct.aspx"> 返 回</a> </asp:LinkButton><br />
                 <br />
                 <fieldset class="fieldset">
                     <legend class="legSearch">订单信息</legend>
