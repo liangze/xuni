@@ -13,11 +13,11 @@ namespace Web
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            string s = "程序启动";
-            Library.LogHelper.SaveLog(s, "Application_Start");
+            //string s = "程序启动";
+            //Library.LogHelper.SaveLog(s, "Application_Start");
 
-            // 在应用程序启动时运行的代码
-            QuartzStart.Start();
+            //// 在应用程序启动时运行的代码
+            //QuartzStart.Start();
         }
 
         protected void Session_Start(object sender, EventArgs e)
