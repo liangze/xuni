@@ -61,6 +61,11 @@ namespace Web.user.shop
             string strOrderCode = e.CommandArgument.ToString();
 
             lgk.Model.tb_Order orderInfo = orderBLL.GetModelByCode(strOrderCode);
+            if (orderInfo==null)
+            {
+                MessageBox.ShowAndRedirect(this, "订单已经修改", "order.aspx");//未收货成功
+                return;
+            }
 
             if (e.CommandName.Equals("Payment"))
             {
