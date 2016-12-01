@@ -1126,6 +1126,7 @@
     <Content Include="doc\奖金类型.txt" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="getemailcode.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="images\06.jpg" />
     <Content Include="images\ad2.jpg" />
     <Content Include="images\art_new.png" />
@@ -2904,6 +2905,9 @@
     </Compile>
     <Compile Include="getemailcode.aspx.designer.cs">
       <DependentUpon>getemailcode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IPS\IPSConfig.aspx.cs">
       <DependentUpon>IPSConfig.aspx</DependentUpon>

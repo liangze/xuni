@@ -110,7 +110,7 @@ namespace Web.user.team
             string strStartTime = txtStart.Text.Trim();
             string strEndTime = txtEnd.Text.Trim();
 
-            strWhere = " IsOpend=0  and User006 = '"+ model.UserCode + "';";//and AgentsID=" + Loginagent.ID
+            strWhere = " IsOpend=0  and User006 = '"+ model.UserCode + "'";//and AgentsID=" + Loginagent.ID
             if (this.dropType.SelectedValue != "0")
             {
                 if (this.dropType.SelectedValue == "1")
