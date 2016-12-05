@@ -2808,7 +2808,7 @@ namespace Library
             htb.Add("OrderTotal", "总金额");
             htb.Add("OrderDate", "购买日期");
             htb.Add("IsSend", "状态");
-
+            htb.Add("Order5", "电话号码");
             dt.Columns.Remove("OrderCode1");
             dt.Columns.Remove("OrderID");
             dt.Columns.Remove("UserID");
@@ -2829,7 +2829,7 @@ namespace Library
             dd.Columns.Add("OrderTotal");
             dd.Columns.Add("OrderDate");
             dd.Columns.Add("IsSend");
-
+            dd.Columns.Add("Order5");
             foreach (DataRow row in dt.Rows)
             {
                 DataRow newrow = dd.NewRow();
@@ -2842,7 +2842,8 @@ namespace Library
                     newrow["OrderSum"] = row["OrderSum"];
                     newrow["OrderTotal"] = row["OrderTotal"];
                     newrow["OrderDate"] = row["OrderDate"];
-                    newrow["IsSend"] = row["IsSend"].ToString().Trim() == "1" ? "已发货" : "未发货";
+                    newrow["IsSend"] = row["IsSend"].ToString().Trim() == "1" ? "未发货" : "已发货";
+                    newrow["Order5"] = row["Order5"];
                 }
                 dd.Rows.Add(newrow);
             }
