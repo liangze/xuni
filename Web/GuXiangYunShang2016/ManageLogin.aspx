@@ -118,7 +118,7 @@
                     <tr>
                         <td class="title"></td>
                         <td>
-                            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="images/login99.gif"
+                            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="../images/login99.gif"
                                 OnClick="ImageButton1_Click" OnClientClick="return validate()" />
                         </td>
                     </tr>
