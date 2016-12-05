@@ -89,22 +89,23 @@
             <table width="99%" border="0" cellspacing="0" cellpadding="0" class="t1">
                 <tbody>
                     <tr>
-                        <th align="center">会员持有积分数
-                        </th>
+                        <%--<th align="center">会员持有积分数
+                        </th>--%>
                         <th align="center">积分拆分总数量
                         </th>
                         <th align="center">爱心基金总数量
                         </th>
                         <th align="center">公司总业绩金额
                         </th>
-                        
+                        <th align="center">今日邮件总数量
+                        </th>
                     </tr>
                     <tr>
-                        <td align="center"><%=all %></td>
+                        <%--<td align="center"><%=all %></td>--%>
                         <td align="center"> <%=caifen %></td>
                         <td align="center"><%=aixing %></td>
                         <td align="center"><%=zongyeji %></td>
-                        
+                        <td align="center"><%=youjian %></td>
                     </tr>
                 </tbody>
             </table>
@@ -133,19 +134,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="dataTable">
-            <table width="24.75%" border="0" cellspacing="0" cellpadding="0" class="t1">
-                <tbody>
-                    <tr>
-                        <th align="center">今日邮件总数量
-                        </th>
-                    </tr>
-                    <tr>
-                        <td align="center"><%=youjian %></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        
     </form>
 </body>
 </html>
