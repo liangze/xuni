@@ -7,3 +7,12 @@ D:\liang\Nn610231023\DAL\bin\Debug\Model.pdb
 D:\liang\Nn610231023\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 D:\liang\Nn610231023\DAL\obj\Debug\DAL.dll
 D:\liang\Nn610231023\DAL\obj\Debug\DAL.pdb
+D:\liang\23\Nn610231023\Nn610231023\DAL\bin\Debug\DAL.dll
+D:\liang\23\Nn610231023\Nn610231023\DAL\bin\Debug\DAL.pdb
+D:\liang\23\Nn610231023\Nn610231023\DAL\bin\Debug\DBUtility.dll
+D:\liang\23\Nn610231023\Nn610231023\DAL\bin\Debug\Model.dll
+D:\liang\23\Nn610231023\Nn610231023\DAL\bin\Debug\DBUtility.pdb
+D:\liang\23\Nn610231023\Nn610231023\DAL\bin\Debug\Model.pdb
+D:\liang\23\Nn610231023\Nn610231023\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\liang\23\Nn610231023\Nn610231023\DAL\obj\Debug\DAL.dll
+D:\liang\23\Nn610231023\Nn610231023\DAL\obj\Debug\DAL.pdb

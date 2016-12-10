@@ -9,3 +9,14 @@ D:\liang\Nn610231023\BLL\bin\Debug\DBUtility.pdb
 D:\liang\Nn610231023\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 D:\liang\Nn610231023\BLL\obj\Debug\BLL.dll
 D:\liang\Nn610231023\BLL\obj\Debug\BLL.pdb
+D:\liang\23\Nn610231023\Nn610231023\BLL\bin\Debug\BLL.dll
+D:\liang\23\Nn610231023\Nn610231023\BLL\bin\Debug\BLL.pdb
+D:\liang\23\Nn610231023\Nn610231023\BLL\bin\Debug\DAL.dll
+D:\liang\23\Nn610231023\Nn610231023\BLL\bin\Debug\Model.dll
+D:\liang\23\Nn610231023\Nn610231023\BLL\bin\Debug\DBUtility.dll
+D:\liang\23\Nn610231023\Nn610231023\BLL\bin\Debug\DAL.pdb
+D:\liang\23\Nn610231023\Nn610231023\BLL\bin\Debug\Model.pdb
+D:\liang\23\Nn610231023\Nn610231023\BLL\bin\Debug\DBUtility.pdb
+D:\liang\23\Nn610231023\Nn610231023\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+D:\liang\23\Nn610231023\Nn610231023\BLL\obj\Debug\BLL.dll
+D:\liang\23\Nn610231023\Nn610231023\BLL\obj\Debug\BLL.pdb
