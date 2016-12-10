@@ -1,0 +1,5 @@
+D:\liang\Nn610231023\Model\bin\Debug\Model.dll
+D:\liang\Nn610231023\Model\bin\Debug\Model.pdb
+D:\liang\Nn610231023\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\liang\Nn610231023\Model\obj\Debug\Model.dll
+D:\liang\Nn610231023\Model\obj\Debug\Model.pdb

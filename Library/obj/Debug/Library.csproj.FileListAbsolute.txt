@@ -1,0 +1,15 @@
+D:\liang\Nn610231023\Library\bin\Debug\Library.dll
+D:\liang\Nn610231023\Library\bin\Debug\Library.pdb
+D:\liang\Nn610231023\Library\bin\Debug\BLL.dll
+D:\liang\Nn610231023\Library\bin\Debug\COM.Excel.dll
+D:\liang\Nn610231023\Library\bin\Debug\DAL.dll
+D:\liang\Nn610231023\Library\bin\Debug\DBUtility.dll
+D:\liang\Nn610231023\Library\bin\Debug\Excel.dll
+D:\liang\Nn610231023\Library\bin\Debug\Model.dll
+D:\liang\Nn610231023\Library\bin\Debug\BLL.pdb
+D:\liang\Nn610231023\Library\bin\Debug\DAL.pdb
+D:\liang\Nn610231023\Library\bin\Debug\DBUtility.pdb
+D:\liang\Nn610231023\Library\bin\Debug\Model.pdb
+D:\liang\Nn610231023\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
+D:\liang\Nn610231023\Library\obj\Debug\Library.dll
+D:\liang\Nn610231023\Library\obj\Debug\Library.pdb
