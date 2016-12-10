@@ -19,7 +19,7 @@
     <link href="../../static/css/style1.css" rel="stylesheet" type="text/css" />
     <link href="../../static/css/add.css" rel="stylesheet" type="text/css" />
 
-    <script src="../../static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../static/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../static/js/footable.js"></script>
     <script type="text/javascript" src="../../static/js/footable.paginate.js"></script>
@@ -38,7 +38,7 @@
     <script type="text/javascript" src="../../static/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../static/js/echarts.js"></script>
     <script type="text/javascript" src="../../static/js/functions.js"></script>
-    <script>
+    <script type="text/javascript">
         function focusAndSelect(obj) {
             obj.focus();
             obj.select();
@@ -63,11 +63,8 @@
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="span12">
-
-
                         <h2>走势图
                         </h2>
-
                         <p />
                         <p></p>
                         <div class="criteriaTable">
@@ -126,21 +123,7 @@
                         <input type="hidden" runat="server" id="hdmoney" />
                         <input type="hidden" runat="server" id="hdprice" />
                         <!--content start-->
-                        <%--<div class="widget-box">
-                            <div class="widget-title">
-                                <span class="icon">
-                                    <i class="icon-align-right"></i>
-                                </span>
-                            </div>
-                            <div class="widget-content nopadding">
-                                <form action="#" method="get" class="form-horizontal">
-                                    <div style="float: left; margin-left: 2px; height: 360px; width: 100%; border: 1px solid #ccc; padding: 5px;" id="main">
-                                        <!-- 走势图位置 -->
-
-                                    </div>
-                                </form>
-                            </div>
-                        </div>--%>
+                        
                         <div class="widget-box">
                             <div class="widget-title">
                                 <span class="icon"><i class="icon-align-right"></i></span>
@@ -305,150 +288,7 @@
             </div>
         </div>
     </form>
-    <%-- <script type="text/javascript">
-        function getMaxDate() {
-            var curDate = new Date();
-            curDate.setMonth(curDate.getMonth());
-            curDate.setDate(0);
-            //alert(curDate.getDate());
-            return curDate.getDate();
-        }
-
-        require.config({
-            paths: {
-                //'echarts': '../JS/echarts/echarts', //echarts.js的路径
-                //'line': '../JS/echarts/line'
-                'echarts': 'http://echarts.baidu.com/build/echarts',
-                'echarts/chart/line': 'http://echarts.baidu.com/build/echarts'
-            }
-        });
-
-        // Step:4 require echarts and use it in the callback.
-        // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
-        require(
-        [
-        //'echarts',
-        //'line'
-          'echarts',
-          'echarts/chart/line'
-        ],
-        //回调函数
-        DrawEChart
-        );
-
-        //渲染ECharts图表
-        function DrawEChart(ec) {
-            var chartContainer = document.getElementById("main");
-            var nowDate = new Date();
-            var arry = new Array();
-            var brry = new Array();
-            var m = nowDate.toLocaleDateString();
-
-            var myChart = ec.init(chartContainer);
-            myChart.showLoading({
-                text: "图表数据正在努力加载..."
-            });
-
-            var opition = {
-                title: {
-                    text: '价格走势图',
-                    subtext: '',
-                },
-                tooltip: {
-                    trigger: 'axis',
-                },
-                legend: {
-                    data: ['积分价格']
-                },
-                toolbox: {
-                    show: true,
-                    feature: {
-                        mark: { show: true },
-                        dataView: { show: true, readOnly: false },
-                        magicType: { show: true, type: ['line', 'bar'] },
-                        restore: { show: true },
-                        saveAsImage: { show: true }
-                    }
-                },
-                dataZoom: {
-                    show: true,
-                    realtime: true,
-                    start: 0,
-                    end: 100
-                },
-                calculable: true,
-                xAxis: [
-                    {
-                        type: 'category',
-                        name: '日期',
-                        boundaryGap: false,
-                        axisLine: { onZero: false },
-                        data: []
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value',
-                        name: '积分价格（$/个）',
-                        //splitArea: { show: true },
-                        min: 1.68,
-                        max: 1.70,
-                        splitNumber: 0.01,
-                        precision: 0.01,
-                        scal: false,
-                        //axisLabel: { show: true },
-
-                    }
-                ],
-                series: [{
-                    name: "积分价格",
-                    type: 'line',
-                    data: [],
-                    markPoint: {
-                        data: [
-                            { type: 'max', name: '最大值' },
-                            { type: 'min', name: '最小值' }
-                        ]
-                    },
-                    markLine: {
-                        data: [
-                            { type: 'average', name: '平均值' }
-                        ]
-                    }
-                }
-                ]
-            };
-            $.ajax({
-                type: "post",
-                async: false, //同步执行
-                url: "HandlerLine.ashx?type=line",
-                dataType: "json", //返回数据形式为json
-                success: function (result) {
-                    if (result) {
-                        if (result.length == 0) {
-                            opition.series[0].data = [];
-                            opition.xAxis[0].data = [m];
-                        } else {
-                            var arr = new Array();
-                            var brr = new Array();
-                            for (var i = 0; i < result.length; i++) {
-
-                                brr[i] = result[i].name;//.substr(5, 9)
-                                arr[i] = result[i].value;
-                            }
-                            opition.xAxis[0].data = brr;
-                            opition.series[0].data = arr;
-                        }
-                        myChart.hideLoading();
-                        myChart.setOption(opition);
-                    }
-                },
-                error: function (errorMsg) {
-                    alert("不好意思，图表请求数据错误!");
-                }
-            });
-        }
-    </script>--%>
+    
 </body>
 <script type="text/javascript">
     function getMaxDate() {
