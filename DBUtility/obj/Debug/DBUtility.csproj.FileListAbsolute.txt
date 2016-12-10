@@ -5,6 +5,5 @@ D:\liang\Nn610231023\DBUtility\obj\Debug\DBUtility.dll
 D:\liang\Nn610231023\DBUtility\obj\Debug\DBUtility.pdb
 D:\liang\23\Nn610231023\Nn610231023\DBUtility\bin\Debug\DBUtility.dll
 D:\liang\23\Nn610231023\Nn610231023\DBUtility\bin\Debug\DBUtility.pdb
-D:\liang\23\Nn610231023\Nn610231023\DBUtility\obj\Debug\DBUtility.csprojResolveAssemblyReference.cache
 D:\liang\23\Nn610231023\Nn610231023\DBUtility\obj\Debug\DBUtility.dll
 D:\liang\23\Nn610231023\Nn610231023\DBUtility\obj\Debug\DBUtility.pdb
