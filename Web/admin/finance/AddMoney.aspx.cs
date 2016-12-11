@@ -123,7 +123,7 @@ namespace Web.admin.finance
             int iRechargeStyle = int.Parse(dropMoneyType.SelectedValue);
             rechargeInfo.UserID = userInfo.UserID;
             rechargeInfo.RechargeStyle = Convert.ToInt32(dropRechargeStyle.SelectedValue);//1：增加
-            rechargeInfo.RechargeType = iRechargeStyle;//1.注册积分,2.奖金积分,3.电子积分
+            rechargeInfo.RechargeType = iRechargeStyle;//1.股份
             rechargeInfo.RechargeableMoney = dMoney;
             rechargeInfo.RechargeDate = DateTime.Now;
             rechargeInfo.Recharge001 = 1;  //后台充值
@@ -135,19 +135,19 @@ namespace Web.admin.finance
             jmodel.UserID = userInfo.UserID;
             jmodel.JournalDate = DateTime.Now;
 
-            //Emoney = 0;// 注册积分         写流水类型：1
+            //Emoney = 0;// 股份         写流水类型：1
             //BonusAccount = 0;// 奖金积分 	 2
             //AllBonusAccount = 0;// 电子积分	 3
             
             if (rechargeInfo.RechargeStyle == 1)//增加
             {
-                if (rechargeInfo.RechargeType == 1)//注册积分
+                if (rechargeInfo.RechargeType == 1)//股份
                 {
                     rechargeInfo.YuAmount = userInfo.Emoney + dMoney;
                     jmodel.InAmount = dMoney;
                     jmodel.OutAmount = 0;
                     jmodel.BalanceAmount = userInfo.Emoney + dMoney;
-                    jmodel.Remark = "后台充值注册积分(增加)";
+                    jmodel.Remark = "后台充值股份(增加)";
                     jmodel.JournalType = iRechargeStyle;
                 }
                 else if (rechargeInfo.RechargeType == 2)//奖金积分
@@ -232,21 +232,21 @@ namespace Web.admin.finance
             }
             if (rechargeInfo.RechargeStyle == 2)//扣除
             {
-                //Emoney = 0;// 注册积分         写流水类型：1
+                //Emoney = 0;// 股份         写流水类型：1
                 //BonusAccount = 0;// 奖金积分 	 2
                 
                 if (rechargeInfo.RechargeType == 1)
                 {
                     if (dMoney > userInfo.Emoney)
                     {
-                        MessageBox.MyShow(this, "注册积分余额不足!");
+                        MessageBox.MyShow(this, "股份余额不足!");
                         return;
                     }
                     rechargeInfo.YuAmount = userInfo.Emoney - dMoney;
                     jmodel.InAmount = 0;
                     jmodel.OutAmount = dMoney;
                     jmodel.BalanceAmount = userInfo.Emoney - dMoney;
-                    jmodel.Remark = "后台充值注册积分(减少)";
+                    jmodel.Remark = "后台充值股份(减少)";
                     jmodel.JournalType = iRechargeStyle;
                 }
                 else if (rechargeInfo.RechargeType == 2)
@@ -387,7 +387,7 @@ namespace Web.admin.finance
                         UpdateAccount("BonusAccount", rechargeInfo.UserID, rechargeInfo.RechargeableMoney, 1);//各人账户增加
                        // UpdateSystemAccount("MoneyAccount", rechargeInfo.RechargeableMoney, 0);//公司账户减少
                     }
-                    //Emoney = 0;// 注册积分         写流水类型：1
+                    //Emoney = 0;// 股份         写流水类型：1
                     //BonusAccount = 0;// 奖金积分 		2
                     //AllBonusAccount = 0;// 电子积分		3
                     //StockAccount = 0;// 云商积分		4
@@ -435,7 +435,7 @@ namespace Web.admin.finance
                 }
                 else if (rechargeInfo.RechargeStyle == 2)
                 {
-                    //Emoney = 0;// 注册积分         写流水类型：1
+                    //Emoney = 0;// 股份         写流水类型：1
                     //BonusAccount = 0;// 奖金积分 		2
                     //AllBonusAccount = 0;// 电子积分		3
                     //StockAccount = 0;// 云商积分		4

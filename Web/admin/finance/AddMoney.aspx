@@ -25,32 +25,15 @@
                     <legend class="legSearch">操作</legend>
                     会员编号：<asp:TextBox ID="txtUserCode" class="input_select" runat="server" tip="输入会员编号"></asp:TextBox>
                     &nbsp;&nbsp;币种类型：<asp:DropDownList ID="dropMoneyType" runat="server">
-                        <%--  Emoney = 0;// 注册积分         写流水类型：1
-                              BonusAccount = 0;// 奖金积分 	 2
-                              AllBonusAccount = 0;// 电子积分	 3
-                              StockAccount = 0;// 云商积分	 4
-                              StockMoney = 0;// 感恩积分	 5
-                              GLmoney = 0;// 购物积分	 6
-                              ShopAccount = 0;// 消费积分	 7
-                              User011// 爱心基金	 8
-                              User012// 云购积分	 9--%>
                         <asp:ListItem Value="0" Text="请选择"></asp:ListItem>
-                        <asp:ListItem Value="1" Text="注册积分"></asp:ListItem>
-                        <asp:ListItem Value="2" Text="奖金积分"></asp:ListItem>
-                        <asp:ListItem Value="3" Text="电子积分"></asp:ListItem>
-                        <asp:ListItem Value="4" Text="云商积分"></asp:ListItem>
-                        <asp:ListItem Value="5" Text="感恩积分"></asp:ListItem>
-                        <asp:ListItem Value="6" Text="购物积分"></asp:ListItem>
-                        <asp:ListItem Value="7" Text="消费积分"></asp:ListItem>
-                        <asp:ListItem Value="8" Text="爱心基金"></asp:ListItem>
-                        <asp:ListItem Value="9" Text="云购积分"></asp:ListItem>
+                        <asp:ListItem Value="1" Text="股份"></asp:ListItem>
                     </asp:DropDownList>
                     &nbsp;&nbsp;充值类型：<asp:DropDownList ID="dropRechargeStyle" runat="server">
                         <asp:ListItem Value="0" Text="请选择"></asp:ListItem>
                         <asp:ListItem Value="1" Text="增加"></asp:ListItem>
                         <asp:ListItem Value="2" Text="扣除"></asp:ListItem>
                     </asp:DropDownList>
-                    &nbsp;&nbsp; 充值金额：<asp:TextBox ID="txtMoney" class="easyui-numberbox input_select" runat="server" min="0" precision="2" tip="输入充值金额"></asp:TextBox>$
+                    &nbsp;&nbsp; 充值金额：<asp:TextBox ID="txtMoney" class="easyui-numberbox input_select" runat="server" min="0" precision="2" tip="输入充值金额"></asp:TextBox>
     <asp:LinkButton ID="lbtnSubmit" runat="server" class="easyui-linkbutton"
         iconcls="icon-ok" OnClientClick="javascript:return confirm('确认给该会员充值？')" OnClick="lbtnSubmit_Click"> 提 交 </asp:LinkButton>
                     &nbsp;&nbsp;
@@ -75,7 +58,7 @@
                         <th align="center">会员编号</th>
                         <th align="center">充值金额</th>
                         <th align="center">充值类型</th>
-                        <th align="center">金币类型</th>
+                        <th align="center">币种类型</th>
                         <th align="center">充值方式</th>
                         <th align="center">充值结果</th>
                         <th align="center">充值日期</th>

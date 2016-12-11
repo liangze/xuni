@@ -1224,7 +1224,7 @@ namespace Library
             {
                 if (type == 1)
                 {
-                    bi = "奖金积分转注册积分";
+                    bi = "奖金积分转股份";
                 }
                 else if (type == 2)
                 {
@@ -1255,14 +1255,14 @@ namespace Library
         public string RechargeType(int type)
         {
             string bi = "";
-            //Emoney = 0;// 注册积分         写流水类型：1
+            //Emoney = 0;// 股份         写流水类型：1
             //BonusAccount = 0;// 奖金积分 		2
             //AllBonusAccount = 0;// 电子积分		3
             //StockAccount = 0;// 云商积分		4
             //StockMoney = 0;// 感恩积分		5
             if (type == 1)
             {
-                bi = "注册积分";
+                bi = "股份";
             }
             else if (type == 2)
             {
@@ -1350,10 +1350,10 @@ namespace Library
             string bi = "";
             if (currentCulture == "zh-cn")
             {
-               // 1、注册积分，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
+               // 1、股份，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
                 if (d == 1)
                 {
-                    bi = "注册积分";
+                    bi = "股份";
                 }
                 else if (d == 2)
                 {
@@ -1371,7 +1371,7 @@ namespace Library
                 {
                     bi = "感恩积分";
                 }
-                else if (d == 6)//// 1、注册积分，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
+                else if (d == 6)//// 1、股份，2、奖金积分，3、电子积分，4、云商积分，5、感恩积分，6、购物积分，7、消费积分，8、爱心基金，9、云购积分
                 {
                     bi = "购物积分";
                 }
