@@ -7,3 +7,8 @@ D:\liang\23\Nn610231023\Nn610231023\DBUtility\bin\Debug\DBUtility.dll
 D:\liang\23\Nn610231023\Nn610231023\DBUtility\bin\Debug\DBUtility.pdb
 D:\liang\23\Nn610231023\Nn610231023\DBUtility\obj\Debug\DBUtility.dll
 D:\liang\23\Nn610231023\Nn610231023\DBUtility\obj\Debug\DBUtility.pdb
+C:\Users\OuyangNana\Source\Repos\xuni\DBUtility\bin\Debug\DBUtility.dll
+C:\Users\OuyangNana\Source\Repos\xuni\DBUtility\bin\Debug\DBUtility.pdb
+C:\Users\OuyangNana\Source\Repos\xuni\DBUtility\obj\Debug\DBUtility.csprojResolveAssemblyReference.cache
+C:\Users\OuyangNana\Source\Repos\xuni\DBUtility\obj\Debug\DBUtility.dll
+C:\Users\OuyangNana\Source\Repos\xuni\DBUtility\obj\Debug\DBUtility.pdb

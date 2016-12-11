@@ -16,3 +16,12 @@ D:\liang\23\Nn610231023\Nn610231023\DAL\bin\Debug\Model.pdb
 D:\liang\23\Nn610231023\Nn610231023\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 D:\liang\23\Nn610231023\Nn610231023\DAL\obj\Debug\DAL.dll
 D:\liang\23\Nn610231023\Nn610231023\DAL\obj\Debug\DAL.pdb
+C:\Users\OuyangNana\Source\Repos\xuni\DAL\bin\Debug\DAL.dll
+C:\Users\OuyangNana\Source\Repos\xuni\DAL\bin\Debug\DAL.pdb
+C:\Users\OuyangNana\Source\Repos\xuni\DAL\bin\Debug\DBUtility.dll
+C:\Users\OuyangNana\Source\Repos\xuni\DAL\bin\Debug\Model.dll
+C:\Users\OuyangNana\Source\Repos\xuni\DAL\bin\Debug\DBUtility.pdb
+C:\Users\OuyangNana\Source\Repos\xuni\DAL\bin\Debug\Model.pdb
+C:\Users\OuyangNana\Source\Repos\xuni\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\OuyangNana\Source\Repos\xuni\DAL\obj\Debug\DAL.dll
+C:\Users\OuyangNana\Source\Repos\xuni\DAL\obj\Debug\DAL.pdb
